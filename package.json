@@ -17,5 +17,9 @@
     "discord.js"
   ],
   "author": "Bjornskjald",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "facebook-chat-api": "^1.4.0"
+  }
 }
