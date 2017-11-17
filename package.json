@@ -1,0 +1,21 @@
+{
+  "name": "messenger-discord",
+  "version": "1.0.0",
+  "description": "Facebook Messenger to Discord bridge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bjornskjald/messenger-discord/"
+  },
+  "keywords": [
+    "messenger",
+    "discord",
+    "javascript",
+    "discord.js"
+  ],
+  "author": "Bjornskjald",
+  "license": "MIT"
+}
