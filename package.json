@@ -20,6 +20,6 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.2.1",
-    "facebook-chat-api": "^1.4.0"
+    "facebook-chat-api": "github:schmavery/facebook-chat-api"
   }
 }
