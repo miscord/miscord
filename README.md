@@ -12,7 +12,9 @@ Facebook Messenger to Discord bridge
 ### Usage
 
 ```bash
-node index.js name_of_your_guild
+node login.js # this will save your Facebook session to appstate.json
+
+node index.js name_of_your_guild # name may be empty, bot will use first guild from the list
 ```
 
 The bot will automatically create channels corresponding to threads on Messenger, sending message to these channels will send it to Messenger
