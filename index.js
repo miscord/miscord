@@ -12,7 +12,7 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 	if (!guild) sendError('Guild not found!')
 })
 
-Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, (err,api) => {
+Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, (err,api) => {
 	if(err) return console.error(err)
     api.setOptions({ logLevel: "silent" })
 	discord.on("message", message => {
