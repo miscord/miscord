@@ -1,4 +1,8 @@
-FROM node:latest
+FROM node:alpine
+
+RUN apk update && \
+    apk upgrade && \
+    apk add git
 
 # Create app directory
 WORKDIR /usr/src/app
