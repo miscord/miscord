@@ -17,7 +17,8 @@ Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, (err,api) 
     api.setOptions({ logLevel: "silent" })
 	discord.on("message", message => {
 		if (message.author.username === discord.user.username) return
-		api.sendMessage({body: message.content, url: message.attachments.first().url}, message.channel.topic)
+		var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
+		api.sendMessage(msg, message.channel.topic)
 	})
     api.listen((err, message) => {
 		if(err) return console.error(err)
