@@ -18,13 +18,12 @@ cd messenger-discord
 
 ### Setup
 
+
 Create new Discord application [here](https://discordapp.com/developers/applications/me)
 
-Add "app bot user" to your application. Save the token somewhere safe
+Click "new app", choose a name for your bot, confirm by clicking "create app"
 
-Copy this link to your browser: https://discordapp.com/oauth2/authorize?scope=bot&permissions=0&client_id={CLIENT_ID}
-
-Replace {CLIENT_ID} with your own client ID
+Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
 
 Add your bot to chosen guild
 
