@@ -9,7 +9,19 @@ Facebook Messenger to Discord bridge
 | `PASSWORD` | Facebook password |
 | `DISCORD_TOKEN` | Discord app token |
 
-### Installing
+### Setup
+
+Create new Discord application [here](https://discordapp.com/developers/applications/me)
+
+Click "new app", choose a name for your application, confirm by clicking "create app"
+
+Add "bot user" to your application
+
+Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
+
+Add your bot to chosen guild
+
+### Usage
 
 **Local install**
 ```bash
@@ -22,22 +34,21 @@ cd messenger-discord
 docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/messenger-discord
 ```
 
-### Setup
+**Windows setup**
+```batch
+set DISCORD_TOKEN=place_your_token_here
+set LOGIN=facebook@username.or.email
+set PASSWORD=yourfacebookpass
+```
 
+**Linux setup**
+```bash
+DISCORD_TOKEN=place_your_token_here
+LOGIN=facebook@username.or.email
+PASSWORD=yourfacebookpass
+```
 
-Create new Discord application [here](https://discordapp.com/developers/applications/me)
-
-Click "new app", choose a name for your application, confirm by clicking "create app"
-
-Add "bot user" to your application
-
-Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
-
-Add your bot to chosen guild
-
-
-### Usage
-
+**Usage**
 ```bash
 node login.js # this will save your Facebook session to appstate.json
 
