@@ -23,6 +23,8 @@ Add your bot to chosen guild
 
 ### Usage
 
+*If you don't know what Docker is, use "Local install"*
+
 **Local install**
 ```bash
 git clone https://github.com/Bjornskjald/messenger-discord
