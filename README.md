@@ -9,6 +9,13 @@ Facebook Messenger to Discord bridge
 | `PASSWORD` | Facebook password |
 | `DISCORD_TOKEN` | Discord app token |
 
+### Installing
+
+```bash
+git clone https://github.com/Bjornskjald/messenger-discord
+cd messenger-discord
+```
+
 ### Setup
 
 Create new Discord application [here](https://discordapp.com/developers/applications/me)
