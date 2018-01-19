@@ -17,13 +17,13 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 
 	// set guild as a global variable, if it's specified in arguments then get it by name, if not then get the first one
 	guild = process.argv[2] ? discord.guilds.get(process.argv[2]) : discord.guilds.first()
-	
+
 	// if guild is undefined, send error
 	if (!guild) sendError('Guild not found!')
 })
 
 // log in to messenger
-Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogin: process.env.FORCE_LOGIN, logLevel: 'silent'}, (err,api) => {
+Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
 	if(err) {
 		// if login approval is needed, enter authenticator code
 		if (err.error !== 'login-approval') return console.error(err)
