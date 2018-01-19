@@ -29,6 +29,7 @@ Add your bot to chosen guild
 ```bash
 git clone https://github.com/Bjornskjald/messenger-discord
 cd messenger-discord
+npm install
 ```
 
 **Docker install**
