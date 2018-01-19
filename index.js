@@ -24,16 +24,7 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 
 // log in to messenger
 Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
-	if(err) {
-		// if login approval is needed, enter authenticator code
-		if (err.error !== 'login-approval') return console.error(err)
-		console.log('Enter code: ')
-		rl.on('line', line => {
-			err.continue(line)
-			rl.close()
-		})
-		return
-	}
+	if(err) return console.error(err)
 	
 	// when got a discord message
 	discord.on("message", message => {
