@@ -23,7 +23,7 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 })
 
 // log in to messenger
-Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
+Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogin: process.env.FORCE_LOGIN, logLevel: 'silent'}, (err,api) => {
 	if(err) {
 		// if login approval is needed, enter authenticator code
 		if (err.error !== 'login-approval') return console.error(err)
@@ -33,8 +33,6 @@ Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogi
 			rl.close()
 		})
 	}
-	// don't spam with unnecessary debug messages
-	api.setOptions({ logLevel: "silent" })
 	
 	// when got a discord message
 	discord.on("message", message => {
