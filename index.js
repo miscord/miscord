@@ -23,7 +23,7 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 })
 
 // log in to messenger
-Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
+Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
 	if(err) {
 		// if login approval is needed, enter authenticator code
 		if (err.error !== 'login-approval') return console.error(err)
