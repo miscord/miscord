@@ -8,6 +8,7 @@ Facebook Messenger to Discord bridge
 | `LOGIN` | Facebook username/email |
 | `PASSWORD` | Facebook password |
 | `DISCORD_TOKEN` | Discord app token |
+| `FORCE_LOGIN` | Forces login in case of login approval (optional) |
 
 ### Setup
 

@@ -15,7 +15,7 @@ discord.login(process.env.DISCORD_TOKEN).then(u => {
 	if (!guild) sendError('Guild not found!')
 })
 
-Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, (err,api) => {
+Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
 	if(err) {
 		if (err.error !== 'login-approval') return console.error(err)
 		console.log('Enter code: ')
