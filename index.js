@@ -6,8 +6,6 @@ const readline = require('readline')
 const sendError = require('./lib/error.js')
 const removeAccents = require('remove-accents')
 
-var rl = readline.createInterface({input: process.stdin, output: process.stdout})
-
 const discord = new Discord.Client()
 
 // log in to discord
