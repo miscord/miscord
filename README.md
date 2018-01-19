@@ -22,6 +22,8 @@ Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
 
 Add your bot to chosen guild
 
+**Warning: the guild has to be empty or have no text channels with only numbers in topic. Bot checks if channel is associated with a Facebook chat by checking if topic is only numbers (thread ID). It can crash otherwise**
+
 Install Node.js - download [here](https://nodejs.org/en/download/)
 
 ### Usage
