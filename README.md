@@ -1,5 +1,5 @@
 # messenger-discord
-Facebook Messenger to Discord bridge
+Facebook Messenger to Discord bridge for Node.js
 
 ### Environmental variables
 
@@ -22,14 +22,16 @@ Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
 
 Add your bot to chosen guild
 
+Install Node.js - download [here](https://nodejs.org/en/download/)
+
 ### Usage
 
 *If you don't know what Docker is, use "Local install"*
 
 **Local install**
 ```bash
-git clone https://github.com/Bjornskjald/messenger-discord
-cd messenger-discord
+git clone https://github.com/Bjornskjald/messenger-discord # or download a zip from GitHub repo and extract it to folder of your choice
+cd messenger-discord # if you download the zip you might need to provide a full path, like C:\Users\User\Downloads\messenger-discord
 npm install
 ```
 
