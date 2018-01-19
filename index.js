@@ -32,6 +32,7 @@ Messenger({email: process.env.LOGIN, password: process.env.PASSWORD}, {forceLogi
 			err.continue(line)
 			rl.close()
 		})
+		return
 	}
 	
 	// when got a discord message
