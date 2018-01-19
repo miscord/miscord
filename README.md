@@ -37,19 +37,11 @@ npm install
 docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/messenger-discord
 ```
 
-**Windows setup**
-```batch
-set DISCORD_TOKEN=place_your_token_here
-set LOGIN=facebook@username.or.email
-set PASSWORD=yourfacebookpass
-```
+**Setup**
 
-**Linux setup**
-```bash
-DISCORD_TOKEN=place_your_token_here
-LOGIN=facebook@username.or.email
-PASSWORD=yourfacebookpass
-```
+| Windows | Linux |
+| ------- | ----- |
+|<pre>set DISCORD_TOKEN=place_your_token_here<br />set LOGIN=facebook@username.or.email<br />set PASSWORD=yourfacebookpass</pre>|<pre>DISCORD_TOKEN=place_your_token_here<br />LOGIN=facebook@username.or.email<br />PASSWORD=yourfacebookpass</pre>|
 
 **Usage**
 ```bash
