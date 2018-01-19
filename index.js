@@ -32,6 +32,7 @@ Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {for
 			err.continue(line)
 			rl.close()
 		})
+		return
 	}
 	
 	// when got a discord message
