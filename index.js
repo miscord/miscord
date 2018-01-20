@@ -54,18 +54,8 @@ Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {for
 				// build message from template
 				var m = createMessage(thread, sender[message.senderID], message)
 
-				// find the discord channel
-				var channel = guild.channels.find(channel => channel.name === cleanname)
-				if (channel) {
-					// if channel exists then message is sent to this channel
-					channel.send(m)
-				} else {
-					guild.createChannel(cleanname, "text").then(channel => {
-						// otherwise that channel is created, topic is set to thread ID and message is sent to this channel
-						channel.setTopic(message.threadID)
-						channel.send(m) 
-					})
-				}
+				// get channel and send the message
+				getChannel(cleanname, message.threadID).then(channel => channel.send(m))
 			})
 		})
 	})
@@ -101,4 +91,18 @@ function createMessage (thread, sender, message) {
 		// if it's not image, simply attach file
 		return embed.attachFile(attach.url)
 	}
+}
+
+function getChannel (name, topic) {
+	return new Promise((resolve, reject) => {
+		var channel = guild.channels.find(channel => channel.name === name)
+		if (channel) {
+			resolve(channel)
+		} else {
+			guild.createChannel(name, "text").then(channel => {
+				channel.setTopic(topic)
+				resolve(channel)
+			})
+		}
+	})
 }
