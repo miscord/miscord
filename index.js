@@ -16,7 +16,7 @@ login().then(e => {
 
 	// when got a facebook message
 	fb.listen(facebookListener)
-}).catch(showError)
+}).catch(sendError)
 		
 
 function discordListener (message) {
