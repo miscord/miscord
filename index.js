@@ -44,6 +44,7 @@ function facebookListener (error, message) {
 			// clean name for the needs of discord channel naming
 			var cleanname = removeAccents(thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
 
+
 			// build message from template
 			var m = createMessage(thread, sender[message.senderID], message)
 
