@@ -1,0 +1,10 @@
+{
+	"facebook": {
+		"username": "",
+		"password": ""
+	},
+	"discord": {
+		"token": "",
+		"guild": ""
+	}
+}

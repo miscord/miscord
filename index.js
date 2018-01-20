@@ -1,65 +1,56 @@
-const Discord = require('discord.js')
-const Messenger = require('facebook-chat-api')
 const fs = require('fs')
 const util = ('util')
-const readline = require('readline')
 const sendError = require('./lib/error.js')
+const login = require('./lib/login.js')
 const removeAccents = require('remove-accents')
 
-const discord = new Discord.Client()
-
-// log in to discord
-discord.login(process.env.DISCORD_TOKEN).then(u => {
-	// if bot isn't added to any guilds, send error
-	if (discord.guilds.size === 0) sendError('No guilds added!')
-
-	// set guild as a global variable, if it's specified in arguments then get it by name, if not then get the first one
-	guild = process.argv[2] ? discord.guilds.get(process.argv[2]) : discord.guilds.first()
-
-	// if guild is undefined, send error
-	if (!guild) sendError('Guild not found!')
-})
-
-// log in to messenger
-Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {forceLogin: process.env.FORCE_LOGIN}, (err,api) => {
-	if(err) return console.error(err)
+login().then(e => {
+	// save login results as globals
+	fb = e.api
+	discord = e.discord
+	guild = e.guild
 	
 	// when got a discord message
-	discord.on("message", message => {
-		// don't want to echo bot's messages
-		if (message.author.username === discord.user.username) return
-
-		// make sure this channel is meant for the bot
-		if (!parseInt(message.channel.topic, 10).toString() === message.channel.topic) return
-
-		// build message with attachments provided
-		var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
-		
-		// send message to thread with ID specified in topic
-		api.sendMessage(msg, message.channel.topic)
-	})
+	discord.on("message", discordListener)
 
 	// when got a facebook message
-	api.listen((err, message) => {
-		if(err) return console.error(err)
-		// get thread info to know if it's a group conversation
-		api.getThreadInfoGraphQL(message.threadID, (err, thread) => {
+	api.listen(facebookListener)
+})
+		
+
+function discordListener (message) {
+	// don't want to echo bot's messages
+	if (message.author.username === discord.user.username) return
+
+	// make sure this channel is meant for the bot
+	if (!parseInt(message.channel.topic, 10).toString() === message.channel.topic) return
+
+	// build message with attachments provided
+	var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
+	
+	// send message to thread with ID specified in topic
+	fb.sendMessage(msg, message.channel.topic)
+}
+
+function facebookListener (error, message) {
+	if(err) return console.error(err)
+	// get thread info to know if it's a group conversation
+	fb.getThreadInfoGraphQL(message.threadID, (err, thread) => {
+		if (err) return console.error(err)
+		// also get sender info because we need it if it's a group
+		fb.getUserInfo(message.senderID, (err, sender) => {
 			if (err) return console.error(err)
-			// also get sender info because we need it if it's a group
-			api.getUserInfo(message.senderID, (err, sender) => {
-				if (err) return console.error(err)
-				// clean name for the needs of discord channel naming
-				var cleanname = removeAccents(thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
+			// clean name for the needs of discord channel naming
+			var cleanname = removeAccents(thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
 
-				// build message from template
-				var m = createMessage(thread, sender[message.senderID], message)
+			// build message from template
+			var m = createMessage(thread, sender[message.senderID], message)
 
-				// get channel and send the message
-				getChannel(cleanname, message.threadID).then(channel => channel.send(m))
-			})
+			// get channel and send the message
+			getChannel(cleanname, message.threadID).then(channel => channel.send(m))
 		})
 	})
-})
+}
 
 // function creating message from template
 function createMessage (thread, sender, message) {

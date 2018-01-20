@@ -37,22 +37,16 @@ cd messenger-discord # if you download the zip you might need to provide a full 
 npm install
 ```
 
+Fill "config.json" with needed info.
+
 **Docker install**
 ```bash
-docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/messenger-discord
+docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token -e DISCORD_GUILD=nameofyourguild Bjornskjald/messenger-discord
 ```
-
-**Setup**
-
-| Windows | Linux |
-| ------- | ----- |
-|<pre>set DISCORD_TOKEN=place_your_token_here<br />set LOGIN=facebook@username.or.email<br />set PASSWORD=yourfacebookpass</pre>|<pre>DISCORD_TOKEN=place_your_token_here<br />LOGIN=facebook@username.or.email<br />PASSWORD=yourfacebookpass</pre>|
 
 **Usage**
 ```bash
-node login.js # this will save your Facebook session to appstate.json
-
-node index.js name_of_your_guild # name may be empty, bot will use first guild from the list
+npm start
 ```
 
 The bot will automatically create channels corresponding to threads on Messenger, sending message to these channels will send it to Messenger
