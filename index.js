@@ -49,7 +49,7 @@ Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {for
 			api.getUserInfo(message.senderID, (err, sender) => {
 				if (err) return console.error(err)
 				// clean name for the needs of discord channel naming
-				var cleanname = removeAccents(thread.name).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
+				var cleanname = removeAccents(thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
 
 				// build message from template
 				var m = createMessage(thread, sender[message.senderID], message)
@@ -63,8 +63,8 @@ Messenger({appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8'))}, {for
 
 // function creating message from template
 function createMessage (thread, sender, message) {
-	if (thread.isCanonical) {
-		// if it's a group:
+	if (thread.threadType === 'one_to_one') {
+		// if it's not a group:
 		// if there are no attachments, return plaintext message
 		if (message.attachments.length === 0) return message.body
 		var attach = message.attachments[0]
