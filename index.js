@@ -2,6 +2,7 @@ const fs = require('fs')
 const util = ('util')
 const sendError = require('./lib/error.js')
 const login = require('./lib/login.js')
+const getChannel = require('./lib/getChannel.js')
 const removeAccents = require('remove-accents')
 
 login().then(e => {
@@ -47,7 +48,10 @@ function facebookListener (error, message) {
 			var m = createMessage(thread, sender[message.senderID], message)
 
 			// get channel and send the message
-			getChannel(cleanname, message.threadID).then(channel => channel.send(m))
+			getChannel(guild, cleanname).then(channel => {
+				channel.setTopic(message.threadID)
+				channel.send(m)
+			})
 		})
 	})
 }
@@ -82,18 +86,4 @@ function createMessage (thread, sender, message) {
 		// if it's not image, simply attach file
 		return embed.attachFile(attach.url)
 	}
-}
-
-function getChannel (name, topic) {
-	return new Promise((resolve, reject) => {
-		var channel = guild.channels.find(channel => channel.name === name)
-		if (channel) {
-			resolve(channel)
-		} else {
-			guild.createChannel(name, "text").then(channel => {
-				channel.setTopic(topic)
-				resolve(channel)
-			})
-		}
-	})
 }
