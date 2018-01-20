@@ -34,7 +34,7 @@ function discordListener (message) {
 }
 
 function facebookListener (error, message) {
-	if(err) return console.error(err)
+	if(error) return console.error(error)
 	// get thread info to know if it's a group conversation
 	fb.getThreadInfoGraphQL(message.threadID, (err, thread) => {
 		if (err) return console.error(err)
