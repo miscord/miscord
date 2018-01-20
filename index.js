@@ -1,5 +1,6 @@
 const fs = require('fs')
 const util = ('util')
+const Discord = require('discord.js')
 const sendError = require('./lib/error.js')
 const login = require('./lib/login.js')
 const getChannel = require('./lib/getChannel.js')
