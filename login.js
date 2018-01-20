@@ -15,5 +15,5 @@ login({email: process.env.LOGIN, password: process.env.PASSWORD}, (err, api) => 
 		})
 		return
 	}
-    fs.writeFileSync('appstate.json', JSON.stringify(api.getAppState()))
+    fs.writeFile('appstate.json', JSON.stringify(api.getAppState()), e => process.exit(0))
 })
