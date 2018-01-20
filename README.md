@@ -1,15 +1,6 @@
 # messenger-discord
 Facebook Messenger to Discord bridge for Node.js
 
-### Environmental variables
-
-| Variable | Description |
-| --- | --- |
-| `LOGIN` | Facebook username/email |
-| `PASSWORD` | Facebook password |
-| `DISCORD_TOKEN` | Discord app token |
-| `FORCE_LOGIN` | Forces login in case of login approval (optional) |
-
 ### Setup
 
 Create new Discord application [here](https://discordapp.com/developers/applications/me)
@@ -37,7 +28,7 @@ cd messenger-discord # if you download the zip you might need to provide a full 
 npm install
 ```
 
-Fill "config.json" with needed info.
+Fill "config.json" with needed info. Force login is optional, if you need it then set it to true.
 
 **Docker install**
 ```bash
@@ -50,3 +41,10 @@ npm start
 ```
 
 The bot will automatically create channels corresponding to threads on Messenger, sending message to these channels will send it to Messenger
+
+### Troubleshooting
+
+- Try removing appstate.json file
+- Check your internet connection
+- Make sure no text in config has trailing spaces
+- If this doesn't work, post error log on issues page
