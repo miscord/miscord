@@ -50,10 +50,7 @@ function facebookListener (error, message) {
       var m = createMessage(thread, sender[message.senderID], message)
 
       // get channel and send the message
-      getChannel(guild, cleanname, category).then(channel => {
-        channel.setTopic(message.threadID)
-        channel.send(m)
-      })
+      getChannel(guild, cleanname, category, message.threadID).then(channel => channel.send(m))
     })
   })
 }
