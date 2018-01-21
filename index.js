@@ -42,9 +42,10 @@ function facebookListener (error, message) {
 		// also get sender info because we need it if it's a group
 		fb.getUserInfo(message.senderID, (err, sender) => {
 			if (err) return console.error(err)
+			// get name
+			var name = thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName ? thread.threadName : thread.threadID
 			// clean name for the needs of discord channel naming
-			var cleanname = removeAccents(thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName).replace(' ', '-').replace(/\W-/g, '').toLowerCase()
-
+			var cleanname = removeAccents(name).replace(/ /g, '-').replace(/\W-/g, '').toLowerCase()
 
 			// build message from template
 			var m = createMessage(thread, sender[message.senderID], message)
