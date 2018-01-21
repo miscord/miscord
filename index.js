@@ -8,15 +8,16 @@ const removeAccents = require('remove-accents')
 
 login().then(e => {
 	// save login results as globals
-	fb = e.api
+	facebook = e.facebook
 	discord = e.discord
 	guild = e.guild
+	category = e.category
 	
 	// when got a discord message
 	discord.on("message", discordListener)
 
 	// when got a facebook message
-	fb.listen(facebookListener)
+	facebook.listen(facebookListener)
 }).catch(sendError)
 		
 
@@ -31,16 +32,16 @@ function discordListener (message) {
 	var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
 	
 	// send message to thread with ID specified in topic
-	fb.sendMessage(msg, message.channel.topic)
+	facebook.sendMessage(msg, message.channel.topic)
 }
 
 function facebookListener (error, message) {
 	if(error) return console.error(error)
 	// get thread info to know if it's a group conversation
-	fb.getThreadInfoGraphQL(message.threadID, (err, thread) => {
+	facebook.getThreadInfoGraphQL(message.threadID, (err, thread) => {
 		if (err) return console.error(err)
 		// also get sender info because we need it if it's a group
-		fb.getUserInfo(message.senderID, (err, sender) => {
+		facebook.getUserInfo(message.senderID, (err, sender) => {
 			if (err) return console.error(err)
 			// get name
 			var name = thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName ? thread.threadName : thread.threadID
@@ -51,7 +52,7 @@ function facebookListener (error, message) {
 			var m = createMessage(thread, sender[message.senderID], message)
 
 			// get channel and send the message
-			getChannel(guild, cleanname).then(channel => {
+			getChannel(guild, cleanname, category).then(channel => {
 				channel.setTopic(message.threadID)
 				channel.send(m)
 			})
