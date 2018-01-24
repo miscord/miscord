@@ -27,7 +27,7 @@ function discordListener (message) {
   if (!parseInt(message.channel.topic, 10).toString() === message.channel.topic) return
 
   // build message with attachments provided
-  var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
+  var msg = message.attachments.size > 0 ? {body: message.author.username + ': ' + message.content, url: message.attachments.first().url} : {body: message.author.username + ': ' + message.content}
 
   // send message to thread with ID specified in topic
   facebook.sendMessage(msg, message.channel.topic)
