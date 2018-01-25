@@ -6,6 +6,7 @@
 	},
 	"discord": {
 		"token": "",
-		"guild": ""
+		"guild": "",
+		"category": ""
 	}
 }
