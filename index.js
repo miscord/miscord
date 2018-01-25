@@ -43,7 +43,7 @@ function facebookListener (error, message) {
       if (err) return console.error(err)
       // get name
       var nickname = thread.nicknames[message.senderID]
-      var name = thread.threadType === 'one_to_one' ? (nickname ? nickname + ` (${sender.name})` : sender.name) : thread.threadName ? thread.threadName : thread.threadID
+      var name = thread.threadType === 'one_to_one' ? (nickname || sender[message.senderID].name) : (thread.threadName || thread.threadID)
       // clean name for the needs of discord channel naming
       var cleanname = removeAccents(name).replace(/ /g, '-').replace(/\W-/g, '').replace(/(?![a-zA-Z0-9\-_])/g, '').toLowerCase()
 
