@@ -44,7 +44,7 @@ function facebookListener (error, message) {
       // get name
       var name = thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName ? thread.threadName : thread.threadID
       // clean name for the needs of discord channel naming
-      var cleanname = removeAccents(name).replace(/ /g, '-').replace(/\W-/g, '').replace(/[^\x00-\x7F]/g, '').toLowerCase()
+      var cleanname = removeAccents(name).replace(/ /g, '-').replace(/\W-/g, '').replace(/(?![a-zA-Z0-9\-_])/g, '').toLowerCase()
 
       // build message from template
       var m = createMessage(thread, sender[message.senderID], message)
@@ -61,16 +61,16 @@ function createMessage (thread, sender, message) {
     // if it's not a group:
     // if there are no attachments, return plaintext message
     if (message.attachments.length === 0) return message.body
-    var attach = message.attachments[0]
+    var attachment = message.attachments[0]
 
     // if there are attachments, set title to message body
-    var embed = new Discord.RichEmbed().setTitle(message.body)
+    var singleembed = new Discord.RichEmbed().setTitle(message.body)
 
     // if it's image, then embed it
-    if (attach.type === 'photo') return embed.setImage(message.attachments[0].url)
+    if (attachment.type === 'photo') return singleembed.setImage(attachment.url)
 
     // if it's not image, simply attach file
-    return embed.attachFile(attach.url)
+    return singleembed.attachFile(attachment.url)
   } else {
     var attach = message.attachments
     // set description to message body, set author to message sender
