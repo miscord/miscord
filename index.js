@@ -61,16 +61,16 @@ function createMessage (thread, sender, message) {
     // if it's not a group:
     // if there are no attachments, return plaintext message
     if (message.attachments.length === 0) return message.body
-    var attach = message.attachments[0]
+    var attachment = message.attachments[0]
 
     // if there are attachments, set title to message body
-    var embed = new Discord.RichEmbed().setTitle(message.body)
+    var singleembed = new Discord.RichEmbed().setTitle(message.body)
 
     // if it's image, then embed it
-    if (attach.type === 'photo') return embed.setImage(message.attachments[0].url)
+    if (attach.type === 'photo') return embed.setImage(attachment.url)
 
     // if it's not image, simply attach file
-    return embed.attachFile(attach.url)
+    return embed.attachFile(attachment.url)
   } else {
     var attach = message.attachments
     // set description to message body, set author to message sender
