@@ -42,7 +42,8 @@ function facebookListener (error, message) {
     facebook.getUserInfo(message.senderID, (err, sender) => {
       if (err) return console.error(err)
       // get name
-      var name = thread.threadType === 'one_to_one' ? sender[message.senderID].name : thread.threadName ? thread.threadName : thread.threadID
+      var nickname = thread.nicknames[message.senderID]
+      var name = thread.threadType === 'one_to_one' ? (nickname ? nickname + ` (${sender.name})` : sender.name) : thread.threadName ? thread.threadName : thread.threadID
       // clean name for the needs of discord channel naming
       var cleanname = removeAccents(name).replace(/ /g, '-').replace(/\W-/g, '').replace(/(?![a-zA-Z0-9\-_])/g, '').toLowerCase()
 
@@ -63,23 +64,14 @@ function facebookListener (error, message) {
 // function creating message from template
 function createMessage (thread, sender, message) {
   if (thread.threadType === 'one_to_one') {
-    // if it's not a group:
-    // if there are no attachments, return plaintext message
-    if (message.attachments.length === 0) return message.body
-    var attachment = message.attachments[0]
-
-    // if there are attachments, set title to message body
-    var singleembed = new Discord.RichEmbed().setTitle(message.body)
-
-    // if it's image, then embed it
-    if (attachment.type === 'photo') return singleembed.setImage(attachment.url)
-
-    // if it's not image, simply attach file
-    return singleembed.attachFile(attachment.url)
-  } else {
     var attach = message.attachments
+
     // set description to message body, set author to message sender
-    var embed = new Discord.RichEmbed().setDescription(message.body).setAuthor(sender.name, sender.thumbSrc)
+    var nickname = thread.nicknames[message.senderID]
+    var authorName = nickname ? nickname + ` (${sender.name})` : sender.name
+    var embed = new Discord.RichEmbed()
+      .setDescription(message.body)
+      .setAuthor(authorName, sender.thumbSrc)
 
     // if there are no attachments, send it already
     if (attach.length === 0) return embed
@@ -88,6 +80,6 @@ function createMessage (thread, sender, message) {
     if (attach[0].type === 'photo') return embed.setImage(attach[0].url)
 
     // if it's not image, simply attach file
-    return embed.attachFile(attach.url)
+    return embed.attachFile(attach[0].url)
   }
 }
