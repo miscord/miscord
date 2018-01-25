@@ -67,10 +67,10 @@ function createMessage (thread, sender, message) {
     var singleembed = new Discord.RichEmbed().setTitle(message.body)
 
     // if it's image, then embed it
-    if (attach.type === 'photo') return embed.setImage(attachment.url)
+    if (attachment.type === 'photo') return singleembed.setImage(attachment.url)
 
     // if it's not image, simply attach file
-    return embed.attachFile(attachment.url)
+    return singleembed.attachFile(attachment.url)
   } else {
     var attach = message.attachments
     // set description to message body, set author to message sender
