@@ -3,14 +3,11 @@ const sendError = require('./lib/error.js')
 const login = require('./lib/login.js')
 const getChannel = require('./lib/getChannel.js')
 const removeAccents = require('remove-accents')
-var facebook, discord, guild, category
+var facebook, discord, guild, category, config
 
 login().then(e => {
   // save login results as globals
-  facebook = e.facebook
-  discord = e.discord
-  guild = e.guild
-  category = e.category
+  ({ facebook, discord, guild, category, config } = e)
 
   // when got a discord message
   discord.on('message', discordListener)
@@ -27,7 +24,10 @@ function discordListener (message) {
   if (!parseInt(message.channel.topic, 10).toString() === message.channel.topic) return
 
   // build message with attachments provided
-  var msg = message.attachments.size > 0 ? {body: message.content, url: message.attachments.first().url} : {body: message.content}
+  var msg = {
+    body: config.discord.showUsername ? message.author.username + ': ' + message.content : message.content,
+    url: message.attachments.size > 0 ? message.attachments.first().url : undefined
+  }
 
   // send message to thread with ID specified in topic
   facebook.sendMessage(msg, message.channel.topic)
@@ -50,7 +50,12 @@ function facebookListener (error, message) {
       var m = createMessage(thread, sender[message.senderID], message)
 
       // get channel and send the message
-      getChannel(guild, cleanname, category, message.threadID).then(channel => channel.send(m))
+      getChannel({
+        guild: guild,
+        name: cleanname,
+        parent: category,
+        topic: message.threadID
+      }).then(channel => channel.send(m))
     })
   })
 }

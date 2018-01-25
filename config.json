@@ -7,6 +7,7 @@
 	"discord": {
 		"token": "",
 		"guild": "",
-		"category": ""
+		"category": "",
+        "showUsername": true
 	}
 }
