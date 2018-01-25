@@ -7,7 +7,7 @@ var facebook, discord, guild, category, config
 
 login().then(e => {
   // save login results as globals
-  { facebook, discord, guild, category, config } = e
+  ({ facebook, discord, guild, category, config } = e)
 
   // when got a discord message
   discord.on('message', discordListener)
