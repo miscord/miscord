@@ -63,21 +63,21 @@ function facebookListener (error, message) {
 
 // function creating message from template
 function createMessage (thread, sender, message) {
-    var attach = message.attachments
+  var attach = message.attachments
 
-    // set description to message body, set author to message sender
-    var nickname = thread.nicknames[message.senderID]
-    var authorName = nickname ? nickname + ` (${sender.name})` : sender.name
-    var embed = new Discord.RichEmbed()
-      .setDescription(message.body)
-      .setAuthor(authorName, sender.thumbSrc)
+  // set description to message body, set author to message sender
+  var nickname = thread.nicknames[message.senderID]
+  var authorName = nickname ? nickname + ` (${sender.name})` : sender.name
+  var embed = new Discord.RichEmbed()
+    .setDescription(message.body)
+    .setAuthor(authorName, sender.thumbSrc)
 
-    // if there are no attachments, send it already
-    if (attach.length === 0) return embed
+  // if there are no attachments, send it already
+  if (attach.length === 0) return embed
 
-    // if it's image, then embed it
-    if (attach[0].type === 'photo') return embed.setImage(attach[0].url)
+  // if it's an image, then embed it
+  if (attach[0].type === 'photo') return embed.setImage(attach[0].url)
 
-    // if it's not image, simply attach file
-    return embed.attachFile(attach[0].url)
+  // if it's not an image, simply attach the file
+  return embed.attachFile(attach[0].url)
 }
