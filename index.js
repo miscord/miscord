@@ -63,7 +63,6 @@ function facebookListener (error, message) {
 
 // function creating message from template
 function createMessage (thread, sender, message) {
-  if (thread.threadType === 'one_to_one') {
     var attach = message.attachments
 
     // set description to message body, set author to message sender
@@ -81,5 +80,4 @@ function createMessage (thread, sender, message) {
 
     // if it's not image, simply attach file
     return embed.attachFile(attach[0].url)
-  }
 }
