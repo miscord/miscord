@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.3.0",
-    "discord.js": "^11.2.1",
+    "discord.js": "^11.3.0",
     "facebook-chat-api": "github:schmavery/facebook-chat-api",
     "remove-accents": "^0.4.2"
   }
