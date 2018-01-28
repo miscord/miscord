@@ -37,8 +37,19 @@ Everything else is optional.
 
 **Docker install**
 ```bash
-docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token -e DISCORD_GUILD=nameofyourguild Bjornskjald/messenger-discord
+docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token -e DISCORD_GUILD=nameofyourguild Bjornskjald/messenger-discord
 ```
+
+**Configuration**
+| Environmental variable |  Value in config  | Description |
+| ---------------------- | ----------------- | ----------- |
+| `FACEBOOK_USERNAME` | `facebook.username` | Facebook username |
+| `FACEBOOK_PASSWORD` | `facebook.password` | Facebook password |
+| `DISCORD_TOKEN` | `discord.token` | Discord token |
+| `FACEBOOK_FORCELOGIN` | `facebook.force` | Forces logging in to Facebook (mostly caused by latest logins review) (default: `false`)|
+| `DISCORD_GUILD` | `discord.guild` | Discord guild (default: first guild available)|
+| `DISCORD_CATEGORY` | `discord.category` | Category of channels on Discord (default: `messenger`)|
+| `DISCORD_SHOW_USERNAME` | `discord.showUsername` | Enables showing Discord username in Facebook messages (default: `true`)|
 
 **Usage**
 ```bash
