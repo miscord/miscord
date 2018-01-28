@@ -3,11 +3,11 @@ const sendError = require('./lib/error.js')
 const login = require('./lib/login.js')
 const getChannel = require('./lib/getChannel.js')
 const removeAccents = require('remove-accents')
-var facebook, discord, guild, category, config
+var facebook, discord, guild, config
 
 login().then(e => {
   // save login results as globals
-  ({ facebook, discord, guild, category, config } = e)
+  ({ facebook, discord, guild, config } = e)
 
   // when got a discord message
   discord.on('message', discordListener)
@@ -54,9 +54,9 @@ function facebookListener (error, message) {
       getChannel({
         guild: guild,
         name: cleanname,
-        parent: category,
+        config: config,
         topic: message.threadID
-      }).then(channel => channel.send(m))
+      }).then(channel => channel.send(m)).catch(sendError)
     })
   })
 }

@@ -28,12 +28,28 @@ cd messenger-discord # if you download the zip you might need to provide a full 
 npm install
 ```
 
-Fill "config.json" with needed info. Force login is optional, if you need it then set it to true.
+Copy/rename "config.example.json" to "config.json" and fill it with needed info:
+- Discord token
+- Facebook username/email
+- Facebook password
+
+Everything else is optional.
 
 **Docker install**
 ```bash
-docker run -d -e LOGIN=facebook@username.or.email -e PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token -e DISCORD_GUILD=nameofyourguild Bjornskjald/messenger-discord
+docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token -e DISCORD_GUILD=nameofyourguild Bjornskjald/messenger-discord
 ```
+
+**Configuration**
+| Environmental variable |  Value in config  | Description |
+| ---------------------- | ----------------- | ----------- |
+| `FACEBOOK_USERNAME` | `facebook.username` | Facebook username |
+| `FACEBOOK_PASSWORD` | `facebook.password` | Facebook password |
+| `DISCORD_TOKEN` | `discord.token` | Discord token |
+| `FACEBOOK_FORCELOGIN` | `facebook.force` | Forces logging in to Facebook (mostly caused by latest logins review) (default: `false`)|
+| `DISCORD_GUILD` | `discord.guild` | Discord guild (default: first guild available)|
+| `DISCORD_CATEGORY` | `discord.category` | Category of channels on Discord (default: `messenger`)|
+| `DISCORD_SHOW_USERNAME` | `discord.showUsername` | Enables showing Discord username in Facebook messages (default: `true`)|
 
 **Usage**
 ```bash
@@ -44,7 +60,8 @@ The bot will automatically create channels corresponding to threads on Messenger
 
 ### Troubleshooting
 
-- Try removing appstate.json file
+- Restart the bridge
+- Remove appstate.json file
 - Check your internet connection
 - Make sure no text in config has trailing spaces
-- If this doesn't work, post error log on issues page
+- If this doesn't work, create new issue [here](https://github.com/Bjornskjald/messenger-discord/issues) with your error log
