@@ -28,7 +28,12 @@ cd messenger-discord # if you download the zip you might need to provide a full 
 npm install
 ```
 
-Fill "config.json" with needed info. Force login is optional, if you need it then set it to true.
+Copy/rename "config.example.json" to "config.json" and fill it with needed info:
+- Discord token
+- Facebook username/email
+- Facebook password
+
+Everything else is optional.
 
 **Docker install**
 ```bash
