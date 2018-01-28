@@ -60,7 +60,8 @@ The bot will automatically create channels corresponding to threads on Messenger
 
 ### Troubleshooting
 
-- Try removing appstate.json file
+- Restart the bridge
+- Remove appstate.json file
 - Check your internet connection
 - Make sure no text in config has trailing spaces
-- If this doesn't work, post error log on issues page
+- If this doesn't work, create new issue [here](https://github.com/Bjornskjald/messenger-discord/issues) with your error log
