@@ -41,6 +41,7 @@ docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=
 ```
 
 **Configuration**
+
 | Environmental variable |  Value in config  | Description |
 | ---------------------- | ----------------- | ----------- |
 | `FACEBOOK_USERNAME` | `facebook.username` | Facebook username |
