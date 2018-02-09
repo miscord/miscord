@@ -53,7 +53,7 @@ function facebookListener (error, message) {
 
       // set options for creating message
       var opts = {thread, sender: sender[message.senderID], message}
-      
+
       // build message from template
       var m = createMessage(opts)
 
