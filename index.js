@@ -51,8 +51,11 @@ function facebookListener (error, message) {
       // clean name for the needs of discord channel naming
       var cleanname = emojiStrip(removeAccents(name)).trim().replace(/ /g, '-').replace(/\W-/g, '').replace(/(?![a-zA-Z0-9\-_])/g, '').toLowerCase()
 
+      // set options for creating message
+      var opts = {thread, sender: sender[message.senderID], message}
+
       // build message from template
-      var m = createMessage(thread, sender[message.senderID], message)
+      var m = createMessage(opts)
 
       // get channel and send the message
       getChannel({
@@ -60,13 +63,30 @@ function facebookListener (error, message) {
         name: cleanname,
         config: config,
         topic: message.threadID
-      }).then(channel => channel.send(m)).catch(sendError)
+      }).then(channel => {
+        // fetch the last message
+        channel.fetchMessage(channel.lastMessageID).then(lastMessage => {
+          console.dir(lastMessage.embeds, {colors: true})
+          // if the last message was sent by the same person
+          if (lastMessage.embeds[0] && lastMessage.embeds[0].author && lastMessage.embeds[0].author.name === m.author.name) {
+            channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
+            // get the last embed
+            var lastEmbed = lastMessage.embeds[0]
+            // update message body with the old text
+            m.setDescription(lastEmbed.description + '\n' + m.description)
+            lastMessage.edit(m)
+          } else {
+            channel.send(m)
+          }
+        }).catch(sendError)
+      }).catch(sendError)
     })
   })
 }
 
 // function creating message from template
-function createMessage (thread, sender, message) {
+function createMessage (opts) {
+  var {thread, sender, message} = opts
   var attach = message.attachments
 
   // set description to message body, set author to message sender
