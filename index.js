@@ -64,17 +64,17 @@ function facebookListener (error, message) {
         config: config,
         topic: message.threadID
       }).then(channel => {
+        // if it's a new channel, just send it already
+        if (!channel.lastMessageID) return channel.send(m)
         // fetch the last message
-        channel.fetchMessage(channel.lastMessageID).then(lastMessage => {
-          console.dir(lastMessage.embeds, {colors: true})
+        channel.fetchMessages({limit: 1}).then(lastMessage => {
           // if the last message was sent by the same person
           if (lastMessage.embeds[0] && lastMessage.embeds[0].author && lastMessage.embeds[0].author.name === m.author.name) {
             channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
             // get the last embed
             var lastEmbed = lastMessage.embeds[0]
             // update message body with the old text
-            m.setDescription(lastEmbed.description + '\n' + m.description)
-            lastMessage.edit(m)
+            lastMessage.edit(recreateEmbed(lastEmbed).addField('\u200B', opts.message.body))
           } else {
             channel.send(m)
           }
@@ -93,7 +93,7 @@ function createMessage (opts) {
   var nickname = thread.nicknames[message.senderID]
   var authorName = nickname ? nickname + ` (${sender.name})` : sender.name
   var embed = new Discord.RichEmbed()
-    .setDescription(message.body)
+    .addField('\u200B', message.body)
     .setAuthor(authorName, sender.thumbSrc)
 
   // if there are no attachments, send it already
@@ -104,4 +104,15 @@ function createMessage (opts) {
 
   // if it's not an image, simply attach the file
   return embed.attachFile(attach[0].url)
+}
+
+function recreateEmbed (message) {
+  var embed = new Discord.RichEmbed(message)
+  //   .setDescription(message.description || '')
+  //   .setAuthor(message.author)
+  
+  // if (message.image) embed.setImage(message.image)
+  // if (message.url) embed.attachFile(message.url)
+
+  return embed
 }
