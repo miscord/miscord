@@ -1,7 +1,8 @@
-const Discord = require('discord.js')
 const sendError = require('./lib/error.js')
 const login = require('./lib/login.js')
 const getChannel = require('./lib/getChannel.js')
+const createEmbed = require('./lib/createEmbed.js')
+const recreateEmbed = require('./lib/recreateEmbed.js')
 const removeAccents = require('remove-accents')
 const emojiStrip = require('emoji-strip')
 var facebook, discord, guild, config
@@ -55,7 +56,7 @@ function facebookListener (error, message) {
       var opts = {thread, sender: sender[message.senderID], message}
 
       // build message from template
-      var m = createMessage(opts)
+      var m = createEmbed(opts)
 
       // get channel and send the message
       getChannel({
@@ -63,45 +64,23 @@ function facebookListener (error, message) {
         name: cleanname,
         config: config,
         topic: message.threadID
-      }).then(channel => {
+      }).then(async channel => {
+        // if it's a new channel, just send it already
+        if (!channel.lastMessageID) return channel.send(m)
         // fetch the last message
-        channel.fetchMessage(channel.lastMessageID).then(lastMessage => {
-          console.dir(lastMessage.embeds, {colors: true})
-          // if the last message was sent by the same person
-          if (lastMessage.embeds[0] && lastMessage.embeds[0].author && lastMessage.embeds[0].author.name === m.author.name) {
-            channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
-            // get the last embed
-            var lastEmbed = lastMessage.embeds[0]
-            // update message body with the old text
-            m.setDescription(lastEmbed.description + '\n' + m.description)
-            lastMessage.edit(m)
-          } else {
-            channel.send(m)
-          }
-        }).catch(sendError)
+        var messages = await channel.fetchMessages({limit: 1})
+        var lastMessage = messages.first()
+        // if the last message was sent by the same person
+        if (lastMessage.embeds[0] && lastMessage.embeds[0].author && lastMessage.embeds[0].author.name === m.author.name && !lastMessage.embeds[0].image && !opts.message.attachments.length > 0) {
+          channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
+          // get the last embed
+          var lastEmbed = lastMessage.embeds[0]
+          // update message body with the old text
+          lastMessage.edit(recreateEmbed(lastEmbed).setDescription(lastEmbed.description + '\n' + m.description))
+        } else {
+          channel.send(m)
+        }
       }).catch(sendError)
     })
   })
-}
-
-// function creating message from template
-function createMessage (opts) {
-  var {thread, sender, message} = opts
-  var attach = message.attachments
-
-  // set description to message body, set author to message sender
-  var nickname = thread.nicknames[message.senderID]
-  var authorName = nickname ? nickname + ` (${sender.name})` : sender.name
-  var embed = new Discord.RichEmbed()
-    .setDescription(message.body)
-    .setAuthor(authorName, sender.thumbSrc)
-
-  // if there are no attachments, send it already
-  if (attach.length === 0) return embed
-
-  // if it's an image, then embed it
-  if (attach[0].type === 'photo') return embed.setImage(attach[0].url)
-
-  // if it's not an image, simply attach the file
-  return embed.attachFile(attach[0].url)
 }
