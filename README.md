@@ -1,4 +1,5 @@
-# messenger-discord
+![messenger-discord](https://user-images.githubusercontent.com/26630168/36616623-bbee32b4-18e4-11e8-955f-ddbbff8e03b3.png)
+
 Facebook Messenger to Discord bridge for Node.js
 
 ### Setup
