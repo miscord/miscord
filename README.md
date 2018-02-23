@@ -1,22 +1,18 @@
 ![messenger-discord](https://user-images.githubusercontent.com/26630168/36616623-bbee32b4-18e4-11e8-955f-ddbbff8e03b3.png)
 
-Facebook Messenger to Discord bridge for Node.js
+**Facebook Messenger to Discord bridge for Node.js**
 
 ### Setup
 
-Create new Discord application [here](https://discordapp.com/developers/applications/me)
-
-Click "new app", choose a name for your application, confirm by clicking "create app"
-
-Add "bot user" to your application
-
-Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
-
-Add your bot to chosen guild
+- Install Node.js - download [here](https://nodejs.org/en/download/)
+- Create new Discord application [here](https://discordapp.com/developers/applications/me)
+- Click "new app", choose a name for your application, confirm by clicking "create app"
+- Add "bot user" to your application
+- Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
+- Add your bot to chosen guild
 
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
 
-Install Node.js - download [here](https://nodejs.org/en/download/)
 
 ### Usage
 
@@ -25,7 +21,7 @@ Install Node.js - download [here](https://nodejs.org/en/download/)
 **Local install**
 ```bash
 git clone https://github.com/Bjornskjald/messenger-discord # or download a zip from GitHub repo and extract it to folder of your choice
-cd messenger-discord # if you download the zip you might need to provide a full path, like C:\Users\User\Downloads\messenger-discord
+cd messenger-discord # if you download the zip you might need to provide a full path, like C:\Users\User\Downloads\messenger-discord-master
 npm install
 ```
 
