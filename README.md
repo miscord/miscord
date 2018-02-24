@@ -10,7 +10,7 @@
 ### Nickname
 ![nickname](https://user-images.githubusercontent.com/26630168/36634196-1d71dfd8-19a1-11e8-93b1-71313bf8cd4a.png)
 
-### Setup
+## Setup
 
 - Install Node.js - download [here](https://nodejs.org/en/download/)
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
@@ -22,7 +22,7 @@
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
 
 
-### Usage
+## Usage
 
 *If you don't know what Docker is, use "Local install"*
 
@@ -64,7 +64,7 @@ npm start
 
 The bot will automatically create channels corresponding to threads on Messenger, sending message to these channels will send it to Messenger
 
-### Troubleshooting
+## Troubleshooting
 
 - Restart the bridge
 - Remove appstate.json file
