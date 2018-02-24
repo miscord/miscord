@@ -2,6 +2,14 @@
 
 **Facebook Messenger to Discord bridge for Node.js**
 
+## Screenshots
+
+### Message
+![message](https://user-images.githubusercontent.com/26630168/36634178-dfbd35ac-19a0-11e8-8c60-2969b37f5282.png)
+
+### Nickname
+![nickname](https://user-images.githubusercontent.com/26630168/36634196-1d71dfd8-19a1-11e8-93b1-71313bf8cd4a.png)
+
 ### Setup
 
 - Install Node.js - download [here](https://nodejs.org/en/download/)
