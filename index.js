@@ -28,10 +28,18 @@ function discordListener (message) {
   // make sure it's bot's category
   if (message.channel.parent && message.channel.parent.name !== config.discord.category.name) return
 
+  // parse embed into plaintext
+  if (message.embeds.length > 0) {
+    message.embeds.forEach(embed => {
+      message.content += '\n' + embed.title + '\n' + embed.description
+      embed.fields.forEach(field => { message.content += '\n\n' + field.name + '\n' + field.value })
+    })
+  }
+
   // build message with attachments provided
   var msg = {
     body: config.discord.showUsername ? message.author.username + ': ' + message.content : message.content,
-    url: message.attachments.size > 0 ? message.attachments.first().url : undefined
+    url: message.attachments.size > 0 ? message.attachments.first().url : (message.embeds.length > 0 ? message.embeds[0].image : undefined)
   }
 
   // send message to thread with ID specified in topic
