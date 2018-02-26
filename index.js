@@ -31,7 +31,9 @@ function discordListener (message) {
   // parse embed into plaintext
   if (message.embeds.length > 0) {
     message.embeds.forEach(embed => {
-      message.content += '\n' + embed.title + '\n' + embed.description
+      if (embed.title) message.content += '\n' + embed.title
+      if (embed.url) message.content += '\n(' + embed.url + ')'
+      if (embed.description) message.content += '\n' + embed.description
       embed.fields.forEach(field => { message.content += '\n\n' + field.name + '\n' + field.value })
     })
   }
