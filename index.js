@@ -81,7 +81,14 @@ function facebookListener (error, message) {
         var messages = await channel.fetchMessages({limit: 1})
         var lastMessage = messages.first()
         // if the last message was sent by the same person
-        if (lastMessage.embeds[0] && lastMessage.embeds[0].author && lastMessage.embeds[0].author.name === m.author.name && !lastMessage.embeds[0].image && !opts.message.attachments.length > 0) {
+        if (
+          lastMessage &&
+          lastMessage.embeds[0] &&
+          lastMessage.embeds[0].author &&
+          lastMessage.embeds[0].author.name === m.author.name &&
+          !lastMessage.embeds[0].image &&
+          !opts.message.attachments.length > 0
+        ) {
           channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
           // get the last embed
           var lastEmbed = lastMessage.embeds[0]
