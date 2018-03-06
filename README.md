@@ -52,10 +52,11 @@ docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=
 | `FACEBOOK_USERNAME` | `facebook.username` | Facebook username | :heavy_multiplication_x: | none |
 | `FACEBOOK_PASSWORD` | `facebook.password` | Facebook password | :heavy_multiplication_x: | none |
 | `DISCORD_TOKEN` | `discord.token` | Discord token | :heavy_multiplication_x: | none |
-| `FACEBOOK_FORCELOGIN` | `facebook.force` | Forces logging in to Facebook (mostly caused by latest logins review) | :heavy_check_mark: | `false` |
+| `FACEBOOK_FORCE_LOGIN` | `facebook.forceLogin` | Forces logging in to Facebook (mostly caused by latest logins review) | :heavy_check_mark: | `false` |
 | `DISCORD_GUILD` | `discord.guild` | Discord guild | :heavy_check_mark: | (first guild available) |
 | `DISCORD_CATEGORY` | `discord.category` | Category of channels on Discord | :heavy_check_mark: | `messenger` |
 | `DISCORD_SHOW_USERNAME` | `discord.showUsername` | Enables showing Discord username in Facebook messages | :heavy_check_mark: | `true` |
+| `DISCORD_SEND_NOTIFICATIONS` | `discord.sendNotifications` | Enables sending notifications when appending to existing embeds (see #71) | :heavy_check_mark: | `true` |
 
 **Usage**
 ```bash
