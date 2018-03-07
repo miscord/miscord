@@ -1,14 +1,13 @@
-![messenger-discord](https://user-images.githubusercontent.com/26630168/36616623-bbee32b4-18e4-11e8-955f-ddbbff8e03b3.png)
+# Miscord <img src="../gh-pages/img/256x256.png" width="60">
+> Simple Facebook Messenger to Discord bridge for Node.js
 
-**Facebook Messenger to Discord bridge for Node.js**
+**[Website](http://miscord.js.org/)**
 
-## Screenshots
+<br>
 
-### Message
-![message](https://user-images.githubusercontent.com/26630168/36634178-dfbd35ac-19a0-11e8-8c60-2969b37f5282.png)
-
-### Nickname
-![nickname](https://user-images.githubusercontent.com/26630168/36634196-1d71dfd8-19a1-11e8-93b1-71313bf8cd4a.png)
+<a href="http://miscord.js.org/">
+  <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
+</a>
 
 ## Setup
 
@@ -28,8 +27,8 @@
 
 **Local install**
 ```bash
-git clone https://github.com/Bjornskjald/messenger-discord # or download a zip from GitHub repo and extract it to folder of your choice
-cd messenger-discord # if you download the zip you might need to provide a full path, like C:\Users\User\Downloads\messenger-discord-master
+git clone https://github.com/Bjornskjald/miscord # or download a zip from GitHub repo and extract it to folder of your choice
+cd miscord # if you download the zip you might need to provide a full path, like C:\Users\User\Downloads\miscord-master
 npm install
 ```
 
@@ -42,7 +41,7 @@ Everything else is optional.
 
 **Docker install**
 ```bash
-docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/messenger-discord
+docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/miscord
 ``` 
 
 **Configuration**
@@ -72,4 +71,4 @@ The bot will automatically create channels corresponding to threads on Messenger
 - Check your internet connection
 - Make sure no text in config has trailing spaces
 - Login with a browser to check for pending login reviews
-- If this doesn't work, create new issue [here](https://github.com/Bjornskjald/messenger-discord/issues) with your error log
+- If this doesn't work, create new issue [here](https://github.com/Bjornskjald/miscord/issues) with your error log
