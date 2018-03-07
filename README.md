@@ -1,4 +1,4 @@
-# Miscord <img src="../gh-pages/img/256x256.png" width="60">
+# Miscord <img src="../gh-pages/img/icon.png" width="60">
 > Simple Facebook Messenger to Discord bridge for Node.js
 
 **[Website](http://miscord.js.org/)**
