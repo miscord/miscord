@@ -28,19 +28,22 @@ function discordListener (message) {
   // make sure it's bot's category
   if (message.channel.parent && message.channel.parent.name !== config.discord.category.name) return
 
+  // copy message content to a new variable, as the cleanContent property is read-only
+  var content = message.cleanContent
+
   // parse embed into plaintext
   if (message.embeds.length > 0) {
     message.embeds.forEach(embed => {
-      if (embed.title) message.content += '\n' + embed.title
-      if (embed.url) message.content += '\n(' + embed.url + ')'
-      if (embed.description) message.content += '\n' + embed.description
-      embed.fields.forEach(field => { message.content += '\n\n' + field.name + '\n' + field.value })
+      if (embed.title) content += '\n' + embed.title
+      if (embed.url) content += '\n(' + embed.url + ')'
+      if (embed.description) content += '\n' + embed.description
+      embed.fields.forEach(field => { content += '\n\n' + field.name + '\n' + field.value })
     })
   }
 
   // build message with attachments provided
   var msg = {
-    body: config.discord.showUsername ? (message.member.nickname || message.author.username) + ': ' + message.content : message.content,
+    body: config.discord.showUsername ? (message.member.nickname || message.author.username) + ': ' + content : content,
     url: message.attachments.size > 0 ? message.attachments.first().url : (message.embeds.length > 0 ? message.embeds[0].image : undefined)
   }
 
