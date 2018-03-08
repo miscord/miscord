@@ -1,17 +1,18 @@
 # Miscord <img src="../gh-pages/img/icon.png" width="60">
 > Simple Facebook Messenger to Discord bridge for Node.js
 
-**[Website](http://miscord.js.org/)**
+**[Website](https://miscord.js.org/)**
 
 <br>
 
-<a href="http://miscord.js.org/">
+<a href="https://miscord.js.org/">
   <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
 </a>
 
 ## Setup
 
-- Install Node.js - download [here](https://nodejs.org/en/download/)
+- Install Git - download [here](https://git-scm.com/download/win), make sure to add Git to PATH
+- Install Node.js - download [here](https://nodejs.org/en/download/) (**version 8.x.x at least**)
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Add "bot user" to your application
