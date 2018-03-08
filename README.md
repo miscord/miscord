@@ -15,8 +15,8 @@
 - Install Node.js - download [here](https://nodejs.org/en/download/) (**version 8.x.x at least**)
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
-- Add "bot user" to your application
-- Open "OAuth URL Generator", choose scope "bot" and copy link to your browser
+- Create a Bot User on your app's page
+- Open "OAuth URL Generator", choose scope `bot` and permission `Manage Channels`, then copy link to your browser
 - Add your bot to chosen guild
 
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
