@@ -40,7 +40,7 @@ function discordListener (message) {
 
   // build message with attachments provided
   var msg = {
-    body: config.discord.showUsername ? message.author.username + ': ' + message.content : message.content,
+    body: config.discord.showUsername ? (message.member.nickname || message.author.username) + ': ' + message.content : message.content,
     url: message.attachments.size > 0 ? message.attachments.first().url : (message.embeds.length > 0 ? message.embeds[0].image : undefined)
   }
 
