@@ -73,3 +73,5 @@ The bot will automatically create channels corresponding to threads on Messenger
 - Make sure no text in config has trailing spaces
 - Login with a browser to check for pending login reviews
 - If this doesn't work, create new issue [here](https://github.com/Bjornskjald/miscord/issues) with your error log
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JV5J73B4YKU7U)
