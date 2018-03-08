@@ -11,7 +11,8 @@
 
 ## Setup
 
-- Install Node.js - download [here](https://nodejs.org/en/download/)
+- Install Git - download [here](https://git-scm.com/download/win), make sure to add Git to PATH
+- Install Node.js - download [here](https://nodejs.org/en/download/) (**version 8.x.x at least**)
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Add "bot user" to your application
