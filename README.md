@@ -16,8 +16,9 @@
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Create a Bot User on your app's page
-- Open "OAuth URL Generator", choose scope `bot` and permission `Manage Channels`, then copy link to your browser
-- Add your bot to chosen guild
+- Open "OAuth URL Generator", choose scope `bot`
+- Add permissions: `Manage Channels` and whole `Text Permissions` group, then copy link to your browser
+- Add your bot to chosen guild(s)
 
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
 
