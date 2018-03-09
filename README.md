@@ -1,7 +1,7 @@
 # Miscord <img src="../gh-pages/img/icon.png" width="60">
 > Simple Facebook Messenger to Discord bridge for Node.js
 
-**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)**
+**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)**
 
 <br>
 
