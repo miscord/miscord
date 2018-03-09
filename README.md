@@ -1,7 +1,7 @@
 # Miscord <img src="../gh-pages/img/icon.png" width="60">
 > Simple Facebook Messenger to Discord bridge for Node.js
 
-**[Website](https://miscord.js.org/)**
+**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)**
 
 <br>
 
@@ -16,8 +16,9 @@
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Create a Bot User on your app's page
-- Open "OAuth URL Generator", choose scope `bot` and permission `Manage Channels`, then copy link to your browser
-- Add your bot to chosen guild
+- Open "OAuth URL Generator", choose scope `bot`
+- Add permissions: `Manage Channels` and whole `Text Permissions` group, then copy link to your browser
+- Add your bot to chosen guild(s)
 
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
 
@@ -73,5 +74,7 @@ The bot will automatically create channels corresponding to threads on Messenger
 - Make sure no text in config has trailing spaces
 - Login with a browser to check for pending login reviews
 - If this doesn't work, create new issue [here](https://github.com/Bjornskjald/miscord/issues) with your error log
+
+## Donate
 
 [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JV5J73B4YKU7U)
