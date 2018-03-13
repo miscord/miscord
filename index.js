@@ -93,7 +93,7 @@ function facebookListener (error, message) {
           !lastMessage.embeds[0].image &&
           !opts.message.attachments.length > 0
         ) {
-          if (config.discord.sendNotification) channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
+          if (config.discord.sendNotifications) channel.send(m).then(mess => mess.delete()) // ugly workaround to send notification
           // get the last embed
           var lastEmbed = lastMessage.embeds[0]
           // update message body with the old text
