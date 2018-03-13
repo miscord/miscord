@@ -66,6 +66,9 @@ function facebookListener (error, message) {
       // clean name for the needs of discord channel naming
       var cleanname = emojiStrip(removeAccents(name)).trim().replace(/ /g, '-').replace(/\W-/g, '').replace(/(?![a-zA-Z0-9\-_])/g, '').toLowerCase()
 
+      if (config.facebook.filter.whitelist.length > 0 && !(config.facebook.filter.whitelist.includes(cleanname) || config.facebook.filter.whitelist.includes(message.threadID))) return
+      if (config.facebook.filter.blacklist.length > 0 && (config.facebook.filter.blacklist.includes(cleanname) || config.facebook.filter.blacklist.includes(message.threadID))) return
+
       // set options for creating message
       var opts = {thread, sender: sender[message.senderID], message}
 
