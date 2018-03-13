@@ -2,13 +2,14 @@
   "facebook": {
     "username": "",
     "password": "",
-    "forceLogin": false
+    "forceLogin": false,
+    "showUsername": true,
+    "boldUsername": false
   },
   "discord": {
     "token": "",
     "guild": "",
     "category": "",
-    "showUsername": true,
     "sendNotifications": true,
     "_comment": "Regular notifications will still arrive. This switch disables sending duplicate messages when appending new messsage to existing embed (see issue #71)"
 	}
