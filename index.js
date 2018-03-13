@@ -42,7 +42,7 @@ function discordListener (message) {
   }
 
   // build message with attachments provided
-  var username = message.member.nickname || message.author.username
+  var username = message.member ? (message.member.nickname || message.author.username) : message.author.username
   var msg = {
     body: config.facebook.showUsername ? (config.facebook.boldUsername ? `*${username}*: ${content}` : `${username}: ${content}`) : content,
     url: message.attachments.size > 0 ? message.attachments.first().url : (message.embeds.length > 0 ? message.embeds[0].image : undefined)
