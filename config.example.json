@@ -4,7 +4,12 @@
     "password": "",
     "forceLogin": false,
     "showUsername": true,
-    "boldUsername": false
+    "boldUsername": false,
+    "filter": {
+      "whitelist": [],
+      "blacklist": [],
+      "_comment": "If you use one of the properties above, leave the other empty."
+    }
   },
   "discord": {
     "token": "",
