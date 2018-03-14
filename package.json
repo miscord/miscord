@@ -26,6 +26,7 @@
     "discord.js": "^11.3.0",
     "emoji-strip": "^1.0.1",
     "facebook-chat-api": "github:schmavery/facebook-chat-api",
-    "remove-accents": "^0.4.2"
+    "remove-accents": "^0.4.2",
+    "yn": "^2.0.0"
   }
 }
