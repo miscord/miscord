@@ -26,7 +26,7 @@ function discordListener (message) {
   if (!parseInt(message.channel.topic, 10).toString() === message.channel.topic) return
 
   // make sure it's bot's category
-  if (message.channel.parent && message.channel.parent.name !== config.discord.category) return
+  if (message.channel.parent && message.channel.parent.name !== config.discord.category.name) return
 
   // copy message content to a new variable, as the cleanContent property is read-only
   var content = message.cleanContent
