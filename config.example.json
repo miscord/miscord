@@ -18,5 +18,6 @@
     "sendNotifications": true,
     "_comment": "Regular notifications will still arrive. This switch disables sending duplicate messages when appending new messsage to existing embed (see issue #71)"
   },
+  "checkUpdates": true,
   "logLevel": "info"
 }
