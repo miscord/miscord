@@ -59,6 +59,15 @@ docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=
 | `DISCORD_SEND_NOTIFICATIONS` | `discord.sendNotifications` | Enables sending notifications when appending to existing embeds (see <a href="../../issues/71">#71</a>) | :heavy_check_mark: | `true` |
 | `FACEBOOK_SHOW_USERNAME` | `facebook.showUsername` | Enables showing Discord username in Facebook messages | :heavy_check_mark: | `true` |
 | `FACEBOOK_BOLD_USERNAME` | `facebook.boldUsername` | Makes all Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>) | :heavy_check_mark: | `false` |
+| `MISCORD_CHECK_UPDATES` | `checkUpdates` | Enables update checking | :heavy_check_mark: | `true` |
+| `MISCORD_LOG_LEVEL` | `logLevel` | Log level (see <a href="https://github.com/npm/npmlog#loglevelprefix-message-">here</a>) | :heavy_check_mark: | `info` |
+
+Filtering:
+- to show **only** the channels you chose, fill the whitelist (`FACEBOOK_FILTER_WHITELIST`)
+- to **don't show** the channels you chose, fill the blacklist (`FACEBOOK_FILTER_BLACKLIST`)
+Whitelist/blacklist have to be in the format of an [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)  
+Use Discord-supported names or thread IDs. ([Where to find thread ID?](../../wiki/faq#where-to-find-thread-id))
+
 
 **Usage**
 ```bash
