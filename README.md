@@ -20,8 +20,8 @@
 - Add permissions: `Manage Channels` and whole `Text Permissions` group, then copy link to your browser
 - Add your bot to chosen guild(s)
 
-**Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**
-
+**Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**  
+**Make sure you have "Show website preview info from links pasted into chat" enabled in "Text & Images" Discord settings**
 
 ## Usage
 
