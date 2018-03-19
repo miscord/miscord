@@ -1,6 +1,6 @@
 {
   "name": "messenger-discord",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
