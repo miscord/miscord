@@ -58,6 +58,7 @@ docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=
 | `DISCORD_CATEGORY` | `discord.category` | Category of channels on Discord | :heavy_check_mark: | `messenger` |
 | `DISCORD_SEND_NOTIFICATIONS` | `discord.sendNotifications` | Enables sending notifications when appending to existing embeds (see <a href="../../issues/71">#71</a>) | :heavy_check_mark: | `true` |
 | `DISCORD_NO_EMBEDS` | `discord.noEmbeds` | Shows messages as plaintext | :heavy_check_mark: | `false` |
+| `DISCORD_RENAME_CHANNELS` | `discord.renameChannels` | Enables renaming channels to FB chat names | :heavy_check_mark: | `true` |
 | `FACEBOOK_SHOW_USERNAME` | `facebook.showUsername` | Enables showing Discord username in Facebook messages | :heavy_check_mark: | `true` |
 | `FACEBOOK_BOLD_USERNAME` | `facebook.boldUsername` | Makes all Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>) | :heavy_check_mark: | `false` |
 | `MISCORD_CHECK_UPDATES` | `checkUpdates` | Enables update checking | :heavy_check_mark: | `true` |
