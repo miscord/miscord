@@ -21,5 +21,6 @@
     "renameChannels": true
   },
   "checkUpdates": true,
-  "logLevel": "info"
+  "logLevel": "info",
+  "custom": {}
 }
