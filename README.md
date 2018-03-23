@@ -64,12 +64,25 @@ docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=
 | `MISCORD_CHECK_UPDATES` | `checkUpdates` | Enables update checking | :heavy_check_mark: | `true` |
 | `MISCORD_LOG_LEVEL` | `logLevel` | Log level (see <a href="https://github.com/npm/npmlog#loglevelprefix-message-">here</a>) | :heavy_check_mark: | `info` |
 
-Filtering:
+**Filtering**:
 - to show **only** the channels you chose, fill the whitelist (`FACEBOOK_FILTER_WHITELIST`)
 - to **don't show** the channels you chose, fill the blacklist (`FACEBOOK_FILTER_BLACKLIST`)
+
 Whitelist/blacklist have to be in the format of an [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)  
+If you use enviromental variable, separate your thread IDs with a colon.
 Use Discord-supported names or thread IDs. ([Where to find thread ID?](../../wiki/faq#where-to-find-thread-id))
 
+**Custom mapping**:  
+If you want to map multiple channels to one Facebook chat, you can use custom mapping. (`custom` in the config)  
+Format: `"<facebook thread id>": "<discord channel name>"`  
+Example:  
+```javascript
+{
+  "100015962055831": "chat",
+  "100015872888779": "backup"
+}
+```  
+Enviromental variable (`MISCORD_CUSTOM`): `100015962055831:chat,100015872888779:backup`
 
 **Usage**
 ```bash
