@@ -1,4 +1,5 @@
 node_modules/
-logs/
+logs/*
+!logs/.gitkeep
 appstate.json
 config.json
