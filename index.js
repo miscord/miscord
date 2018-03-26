@@ -1,3 +1,5 @@
+require('./lib/logger.js')
+
 const sendError = require('./lib/error.js')
 const login = require('./lib/login/login.js')
 
