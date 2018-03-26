@@ -1,3 +1,4 @@
 node_modules/
+logs/
 appstate.json
 config.json
