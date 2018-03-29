@@ -4,12 +4,12 @@ const sendError = require('./lib/error.js')
 const login = require('./lib/login/login.js')
 
 const discordListener = require('./lib/listeners/discord.js')
-const facebookListener = require('./lib/listeners/facebook.js')
+const messengerListener = require('./lib/listeners/messenger.js')
 
 login().then(config => {
   // when got a discord message
   config.discord.client.on('message', message => discordListener({config, message}))
 
-  // when got a facebook message
-  config.facebook.client.listen((err, message) => facebookListener({config, err, message}))
+  // when got a messenger message
+  config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
 }).catch(sendError)
