@@ -1,5 +1,5 @@
 # Miscord <img src="../gh-pages/img/icon.png" width="60">
-> Simple Facebook Messenger to Discord bridge for Node.js
+> Simple Facebook Messenger to Discord bridge for Node.js built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
 
 **[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)**
 
@@ -43,30 +43,30 @@ Everything else is optional.
 
 **Docker install**
 ```bash
-docker run -d -e FACEBOOK_LOGIN=facebook@username.or.email -e FACEBOOK_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/miscord
+docker run -d -e MESSENGER_LOGIN=facebook@username.or.email -e MESSENGER_PASSWORD=yourfacebookpass -e DISCORD_TOKEN=token Bjornskjald/miscord
 ``` 
 
 **Configuration**
 
 | Environmental variable |  Value in config  | Description | Optional | Default value |
 | ---------------------- | ----------------- | ----------- | -------- | ------------- |
-| `FACEBOOK_USERNAME` | `facebook.username` | Facebook username | :heavy_multiplication_x: | none |
-| `FACEBOOK_PASSWORD` | `facebook.password` | Facebook password | :heavy_multiplication_x: | none |
+| `MESSENGER_USERNAME` | `messenger.username` | Facebook username | :heavy_multiplication_x: | none |
+| `MESSENGER_PASSWORD` | `messenger.password` | Facebook password | :heavy_multiplication_x: | none |
 | `DISCORD_TOKEN` | `discord.token` | Discord token | :heavy_multiplication_x: | none |
-| `FACEBOOK_FORCE_LOGIN` | `facebook.forceLogin` | Forces logging in to Facebook (mostly caused by latest logins review) | :heavy_check_mark: | `false` |
+| `MESSENGER_FORCE_LOGIN` | `messenger.forceLogin` | Forces logging in to Facebook (mostly caused by latest logins review) | :heavy_check_mark: | `false` |
 | `DISCORD_GUILD` | `discord.guild` | Discord guild | :heavy_check_mark: | (first guild available) |
 | `DISCORD_CATEGORY` | `discord.category` | Category of channels on Discord | :heavy_check_mark: | `messenger` |
 | `DISCORD_SEND_NOTIFICATIONS` | `discord.sendNotifications` | Enables sending notifications when appending to existing embeds (see <a href="../../issues/71">#71</a>) | :heavy_check_mark: | `true` |
 | `DISCORD_NO_EMBEDS` | `discord.noEmbeds` | Shows messages as plaintext | :heavy_check_mark: | `false` |
 | `DISCORD_RENAME_CHANNELS` | `discord.renameChannels` | Enables renaming channels to FB chat names | :heavy_check_mark: | `true` |
-| `FACEBOOK_SHOW_USERNAME` | `facebook.showUsername` | Enables showing Discord username in Facebook messages | :heavy_check_mark: | `true` |
-| `FACEBOOK_BOLD_USERNAME` | `facebook.boldUsername` | Makes all Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>) | :heavy_check_mark: | `false` |
+| `MESSENGER_SHOW_USERNAME` | `messenger.showUsername` | Enables showing Discord username in Facebook messages | :heavy_check_mark: | `true` |
+| `MESSENGER_BOLD_USERNAME` | `messenger.boldUsername` | Makes all Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>) | :heavy_check_mark: | `false` |
 | `MISCORD_CHECK_UPDATES` | `checkUpdates` | Enables update checking | :heavy_check_mark: | `true` |
 | `MISCORD_LOG_LEVEL` | `logLevel` | Log level (see <a href="https://github.com/npm/npmlog#loglevelprefix-message-">here</a>) | :heavy_check_mark: | `info` |
 
 **Filtering**:
-- to show **only** the channels you chose, fill the whitelist (`FACEBOOK_FILTER_WHITELIST`)
-- to **don't show** the channels you chose, fill the blacklist (`FACEBOOK_FILTER_BLACKLIST`)
+- to show **only** the channels you chose, fill the whitelist (`MESSENGER_FILTER_WHITELIST`)
+- to **don't show** the channels you chose, fill the blacklist (`MESSENGER_FILTER_BLACKLIST`)
 
 Whitelist/blacklist have to be in the format of an [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)  
 If you use enviromental variable, separate your thread IDs with a colon.
