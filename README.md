@@ -1,5 +1,5 @@
 # Miscord <img src="../gh-pages/img/icon.png" width="60">
-> Simple Facebook Messenger to Discord bridge for Node.js build on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
+> Simple Facebook Messenger to Discord bridge for Node.js built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
 
 **[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)**
 
