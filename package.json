@@ -1,6 +1,6 @@
 {
   "name": "messenger-discord",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "author": "Bjornskjald",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.3.0",
+    "colors": "^1.2.1",
     "discord.js": "^11.3.0",
     "emoji-strip": "^1.0.1",
     "facebook-chat-api": "github:Schmavery/facebook-chat-api",
