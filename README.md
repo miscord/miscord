@@ -26,7 +26,6 @@
 - [Local install](../../wiki/install#local)
 - [Docker install](../../wiki/install#docker)
 
-
 **Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**  
 **Make sure you have "Show website preview info from links pasted into chat" enabled in "Text & Images" Discord settings**
 
@@ -83,14 +82,14 @@ Configuration file:
     <td><code>USERNAME</code></td>
     <td>Messenger username</td>
     <td>:heavy_multiplication_x:</td>
-    <td><code>(none)</code></td>
+    <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>password</code></td>
     <td><code>PASSWORD</code></td>
     <td>Messenger password</td>
     <td>:heavy_multiplication_x:</td>
-    <td><code>(none)</code></td>
+    <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>forceLogin</code></td>
@@ -137,7 +136,7 @@ Configuration file:
     <td><code>TOKEN</code></td>
     <td>Discord token</td>
     <td>:heavy_multiplication_x:</td>
-    <td><code>(none)</code></td>
+    <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>guild</code></td>
@@ -175,6 +174,34 @@ Configuration file:
     <td><code>true</code></td>
   </tr>
 </table>
+
+## Running
+
+### Binaries/NPM install
+
+Run `miscord` in the console.  
+_If you store your config somewhere else, you can run it with `miscord --config {path}`_
+
+### Local install
+
+Enter the Miscord directory where you cloned it (`cd miscord`)  
+Run it using `npm start`.  
+(Note: you can enable developing environment with `NODE_ENV=development`. Miscord will read config.json from your current directory)
+
+## Module usage
+
+You can use Miscord as a module in your script  
+Example:
+```javascript
+const miscord = require('miscord')
+const config = // ...
+
+miscord(config).then(config => {
+  // there are Discord and Messenger clients added to config variable
+  // config.messenger.client
+  // config.discord.client
+}
+```
 
 ## Donate
 
