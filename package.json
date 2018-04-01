@@ -4,7 +4,7 @@
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,9 @@
     "bridge",
     "bot"
   ],
+  "bin": {
+    "miscord": "bin/index.js"
+  },
   "author": "Bjornskjald",
   "license": "MIT",
   "dependencies": {
