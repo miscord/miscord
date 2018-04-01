@@ -48,131 +48,131 @@ Configuration file:
     <th>Default value</th>
   </tr>
   <tr>
-    <td rowspan="2">
+    <td rowspan="3">
       Miscord<br />
-      `*`<br />
-      `MISCORD_*`
+      <code>*</code><br />
+      <code>MISCORD_*</code>
     </td>
-    <td>`logLevel`</td>
-    <td>`LOG_LEVEL`</td>
+    <td><code>logLevel</code></td>
+    <td><code>LOG_LEVEL</code></td>
     <td>Log level (see <a href="https://github.com/npm/npmlog#loglevelprefix-message-">here</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`"info"`</td>
+    <td><code>"info"</code></td>
   </tr>
   <tr>
-    <td>`checkUpdates`</td>
-    <td>`CHECK_UPDATES`</td>
+    <td><code>checkUpdates</code></td>
+    <td><code>CHECK_UPDATES</code></td>
     <td>Checking updates</td>
     <td>:heavy_check_mark:</td>
-    <td>`true`</td>
-  </tr>  
+    <td><code>true</code></td>
+  </tr>
   <tr>
-    <td>`custom`</td>
-    <td>`CUSTOM`</td>
+    <td><code>custom</code></td>
+    <td><code>CUSTOM</code></td>
     <td>Custom channel map (see <a href="../../wiki/custom-mapping">here</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`{}`</td>
+    <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="5">
+    <td rowspan="7">
       Messenger<br />
-      `messenger.*`<br />
-      `MESSENGER_*`
+      <code>messenger.*</code><br />
+      <code>MESSENGER_*</code>
     </td>
-    <td>`username`</td>
-    <td>`USERNAME`</td>
+    <td><code>username</code></td>
+    <td><code>USERNAME</code></td>
     <td>Messenger username</td>
     <td>:heavy_multiplication_x:</td>
-    <td>`(none)`</td>
+    <td><code>(none)</code></td>
   </tr>
   <tr>
-    <td>`password`</td>
-    <td>`PASSWORD`</td>
+    <td><code>password</code></td>
+    <td><code>PASSWORD</code></td>
     <td>Messenger password</td>
     <td>:heavy_multiplication_x:</td>
-    <td>`(none)`</td>
+    <td><code>(none)</code></td>
   </tr>
   <tr>
-    <td>`forceLogin`</td>
-    <td>`FORCE_LOGIN`</td>
+    <td><code>forceLogin</code></td>
+    <td><code>FORCE_LOGIN</code></td>
     <td>Forces logging in to Facebook</td>
     <td>:heavy_check_mark:</td>
-    <td>`false`</td>
+    <td><code>false</code></td>
   </tr>
   <tr>
-    <td>`showUsername`</td>
-    <td>`SHOW_USERNAME`</td>
+    <td><code>showUsername</code></td>
+    <td><code>SHOW_USERNAME</code></td>
     <td>Shows Discord usernames on Facebook</td>
     <td>:heavy_check_mark:</td>
-    <td>`true`</td>
+    <td><code>true</code></td>
   </tr>
   <tr>
-    <td>`boldUsername`</td>
-    <td>`BOLD_USERNAME`</td>
+    <td><code>boldUsername</code></td>
+    <td><code>BOLD_USERNAME</code></td>
     <td>Makes Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`false`</td>
+    <td><code>false</code></td>
   </tr>
   <tr>
-    <td>`filter.whitelist`</td>
-    <td>`FILTER_WHITELIST`</td>
+    <td><code>filter.whitelist</code></td>
+    <td><code>FILTER_WHITELIST</code></td>
     <td>Messenger chat filtering (see <a href="../../wiki/filtering">here</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`[]`</td>
+    <td><code>[]</code></td>
   </tr>
   <tr>
-    <td>`filter.blacklist`</td>
-    <td>`FILTER_BLACKLIST`</td>
+    <td><code>filter.blacklist</code></td>
+    <td><code>FILTER_BLACKLIST</code></td>
     <td>Messenger chat filtering (see <a href="../../wiki/filtering">here</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`[]`</td>
+    <td><code>[]</code></td>
   </tr>
   <tr>
-    <td rowspan="5">
+    <td rowspan="6">
       Discord<br />
-      `discord.*`<br />
-      `DISCORD_*`
+      <code>discord.*</code><br />
+      <code>DISCORD_*</code>
     </td>
-    <td>`token`</td>
-    <td>`TOKEN`</td>
+    <td><code>token</code></td>
+    <td><code>TOKEN</code></td>
     <td>Discord token</td>
     <td>:heavy_multiplication_x:</td>
-    <td>`(none)`</td>
+    <td><code>(none)</code></td>
   </tr>
   <tr>
-    <td>`guild`</td>
-    <td>`GUILD`</td>
+    <td><code>guild</code></td>
+    <td><code>GUILD</code></td>
     <td>Discord guild (server)</td>
     <td>:heavy_check_mark:</td>
     <td>(first guild available)</td>
   </tr>
   <tr>
-    <td>`category`</td>
-    <td>`CATEGORY`</td>
+    <td><code>category</code></td>
+    <td><code>CATEGORY</code></td>
     <td>Discord category on server</td>
     <td>:heavy_check_mark:</td>
-    <td>new category named `messenger`</td>
+    <td>new category named <code>messenger</code></td>
   </tr>
   <tr>
-    <td>`sendNotifications`</td>
-    <td>`SEND_NOTIFICATIONS`</td>
+    <td><code>sendNotifications</code></td>
+    <td><code>SEND_NOTIFICATIONS</code></td>
     <td>Sends notifications when appending to existing embeds (see <a href="../../issues/71">#71</a>)</td>
     <td>:heavy_check_mark:</td>
-    <td>`true`</td>
+    <td><code>true</code></td>
   </tr>
   <tr>
-    <td>`noEmbeds`</td>
-    <td>`NO_EMBEDS`</td>
+    <td><code>noEmbeds</code></td>
+    <td><code>NO_EMBEDS</code></td>
     <td>Sends plaintext messages without embeds</td>
     <td>:heavy_check_mark:</td>
-    <td>`false`</td>
+    <td><code>false</code></td>
   </tr>
   <tr>
-    <td>`renameChannels`</td>
-    <td>`RENAME_CHANNELS`</td>
+    <td><code>renameChannels</code></td>
+    <td><code>RENAME_CHANNELS</code></td>
     <td>Renames channels according to Messenger</td>
     <td>:heavy_check_mark:</td>
-    <td>`true`</td>
+    <td><code>true</code></td>
   </tr>
 </table>
 
