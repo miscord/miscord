@@ -11,11 +11,12 @@ const messengerListener = require('../lib/listeners/messenger.js')
 const getConfig = require('../lib/config/getConfig.js')
 
 if (['--help', '-h'].includes(process.argv[2])) {
-  return console.log(
+  console.log(
     'Miscord v' + require('../package.json').version,
     '\nUsage:',
     '\n\tmiscord', '[--help, -h]'.green, 'configPath'.blue
   )
+  process.exit(1)
 }
 
 login(getConfig(process.argv[2])).then(config => {
