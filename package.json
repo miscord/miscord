@@ -1,11 +1,16 @@
 {
   "name": "miscord",
-  "version": "2.7.8",
+  "version": "3.0.0",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/index.js",
+    "test": "node_modules/.bin/standard",
+    "build": "node_modules/.bin/pkg --public .",
+    "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
+    "build:win32": "node_modules/.bin/pkg -t node8-win-x86 --public .",
+    "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 --public .",
+    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public ."
   },
   "repository": {
     "type": "git",
@@ -19,6 +24,9 @@
     "bridge",
     "bot"
   ],
+  "bin": {
+    "miscord": "bin/index.js"
+  },
   "author": "Bjornskjald",
   "license": "MIT",
   "dependencies": {
@@ -26,10 +34,15 @@
     "discord.js": "^11.3.0",
     "emoji-strip": "^1.0.1",
     "facebook-chat-api": "github:Schmavery/facebook-chat-api",
+    "mkdirp": "^0.5.1",
     "npmlog": "^4.1.2",
     "remove-accents": "^0.4.2",
     "strip-ansi": "^4.0.0",
     "superagent": "^3.8.2",
     "yn": "^2.0.0"
+  },
+  "devDependencies": {
+    "pkg": "^4.3.1",
+    "standard": "^11.0.1"
   }
 }
