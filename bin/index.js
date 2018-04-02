@@ -19,7 +19,7 @@ if (['--help', '-h'].includes(process.argv[2])) {
   process.exit(1)
 }
 
-login(getConfig(process.argv[2])).then(config => {
+getConfig(process.argv[2]).then(login).then(config => {
   // when got a discord message
   config.discord.client.on('message', message => discordListener({config, message}))
 
