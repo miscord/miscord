@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node bin/index.js",
     "test": "node_modules/.bin/standard",
-    "build": "node_modules/.bin/pkg .",
-    "build:win": "node_modules/.bin/pkg -t node8-win-x64 .",
-    "build:win32": "node_modules/.bin/pkg -t node8-win-x86 .",
-    "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 .",
-    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 ."
+    "build": "node_modules/.bin/pkg --public .",
+    "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
+    "build:win32": "node_modules/.bin/pkg -t node8-win-x86 --public .",
+    "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 --public .",
+    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public ."
   },
   "repository": {
     "type": "git",
