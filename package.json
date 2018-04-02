@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/standard",
+    "build": "node_modules/.bin/pkg .",
+    "build:win": "node_modules/.bin/pkg -t node8-win-x64 .",
+    "build:win32": "node_modules/.bin/pkg -t node8-win-x86 .",
+    "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 .",
+    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 ."
   },
   "repository": {
     "type": "git",
@@ -35,5 +40,9 @@
     "strip-ansi": "^4.0.0",
     "superagent": "^3.8.2",
     "yn": "^2.0.0"
+  },
+  "devDependencies": {
+    "pkg": "^4.3.1",
+    "standard": "^11.0.1"
   }
 }
