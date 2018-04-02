@@ -34,8 +34,9 @@
 
 Configuration file:
 - Windows: `%appdata%/Miscord/config.json`
-- Mac/Linux: `~/.config/Miscord/config.json`
-- Other: ~/.miscord.json
+- Mac: `~/Library/Application Support/Miscord/config.json`
+- Linux: `~/.config/Miscord/config.json`
+- Other: `~/.miscord/config.json`
 
 <table>
   <tr>
