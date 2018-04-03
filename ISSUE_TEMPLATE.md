@@ -13,5 +13,5 @@
 ## Specifications
 
   - Platform:
-  - Version (can be found in package.json):
+  - Version (`miscord -v`):
   - Node.js version (`node -v`):

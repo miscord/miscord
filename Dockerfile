@@ -1,22 +1,13 @@
 FROM node:alpine
+LABEL maintainer="Bjornskjald <github@bjorn.ml>"
 
 RUN apk update && \
     apk upgrade && \
     apk add git
 
-# Create app directory
-WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+RUN npm install --only=production -g miscord
 
-RUN npm install --only=production
-# If you are building your code for production
-# RUN npm install --only=production
+VOLUME ["/config"]
 
-# Bundle app source
-COPY . .
-
-CMD [ "npm", "start" ]
+CMD [ "miscord", "-c", "/config/config.json" ]
