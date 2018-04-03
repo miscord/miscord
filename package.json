@@ -10,7 +10,8 @@
     "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
     "build:win32": "node_modules/.bin/pkg -t node8-win-x86 --public .",
     "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 --public .",
-    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public ."
+    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public .",
+    "build:linux32": "node_modules/.bin/pkg -t node8-linux-x86 --public ."
   },
   "repository": {
     "type": "git",
