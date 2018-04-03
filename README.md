@@ -128,7 +128,7 @@ Configuration file:
     <td><code>[]</code></td>
   </tr>
   <tr>
-    <td rowspan="6">
+    <td rowspan="7">
       Discord<br />
       <code>discord.*</code><br />
       <code>DISCORD_*</code>
@@ -173,6 +173,13 @@ Configuration file:
     <td>Renames channels according to Messenger</td>
     <td>:heavy_check_mark:</td>
     <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>showEvents</code></td>
+    <td><code>SHOW_EVENTS</code></td>
+    <td>Shows Facebook events on Discord</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>false</code></td>
   </tr>
 </table>
 
