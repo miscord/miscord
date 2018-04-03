@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
     "build:win32": "node_modules/.bin/pkg -t node8-win-x86 --public .",
     "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 --public .",
-    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public ."
+    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public .",
+    "build:linux32": "node_modules/.bin/pkg -t node8-linux-x86 --public ."
   },
   "repository": {
     "type": "git",
@@ -44,5 +45,11 @@
   "devDependencies": {
     "pkg": "^4.3.1",
     "standard": "^11.0.1"
+  },
+  "pkg": {
+    "scripts": [
+      "node_modules/facebook-chat-api/**/*.js",
+      "!node_modules/facebook-chat-api/**/test"
+    ]
   }
 }
