@@ -48,6 +48,11 @@ a:not(.button):hover {
 
 .main-screenshot {
   max-width: 60%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  -webkit-box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
+  box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5);
 }
 
 #read-more {
