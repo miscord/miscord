@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require('../lib/logger.js')
 require('colors')
 
 const minimist = require('minimist')
@@ -31,6 +30,8 @@ if (args.v || args.version) {
   console.log(require('../package.json').version)
   process.exit(0)
 }
+
+require('../lib/logger.js')(args.c || args.config)
 
 getConfig(args.c || args.config).then(login).then(config => {
   // when got a discord message
