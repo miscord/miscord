@@ -1,3 +1,4 @@
+_If you have a question, ask on the [Miscord Support server](https://discord.gg/DkmTvVz) instead_  
 ## Expected Behavior
 
 

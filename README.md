@@ -1,7 +1,15 @@
-# Miscord <img src="../gh-pages/img/icon.png" width="60">
-> Simple Facebook Messenger to Discord bridge for Node.js built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
+![banner](../gh-pages/img/banner.png)
 
-**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)**
+> Built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
+
+[![code style: Standard.js](https://img.shields.io/badge/code%20style-standard.js-green.svg?style=flat-square)](https://standardjs.com/)
+[![Travis](https://img.shields.io/travis/Bjornskjald/miscord.svg?style=flat-square)](https://travis-ci.org/Bjornskjald/miscord/)
+[![NPM downloads](https://img.shields.io/npm/dt/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
+[![NPM version](https://img.shields.io/npm/v/miscord.svg?style=flat-square&label=NPM%20version)](https://npmjs.org/package/miscord)
+[![GitHub release](https://img.shields.io/github/release/Bjornskjald/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
+![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
+
+**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)** &nbsp; **[Support Server](https://discord.gg/DkmTvVz)**
 
 <br>
 
