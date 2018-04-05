@@ -11,7 +11,7 @@ fetch('https://api.github.com/repos/Bjornskjald/miscord/releases/latest')
   )
   .then(asset => {
     document.querySelector('#download').href = asset.url
-    document.querySelector('#download').innerHTML = `Download Miscord ${asset.version} for ${getFullOSName(os)}${os === 'Mac' ? ` (${asset.arch === 'x64' ? '64-bit' : '32-bit'})` : ``}`
+    document.querySelector('#download').innerHTML = `Download Miscord ${asset.version} for ${getFullOSName(os)}${os !== 'Mac' ? ` (${asset.arch === 'x64' ? '64-bit' : '32-bit'})` : ``}`
   })
 
 function getFullOSName (os) { switch (os) { case 'Win': return 'Windows'; case 'Mac': return 'macOS'; default: return 'Linux' } }
