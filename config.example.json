@@ -9,7 +9,8 @@
       "whitelist": [],
       "blacklist": [],
       "_comment": "If you use one of the properties above, leave the other empty."
-    }
+    },
+    "separateImages": false
   },
   "discord": {
     "token": "",
