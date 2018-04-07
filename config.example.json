@@ -9,7 +9,8 @@
       "whitelist": [],
       "blacklist": [],
       "_comment": "If you use one of the properties above, leave the other empty."
-    }
+    },
+    "separateImages": false
   },
   "discord": {
     "token": "",
@@ -18,7 +19,8 @@
     "sendNotifications": true,
     "_comment": "Regular notifications will still arrive. This switch disables sending duplicate messages when appending new messsage to existing embed (see issue #71)",
     "noEmbeds": false,
-    "renameChannels": true
+    "renameChannels": true,
+    "showEvents": false
   },
   "checkUpdates": true,
   "logLevel": "info",
