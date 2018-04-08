@@ -1,10 +1,10 @@
-require('./lib/logger.js')
+require('./lib/logger')
 
-const sendError = require('./lib/error.js')
-const login = require('./lib/login/login.js')
+const sendError = require('./lib/error')
+const login = require('./lib/login/login')
 
-const discordListener = require('./lib/listeners/discord.js')
-const messengerListener = require('./lib/listeners/messenger.js')
+const discordListener = require('./lib/listeners/discord')
+const messengerListener = require('./lib/listeners/messenger')
 
 module.exports = config => {
   return login(config).then(config => {
