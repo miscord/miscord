@@ -4,12 +4,12 @@ require('colors')
 
 const minimist = require('minimist')
 
-const sendError = require('../lib/error.js')
-const login = require('../lib/login/login.js')
+const sendError = require('../lib/error')
+const login = require('../lib/login/login')
 
-const discordListener = require('../lib/listeners/discord.js')
-const messengerListener = require('../lib/listeners/messenger.js')
-const getConfig = require('../lib/config/getConfig.js')
+const discordListener = require('../lib/listeners/discord')
+const messengerListener = require('../lib/listeners/messenger')
+const getConfig = require('../lib/config/getConfig')
 
 var args = minimist(process.argv.slice(2))
 
