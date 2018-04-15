@@ -136,7 +136,7 @@ Configuration file:
     <td><code>[]</code></td>
   </tr>
   <tr>
-    <td rowspan="5">
+    <td rowspan="6">
       Discord<br />
       <code>discord.*</code><br />
       <code>DISCORD_*</code>
@@ -174,6 +174,13 @@ Configuration file:
     <td>Shows Facebook events on Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>showFullNames</code></td>
+    <td><code>SHOW_FULL_NAMES</code></td>
+    <td>Shows Facebook users' full names alongside their nicknames on Discord</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>true</code></td>
   </tr>
 </table>
 
