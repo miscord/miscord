@@ -136,7 +136,7 @@ Configuration file:
     <td><code>[]</code></td>
   </tr>
   <tr>
-    <td rowspan="7">
+    <td rowspan="6">
       Discord<br />
       <code>discord.*</code><br />
       <code>DISCORD_*</code>
@@ -162,20 +162,6 @@ Configuration file:
     <td>new category named <code>messenger</code></td>
   </tr>
   <tr>
-    <td><code>sendNotifications</code></td>
-    <td><code>SEND_NOTIFICATIONS</code></td>
-    <td>Sends notifications when appending to existing embeds (see <a href="../../issues/71">#71</a>)</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>noEmbeds</code></td>
-    <td><code>NO_EMBEDS</code></td>
-    <td>Sends plaintext messages without embeds</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
     <td><code>renameChannels</code></td>
     <td><code>RENAME_CHANNELS</code></td>
     <td>Renames channels according to Messenger</td>
@@ -188,6 +174,13 @@ Configuration file:
     <td>Shows Facebook events on Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>showFullNames</code></td>
+    <td><code>SHOW_FULL_NAMES</code></td>
+    <td>Shows Facebook users' full names alongside their nicknames on Discord</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>true</code></td>
   </tr>
 </table>
 
