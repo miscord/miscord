@@ -17,7 +17,8 @@
     "guild": "",
     "category": "",
     "renameChannels": true,
-    "showEvents": false
+    "showEvents": false,
+    "showFullNames": false
   },
   "checkUpdates": true,
   "logLevel": "info",

@@ -180,7 +180,7 @@ Configuration file:
     <td><code>SHOW_FULL_NAMES</code></td>
     <td>Shows Facebook users' full names alongside their nicknames on Discord</td>
     <td>:heavy_check_mark:</td>
-    <td><code>true</code></td>
+    <td><code>false</code></td>
   </tr>
 </table>
 
