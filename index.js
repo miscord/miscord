@@ -12,7 +12,7 @@ module.exports = config => {
     config.discord.client.on('message', message => discordListener({config, message}))
 
     // when got a messenger message
-    config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
+    config.messenger.stopListening = config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
     return config
   }).catch(sendError)
 }

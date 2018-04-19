@@ -38,5 +38,5 @@ getConfig(args.c || args.config).then(login).then(config => {
   config.discord.client.on('message', message => discordListener({config, message}))
 
   // when got a messenger message
-  config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
+  config.messenger.stopListening = config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
 }).catch(sendError)

@@ -1,10 +1,11 @@
 {
   "name": "miscord",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
+    "postinstall": "node bin/postinstall.js",
     "test": "node_modules/.bin/standard",
     "build": "node_modules/.bin/pkg --public .",
     "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
