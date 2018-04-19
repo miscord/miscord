@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
-    "postinstall": "echo Ignore any \"WARN\" errors above, these are optional dependencies and they're not necessary to run Miscord correctly. && echo Join our Discord server: https://discord.gg/DkmTvVz",
+    "postinstall": "node bin/postinstall.js",
     "test": "node_modules/.bin/standard",
     "build": "node_modules/.bin/pkg --public .",
     "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
