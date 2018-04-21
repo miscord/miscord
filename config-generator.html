@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Miscord Config Generator</title>
+		<link rel="icon" href="img/icon.png">
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+			integrity="sha256-zIG416V1ynj3Wgju/scU80KAEWOsO5rRLfVyRDuOv7Q="
+			crossorigin="anonymous" />
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="checkbox.css">
+		<style>
+			.input::-moz-placeholder,
+			.textarea::-moz-placeholder {
+				color: rgba(54, 54, 54, 0.7);
+			}
+
+			.input::-webkit-input-placeholder,
+			.textarea::-webkit-input-placeholder {
+				color: rgba(54, 54, 54, 0.7);
+			}
+
+			.input:-moz-placeholder,
+			.textarea:-moz-placeholder {
+				color: rgba(54, 54, 54, 0.7);
+			}
+
+			.input:-ms-input-placeholder,
+			.textarea:-ms-input-placeholder {
+				color: rgba(54, 54, 54, 0.7);
+			}
+		</style>
+		<style>
+			.config::before {
+				background: #209cee;
+				border-radius: 2px 2px 0 0;
+				bottom: 100%;
+				color: rgba(0,0,0,.7);
+				content: "Config";
+				display: inline-block;
+				font-size: 10px;
+				font-weight: 700;
+				left: 5px;
+				letter-spacing: 1px;
+				margin-left: -1px;
+				padding: 3px 5px;
+				position: absolute;
+				text-transform: uppercase;
+				vertical-align: top;
+			}
+
+			#config-miscord::before {
+				content: "Miscord";
+			}
+
+			#config-messenger::before {
+				content: "Messenger";
+			}
+
+			#config-discord::before {
+				content: "Discord";
+			}
+
+			.config {
+				margin-bottom: 2rem !important;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="hero is-info">
+			<div class="hero-body">
+				<div class="container">
+					<h1 class="title">
+						Miscord Config Generator
+					</h1>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+
+			<div class="container box config" id="config-miscord">
+				<div class="field">
+					<label class="label">Log level</label>
+					<div class="select">
+						<select id="miscord-logLevel">
+							<option value="silent">silent</option>
+							<option value="warn">warn</option>
+							<option value="info" selected>info</option>
+							<option value="verbose">verbose</option>
+							<option value="silly">silly</option>
+						</select>
+					</div>
+				</div>
+	
+				<div class="field">
+					<label class="checkbox">
+						<input id="miscord-checkUpdates" type="checkbox" checked="checked">
+						<span>Check updates</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<textarea id="miscord-custom" class="textarea" placeholder="Custom mapping in the format &quot;threadID:Discord channel name/ID&quot; (one in a line) "></textarea>
+				</div>
+			</div>
+
+			<div class="container box config" id="config-messenger">
+				<div class="field">
+					<input class="input" id="messenger-username" type="text" placeholder="Facebook mail/username">
+				</div>
+
+				<div class="field">
+					<input class="input" id="messenger-password" type="text" placeholder="Facebook password">
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="messenger-forceLogin" type="checkbox">
+						<span>Force login to Facebook (skip login reviews, etc.)</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="messenger-showUsername" type="checkbox" checked="checked">
+						<span>Show Discord usernames on Messenger</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="messenger-boldUsername" type="checkbox">
+						<span>Make Discord usernames bold</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="label">White/blacklist</label>
+					<div class="select">
+						<select id="messenger-list-type">
+							<option value="whitelist">Whitelist</option>
+							<option value="blacklist">Blacklist</option>
+						</select>
+					</div>
+					<textarea id="messenger-filter" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="messenger-separateImages" type="checkbox">
+						<span>Send images separate from text on Messenger</span>
+					</label>
+				</div>
+			</div>
+
+			<div class="container box config" id="config-discord">
+				<div class="field">
+					<input class="input" id="discord-token" type="text" placeholder="Discord token">
+				</div>
+
+				<div class="field">
+					<input class="input" id="discord-guild" type="text" placeholder="Discord guild (leave empty for the first guild available)">
+				</div>
+				
+				<div class="field">
+					<input class="input" id="discord-category" type="text" placeholder="Discord category name (default: messenger)">
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="discord-renameChannels" type="checkbox" checked="checked">
+						<span>Rename Discord channels according to Messenger chat renames</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="discord-showEvents" type="checkbox">
+						<span>Show Messenger chat events (kick/leave/chat rename, etc.) on Discord</span>
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input id="discord-showFullNames" type="checkbox">
+						<span>Show Messenger users' full names alongside their nicknames on Discord</span>
+					</label>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="field">
+					<a class="button is-info is-medium" id="generate-config">Generate config</a>
+				</div> 
+				<div class="field">
+					<textarea class="textarea" placeholder="Click the button above" id="output" rows="25"></textarea>
+				</div> 
+			</div>
+
+		</section>
+
+		<footer class="footer hero is-info is-paddingless">
+			<div class="hero-body">
+				<div class="container">
+					<div class="has-text-centered">
+						<p>Created by <a href="https://bjorn.ml">Bjornskjald</a>. Website by <a href="https://sindresorhus.com">Sindre Sorhus</a>.</p>
+						<p class="disclaimer"><strong>Miscord</strong> is a third-party app and is not affiliated with Facebook nor Discord.</p>
+						<div class="block">
+							<a class="button is-info is-inverted is-outlined" href="https://github.com/Bjornskjald/miscord">Source Code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			var output = document.querySelector('#output')
+
+			document.querySelector('#generate-config').addEventListener("click", ev => {
+				/* Miscord */
+				var logLevel = document.querySelector('#miscord-logLevel').value
+				var checkUpdates = document.querySelector('#miscord-checkUpdates').checked
+				var custom = document.querySelector('#miscord-custom').value
+
+				/* Messenger */
+				var messenger = {
+					username: document.querySelector('#messenger-username').value,
+					password: document.querySelector('#messenger-password').value,
+					forceLogin: document.querySelector('#messenger-forceLogin').checked,
+					showUsername: document.querySelector('#messenger-showUsername').checked,
+					boldUsername: document.querySelector('#messenger-boldUsername').checked,
+					filter: document.querySelector('#messenger-filter').value,
+					separateImages: document.querySelector('#messenger-separateImages').checked
+				}
+
+				var discord = {
+					token: document.querySelector('#discord-token').value,
+					guild: document.querySelector('#discord-guild').value,
+					category: document.querySelector('#discord-category').value,
+					renameChannels: document.querySelector('#discord-renameChannels').checked,
+					showEvents: document.querySelector('#discord-showEvents').checked,
+					showFullNames: document.querySelector('#discord-showFullNames').checked
+				}
+
+				if (!messenger.username) return alert('Messenger username missing!')
+				if (!messenger.password) return alert('Messenger password missing!')
+				if (!discord.token) return alert('Discord token missing!')
+
+				var config = {
+					logLevel: logLevel !== 'info' ? logLevel : undefined,
+					checkUpdates: !checkUpdates ? false : undefined,
+					custom: parseCustom(custom),
+					messenger: {
+						username: messenger.username,
+						password: messenger.password,
+						forceLogin: messenger.forceLogin ? true : undefined,
+						showUsername: !messenger.showUsername ? false : undefined,
+						boldUsername: messenger.boldUsername ? true : undefined,
+						filter: parseFilter(messenger.filter),
+						separateImages: messenger.separateImages ? true : undefined
+					},
+					discord: {
+						token: discord.token,
+						guild: discord.guild ? discord.guild : undefined,
+						category: discord.category ? discord.category : undefined,
+						renameChannels: !discord.renameChannels ? false : undefined,
+						showEvents: discord.showEvents ? true : undefined,
+						showFullNames: discord.showFullNames ? true : undefined
+					}
+				}
+
+				output.innerHTML = JSON.stringify(config, null, 2)
+			})
+			function parseCustom (custom) {
+				if (!custom) return undefined
+				var obj = {}
+				for (let value of custom.split('\n')) {
+					if (!value.includes(':')) break
+					value = value.split(':')
+					obj[value[0]] = value[1]
+				}
+				return obj
+			}
+			function parseFilter (filter) {
+				if (!filter) return undefined
+				var obj = {}
+				var type = document.querySelector('#messenger-list-type').value
+				obj[type] = filter.split('\n')
+				obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
+				return obj
+			}
+		</script>
+	</body>
+</html>
