@@ -82,7 +82,7 @@ Configuration file:
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="7">
+    <td rowspan="8">
       Messenger<br />
       <code>messenger.*</code><br />
       <code>MESSENGER_*</code>
@@ -134,6 +134,13 @@ Configuration file:
     <td>Messenger chat filtering (see <a href="../../wiki/filtering">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>[]</code></td>
+  </tr>
+  <tr>
+    <td><code>separateImages</code></td>
+    <td><code>SEPARATE_IMAGES</code></td>
+    <td>Sends images on Messenger separate from text</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>false</code></td>
   </tr>
   <tr>
     <td rowspan="6">
