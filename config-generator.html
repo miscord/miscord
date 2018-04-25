@@ -37,13 +37,13 @@
 			.config::before {
 				background: #209cee;
 				border-radius: 2px 2px 0 0;
-				bottom: 100%;
+				bottom: 98%;
 				color: rgba(0,0,0,.7);
 				content: "Config";
 				display: inline-block;
 				font-size: 10px;
 				font-weight: 700;
-				left: 5px;
+				/* left: 5px; */
 				letter-spacing: 1px;
 				margin-left: -1px;
 				padding: 3px 5px;
@@ -82,119 +82,146 @@
 
 		<section class="section">
 
-			<div class="container box config" id="config-miscord">
-				<div class="field">
-					<label class="label">Log level</label>
-					<div class="select">
-						<select id="miscord-logLevel">
-							<option value="silent">silent</option>
-							<option value="warn">warn</option>
-							<option value="info" selected>info</option>
-							<option value="verbose">verbose</option>
-							<option value="silly">silly</option>
-						</select>
-					</div>
-				</div>
-	
-				<div class="field">
-					<label class="checkbox">
-						<input id="miscord-checkUpdates" type="checkbox" checked="checked">
-						<span>Check updates</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<textarea id="miscord-custom" class="textarea" placeholder="Custom mapping in the format &quot;threadID:Discord channel name/ID&quot; (one in a line) "></textarea>
-				</div>
-			</div>
-
-			<div class="container box config" id="config-messenger">
-				<div class="field">
-					<input class="input" id="messenger-username" type="text" placeholder="Facebook mail/username">
-				</div>
-
-				<div class="field">
-					<input class="input" id="messenger-password" type="text" placeholder="Facebook password">
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="messenger-forceLogin" type="checkbox">
-						<span>Force login to Facebook (skip login reviews, etc.)</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="messenger-showUsername" type="checkbox" checked="checked">
-						<span>Show Discord usernames on Messenger</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="messenger-boldUsername" type="checkbox">
-						<span>Make Discord usernames bold</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<label class="label">White/blacklist</label>
-					<div class="select">
-						<select id="messenger-list-type">
-							<option value="whitelist">Whitelist</option>
-							<option value="blacklist">Blacklist</option>
-						</select>
-					</div>
-					<textarea id="messenger-filter" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="messenger-separateImages" type="checkbox">
-						<span>Send images separate from text on Messenger</span>
-					</label>
-				</div>
-			</div>
-
-			<div class="container box config" id="config-discord">
-				<div class="field">
-					<input class="input" id="discord-token" type="text" placeholder="Discord token">
-				</div>
-
-				<div class="field">
-					<input class="input" id="discord-guild" type="text" placeholder="Discord guild (leave empty for the first guild available)">
-				</div>
-				
-				<div class="field">
-					<input class="input" id="discord-category" type="text" placeholder="Discord category name (default: messenger)">
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="discord-renameChannels" type="checkbox" checked="checked">
-						<span>Rename Discord channels according to Messenger chat renames</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="discord-showEvents" type="checkbox">
-						<span>Show Messenger chat events (kick/leave/chat rename, etc.) on Discord</span>
-					</label>
-				</div>
-
-				<div class="field">
-					<label class="checkbox">
-						<input id="discord-showFullNames" type="checkbox">
-						<span>Show Messenger users' full names alongside their nicknames on Discord</span>
+			<div class="container" style="margin-bottom: 2rem;">
+				<div class="file is-info" id="upload-wrapper">
+					<label class="file-label">
+						<input class="file-input" type="file" id="config-upload">
+						<span class="file-cta">
+							<span class="file-label">
+								Upload your config file…
+							</span>
+						</span>
+						<span class="file-name" id="filename" style="visibility: hidden"></span>
 					</label>
 				</div>
 			</div>
 
 			<div class="container">
-				<div class="field">
-					<a class="button is-info is-medium" id="generate-config">Generate config</a>
+				<div class="columns">
+					<div class="column">
+						<div class="box config" id="config-miscord">
+							<div class="field">
+								<label class="label">Log level</label>
+								<div class="select">
+									<select id="miscord-logLevel">
+										<option value="silent">silent</option>
+										<option value="warn">warn</option>
+										<option value="info" selected>info</option>
+										<option value="verbose">verbose</option>
+										<option value="silly">silly</option>
+									</select>
+								</div>
+							</div>
+				
+							<div class="field">
+								<label class="checkbox">
+									<input id="miscord-checkUpdates" type="checkbox" checked="checked">
+									<span>Check updates</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<textarea id="miscord-custom" class="textarea" placeholder="Custom mapping in the format &quot;threadID:Discord channel name/ID&quot; (one in a line) "></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="box config" id="config-messenger">
+							<div class="field">
+								<input class="input" id="messenger-username" type="text" placeholder="Facebook mail/username">
+							</div>
+			
+							<div class="field">
+								<input class="input" id="messenger-password" type="text" placeholder="Facebook password">
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-forceLogin" type="checkbox">
+									<span>Force login to Facebook (skip login reviews, etc.)</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-showUsername" type="checkbox" checked="checked">
+									<span>Show Discord usernames on Messenger</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-boldUsername" type="checkbox">
+									<span>Make Discord usernames bold</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="label">White/blacklist</label>
+								<div class="select">
+									<select id="messenger-list-type">
+										<option value="whitelist">Whitelist</option>
+										<option value="blacklist">Blacklist</option>
+									</select>
+								</div>
+								<textarea id="messenger-filter" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-separateImages" type="checkbox">
+									<span>Send images separate from text on Messenger</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="box config" id="config-discord">
+							<div class="field">
+								<input class="input" id="discord-token" type="text" placeholder="Discord token">
+							</div>
+			
+							<div class="field">
+								<input class="input" id="discord-guild" type="text" placeholder="Discord guild (leave empty for the first guild available)">
+							</div>
+							
+							<div class="field">
+								<input class="input" id="discord-category" type="text" placeholder="Discord category name (default: messenger)">
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-renameChannels" type="checkbox" checked="checked">
+									<span>Rename Discord channels according to Messenger chat renames</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-showEvents" type="checkbox">
+									<span>Show Messenger chat events (kick/leave/chat rename, etc.) on Discord</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-showFullNames" type="checkbox">
+									<span>Show Messenger users' full names alongside their nicknames on Discord</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="level">
+					<div class="level-left">
+						<a class="button is-info is-medium" id="generate-config">Generate config</a>
+					</div>
+					<div class="level-right">
+						<a class="button is-info is-medium" id="download-config">Download config</a>
+					</div>
 				</div> 
 				<div class="field">
 					<textarea class="textarea" placeholder="Click the button above" id="output" rows="25"></textarea>
