@@ -164,9 +164,9 @@ Configuration file:
   <tr>
     <td><code>category</code></td>
     <td><code>CATEGORY</code></td>
-    <td>Discord category on server</td>
+    <td>Discord category name/id on the server</td>
     <td>:heavy_check_mark:</td>
-    <td>new category named <code>messenger</code></td>
+    <td>(none)</td>
   </tr>
   <tr>
     <td><code>renameChannels</code></td>
