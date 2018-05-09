@@ -10,6 +10,7 @@
     },
     "separateImages": false,
     "format": "*{username}*: {message}",
+    "link": {},
     "ignoreEmbeds": false
   },
   "discord": {
