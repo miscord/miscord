@@ -3,14 +3,15 @@
     "username": "",
     "password": "",
     "forceLogin": false,
-    "showUsername": true,
-    "boldUsername": false,
     "filter": {
       "whitelist": [],
       "blacklist": [],
       "_comment": "If you use one of the properties above, leave the other empty."
     },
-    "separateImages": false
+    "separateImages": false,
+    "format": "*{username}*: {message}",
+    "link": {},
+    "ignoreEmbeds": false
   },
   "discord": {
     "token": "",

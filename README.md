@@ -9,7 +9,11 @@
 [![GitHub release](https://img.shields.io/github/release/Bjornskjald/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
 ![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
 
-**[Website](https://miscord.js.org/)** &nbsp; **[Donate](#donate)** &nbsp; **[FAQ](../../wiki/faq)** &nbsp; **[Support Server](https://discord.gg/DkmTvVz)**
+**[Website](https://miscord.js.org/)** &nbsp;
+**[Donate](#donate)** &nbsp;
+**[FAQ](../../wiki/faq)** &nbsp;
+**[Config Generator](https://miscord.js.org/config-generator.html)** &nbsp;
+**[Support Server](https://discord.gg/DkmTvVz)**
 
 <br>
 
@@ -40,7 +44,7 @@
 
 ## Configuration
 
-Configuration file:
+Default location of config file:
 - Windows: `%appdata%/Miscord/config.json`
 - Mac: `~/Library/Application Support/Miscord/config.json`
 - Linux: `~/.config/Miscord/config.json`
@@ -50,7 +54,6 @@ Configuration file:
   <tr>
     <th>Category</th>
     <th>Config variable</th>
-    <th>Environmental variable</th>
     <th>Description</th>
     <th>Optional</th>
     <th>Default value</th>
@@ -58,133 +61,119 @@ Configuration file:
   <tr>
     <td rowspan="3">
       Miscord<br />
-      <code>*</code><br />
-      <code>MISCORD_*</code>
+      <code>*</code>
     </td>
     <td><code>logLevel</code></td>
-    <td><code>LOG_LEVEL</code></td>
     <td>Log level (see <a href="https://github.com/npm/npmlog#loglevelprefix-message-">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>"info"</code></td>
   </tr>
   <tr>
     <td><code>checkUpdates</code></td>
-    <td><code>CHECK_UPDATES</code></td>
     <td>Checking updates</td>
     <td>:heavy_check_mark:</td>
     <td><code>true</code></td>
   </tr>
   <tr>
     <td><code>custom</code></td>
-    <td><code>CUSTOM</code></td>
     <td>Custom channel map (see <a href="../../wiki/custom-mapping">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="8">
+    <td rowspan="9">
       Messenger<br />
-      <code>messenger.*</code><br />
-      <code>MESSENGER_*</code>
+      <code>messenger.*</code>
     </td>
     <td><code>username</code></td>
-    <td><code>USERNAME</code></td>
     <td>Messenger username</td>
     <td>:heavy_multiplication_x:</td>
     <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>password</code></td>
-    <td><code>PASSWORD</code></td>
     <td>Messenger password</td>
     <td>:heavy_multiplication_x:</td>
     <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>forceLogin</code></td>
-    <td><code>FORCE_LOGIN</code></td>
     <td>Forces logging in to Facebook</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
   </tr>
   <tr>
-    <td><code>showUsername</code></td>
-    <td><code>SHOW_USERNAME</code></td>
-    <td>Shows Discord usernames on Facebook</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>boldUsername</code></td>
-    <td><code>BOLD_USERNAME</code></td>
-    <td>Makes Discord usernames on Facebook bold (see <a href="../../issues/88">#88</a>)</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
     <td><code>filter.whitelist</code></td>
-    <td><code>FILTER_WHITELIST</code></td>
     <td>Messenger chat filtering (see <a href="../../wiki/filtering">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>[]</code></td>
   </tr>
   <tr>
     <td><code>filter.blacklist</code></td>
-    <td><code>FILTER_BLACKLIST</code></td>
     <td>Messenger chat filtering (see <a href="../../wiki/filtering">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>[]</code></td>
   </tr>
   <tr>
     <td><code>separateImages</code></td>
-    <td><code>SEPARATE_IMAGES</code></td>
     <td>Sends images on Messenger separate from text</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>format</code></td>
+    <td>Format of the message (see <a href="../../wiki/format">here</a></td>
+    <td>:heavy_check_mark:</td>
+    <td><code>*{username}*: {message}</code></td>
+  </tr>
+  <tr>
+    <td><code>link</code></td>
+    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a></td>
+    <td>:heavy_check_mark:</td>
+    <td><code>{}</code></td>
+  </tr>
+  <tr>
+    <td><code>ignoreEmbeds</code></td>
+    <td>Disables embed parsing from Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
   </tr>
   <tr>
     <td rowspan="6">
       Discord<br />
-      <code>discord.*</code><br />
-      <code>DISCORD_*</code>
+      <code>discord.*</code>
     </td>
     <td><code>token</code></td>
-    <td><code>TOKEN</code></td>
     <td>Discord token</td>
     <td>:heavy_multiplication_x:</td>
     <td>:heavy_multiplication_x:</td>
   </tr>
   <tr>
     <td><code>guild</code></td>
-    <td><code>GUILD</code></td>
     <td>Discord guild (server)</td>
     <td>:heavy_check_mark:</td>
     <td>(first guild available)</td>
   </tr>
   <tr>
     <td><code>category</code></td>
-    <td><code>CATEGORY</code></td>
-    <td>Discord category on server</td>
+    <td>Discord category name/id on the server</td>
     <td>:heavy_check_mark:</td>
-    <td>new category named <code>messenger</code></td>
+    <td>(none)</td>
   </tr>
   <tr>
     <td><code>renameChannels</code></td>
-    <td><code>RENAME_CHANNELS</code></td>
     <td>Renames channels according to Messenger</td>
     <td>:heavy_check_mark:</td>
     <td><code>true</code></td>
   </tr>
   <tr>
     <td><code>showEvents</code></td>
-    <td><code>SHOW_EVENTS</code></td>
     <td>Shows Facebook events on Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
   </tr>
   <tr>
     <td><code>showFullNames</code></td>
-    <td><code>SHOW_FULL_NAMES</code></td>
     <td>Shows Facebook users' full names alongside their nicknames on Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>

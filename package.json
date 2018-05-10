@@ -1,18 +1,18 @@
 {
   "name": "miscord",
-  "version": "3.1.8",
+  "version": "3.2.0",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
     "postinstall": "node bin/postinstall.js",
-    "test": "node_modules/.bin/standard",
-    "build": "node_modules/.bin/pkg --public .",
-    "build:win": "node_modules/.bin/pkg -t node8-win-x64 --public .",
-    "build:win32": "node_modules/.bin/pkg -t node8-win-x86 --public .",
-    "build:mac": "node_modules/.bin/pkg -t node8-mac-x64 --public .",
-    "build:linux": "node_modules/.bin/pkg -t node8-linux-x64 --public .",
-    "build:linux32": "node_modules/.bin/pkg -t node8-linux-x86 --public ."
+    "test": "standard",
+    "build": "pkg --public .",
+    "build:win": "pkg -t node8-win-x64 --public .",
+    "build:win32": "pkg -t node8-win-x86 --public .",
+    "build:mac": "pkg -t node8-mac-x64 --public .",
+    "build:linux": "pkg -t node8-linux-x64 --public .",
+    "build:linux32": "pkg -t node8-linux-x86 --public ."
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,6 @@
     "npmlog": "^4.1.2",
     "remove-accents": "^0.4.2",
     "strip-ansi": "^4.0.0",
-    "superagent": "^3.8.2",
     "yn": "^2.0.0"
   },
   "devDependencies": {
