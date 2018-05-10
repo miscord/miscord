@@ -4,8 +4,8 @@
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
-    "start": "bin/index.js",
-    "postinstall": "bin/postinstall.js",
+    "start": "node bin/index.js",
+    "postinstall": "node bin/postinstall.js",
     "test": "standard",
     "build": "pkg --public .",
     "build:win": "pkg -t node8-win-x64 --public .",
