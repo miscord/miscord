@@ -1,4 +1,5 @@
 {
+  "_comment": "This is an example config with default values, you can remove any of the values below from the config and it will still work.",
   "messenger": {
     "username": "",
     "password": "",
