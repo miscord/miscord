@@ -10,6 +10,10 @@
     },
     "separateImages": false,
     "format": "*{username}*: {message}",
+    "sourceFormat": {
+      "discord": "(Discord)",
+      "messenger": "(Messenger: {name})"
+    },
     "link": {},
     "ignoreEmbeds": false
   },

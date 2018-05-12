@@ -81,7 +81,7 @@ Default location of config file:
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="9">
+    <td rowspan="11">
       Messenger<br />
       <code>messenger.*</code>
     </td>
@@ -137,6 +137,18 @@ Default location of config file:
     <td>Disables embed parsing from Discord</td>
     <td>:heavy_check_mark:</td>
     <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>sourceFormat.discord</code></td>
+    <td>Format of the Discord source in message</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>(Discord)</code></td>
+  </tr>
+  <tr>
+    <td><code>sourceFormat.messenger</code></td>
+    <td>Format of the Messenger source in message<br>Group name: <code>{name}</code></td>
+    <td>:heavy_check_mark:</td>
+    <td><code>(Messenger: {name})</code></td>
   </tr>
   <tr>
     <td rowspan="6">
