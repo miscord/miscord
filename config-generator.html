@@ -143,20 +143,6 @@
 							</div>
 			
 							<div class="field">
-								<label class="checkbox">
-									<input id="messenger-showUsername" type="checkbox" checked="checked">
-									<span>Show Discord usernames on Messenger</span>
-								</label>
-							</div>
-			
-							<div class="field">
-								<label class="checkbox">
-									<input id="messenger-boldUsername" type="checkbox">
-									<span>Make Discord usernames bold</span>
-								</label>
-							</div>
-			
-							<div class="field">
 								<label class="label">White/blacklist</label>
 								<div class="select">
 									<select id="messenger-list-type">
@@ -171,6 +157,29 @@
 								<label class="checkbox">
 									<input id="messenger-separateImages" type="checkbox">
 									<span>Send images separate from text on Messenger</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<input class="input" id="messenger-format" type="text" placeholder="Message format">
+							</div>
+			
+							<div class="field">
+								<input class="input" id="messenger-sourceFormat-discord" type="text" placeholder="Discord source format (if you used {source})">
+							</div>
+			
+							<div class="field">
+								<input class="input" id="messenger-sourceFormat-messenger" type="text" placeholder="Messenger source format (if you used {source})">
+							</div>
+			
+							<div class="field">
+								<textarea id="messenger-link" class="textarea" placeholder="Facebook chat linking (thread IDs separated by a colon, one link in a line)"></textarea>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-ignoreEmbeds" type="checkbox">
+									<span>Ignore embeds from Discord</span>
 								</label>
 							</div>
 						</div>
@@ -261,10 +270,15 @@
 					get username () { return getElement('#messenger-username').value }, set username(val) { getElement('#messenger-username').value = val },
 					get password() { return getElement('#messenger-password').value }, set password(val) { getElement('#messenger-password').value = val },
 					get forceLogin() { return getElement('#messenger-forceLogin').checked }, set forceLogin(val) { getElement('#messenger-forceLogin').checked = val },
-					get showUsername() { return getElement('#messenger-showUsername').checked }, set showUsername(val) { getElement('#messenger-showUsername').checked = val },
-					get boldUsername() { return getElement('#messenger-boldUsername').checked }, set boldUsername(val) { getElement('#messenger-boldUsername').checked = val },
 					get filter() { return getElement('#messenger-filter').value }, set filter(val) { getElement('#messenger-filter').value = val },
-					get separateImages() { return getElement('#messenger-separateImages').checked }, set separateImages(val) { getElement('#messenger-separateImages').checked = val }
+					get separateImages() { return getElement('#messenger-separateImages').checked }, set separateImages(val) { getElement('#messenger-separateImages').checked = val },
+					get format() { return getElement('#messenger-format').value }, set format(val) { getElement('#messenger-format').value = val },
+					sourceFormat: {
+						get discord() { return getElement('#messenger-sourceFormat-discord').value }, set discord(val) { getElement('#messenger-sourceFormat-discord').value = val },
+						get messenger() { return getElement('#messenger-sourceFormat-messenger').value }, set messenger(val) { getElement('#messenger-sourceFormat-messenger').value = val }
+					},
+					get link() { return getElement('#messenger-link').value }, set link(val) { getElement('#messenger-link').value = val },
+					get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').value }, set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val },
 				},
 
 				discord: {
@@ -307,6 +321,7 @@
 					try {
 						return handleUpload(JSON.parse(content))
 					} catch (err) {
+						console.error(err)
 						return style.setDanger(uploadWrapper)
 					}
 				})
@@ -315,8 +330,15 @@
 			function handleUpload (config) {
 				for (var key in config) {
 					if (key === 'messenger' || key === 'discord') {
-						for (let vkey in config[key]) form[key][vkey] = vkey === 'filter' ? handleList(config[key][vkey]) : config[key][vkey]
-					} else form[key] = key === 'custom' ? handleCustom(config[key]) : config[key]
+						for (let vkey in config[key]) {
+							let value = config[key][vkey]
+							form[key][vkey] =
+								vkey === 'filter' ? handle.filter(value) :
+								vkey === 'link' ? handle.link(value) :
+								vkey === 'sourceFormat' ? handle.sourceFormat(value) :
+								value
+						}
+					} else form[key] = key === 'custom' ? handle.custom(config[key]) : config[key]
 				}
 			}
 			function generateConfig () {
@@ -327,15 +349,16 @@
 				var config = {
 					logLevel: v(form.logLevel, 'info'),
 					checkUpdates: v(form.checkUpdates, true),
-					custom: parseCustom(form.custom),
+					custom: parse.custom(form.custom),
 					messenger: {
 						username: form.messenger.username,
 						password: form.messenger.password,
 						forceLogin: v(form.messenger.forceLogin, false),
-						showUsername: v(form.messenger.showUsername, true),
-						boldUsername: v(form.messenger.boldUsername, false),
-						filter: parseFilter(form.messenger.filter),
-						separateImages: v(form.messenger.separateImages, false)
+						filter: parse.filter(form.messenger.filter),
+						separateImages: v(form.messenger.separateImages, false),
+						format: v(form.messenger.format, ''),
+						sourceFormat: parse.sourceFormat(form.messenger.sourceFormat),
+						link: parse.link(form.messenger.link)
 					},
 					discord: {
 						token: form.discord.token,
@@ -349,23 +372,48 @@
 
 				return JSON.stringify(config, null, 2)
 			}
-			function parseCustom (custom) {
-				if (!custom) return undefined
-				var obj = {}
-				for (let value of custom.split('\n')) {
-					if (!value.includes(':')) break
-					value = value.split(':')
-					obj[value[0]] = value[1]
-				}
-				return obj
+			const parse = {
+				custom: custom => {
+					if (!custom) return undefined
+					var obj = {}
+					for (let value of custom.split('\n')) {
+						if (!value.includes(':')) break
+						value = value.split(':')
+						obj[value[0].trim()] = value[1].trim()
+					}
+					return obj
+				},
+				filter: filter => {
+					if (!filter) return undefined
+					var obj = {}
+					var type = getElement('#messenger-list-type').value
+					obj[type] = filter.split('\n')
+					obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
+					return obj
+				},
+				link: links => {
+					if (!links) return undefined
+					var obj = {}
+					for (let link of links.split('\n')) {
+						if (!link.includes(':')) break
+						link = link.split(':')
+						obj[link[0].trim()] = link.length === 2 ? link[1].trim() : link.slice(1).map(v => v.trim())
+					}
+					return JSON.stringify(obj) === '{}' ? undefined : obj
+				},
+				sourceFormat: format => (format.discord || format.messenger) ? { discord: v(format.discord, ''),	messenger: v(format.messenger, '') } : undefined
 			}
-			function parseFilter (filter) {
-				if (!filter) return undefined
-				var obj = {}
-				var type = getElement('#messenger-list-type').value
-				obj[type] = filter.split('\n')
-				obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
-				return obj
+			const handle = {
+				filter: list => {
+					getElement('#messenger-list-type').value = list.whitelist.length > 0 ? 'whitelist' : 'blacklist'
+					return (list.whitelist.length > 0 ? list.whitelist : list.blacklist).join('\n')
+				},
+				custom: custom => Object.entries(custom).map(el => el.join(':')).join('\n'),
+				link: link => Object.entries(link).map(el => el.reduce((acc, val) => acc.concat(val), []).join(':')),
+				sourceFormat: format => {
+					form.messenger.sourceFormat.discord = format.discord
+					form.messenger.sourceFormat.messenger = format.messenger
+				}
 			}
 			function downloadData (data, name) {
 				var ev = document.createEvent("MouseEvents")
@@ -374,12 +422,6 @@
 				a.download = name
 				a.href = 'data:application/octet-stream;base64,' + btoa(data)
 				a.dispatchEvent(ev)
-			}
-			function handleList (list) {
-				return (list.whitelist.length > 0 ? list.whitelist : list.blacklist).join('\n')
-			}
-			function handleCustom (custom) {
-				return Object.entries(custom).map(el => el.join(':')).join('\n')
 			}
 		</script>
 	</body>
