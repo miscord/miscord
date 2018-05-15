@@ -122,13 +122,13 @@ Default location of config file:
   </tr>
   <tr>
     <td><code>format</code></td>
-    <td>Format of the message (see <a href="../../wiki/format">here</a></td>
+    <td>Format of the message (see <a href="../../wiki/format">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>*{username}*: {message}</code></td>
   </tr>
   <tr>
     <td><code>link</code></td>
-    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a></td>
+    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>{}</code></td>
   </tr>
