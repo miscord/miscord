@@ -36,9 +36,11 @@
     "discord.js": "^11.3.0",
     "emoji-strip": "^1.0.1",
     "facebook-chat-api": "1.5.0",
+    "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "npmlog": "^4.1.2",
     "remove-accents": "^0.4.2",
+    "request": "^2.86.0",
     "strip-ansi": "^4.0.0",
     "yn": "^2.0.0"
   },
