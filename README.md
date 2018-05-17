@@ -28,6 +28,10 @@
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Create a Bot User on your app's page
+- Run Miscord after installation, it will provide you link to add the bot to your guild
+
+*or*
+
 - Open "OAuth URL Generator", choose scope `bot`
 - Add permissions: `Manage Channels`, `Manage Webhooks` and whole `Text Permissions` group (or just `Administrator`), then copy link to your browser
 - Add your bot to chosen guild(s)
