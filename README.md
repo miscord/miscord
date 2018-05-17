@@ -42,9 +42,7 @@
 - [Local install](../../wiki/install#local)
 - [Docker install](../../wiki/install#docker)
 
-**Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**  
-**Make sure you have "Show website preview info from links pasted into chat" enabled in "Text & Images" Discord settings**
-
+**Try not to create channels with only numbers in its topic, Miscord can crash otherwise.**
 
 ## Configuration
 
