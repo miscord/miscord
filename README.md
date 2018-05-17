@@ -115,12 +115,6 @@ Default location of config file:
     <td><code>[]</code></td>
   </tr>
   <tr>
-    <td><code>separateImages</code></td>
-    <td>Sends images on Messenger separate from text</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
     <td><code>format</code></td>
     <td>Format of the message (see <a href="../../wiki/format">here</a>)</td>
     <td>:heavy_check_mark:</td>
