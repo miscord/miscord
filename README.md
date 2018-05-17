@@ -38,7 +38,7 @@
 
 ## Installation
 - [Binary packages](../../releases/latest)
-- [NPM install](../../wiki/install#npm)
+- [NPM install (preferred method)](../../wiki/install#npm)
 - [Local install](../../wiki/install#local)
 - [Docker install](../../wiki/install#docker)
 
