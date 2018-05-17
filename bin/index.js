@@ -17,11 +17,14 @@ if (args.h || args.help) {
   console.log(`
 Miscord v${require('../package.json').version}
 
-Usage:
+Usage: miscord
+  --help    [-h]              ${'shows this message'.cyan}
+  --version [-v]              ${'shows version'.cyan}
+  --config  [-c] configPath   ${'reads config from custom path'.cyan}
 
-miscord --help [-h] ${'shows this message'.cyan}
-miscord --version [-v] ${'shows version'.cyan}
-miscord --config [-c] configPath ${'reads config from custom path'.cyan}
+Example:
+  miscord -c /path/to/config.json
+  miscord -c D:\\Miscord\\config.json
   `)
   process.exit(0)
 }
