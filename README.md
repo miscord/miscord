@@ -83,7 +83,7 @@ Default location of config file:
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="11">
+    <td rowspan="10">
       Messenger<br />
       <code>messenger.*</code>
     </td>
