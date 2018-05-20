@@ -154,13 +154,6 @@
 							</div>
 			
 							<div class="field">
-								<label class="checkbox">
-									<input id="messenger-separateImages" type="checkbox">
-									<span>Send images separate from text on Messenger</span>
-								</label>
-							</div>
-			
-							<div class="field">
 								<input class="input" id="messenger-format" type="text" placeholder="Message format">
 							</div>
 			
@@ -271,7 +264,6 @@
 					get password() { return getElement('#messenger-password').value }, set password(val) { getElement('#messenger-password').value = val },
 					get forceLogin() { return getElement('#messenger-forceLogin').checked }, set forceLogin(val) { getElement('#messenger-forceLogin').checked = val },
 					get filter() { return getElement('#messenger-filter').value }, set filter(val) { getElement('#messenger-filter').value = val },
-					get separateImages() { return getElement('#messenger-separateImages').checked }, set separateImages(val) { getElement('#messenger-separateImages').checked = val },
 					get format() { return getElement('#messenger-format').value }, set format(val) { getElement('#messenger-format').value = val },
 					sourceFormat: {
 						get discord() { return getElement('#messenger-sourceFormat-discord').value }, set discord(val) { getElement('#messenger-sourceFormat-discord').value = val },
@@ -355,7 +347,6 @@
 						password: form.messenger.password,
 						forceLogin: v(form.messenger.forceLogin, false),
 						filter: parse.filter(form.messenger.filter),
-						separateImages: v(form.messenger.separateImages, false),
 						format: v(form.messenger.format, ''),
 						sourceFormat: parse.sourceFormat(form.messenger.sourceFormat),
 						link: parse.link(form.messenger.link)
