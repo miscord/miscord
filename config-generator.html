@@ -255,31 +255,65 @@
 				setInfo: el => { el.classList.remove('is-danger'); el.classList.add('is-info') }
 			}
 			const form = {
-				get logLevel() { return getElement('#miscord-logLevel').value }, set logLevel(val) { getElement('#miscord-logLevel').value = val },
-				get checkUpdates() { return getElement('#miscord-checkUpdates').checked }, set checkUpdates(val) { getElement('#miscord-checkUpdates').checked = val },
-				get custom() { return getElement('#miscord-custom').value }, set custom(val) { getElement('#miscord-custom').value = val },
+				get logLevel() { return getElement('#miscord-logLevel').value },
+				set logLevel(val) { getElement('#miscord-logLevel').value = val },
+
+				get checkUpdates() { return getElement('#miscord-checkUpdates').checked },
+				set checkUpdates(val) { getElement('#miscord-checkUpdates').checked = val },
+
+				get custom() { return getElement('#miscord-custom').value },
+				set custom(val) { getElement('#miscord-custom').value = handle.custom(val) }, 
 
 				messenger: {
-					get username () { return getElement('#messenger-username').value }, set username(val) { getElement('#messenger-username').value = val },
-					get password() { return getElement('#messenger-password').value }, set password(val) { getElement('#messenger-password').value = val },
-					get forceLogin() { return getElement('#messenger-forceLogin').checked }, set forceLogin(val) { getElement('#messenger-forceLogin').checked = val },
-					get filter() { return getElement('#messenger-filter').value }, set filter(val) { getElement('#messenger-filter').value = val },
-					get format() { return getElement('#messenger-format').value }, set format(val) { getElement('#messenger-format').value = val },
-					sourceFormat: {
-						get discord() { return getElement('#messenger-sourceFormat-discord').value }, set discord(val) { getElement('#messenger-sourceFormat-discord').value = val },
-						get messenger() { return getElement('#messenger-sourceFormat-messenger').value }, set messenger(val) { getElement('#messenger-sourceFormat-messenger').value = val }
+					get username () { return getElement('#messenger-username').value },
+					set username(val) { getElement('#messenger-username').value = val },
+
+					get password() { return getElement('#messenger-password').value },
+					set password(val) { getElement('#messenger-password').value = val },
+
+					get forceLogin() { return getElement('#messenger-forceLogin').checked },
+					set forceLogin(val) { getElement('#messenger-forceLogin').checked = val },
+
+					get filter() { return getElement('#messenger-filter').value },
+					set filter(val) { getElement('#messenger-filter').value = handle.filter(val) },
+
+					get format() { return getElement('#messenger-format').value },
+					set format(val) { getElement('#messenger-format').value = val },
+
+					get sourceFormat() { return {
+						discord: getElement('#messenger-sourceFormat-discord').value,
+						messenger: getElement('#messenger-sourceFormat-messenger').value
+					}},
+					set sourceFormat(val) {
+						getElement('#messenger-sourceFormat-discord').value = val.discord
+						getElement('#messenger-sourceFormat-messenger').value = val.messenger
 					},
-					get link() { return getElement('#messenger-link').value }, set link(val) { getElement('#messenger-link').value = val },
-					get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').value }, set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val },
+
+					get link() { return getElement('#messenger-link').value },
+					set link(val) { getElement('#messenger-link').value = handle.link(val) },
+
+					get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').value },
+					set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val },
 				},
 
 				discord: {
-					get token() { return getElement('#discord-token').value }, set token(val) { getElement('#discord-token').value = val },
-					get guild() { return getElement('#discord-guild').value }, set guild(val) { getElement('#discord-guild').value = val },
-					get category() { return getElement('#discord-category').value }, set category(val) { getElement('#discord-category').value = val },
-					get renameChannels() { return getElement('#discord-renameChannels').checked }, set renameChannels(val) { getElement('#discord-renameChannels').checked = val },
-					get showEvents() { return getElement('#discord-showEvents').checked }, set showEvents(val) { getElement('#discord-showEvents').checked = val },
-					get showFullNames() { return getElement('#discord-showFullNames').checked }, set showFullNames(val) { getElement('#discord-showFullNames').checked = val }
+					get token() { return getElement('#discord-token').value },
+					set token(val) { getElement('#discord-token').value = val },
+
+					get guild() { return getElement('#discord-guild').value },
+					set guild(val) { getElement('#discord-guild').value = val },
+
+					get category() { return getElement('#discord-category').value },
+					set category(val) { getElement('#discord-category').value = val },
+
+					get renameChannels() { return getElement('#discord-renameChannels').checked },
+					set renameChannels(val) { getElement('#discord-renameChannels').checked = val },
+
+					get showEvents() { return getElement('#discord-showEvents').checked },
+					set showEvents(val) { getElement('#discord-showEvents').checked = val },
+
+					get showFullNames() { return getElement('#discord-showFullNames').checked },
+					set showFullNames(val) { getElement('#discord-showFullNames').checked = val }
 				}
 			}
 
@@ -322,15 +356,8 @@
 			function handleUpload (config) {
 				for (var key in config) {
 					if (key === 'messenger' || key === 'discord') {
-						for (let vkey in config[key]) {
-							let value = config[key][vkey]
-							form[key][vkey] =
-								vkey === 'filter' ? handle.filter(value) :
-								vkey === 'link' ? handle.link(value) :
-								vkey === 'sourceFormat' ? handle.sourceFormat(value) :
-								value
-						}
-					} else form[key] = key === 'custom' ? handle.custom(config[key]) : config[key]
+						for (let vkey in config[key]) form[key][vkey] = config[key][vkey]
+					} else form[key] = config[key]
 				}
 			}
 			function generateConfig () {
