@@ -28,19 +28,21 @@
 - Create new Discord application [here](https://discordapp.com/developers/applications/me)
 - Click "new app", choose a name for your application, confirm by clicking "create app"
 - Create a Bot User on your app's page
+- Run Miscord after installation, it will provide you link to add the bot to your guild
+
+*or*
+
 - Open "OAuth URL Generator", choose scope `bot`
 - Add permissions: `Manage Channels`, `Manage Webhooks` and whole `Text Permissions` group (or just `Administrator`), then copy link to your browser
 - Add your bot to chosen guild(s)
 
 ## Installation
 - [Binary packages](../../releases/latest)
-- [NPM install](../../wiki/install#npm)
+- [NPM install (preferred method)](../../wiki/install#npm)
 - [Local install](../../wiki/install#local)
 - [Docker install](../../wiki/install#docker)
 
-**Try not to create channels in bots category. If you really need, make sure the channel hasn't got only numbers in its topic.**  
-**Make sure you have "Show website preview info from links pasted into chat" enabled in "Text & Images" Discord settings**
-
+**Try not to create channels with only numbers in its topic, Miscord can crash otherwise.**
 
 ## Configuration
 
@@ -81,7 +83,7 @@ Default location of config file:
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td rowspan="11">
+    <td rowspan="10">
       Messenger<br />
       <code>messenger.*</code>
     </td>
@@ -115,20 +117,14 @@ Default location of config file:
     <td><code>[]</code></td>
   </tr>
   <tr>
-    <td><code>separateImages</code></td>
-    <td>Sends images on Messenger separate from text</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
     <td><code>format</code></td>
-    <td>Format of the message (see <a href="../../wiki/format">here</a></td>
+    <td>Format of the message (see <a href="../../wiki/format">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>*{username}*: {message}</code></td>
   </tr>
   <tr>
     <td><code>link</code></td>
-    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a></td>
+    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>{}</code></td>
   </tr>
