@@ -53,5 +53,10 @@
       "node_modules/facebook-chat-api/**/*.js",
       "!node_modules/facebook-chat-api/**/test"
     ]
+  },
+  "standard": {
+    "globals": [
+      "config"
+    ]
   }
 }

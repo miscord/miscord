@@ -210,8 +210,8 @@ Example:
 const miscord = require('miscord')
 const config = // ...
 
-miscord(config).then(config => {
-  // there are Discord and Messenger clients added to config variable
+miscord(config).then(() => {
+  // there are Discord and Messenger clients added to global config variable
   // config.messenger.client
   // config.discord.client
 }
