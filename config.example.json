@@ -27,5 +27,6 @@
   },
   "checkUpdates": true,
   "logLevel": "info",
-  "custom": {}
+  "custom": {},
+  "ownerID": ""
 }
