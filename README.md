@@ -25,21 +25,18 @@
 
 ## Discord Bot
 
-- Create new Discord application [here](https://discordapp.com/developers/applications/me)
-- Click "new app", choose a name for your application, confirm by clicking "create app"
-- Create a Bot User on your app's page
-- Run Miscord after installation, it will provide you link to add the bot to your guild
+- Follow a guide [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to get the token
+- Run Miscord after configuration, it will provide you a link to add the bot to your server
 
 *or*
 
 - Open "OAuth URL Generator", choose scope `bot`
 - Add permissions: `Manage Channels`, `Manage Webhooks` and whole `Text Permissions` group (or just `Administrator`), then copy link to your browser
-- Add your bot to chosen guild(s)
+- Add your bot to chosen server(s)
 
 ## Installation
 - [Binary packages](../../releases/latest)
 - [NPM install (preferred method)](../../wiki/install#npm)
-- [Local install](../../wiki/install#local)
 - [Docker install](../../wiki/install#docker)
 
 **Try not to create channels with only numbers in its topic, Miscord can crash otherwise.**
@@ -210,8 +207,8 @@ Example:
 const miscord = require('miscord')
 const config = // ...
 
-miscord(config).then(config => {
-  // there are Discord and Messenger clients added to config variable
+miscord(config).then(() => {
+  // there are Discord and Messenger clients added to global config variable
   // config.messenger.client
   // config.discord.client
 }

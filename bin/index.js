@@ -36,10 +36,15 @@ if (args.v || args.version) {
 
 require('../lib/logger.js')(args.c || args.config)
 
-getConfig(args.c || args.config).then(login).then(config => {
+getConfig(args.c || args.config).then(login).then(() => {
   // when got a discord message
-  config.discord.client.on('message', message => discordListener({config, message}))
+  config.discord.client.on('message', discordListener)
 
   // when got a messenger message
-  config.messenger.stopListening = config.messenger.client.listen((err, message) => messengerListener({config, err, message}))
+  config.messenger.stopListening = config.messenger.client.listen(messengerListener)
 }).catch(err => sendError(err))
+
+process.on('unhandledRejection', error => {
+  if (!error) return
+  sendError(error)
+})
