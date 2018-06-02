@@ -80,6 +80,12 @@ Default location of config file:
     <td><code>{}</code></td>
   </tr>
   <tr>
+    <td><code>ownerID</code></td>
+    <td>Discord owner's ID</td>
+    <td>:heavy_check_mark:</td>
+    <td><code>(none)</code></td>
+  </tr>
+  <tr>
     <td rowspan="10">
       Messenger<br />
       <code>messenger.*</code>
