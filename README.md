@@ -49,6 +49,8 @@ Default location of config file:
 - Linux: `~/.config/Miscord/config.json`
 - Other: `~/.miscord/config.json`
 
+**You can use config generator [here](https://miscord.net/config-generator.html)**
+
 <table>
   <tr>
     <th>Category</th>
