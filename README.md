@@ -9,15 +9,15 @@
 [![GitHub release](https://img.shields.io/github/release/Bjornskjald/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
 ![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
 
-**[Website](https://miscord.js.org/)** &nbsp;
+**[Website](https://miscord.net/)** &nbsp;
 **[Donate](#donate)** &nbsp;
 **[FAQ](../../wiki/faq)** &nbsp;
-**[Config Generator](https://miscord.js.org/config-generator.html)** &nbsp;
+**[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 **[Support Server](https://discord.gg/DkmTvVz)**
 
 <br>
 
-<a href="https://miscord.js.org/">
+<a href="https://miscord.net/">
   <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
 </a>
 
