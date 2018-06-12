@@ -80,6 +80,31 @@
 			</div>
 		</section>
 
+		<div class="container" style="margin-top: 40px;">
+			<aside class="menu">
+				<p class="menu-label">
+					Helpful links
+				</p>
+				<ul class="menu-list">
+					<li><a href="javascript:toggleModal('#configLocation')">
+						Where is my config file?
+					</a></li>
+					<li><a href="https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-">
+						Where can I find Discord User/Server/Channel ID?
+					</a></li>
+					<li><a href="https://github.com/Bjornskjald/miscord/wiki/faq#where-to-find-thread-id">
+						Where can I find Facebook thread ID?
+					</a></li>
+					<li><a href="https://github.com/Bjornskjald/miscord/#configuration">
+						Configuration
+					</a></li>
+					<li><a href="https://github.com/Bjornskjald/miscord/wiki/Troubleshooting">
+						Troubleshooting
+					</a></li>
+				</ul>
+			</aside>
+		</div>
+
 		<section class="section">
 
 			<div class="container" style="margin-bottom: 2rem;">
@@ -246,6 +271,26 @@
 			</div>
 		</footer>
 
+		<div class="modal" id="configLocation">
+			<div class="modal-background" onclick="toggleModal('#configLocation')"></div>
+			<div class="modal-content">
+				<article class="message is-primary">
+				<div class="message-header">
+					<p>Where is my config file?</p>
+				</div>
+				<div class="message-body">
+					<b>Windows</b>: <pre>%appdata%/Miscord/config.json</pre><br />
+					<i>%appdata% on Windows is a system folder located in C:/Users/your_username/AppData/Roaming</i><br /><br />
+					<b>macOS</b>: <pre>~/Library/Application Support/Miscord/config.json</pre><br />
+					<b>Linux</b>: <pre>~/.config/Miscord/config.json</pre><br />
+					<b>Other</b>: <pre>~/.miscord/config.json</pre><br />
+					<i>~ = your home folder</i><br />
+				</div>
+				</article>
+			</div>
+			<button class="modal-close is-large" aria-label="close"></button>
+		</div>
 		<script src="js/configGenerator.js"></script>
+		<script src="js/modal.js"></script>
 	</body>
 </html>
