@@ -9,15 +9,15 @@
 [![GitHub release](https://img.shields.io/github/release/Bjornskjald/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
 ![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
 
-**[Website](https://miscord.js.org/)** &nbsp;
+**[Website](https://miscord.net/)** &nbsp;
 **[Donate](#donate)** &nbsp;
 **[FAQ](../../wiki/faq)** &nbsp;
-**[Config Generator](https://miscord.js.org/config-generator.html)** &nbsp;
+**[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 **[Support Server](https://discord.gg/DkmTvVz)**
 
 <br>
 
-<a href="https://miscord.js.org/">
+<a href="https://miscord.net/">
   <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
 </a>
 
@@ -49,6 +49,8 @@ Default location of config file:
 - Linux: `~/.config/Miscord/config.json`
 - Other: `~/.miscord/config.json`
 
+**You can use config generator [here](https://miscord.net/config-generator.html)**
+
 <table>
   <tr>
     <th>Category</th>
@@ -58,7 +60,7 @@ Default location of config file:
     <th>Default value</th>
   </tr>
   <tr>
-    <td rowspan="3">
+    <td rowspan="4">
       Miscord<br />
       <code>*</code>
     </td>
