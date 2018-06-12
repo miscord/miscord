@@ -58,7 +58,7 @@ Default location of config file:
     <th>Default value</th>
   </tr>
   <tr>
-    <td rowspan="3">
+    <td rowspan="4">
       Miscord<br />
       <code>*</code>
     </td>
