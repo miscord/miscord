@@ -13,7 +13,10 @@ const form = {
   set checkUpdates(val) { getElement('#miscord-checkUpdates').checked = val },
 
   get custom() { return getElement('#miscord-custom').value },
-  set custom(val) { getElement('#miscord-custom').value = handle.custom(val) }, 
+  set custom(val) { getElement('#miscord-custom').value = handle.custom(val) },
+
+  get ownerID() { return getElement('#miscord-ownerID').value },
+  set ownerID(val) { getElement('#miscord-ownerID').value = val },
 
   messenger: {
     get username () { return getElement('#messenger-username').value },
@@ -120,6 +123,7 @@ function generateConfig () {
     logLevel: v(form.logLevel, 'info'),
     checkUpdates: v(form.checkUpdates, true),
     custom: parse.custom(form.custom),
+    ownerID: v(form.ownerID, ''),
     messenger: {
       username: form.messenger.username,
       password: form.messenger.password,
