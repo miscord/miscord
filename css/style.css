@@ -21,11 +21,6 @@ a:not(.button):hover {
   padding-top: 30px;
 }
 
-.disclaimer {
-  margin-top: 10px;
-  margin-bottom: 20px !important;
-}
-
 .screenshot {
   display: flex;
   justify-content: center;
