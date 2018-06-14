@@ -47,10 +47,7 @@ const form = {
     set link(val) { getElement('#messenger-link').value = handle.link(val) },
 
     get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').value },
-    set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val },
-
-    get reuploadAttachments() { return getElement('#messenger-reuploadAttachments').value },
-    set reuploadAttachments(val) { getElement('#messenger-reuploadAttachments').value = val }
+    set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val }
   },
 
   discord: {
@@ -135,8 +132,7 @@ function generateConfig () {
       format: v(form.messenger.format, ''),
       sourceFormat: parse.sourceFormat(form.messenger.sourceFormat),
       link: parse.link(form.messenger.link),
-      ignoreEmbeds: v(form.messenger.ignoreEmbeds, false),
-      reuploadAttachments: v(form.messenger.reuploadAttachments, false)
+      ignoreEmbeds: v(form.messenger.ignoreEmbeds, false)
     },
     discord: {
       token: form.discord.token,
