@@ -224,7 +224,7 @@ miscord(config).then(() => {
 
 ## Donate
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MVRTWBXNH8J6)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MVRTWBXNH8J6) [![Greenkeeper badge](https://badges.greenkeeper.io/Bjornskjald/miscord.svg)](https://greenkeeper.io/)
 
 **BTC**: <a href="bitcoin://36tci1gptNyPhvSJkrHg2EdVmH82cwW56R">36tci1gptNyPhvSJkrHg2EdVmH82cwW56R</a>  
 **ETH**: 0xe841ef23e1b94ed2122d248377e9fbeffebaad35  
