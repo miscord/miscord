@@ -144,13 +144,10 @@
 									<span>Check updates</span>
 								</label>
 							</div>
-			
-							<div class="field">
-								<textarea id="miscord-custom" class="textarea" placeholder="Custom mapping in the format &quot;threadID:Discord channel name/ID&quot; (one in a line) "></textarea>
-								<p class="help">
-									More info about custom mapping <a href="https://github.com/Bjornskjald/miscord/wiki/Custom-mapping">here</a>
-								</p>
-							</div>
+
+							<p class="help" style="margin: 15px 0px;">
+								Custom mapping was moved to channels.yml, read more <a href="https://github.com/Bjornskjald/miscord/wiki/Custom-mapping">here</a>
+							</p>
 
 							<div class="field">
 								<input class="input" id="miscord-ownerID" type="text" placeholder="Your Discord user ID for error reporting (optional)">
@@ -201,12 +198,9 @@
 								</p>
 							</div>
 			
-							<div class="field">
-								<textarea id="messenger-link" class="textarea" placeholder="Facebook chat linking (thread IDs separated by a colon, one link in a line)"></textarea>
-								<p class="help">
-									More info about Facebook linking <a href="https://github.com/Bjornskjald/miscord/wiki/Linking">here</a>
-								</p>
-							</div>
+							<p class="help" style="margin: 15px 0px;">
+								Messenger chat linking was merged with custom mapping, read more <a href="https://github.com/Bjornskjald/miscord/wiki/Custom-mapping">here</a>
+							</p>
 			
 							<div class="field">
 								<label class="checkbox">
@@ -248,6 +242,20 @@
 								<label class="checkbox">
 									<input id="discord-showFullNames" type="checkbox">
 									<span>Show Messenger users' full names alongside their nicknames on Discord</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-createChannels" type="checkbox" checked="checked">
+									<span>Create new channels from Facebook threads if not found</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-massMentions" type="checkbox" checked="checked">
+									<span>Allow for @everyone or @here from Messenger</span>
 								</label>
 							</div>
 						</div>

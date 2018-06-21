@@ -12,9 +12,6 @@ const form = {
   get checkUpdates() { return getElement('#miscord-checkUpdates').checked },
   set checkUpdates(val) { getElement('#miscord-checkUpdates').checked = val },
 
-  get custom() { return getElement('#miscord-custom').value },
-  set custom(val) { getElement('#miscord-custom').value = handle.custom(val) },
-
   get ownerID() { return getElement('#miscord-ownerID').value },
   set ownerID(val) { getElement('#miscord-ownerID').value = val },
 
@@ -43,9 +40,6 @@ const form = {
       getElement('#messenger-sourceFormat-messenger').value = val.messenger
     },
 
-    get link() { return getElement('#messenger-link').value },
-    set link(val) { getElement('#messenger-link').value = handle.link(val) },
-
     get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').checked },
     set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').checked = val }
   },
@@ -67,7 +61,13 @@ const form = {
     set showEvents(val) { getElement('#discord-showEvents').checked = val },
 
     get showFullNames() { return getElement('#discord-showFullNames').checked },
-    set showFullNames(val) { getElement('#discord-showFullNames').checked = val }
+    set showFullNames(val) { getElement('#discord-showFullNames').checked = val },
+
+    get createChannels() { return getElement('#discord-createChannels').checked },
+    set createChannels(val) { getElement('#discord-createChannels').checked = val },
+
+    get massMentions() { return getElement('#discord-massMentions').checked },
+    set massMentions(val) { getElement('#discord-massMentions').checked = val }
   }
 }
 
@@ -122,7 +122,6 @@ function generateConfig () {
   var config = {
     logLevel: v(form.logLevel, 'info'),
     checkUpdates: v(form.checkUpdates, true),
-    custom: parse.custom(form.custom),
     ownerID: v(form.ownerID, ''),
     messenger: {
       username: form.messenger.username,
@@ -131,7 +130,6 @@ function generateConfig () {
       filter: parse.filter(form.messenger.filter),
       format: v(form.messenger.format, ''),
       sourceFormat: parse.sourceFormat(form.messenger.sourceFormat),
-      link: parse.link(form.messenger.link),
       ignoreEmbeds: v(form.messenger.ignoreEmbeds, false)
     },
     discord: {
@@ -140,23 +138,15 @@ function generateConfig () {
       category: v(form.discord.category, ''),
       renameChannels: v(form.discord.renameChannels, true),
       showEvents: v(form.discord.showEvents, false),
-      showFullNames: v(form.discord.showFullNames, false)
+      showFullNames: v(form.discord.showFullNames, false),
+      createChannels: v(form.discord.showFullNames, true),
+      massMentions: v(form.discord.showFullNames, true)
     }
   }
 
   return JSON.stringify(config, null, 2)
 }
 const parse = {
-  custom: custom => {
-    if (!custom) return undefined
-    var obj = {}
-    for (let value of custom.split('\n')) {
-      if (!value.includes(':')) break
-      value = value.split(':')
-      obj[value[0].trim()] = value[1].trim()
-    }
-    return obj
-  },
   filter: filter => {
     if (!filter) return undefined
     var obj = {}
@@ -165,16 +155,6 @@ const parse = {
     obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
     return obj
   },
-  link: links => {
-    if (!links) return undefined
-    var obj = {}
-    for (let link of links.split('\n')) {
-      if (!link.includes(':')) break
-      link = link.split(':')
-      obj[link[0].trim()] = link.length === 2 ? link[1].trim() : link.slice(1).map(v => v.trim())
-    }
-    return JSON.stringify(obj) === '{}' ? undefined : obj
-  },
   sourceFormat: format => (format.discord || format.messenger) ? { discord: v(format.discord, ''),	messenger: v(format.messenger, '') } : undefined
 }
 const handle = {
@@ -182,8 +162,6 @@ const handle = {
     getElement('#messenger-list-type').value = list.whitelist.length > 0 ? 'whitelist' : 'blacklist'
     return (list.whitelist.length > 0 ? list.whitelist : list.blacklist).join('\n')
   },
-  custom: custom => Object.entries(custom).map(el => el.join(':')).join('\n'),
-  link: link => Object.entries(link).map(el => el.reduce((acc, val) => acc.concat(val), []).join(':')),
   sourceFormat: format => {
     form.messenger.sourceFormat.discord = format.discord
     form.messenger.sourceFormat.messenger = format.messenger
