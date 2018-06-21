@@ -10,7 +10,7 @@
 ![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
 
 **[Website](https://miscord.net/)** &nbsp;
-**[Donate](#donate)** &nbsp;
+**[Donate](#moneybag-donate)** &nbsp;
 **[FAQ](../../wiki/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 **[Support Server](https://discord.gg/DkmTvVz)**
@@ -21,7 +21,7 @@
   <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
 </a>
 
-# Setup
+# :wrench: Setup
 
 ## Discord Bot
 
@@ -193,14 +193,14 @@ Default location of config file:
   </tr>
 </table>
 
-## Running
+# :electric_plug: Running
 
-### Binaries/NPM install
+## Binaries/NPM install
 
-Run `miscord` in the console.  
+Run `miscord` in the console.
 _If you store your config somewhere else, you can run it with `miscord --config {path}`_
 
-### Local install
+## Local install
 
 Enter the Miscord directory where you cloned it (`cd miscord`)  
 Run it using `npm start`.  
@@ -222,10 +222,21 @@ miscord(config).then(() => {
 }
 ```
 
-## Donate
+# :moneybag: Donate
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MVRTWBXNH8J6)
 
 **BTC**: <a href="bitcoin://36tci1gptNyPhvSJkrHg2EdVmH82cwW56R">36tci1gptNyPhvSJkrHg2EdVmH82cwW56R</a>  
 **ETH**: 0xe841ef23e1b94ed2122d248377e9fbeffebaad35  
 **ZEC**: t1ULEWqCCmVxmaxsRn5KGRXnDmeBY68uMWL
+
+# :warning: Disclaimer
+
+We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.
+
+All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
+
+Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
+
+# :scroll: License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
