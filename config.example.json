@@ -22,7 +22,8 @@
     "category": "",
     "renameChannels": true,
     "showEvents": false,
-    "showFullNames": false
+    "showFullNames": false,
+    "createChannels": true
   },
   "checkUpdates": true,
   "logLevel": "info",
