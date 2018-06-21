@@ -76,12 +76,6 @@ Default location of config file:
     <td><code>true</code></td>
   </tr>
   <tr>
-    <td><code>custom</code></td>
-    <td>Custom channel map (see <a href="../../wiki/custom-mapping">here</a>)</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>{}</code></td>
-  </tr>
-  <tr>
     <td><code>ownerID</code></td>
     <td>Discord owner's ID</td>
     <td>:heavy_check_mark:</td>
@@ -126,12 +120,6 @@ Default location of config file:
     <td>Format of the message (see <a href="../../wiki/format">here</a>)</td>
     <td>:heavy_check_mark:</td>
     <td><code>*{username}*: {message}</code></td>
-  </tr>
-  <tr>
-    <td><code>link</code></td>
-    <td>Link between Messenger chats (see <a href="../../wiki/linking">here</a>)</td>
-    <td>:heavy_check_mark:</td>
-    <td><code>{}</code></td>
   </tr>
   <tr>
     <td><code>ignoreEmbeds</code></td>

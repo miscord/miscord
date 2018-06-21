@@ -14,7 +14,6 @@
       "discord": "(Discord)",
       "messenger": "(Messenger: {name})"
     },
-    "link": {},
     "ignoreEmbeds": false
   },
   "discord": {
@@ -27,6 +26,5 @@
   },
   "checkUpdates": true,
   "logLevel": "info",
-  "custom": {},
   "ownerID": ""
 }
