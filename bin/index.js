@@ -10,6 +10,7 @@ const login = require('../lib/login/login')
 const discordListener = require('../lib/listeners/discord')
 const messengerListener = require('../lib/listeners/messenger')
 const getConfig = require('../lib/config/getConfig')
+const getConfigDir = require('../lib/config/getConfigDir')
 
 var args = minimist(process.argv.slice(2))
 
@@ -21,6 +22,7 @@ Usage: miscord
   --help    [-h]              ${'shows this message'.cyan}
   --version [-v]              ${'shows version'.cyan}
   --config  [-c] configPath   ${'reads config from custom path'.cyan}
+  --getConfigPath             ${'shows config path'.cyan}
 
 Example:
   miscord -c /path/to/config.json
@@ -31,6 +33,11 @@ Example:
 
 if (args.v || args.version) {
   console.log(require('../package.json').version)
+  process.exit(0)
+}
+
+if (args.getConfigPath) {
+  console.log(require('path').join(getConfigDir(), 'config.json'))
   process.exit(0)
 }
 

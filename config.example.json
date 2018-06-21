@@ -14,7 +14,6 @@
       "discord": "(Discord)",
       "messenger": "(Messenger: {name})"
     },
-    "link": {},
     "ignoreEmbeds": false
   },
   "discord": {
@@ -23,10 +22,11 @@
     "category": "",
     "renameChannels": true,
     "showEvents": false,
-    "showFullNames": false
+    "showFullNames": false,
+    "createChannels": true,
+    "massMentions": true
   },
   "checkUpdates": true,
   "logLevel": "info",
-  "custom": {},
   "ownerID": ""
 }
