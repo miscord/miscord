@@ -46,8 +46,8 @@ const form = {
     get link() { return getElement('#messenger-link').value },
     set link(val) { getElement('#messenger-link').value = handle.link(val) },
 
-    get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').value },
-    set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').value = val }
+    get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').checked },
+    set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').checked = val }
   },
 
   discord: {
