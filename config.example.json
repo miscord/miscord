@@ -23,7 +23,8 @@
     "renameChannels": true,
     "showEvents": false,
     "showFullNames": false,
-    "createChannels": true
+    "createChannels": true,
+    "massMentions": true
   },
   "checkUpdates": true,
   "logLevel": "info",
