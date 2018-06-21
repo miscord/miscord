@@ -39,8 +39,6 @@
 - [NPM install (preferred method)](../../wiki/install#npm)
 - [Docker install](../../wiki/install#docker)
 
-**Try not to create channels with only numbers in its topic, Miscord can crash otherwise.**
-
 ## Configuration
 
 Default location of config file:
