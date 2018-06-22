@@ -50,7 +50,6 @@ const form = new Proxy({name: 'miscord'}, proxyHandler)
 var upload = getElement('#config-upload')
 var uploadWrapper = getElement('#upload-wrapper')
 
-
 // BUTTONS
 getElement('#generate-config').addEventListener('click', e => { getElement('#output').innerHTML = generateConfig() })
 getElement('#download-config').addEventListener('click', e => downloadData(generateConfig(), 'config.json'))
@@ -67,7 +66,7 @@ upload.addEventListener('change', e => {
   filename.innerHTML = file.name
 
   if (!file.name.endsWith('.json')) return style.setDanger(uploadWrapper)
-  
+
   var reader = new FileReader()
   reader.readAsText(file)
   reader.addEventListener('load', ev => {
@@ -89,6 +88,7 @@ function handleUpload (config) {
     } else form[key] = config[key]
   }
 }
+
 function generateConfig () {
   if (!form.messenger.username) return alert('Messenger username missing!') || ''
   if (!form.messenger.password) return alert('Messenger password missing!') || ''
@@ -122,8 +122,8 @@ function generateConfig () {
   return JSON.stringify(config, null, 2)
 }
 function downloadData (data, name) {
-  var ev = document.createEvent("MouseEvents")
-  ev.initMouseEvent("click", true, false, self, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+  var ev = document.createEvent('MouseEvents')
+  ev.initMouseEvent('click', true, false, self, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
   var a = document.createElement('a')
   a.download = name
   a.href = 'data:application/octet-stream;base64,' + btoa(data)
