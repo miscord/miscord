@@ -5,71 +5,46 @@ const style = {
   setDanger: el => { el.classList.remove('is-info'); el.classList.add('is-danger') },
   setInfo: el => { el.classList.remove('is-danger'); el.classList.add('is-info') }
 }
-const form = {
-  get logLevel() { return getElement('#miscord-logLevel').value },
-  set logLevel(val) { getElement('#miscord-logLevel').value = val },
+const proxyHandler = {
+  get: (target, name) => {
+    if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
 
-  get checkUpdates() { return getElement('#miscord-checkUpdates').checked },
-  set checkUpdates(val) { getElement('#miscord-checkUpdates').checked = val },
+    const element = document.querySelector(`#${target.name}-${name}`)
 
-  get ownerID() { return getElement('#miscord-ownerID').value },
-  set ownerID(val) { getElement('#miscord-ownerID').value = val },
-
-  messenger: {
-    get username () { return getElement('#messenger-username').value },
-    set username(val) { getElement('#messenger-username').value = val },
-
-    get password() { return getElement('#messenger-password').value },
-    set password(val) { getElement('#messenger-password').value = val },
-
-    get forceLogin() { return getElement('#messenger-forceLogin').checked },
-    set forceLogin(val) { getElement('#messenger-forceLogin').checked = val },
-
-    get filter() { return getElement('#messenger-filter').value },
-    set filter(val) { getElement('#messenger-filter').value = handle.filter(val) },
-
-    get format() { return getElement('#messenger-format').value },
-    set format(val) { getElement('#messenger-format').value = val },
-
-    get sourceFormat() { return {
-      discord: getElement('#messenger-sourceFormat-discord').value,
-      messenger: getElement('#messenger-sourceFormat-messenger').value
-    }},
-    set sourceFormat(val) {
-      getElement('#messenger-sourceFormat-discord').value = val.discord
-      getElement('#messenger-sourceFormat-messenger').value = val.messenger
-    },
-
-    get ignoreEmbeds() { return getElement('#messenger-ignoreEmbeds').checked },
-    set ignoreEmbeds(val) { getElement('#messenger-ignoreEmbeds').checked = val }
+    if (element.type === 'checkbox') return element.checked
+    else if (name === 'filter') {
+      return (filter => {
+        if (!filter) return
+        var obj = {}
+        var type = getElement('#messenger-list-type').value
+        obj[type] = filter.split('\n')
+        obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
+        return obj
+      })(element.value)
+    } else if (name === 'sourceFormat') {
+      return (format => (format.discord || format.messenger) ? { discord: v(format.discord, ''), messenger: v(format.messenger, '') } : undefined)({
+        discord: getElement('#messenger-sourceFormat-discord').value,
+        messenger: getElement('#messenger-sourceFormat-messenger').value
+      })
+    } else return element.value
   },
+  set: (target, name, input) => {
+    if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
 
-  discord: {
-    get token() { return getElement('#discord-token').value },
-    set token(val) { getElement('#discord-token').value = val },
+    const element = document.querySelector(`#${target.name}-${name}`)
 
-    get guild() { return getElement('#discord-guild').value },
-    set guild(val) { getElement('#discord-guild').value = val },
-
-    get category() { return getElement('#discord-category').value },
-    set category(val) { getElement('#discord-category').value = val },
-
-    get renameChannels() { return getElement('#discord-renameChannels').checked },
-    set renameChannels(val) { getElement('#discord-renameChannels').checked = val },
-
-    get showEvents() { return getElement('#discord-showEvents').checked },
-    set showEvents(val) { getElement('#discord-showEvents').checked = val },
-
-    get showFullNames() { return getElement('#discord-showFullNames').checked },
-    set showFullNames(val) { getElement('#discord-showFullNames').checked = val },
-
-    get createChannels() { return getElement('#discord-createChannels').checked },
-    set createChannels(val) { getElement('#discord-createChannels').checked = val },
-
-    get massMentions() { return getElement('#discord-massMentions').checked },
-    set massMentions(val) { getElement('#discord-massMentions').checked = val }
+    if (element.type === 'checkbox') element.checked = input
+    else if (name === 'filter') {
+      getElement('#messenger-list-type').value = input.whitelist.length > 0 ? 'whitelist' : 'blacklist'
+      return (input.whitelist.length > 0 ? input.whitelist : input.blacklist).join('\n')
+    } else if (name === 'sourceFormat') {
+      getElement('#messenger-sourceFormat-discord').value = input.discord
+      getElement('#messenger-sourceFormat-messenger').value = input.messenger
+    } else element.value = input
   }
 }
+
+const form = new Proxy({name: 'miscord'}, proxyHandler)
 
 // ELEMENTS
 var upload = getElement('#config-upload')
@@ -127,9 +102,9 @@ function generateConfig () {
       username: form.messenger.username,
       password: form.messenger.password,
       forceLogin: v(form.messenger.forceLogin, false),
-      filter: parse.filter(form.messenger.filter),
+      filter: form.messenger.filter,
       format: v(form.messenger.format, ''),
-      sourceFormat: parse.sourceFormat(form.messenger.sourceFormat),
+      sourceFormat: form.messenger.sourceFormat,
       ignoreEmbeds: v(form.messenger.ignoreEmbeds, false)
     },
     discord: {
@@ -145,27 +120,6 @@ function generateConfig () {
   }
 
   return JSON.stringify(config, null, 2)
-}
-const parse = {
-  filter: filter => {
-    if (!filter) return undefined
-    var obj = {}
-    var type = getElement('#messenger-list-type').value
-    obj[type] = filter.split('\n')
-    obj[type === 'whitelist' ? 'blacklist' : 'whitelist'] = []
-    return obj
-  },
-  sourceFormat: format => (format.discord || format.messenger) ? { discord: v(format.discord, ''),	messenger: v(format.messenger, '') } : undefined
-}
-const handle = {
-  filter: list => {
-    getElement('#messenger-list-type').value = list.whitelist.length > 0 ? 'whitelist' : 'blacklist'
-    return (list.whitelist.length > 0 ? list.whitelist : list.blacklist).join('\n')
-  },
-  sourceFormat: format => {
-    form.messenger.sourceFormat.discord = format.discord
-    form.messenger.sourceFormat.messenger = format.messenger
-  }
 }
 function downloadData (data, name) {
   var ev = document.createEvent("MouseEvents")
