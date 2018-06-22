@@ -7,11 +7,12 @@ const style = {
 }
 const proxyHandler = {
   get: (target, name) => {
+    console.log({target, name})
     if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
 
     const element = document.querySelector(`#${target.name}-${name}`)
 
-    if (element.type === 'checkbox') return element.checked
+    if (element && element.type === 'checkbox') return element.checked
     else if (name === 'filter') {
       return (filter => {
         if (!filter) return
@@ -29,9 +30,12 @@ const proxyHandler = {
     } else return element.value
   },
   set: (target, name, input) => {
+    console.log({target, name, input})
     if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
 
     const element = document.querySelector(`#${target.name}-${name}`)
+
+    if (!element) return
 
     if (element.type === 'checkbox') element.checked = input
     else if (name === 'filter') {
@@ -114,8 +118,8 @@ function generateConfig () {
       renameChannels: v(form.discord.renameChannels, true),
       showEvents: v(form.discord.showEvents, false),
       showFullNames: v(form.discord.showFullNames, false),
-      createChannels: v(form.discord.showFullNames, true),
-      massMentions: v(form.discord.showFullNames, true)
+      createChannels: v(form.discord.createChannels, true),
+      massMentions: v(form.discord.massMentions, true)
     }
   }
 
