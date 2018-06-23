@@ -8,7 +8,7 @@ fetch('https://api.github.com/repos/Bjornskjald/miscord/releases/latest')
   .then(res => res.assets
     .map(el => ({ url: el.browser_download_url, name: el.name.split('.').slice(0, 3).join('.').split('-') }))
     .map(el => ({ url: el.url, version: el.name[1], os: el.name[2], arch: os === 'Mac' ? 'x64' : el.name[3] }))
-    .find(el => (el.os === getFullOSName(os).toLowerCase() || el.os === os.toLowerCase()) && os === 'Mac' ? true : el.arch === arch)
+    .find(el => (el.os === getFullOSName(os).toLowerCase() || el.os === os.toLowerCase()) && (os === 'Mac' ? true : el.arch === arch))
   )
   .then(asset => {
     download.href = asset.url
