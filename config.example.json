@@ -28,5 +28,6 @@
   },
   "checkUpdates": true,
   "logLevel": "info",
-  "errorChannel": ""
+  "errorChannel": "",
+  "commandChannel": ""
 }
