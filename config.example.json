@@ -28,5 +28,6 @@
   },
   "checkUpdates": true,
   "logLevel": "info",
-  "ownerID": ""
+  "errorChannel": "",
+  "commandChannel": ""
 }
