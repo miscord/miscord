@@ -101,7 +101,8 @@ function generateConfig () {
   var config = {
     logLevel: v(form.logLevel, 'info'),
     checkUpdates: v(form.checkUpdates, true),
-    ownerID: v(form.ownerID, ''),
+    errorChannel: v(form.errorChannel, ''),
+    commandChannel: v(form.commandChannel, ''),
     messenger: {
       username: form.messenger.username,
       password: form.messenger.password,
