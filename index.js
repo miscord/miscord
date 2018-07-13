@@ -13,6 +13,5 @@ module.exports = config => {
 
     // when got a messenger message
     config.messenger.stopListening = config.messenger.client.listen(messengerListener)
-    return config
   })
 }

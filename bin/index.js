@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 require('colors')
 const printAndExit = m => process.exit(console.log(m) || 0)
+const miscord = require('../')
 const sendError = require('../lib/error')
 const login = require('../lib/login/login')
 
@@ -17,13 +18,8 @@ if (args.getConfigPath) printAndExit(require('path').join(getConfigDir(), 'confi
 
 require('../lib/logger.js')(args.c || args.config)
 
-getConfig(args.c || args.config).then(login).then(() => {
-  // when got a discord message
-  config.discord.client.on('message', discordListener)
 
-  // when got a messenger message
-  config.messenger.stopListening = config.messenger.client.listen(messengerListener)
-}).catch(err => sendError(err))
+getConfig(args.c || args.config).then(miscord).catch(err => sendError(err))
 
 process.on('unhandledRejection', error => {
   if (!error) return
