@@ -4,7 +4,7 @@ const printAndExit = m => process.exit(console.log(m) || 0)
 const miscord = require('../')
 const sendError = require('../lib/error')
 const { getConfig, getConfigDir } = require('../lib/config')
-const { checkToken } = require('../lib/discord')
+// const { checkToken } = require('../lib/discord')
 
 var args = require('minimist')(process.argv.slice(2))
 if (args.h || args.help) printAndExit(require('./help'))

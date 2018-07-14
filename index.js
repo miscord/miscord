@@ -1,9 +1,9 @@
 require('./lib/logger')
 
-const login = require('./lib/login/login')
+const login = require('./lib/login')
 
-const discordListener = require('./lib/listeners/discord')
-const messengerListener = require('./lib/listeners/messenger')
+const { listener: discordListener } = require('./lib/discord')
+const { listener: messengerListener } = require('./lib/messenger')
 
 module.exports = config => {
   global.config = config
