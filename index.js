@@ -2,16 +2,16 @@ require('./lib/logger')
 
 const login = require('./lib/login')
 
-const { listener: discordListener } = require('./lib/discord')
-const { listener: messengerListener } = require('./lib/messenger')
+const discordListener = require('./lib/discord/listener')
+const messengerListener = require('./lib/messenger/listener')
 
 module.exports = config => {
-  global.config = config
+  if (!global.config) global.config = config
   return login().then(() => {
     // when got a discord message
-    config.discord.client.on('message', discordListener)
+    global.config.discord.client.on('message', discordListener)
 
     // when got a messenger message
-    config.messenger.stopListening = config.messenger.client.listen(messengerListener)
+    global.config.messenger.stopListening = global.config.messenger.client.listen(messengerListener)
   })
 }
