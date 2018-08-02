@@ -3,11 +3,10 @@
 > Built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
 
 [![code style: Standard.js](https://img.shields.io/badge/code%20style-standard.js-green.svg?style=flat-square)](https://standardjs.com/)
-[![Travis](https://img.shields.io/travis/Bjornskjald/miscord.svg?style=flat-square)](https://travis-ci.org/Bjornskjald/miscord/)
+[![Travis](https://img.shields.io/travis/miscord/miscord.svg?style=flat-square)](https://travis-ci.org/miscord/miscord/)
 [![NPM downloads](https://img.shields.io/npm/dt/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
 [![NPM version](https://img.shields.io/npm/v/miscord.svg?style=flat-square&label=NPM%20version)](https://npmjs.org/package/miscord)
-[![GitHub release](https://img.shields.io/github/release/Bjornskjald/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
-![Requires.io](https://img.shields.io/requires/github/Bjornskjald/miscord.svg?style=flat-square)
+[![GitHub release](https://img.shields.io/github/release/miscord/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
 
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](#moneybag-donate)** &nbsp;
