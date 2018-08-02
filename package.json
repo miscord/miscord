@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "3.7.6",
+  "version": "3.7.7",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bjornskjald/miscord/"
+    "url": "https://github.com/miscord/miscord/"
   },
   "homepage": "https://miscord.net",
   "keywords": [
@@ -30,7 +30,11 @@
   "bin": {
     "miscord": "bin/index.js"
   },
-  "author": "Bjornskjald",
+  "author": {
+    "name" : "Bjornskjald",
+    "email" : "github@bjorn.ml",
+    "url" : "https://bjorn.ml/"
+  },
   "license": "MIT",
   "dependencies": {
     "colors": "^1.3.0",
@@ -49,7 +53,7 @@
     "yn": "^2.0.0"
   },
   "devDependencies": {
-    "pkg": "^4.3.1",
+    "pkg": "^4.3.3",
     "standard": "^11.0.1"
   },
   "pkg": {
