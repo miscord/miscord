@@ -2,11 +2,11 @@
 
 > Built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
 
-[![code style: Standard.js](https://img.shields.io/badge/code%20style-standard.js-green.svg?style=flat-square)](https://standardjs.com/)
+[![Standard.js](https://img.shields.io/badge/code%20style-standard.js-green.svg?style=flat-square)](https://standardjs.com/)
 [![Travis](https://img.shields.io/travis/miscord/miscord.svg?style=flat-square)](https://travis-ci.org/miscord/miscord/)
 [![NPM downloads](https://img.shields.io/npm/dt/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
-[![NPM version](https://img.shields.io/npm/v/miscord.svg?style=flat-square&label=NPM%20version)](https://npmjs.org/package/miscord)
-[![GitHub release](https://img.shields.io/github/release/miscord/miscord.svg?style=flat-square&label=GitHub%20version)](../../releases/latest)
+[![Version](https://img.shields.io/npm/v/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
+[![Discord](https://discordapp.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
 
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](#moneybag-donate)** &nbsp;
