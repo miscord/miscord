@@ -9,10 +9,9 @@
 [![Discord](https://discordapp.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
 
 **[Website](https://miscord.net/)** &nbsp;
-**[Donate](#moneybag-donate)** &nbsp;
+**[Donate](https://paypal.me/Bjornskjald)** &nbsp;
 **[FAQ](../../wiki/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
-**[Support Server](https://discord.gg/DkmTvVz)**
 
 <br>
 
@@ -78,14 +77,6 @@ miscord(config).then(() => {
   // config.discord.client
 }
 ```
-
-# :moneybag: Donate
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MVRTWBXNH8J6)
-
-**BTC**: <a href="bitcoin://36tci1gptNyPhvSJkrHg2EdVmH82cwW56R">36tci1gptNyPhvSJkrHg2EdVmH82cwW56R</a>  
-**ETH**: 0xe841ef23e1b94ed2122d248377e9fbeffebaad35  
-**ZEC**: t1ULEWqCCmVxmaxsRn5KGRXnDmeBY68uMWL
 
 # :warning: Disclaimer
 
