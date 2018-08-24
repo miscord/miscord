@@ -21,23 +21,9 @@
 
 # :wrench: Setup
 
-## Discord Bot
-
-- Follow a guide [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to get the token
-- Run Miscord after configuration, it will provide you a link to add the bot to your server
-
-*or*
-
-- Open "OAuth URL Generator", choose scope `bot`
-- Add permissions: `Manage Channels`, `Manage Webhooks` and whole `Text Permissions` group (or just `Administrator`), then copy link to your browser
-- Add your bot to chosen server(s)
-
-## Installation
-- [Binary packages](../../releases/latest)
-- [NPM install (preferred method)](../../wiki/install#npm)
-- [Docker install](../../wiki/install#docker)
-
 ## Configuration
+
+**Follow a guide [here](../../wiki/Creating-a-Discord-bot) to get the Discord token**
 
 Default location of config file:
 - Windows: `%appdata%/Miscord/config.json`
@@ -48,6 +34,11 @@ Default location of config file:
 **You can use config generator [here](https://miscord.net/config-generator.html)**
 
 **See all config properties [here](../../wiki/configuration)**
+
+## Installation
+- [NPM install (recommended method)](../../wiki/install#npm)
+- [Binary packages](../../releases/latest)
+- [Docker install](../../wiki/install#docker)
 
 # :electric_plug: Running
 
@@ -60,23 +51,7 @@ _If you store your config somewhere else, you can run it with `miscord --config 
 
 Enter the Miscord directory where you cloned it (`cd miscord`)  
 Run it using `npm start`.  
-_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_  
-(Note: you can enable developing environment with `NODE_ENV=development`. Miscord will read config.json from your current directory)
-
-## Module usage
-
-You can use Miscord as a module in your script  
-Example:
-```javascript
-const miscord = require('miscord')
-const config = // ...
-
-miscord(config).then(() => {
-  // there are Discord and Messenger clients added to global config variable
-  // config.messenger.client
-  // config.discord.client
-}
-```
+_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_
 
 # :warning: Disclaimer
 
