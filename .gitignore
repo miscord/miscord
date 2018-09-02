@@ -2,3 +2,4 @@ node_modules/
 appstate.json
 config.json
 .vs
+build/

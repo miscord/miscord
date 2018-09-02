@@ -3,6 +3,6 @@ node_js:
     - "8"
 deploy:
   provider: script
-  script: wget https://raw.githubusercontent.com/miscord/build-scripts/master/make.sh && chmod +x make.sh && bash make.sh
+  script: npm run build
   on:
     branch: master

@@ -1,18 +1,13 @@
 {
   "name": "miscord",
-  "version": "3.8.4",
+  "version": "3.9.0",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
     "postinstall": "node bin/postinstall.js",
     "test": "standard",
-    "build": "pkg --public .",
-    "build:win": "pkg -t node8-win-x64 --public .",
-    "build:win32": "pkg -t node8-win-x86 --public .",
-    "build:mac": "pkg -t node8-mac-x64 --public .",
-    "build:linux": "pkg -t node8-linux-x64 --public .",
-    "build:linux32": "pkg -t node8-linux-x86 --public ."
+    "build": "node bin/build.js"
   },
   "repository": {
     "type": "git",
@@ -31,9 +26,9 @@
     "miscord": "bin/index.js"
   },
   "author": {
-    "name" : "Bjornskjald",
-    "email" : "github@bjorn.ml",
-    "url" : "https://bjorn.ml/"
+    "name": "Bjornskjald",
+    "email": "github@bjorn.ml",
+    "url": "https://bjorn.ml/"
   },
   "license": "MIT",
   "dependencies": {
@@ -41,7 +36,7 @@
     "discord.js": "^11.3.2",
     "dot-prop": "^4.2.0",
     "emoji-strip": "^1.0.1",
-    "facebook-chat-api": "1.6.0",
+    "facebook-chat-api": "^1.6.0",
     "js-yaml": "^3.12.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
@@ -49,11 +44,11 @@
     "remove-accents": "^0.4.2",
     "request": "^2.87.0",
     "semver": "^5.5.0",
-    "strip-ansi": "^4.0.0",
-    "yn": "^2.0.0"
+    "strip-ansi": "^4.0.0"
   },
   "devDependencies": {
-    "pkg": "^4.3.3",
+    "gh-release": "^3.2.3",
+    "pkg": "^4.3.4",
     "standard": "^11.0.1"
   },
   "pkg": {
@@ -64,7 +59,10 @@
   },
   "standard": {
     "globals": [
-      "config"
+      "config",
+      "messenger",
+      "discord",
+      "channels"
     ]
   }
 }
