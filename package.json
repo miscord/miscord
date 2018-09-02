@@ -31,9 +31,9 @@
     "miscord": "bin/index.js"
   },
   "author": {
-    "name" : "Bjornskjald",
-    "email" : "github@bjorn.ml",
-    "url" : "https://bjorn.ml/"
+    "name": "Bjornskjald",
+    "email": "github@bjorn.ml",
+    "url": "https://bjorn.ml/"
   },
   "license": "MIT",
   "dependencies": {
