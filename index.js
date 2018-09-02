@@ -9,9 +9,9 @@ module.exports = config => {
   if (!global.config) global.config = config
   return login().then(() => {
     // when got a discord message
-    global.config.discord.client.on('message', discordListener)
+    discord.client.on('message', discordListener)
 
     // when got a messenger message
-    global.config.messenger.stopListening = global.config.messenger.client.listen(messengerListener)
+    messenger.stopListening = messenger.client.listen(messengerListener)
   })
 }
