@@ -63,7 +63,10 @@
   },
   "standard": {
     "globals": [
-      "config"
+      "config",
+      "messenger",
+      "discord",
+      "channels"
     ]
   }
 }
