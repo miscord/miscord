@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "dot-prop": "^4.2.0",
     "emoji-strip": "^1.0.1",
     "facebook-chat-api": "^1.6.0",
+    "gh-release": "^3.2.3",
     "js-yaml": "^3.12.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
@@ -47,7 +48,6 @@
     "strip-ansi": "^4.0.0"
   },
   "devDependencies": {
-    "gh-release": "^3.2.3",
     "pkg": "^4.3.4",
     "standard": "^11.0.1"
   },
