@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.9.3] - 2018-09-05
+### Added
+- Truncating message when exceeds 2000 chars on Discord
+
 ## [3.9.2] - 2018-09-05
 ### Changed
 - Fixed quit command

@@ -3,7 +3,7 @@
   "messenger": {
     "username": "",
     "password": "",
-    "forceLogin": false,
+    "forceLogin": true,
     "filter": {
       "whitelist": [],
       "blacklist": [],
@@ -23,10 +23,10 @@
     "renameChannels": true,
     "showEvents": false,
     "showFullNames": false,
-    "createChannels": true,
+    "createChannels": false,
     "massMentions": true
   },
-  "checkUpdates": true,
+  "checkUpdates": false,
   "logLevel": "info",
   "errorChannel": "",
   "commandChannel": ""
