@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.9.2] - 2018-09-05
+### Changed
+- Fixed quit command
+- Fixed building script
+
 ## [3.9.1] - 2018-09-03
 ### Changed
 - Fixed crash on start when category is set in the config
