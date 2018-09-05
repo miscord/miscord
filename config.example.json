@@ -3,7 +3,7 @@
   "messenger": {
     "username": "",
     "password": "",
-    "forceLogin": false,
+    "forceLogin": true,
     "filter": {
       "whitelist": [],
       "blacklist": [],
