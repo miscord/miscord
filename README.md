@@ -33,48 +33,9 @@ Default location of config file:
 
 **You can use config generator [here](https://miscord.net/config-generator.html)**
 
-**`Config.json` template**
-  ```json
-  {
-  "_comment": "This is an example config with default values, you can remove any of the values below from the config and it will still work.",
-  "messenger": {
-    "username": "Your facebook username/email",
-    "password": "Your facebook password",
-    "forceLogin": true,
-    "filter": {
-      "whitelist": [],
-      "blacklist": [],
-      "_comment": "If you use one of the properties above, leave the other empty."
-    },
-    "format": "*{username}*: {message}",
-    "sourceFormat": {
-      "discord": "(Discord)",
-      "messenger": "(Messenger: {name})"
-    },
-    "ignoreEmbeds": false
-  },
-  "discord": {
-    "token": "Bot Token",
-    "guild": "Server where you want to send messages id",
-    "category": "",
-    "renameChannels": true,
-    "showEvents": false,
-    "showFullNames": false,
-    "createChannels": false,
-    "massMentions": true
-  },
-  "checkUpdates": false,
-  "logLevel": "info",
-  "errorChannel": "Channel where bot will send errors",
-  "commandChannel": "Channel when you want to use commands"
-}
+**Example config: see [here](config.example.json)**
 
-  ```
-
-  
 **See all config properties [here](../../wiki/configuration)**
-
-
 
 ## Installation
 - [NPM install (recommended method)](../../wiki/install#npm)
@@ -86,22 +47,23 @@ Default location of config file:
 ## Binaries/NPM install
 
 Run `miscord` in the console.
-_If you store your config somewhere else , you can run it with `miscord --config {path}`_ like this : <br />
- *In this example config is stored in miscord folder*
+_If you store your config somewhere else, you can run it with `miscord --config {path}`_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
 
-  ```
-  miscord --config ~/miscord/config.json
-  ```
+```
+miscord --config ~/miscord/config.json
+```
 
 ## Local install
 
 Enter the Miscord directory where you cloned it (`cd miscord`)  
 Run it using `npm start`.  
-_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_ like this : <br />
- *In this example config is stored in miscord folder*
-  ```
-  npm start --config ~/miscord/config.json
-  ```
+_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
+
+```
+npm start -- --config ~/miscord/config.json
+```
 
 # :warning: Disclaimer
 
@@ -112,4 +74,4 @@ All product and company names are trademarks™ or registered® trademarks of th
 Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
 
 # :scroll: License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
