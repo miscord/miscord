@@ -33,6 +33,8 @@ Default location of config file:
 
 **You can use config generator [here](https://miscord.net/config-generator.html)**
 
+**Example config: see [here](config.example.json)**
+
 **See all config properties [here](../../wiki/configuration)**
 
 ## Installation
@@ -45,13 +47,23 @@ Default location of config file:
 ## Binaries/NPM install
 
 Run `miscord` in the console.
-_If you store your config somewhere else, you can run it with `miscord --config {path}`_
+_If you store your config somewhere else, you can run it with `miscord --config {path}`_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
+
+```
+miscord --config ~/miscord/config.json
+```
 
 ## Local install
 
 Enter the Miscord directory where you cloned it (`cd miscord`)  
 Run it using `npm start`.  
-_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_
+_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
+
+```
+npm start -- --config ~/miscord/config.json
+```
 
 # :warning: Disclaimer
 
