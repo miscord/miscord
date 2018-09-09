@@ -13,12 +13,6 @@
 **[FAQ](../../wiki/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 
-<br>
-
-<a href="https://miscord.net/">
-  <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
-</a>
-
 # :wrench: Setup
 
 ## Installation
