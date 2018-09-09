@@ -62,7 +62,7 @@
       "config",
       "messenger",
       "discord",
-      "channels"
+      "connections"
     ]
   }
 }
