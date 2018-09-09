@@ -13,6 +13,10 @@
 **[FAQ](../../wiki/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 
+# :memo: Wiki
+
+**Miscord has its own wiki [here](../../wiki), any information is most likely to be there**
+
 # :wrench: Setup
 
 ## Installation
