@@ -21,6 +21,11 @@
 
 # :wrench: Setup
 
+## Installation
+- [NPM install (recommended method)](../../wiki/install#npm)
+- [Binary packages](../../releases/latest)
+- [Docker install](../../wiki/install#docker)
+
 ## Configuration
 
 **Follow a guide [here](../../wiki/Creating-a-Discord-bot) to get the Discord token**
@@ -37,10 +42,7 @@ Default location of config file:
 
 **See all config properties [here](../../wiki/configuration)**
 
-## Installation
-- [NPM install (recommended method)](../../wiki/install#npm)
-- [Binary packages](../../releases/latest)
-- [Docker install](../../wiki/install#docker)
+**Next step: connections configuration - see [here](../../wiki/Connections.yml)**
 
 # :electric_plug: Running
 
