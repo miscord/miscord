@@ -100,13 +100,13 @@ function generateConfig () {
 
   var config = {
     logLevel: v(form.logLevel, 'info'),
-    checkUpdates: v(form.checkUpdates, true),
+    checkUpdates: v(form.checkUpdates, false),
     errorChannel: v(form.errorChannel, ''),
     commandChannel: v(form.commandChannel, ''),
     messenger: {
       username: form.messenger.username,
       password: form.messenger.password,
-      forceLogin: v(form.messenger.forceLogin, false),
+      forceLogin: v(form.messenger.forceLogin, true),
       filter: form.messenger.filter,
       format: v(form.messenger.format, ''),
       sourceFormat: form.messenger.sourceFormat,
@@ -119,7 +119,7 @@ function generateConfig () {
       renameChannels: v(form.discord.renameChannels, true),
       showEvents: v(form.discord.showEvents, false),
       showFullNames: v(form.discord.showFullNames, false),
-      createChannels: v(form.discord.createChannels, true),
+      createChannels: v(form.discord.createChannels, false),
       massMentions: v(form.discord.massMentions, true)
     }
   }
