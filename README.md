@@ -13,13 +13,16 @@
 **[FAQ](../../wiki/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 
-<br>
+# :memo: Wiki
 
-<a href="https://miscord.net/">
-  <img src="../gh-pages/img/screenshot.png" style="max-width: 80%">
-</a>
+**Miscord has its own wiki [here](../../wiki), any information is most likely to be there**
 
 # :wrench: Setup
+
+## Installation
+- [NPM install (recommended method)](../../wiki/install#npm)
+- [Binary packages](../../releases/latest)
+- [Docker install](../../wiki/install#docker)
 
 ## Configuration
 
@@ -33,25 +36,34 @@ Default location of config file:
 
 **You can use config generator [here](https://miscord.net/config-generator.html)**
 
+**Example config: see [here](config.example.json)**
+
 **See all config properties [here](../../wiki/configuration)**
 
-## Installation
-- [NPM install (recommended method)](../../wiki/install#npm)
-- [Binary packages](../../releases/latest)
-- [Docker install](../../wiki/install#docker)
+**Next step: connections configuration - see [here](../../wiki/Connections.yml)**
 
 # :electric_plug: Running
 
 ## Binaries/NPM install
 
 Run `miscord` in the console.
-_If you store your config somewhere else, you can run it with `miscord --config {path}`_
+_If you store your config somewhere else, you can run it with `miscord --config {path}`_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
+
+```
+miscord --config ~/miscord/config.json
+```
 
 ## Local install
 
 Enter the Miscord directory where you cloned it (`cd miscord`)  
 Run it using `npm start`.  
-_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_
+_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_ like this:  
+*In this example config is stored in a folder called miscord in your home directory*
+
+```
+npm start -- --config ~/miscord/config.json
+```
 
 # :warning: Disclaimer
 
@@ -62,4 +74,4 @@ All product and company names are trademarks™ or registered® trademarks of th
 Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
 
 # :scroll: License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
