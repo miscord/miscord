@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.10.0] - 2018-09-09
+### Added
+- Read-only channels
+- Commands: `eval`, `info`, `add`, `remove`
+- Hiding automatically created channels for non-admins
+
+### Changed
+- Renamed channels.yml to connections.yml
+- Changed format of connections.yml
+- Commands: `link`, `unlink`
+
 ## [3.9.3] - 2018-09-05
 ### Added
 - Truncating message when exceeds 2000 chars on Discord
