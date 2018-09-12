@@ -29,5 +29,7 @@
   "checkUpdates": false,
   "logLevel": "info",
   "errorChannel": "",
-  "commandChannel": ""
+  "commandChannel": "",
+  "consoleTimestamps": false,
+  "logsTimestamps": true
 }
