@@ -103,6 +103,8 @@ function generateConfig () {
     checkUpdates: v(form.checkUpdates, false),
     errorChannel: v(form.errorChannel, ''),
     commandChannel: v(form.commandChannel, ''),
+    consoleTimestamps: v(form.consoleTimestamps, false),
+    logsTimestamps: v(form.logsTimestamps, true),
     messenger: {
       username: form.messenger.username,
       password: form.messenger.password,
