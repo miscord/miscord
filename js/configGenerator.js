@@ -1,4 +1,4 @@
-// CONSTANTS
+/* global alert, FileReader, self, btoa */
 const getElement = e => document.querySelector(e)
 const v = (value, defaultValue) => value === defaultValue ? undefined : value
 const style = {

@@ -1,3 +1,4 @@
+/* global fetch */
 const getFullOSName = os => ({Win: 'Windows', Mac: 'macOS'}[os]) || 'Linux'
 const download = document.querySelector('#download')
 var osMatch = navigator.platform.match(/(Win|Mac|Linux)/)
