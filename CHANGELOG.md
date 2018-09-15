@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.11.0] - 2018-09-15
+### Added
+- Timestamps in the logs/console
+- Showing plans
+- `timezone` field in the config (for plan time)
+
+### Changed
+- `messenger.filter.whitelist` -> `messenger.whitelist`
+
+### Removed
+- `messenger.filter.blacklist`
+
 ## [3.10.0] - 2018-09-09
 ### Added
 - Read-only channels
