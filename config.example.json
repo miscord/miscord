@@ -27,5 +27,6 @@
   "errorChannel": "",
   "commandChannel": "",
   "consoleTimestamps": false,
-  "logsTimestamps": true
+  "logsTimestamps": true,
+  "timezone": ""
 }
