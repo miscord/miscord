@@ -189,14 +189,8 @@
 							</div>
 			
 							<div class="field">
-								<label class="label">White/blacklist</label>
-								<div class="select">
-									<select id="messenger-list-type">
-										<option value="whitelist">Whitelist</option>
-										<option value="blacklist">Blacklist</option>
-									</select>
-								</div>
-								<textarea id="messenger-filter" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
+								<label class="label">Whitelist</label>
+								<textarea id="messenger-whitelist" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
 							</div>
 			
 							<div class="field">
@@ -325,7 +319,7 @@
 			</div>
 			<button class="modal-close is-large" aria-label="close"></button>
 		</div>
-		<script src="js/configGenerator.js"></script>
+		<script src="js/configGenerator.js" type="module"></script>
 		<script src="js/modal.js"></script>
 	</body>
 </html>
