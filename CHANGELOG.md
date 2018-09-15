@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.11.2] - 2018-09-15
+### Changed
+- Replaced facebook-chat-api with @bjornskjald/facebook-chat-api
+
 ## [3.11.1] - 2018-09-15
 ### Added
 - Truncating people in plans
