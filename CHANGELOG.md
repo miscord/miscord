@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.11.1] - 2018-09-15
+### Added
+- Truncating people in plans
+
+### Removed
+- "Invited" people in plans
+
 ## [3.11.0] - 2018-09-15
 ### Added
 - Timestamps in the logs/console
