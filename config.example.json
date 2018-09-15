@@ -4,11 +4,7 @@
     "username": "",
     "password": "",
     "forceLogin": true,
-    "filter": {
-      "whitelist": [],
-      "blacklist": [],
-      "_comment": "If you use one of the properties above, leave the other empty."
-    },
+    "whitelist": [],
     "format": "*{username}*: {message}",
     "sourceFormat": {
       "discord": "(Discord)",
