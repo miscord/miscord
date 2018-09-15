@@ -20,57 +20,23 @@
 # :wrench: Setup
 
 ## Installation
-- [NPM install (recommended method)](../../wiki/install#npm)
-- [Binary packages](../../releases/latest)
-- [Docker install](../../wiki/install#docker)
+- [NPM install (Linux/macOS)](../../wiki/install#npm)
+- [Binary packages (Windows)](../../releases/latest)
+- [Docker install (headless servers)](../../wiki/install#docker)
 
 ## Configuration
 
 **Follow a guide [here](../../wiki/Creating-a-Discord-bot) to get the Discord token**
 
-Default location of config file:
-- Windows: `%appdata%/Miscord/config.json`
-- Mac: `~/Library/Application Support/Miscord/config.json`
-- Linux: `~/.config/Miscord/config.json`
-- Other: `~/.miscord/config.json`
-
-**You can use config generator [here](https://miscord.net/config-generator.html)**
-
-**Example config: see [here](config.example.json)**
-
-**See all config properties [here](../../wiki/configuration)**
-
-**Next step: connections configuration - see [here](../../wiki/Connections.yml)**
-
-# :electric_plug: Running
-
-## Binaries/NPM install
-
-Run `miscord` in the console.
-_If you store your config somewhere else, you can run it with `miscord --config {path}`_ like this:  
-*In this example config is stored in a folder called miscord in your home directory*
-
-```
-miscord --config ~/miscord/config.json
-```
-
-## Local install
-
-Enter the Miscord directory where you cloned it (`cd miscord`)  
-Run it using `npm start`.  
-_If you store your config somewhere else, you can run it with `npm start -- --config {path}` (note the `--` before `--config`)_ like this:  
-*In this example config is stored in a folder called miscord in your home directory*
-
-```
-npm start -- --config ~/miscord/config.json
-```
+**[Config Generator](https://miscord.net/config-generator.html)**  
+**[Example config](config.example.json)**  
+**[All config properties (explained)](../../wiki/configuration)**  
+**Next step: [connections setup](../../wiki/Connections.yml)**
 
 # :warning: Disclaimer
 
-We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.
-
-All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
-
+We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.  
+All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.  
 Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
 
 # :scroll: License
