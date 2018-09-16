@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "3.11.2",
+  "version": "3.11.3",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -53,8 +53,8 @@
   },
   "pkg": {
     "scripts": [
-      "node_modules/facebook-chat-api/**/*.js",
-      "!node_modules/facebook-chat-api/**/test"
+      "node_modules/@bjornskjald/facebook-chat-api/**/*.js",
+      "!node_modules/@bjornskjald/facebook-chat-api/**/test"
     ]
   },
   "standard": {
