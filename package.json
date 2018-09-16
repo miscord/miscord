@@ -53,8 +53,8 @@
   },
   "pkg": {
     "scripts": [
-      "node_modules/facebook-chat-api/**/*.js",
-      "!node_modules/facebook-chat-api/**/test"
+      "node_modules/@bjornskjald/facebook-chat-api/**/*.js",
+      "!node_modules/@bjornskjald/facebook-chat-api/**/test"
     ]
   },
   "standard": {
