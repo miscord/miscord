@@ -1,5 +1,17 @@
 # Changelog
 
+# [3.11.4] - 2018-09-18
+### Added
+- Missing space to `and X more...`
+
+### Changed
+- Moved API to @miscord/facebook
+
+# [3.11.3] - 2018-09-16
+### Changed
+- Fixed incorrect import
+- Moved info from README to wiki
+
 ## [3.11.2] - 2018-09-15
 ### Changed
 - Replaced facebook-chat-api with @bjornskjald/facebook-chat-api
