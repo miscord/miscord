@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.12.0] - 2018-09-19
+### Changed
+- Logger: `npmlog` -> `consola`
+
 ## [3.11.4] - 2018-09-18
 ### Added
 - Missing space to `and X more...`
