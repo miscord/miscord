@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 require('colors')
+global.logger = require('consola')
+const { inspect } = require('util')
+global.toStr = (object, depth = 2) => inspect(object, { depth })
 const printAndExit = m => process.exit(console.log(m) || 0)
 
 const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
