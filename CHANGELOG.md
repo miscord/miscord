@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.12.1] - 2018-09-25
+### Added
+- New method of uploading images to Facebook
+
 ## [3.12.0] - 2018-09-19
 ### Changed
 - Logger: `npmlog` -> `consola`
