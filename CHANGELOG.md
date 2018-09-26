@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.12.2] - 2018-09-26
+### Changed
+- Fixed file downloading for more than 2 linked chats
+
 ## [3.12.1] - 2018-09-25
 ### Added
 - New method of uploading images to Facebook
