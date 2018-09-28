@@ -22,7 +22,8 @@ const defaultConfig = {
   checkUpdates: false,
   logLevel: 'info',
   consoleTimestamps: false,
-  logsTimestamps: true
+  logsTimestamps: true,
+  timezone: ''
 }
 
 export default defaultConfig
