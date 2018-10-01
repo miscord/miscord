@@ -3,6 +3,7 @@ const login = require('./lib/login')
 const { inspect } = require('util')
 const discordListener = require('./lib/discord/listener')
 const messengerListener = require('./lib/messenger/listener')
+const messengerEventListener = require('./lib/messenger/handleEvent')
 
 module.exports = config => {
   if (!global.config) global.config = config
@@ -13,6 +14,9 @@ module.exports = config => {
     discord.client.on('message', discordListener)
 
     // when got a messenger message
-    messenger.stopListening = messenger.client.listen(messengerListener)
+    messenger.client.on('message', messengerListener)
+
+    // when got a messenger event
+    messenger.client.on('event', messengerEventListener)
   })
 }
