@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.0] - 2018-10-04
+### Added
+- Facebook message on attachments for Discord larger than 8MB
+- Discord message when Messenger failed
+
+### Changed
+- `facebook-chat-api` -> `libfb`
+
 ## [3.12.2] - 2018-09-26
 ### Changed
 - Fixed file downloading for more than 2 linked chats
