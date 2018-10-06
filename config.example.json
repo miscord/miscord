@@ -10,7 +10,8 @@
       "discord": "(Discord)",
       "messenger": "(Messenger: {name})"
     },
-    "ignoreEmbeds": false
+    "ignoreEmbeds": false,
+    "attachmentTooLargeError": true
   },
   "discord": {
     "token": "",
@@ -22,11 +23,15 @@
     "createChannels": false,
     "massMentions": true
   },
+  "channels": {
+    "error": "",
+    "command": ""
+  },
+  "timestamps": {
+    "console": false,
+    "logs": true
+  },
   "checkUpdates": false,
   "logLevel": "info",
-  "errorChannel": "",
-  "commandChannel": "",
-  "consoleTimestamps": false,
-  "logsTimestamps": true,
   "timezone": ""
 }
