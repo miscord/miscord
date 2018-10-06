@@ -19,10 +19,16 @@ const defaultConfig = {
     createChannels: false,
     massMentions: true
   },
+  timestamps: {
+    console: false,
+    logs: true
+  },
+  channels: {
+    command: '',
+    error: ''
+  },
   checkUpdates: false,
   logLevel: 'info',
-  consoleTimestamps: false,
-  logsTimestamps: true,
   timezone: ''
 }
 

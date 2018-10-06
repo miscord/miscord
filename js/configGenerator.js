@@ -1,5 +1,6 @@
 /* global alert, FileReader, self, btoa */
 import defaultConfig from './defaultConfig.js'
+const categories = ['messenger', 'discord', 'timestamps', 'channels']
 const getElement = e => document.querySelector(e)
 const v = (value, defaultValue) => value === defaultValue ? undefined : value
 const style = {
@@ -8,9 +9,10 @@ const style = {
 }
 const proxyHandler = {
   get: (target, name) => {
-    console.log({target, name})
-    if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
+    console.log({ target, name })
+    if (categories.includes(name)) return new Proxy({ name }, proxyHandler)
 
+    console.log(`Querying #${target.name}-${name}`)
     const element = document.querySelector(`#${target.name}-${name}`)
 
     if (element && element.type === 'checkbox') return element.checked
@@ -23,8 +25,8 @@ const proxyHandler = {
     } else return element.value
   },
   set: (target, name, input) => {
-    console.log({target, name, input})
-    if (['messenger', 'discord'].includes(name)) return new Proxy({name}, proxyHandler)
+    console.log({ target, name, input })
+    if (categories.includes(name)) return new Proxy({ name }, proxyHandler)
 
     const element = document.querySelector(`#${target.name}-${name}`)
 
@@ -39,7 +41,7 @@ const proxyHandler = {
   }
 }
 
-const form = new Proxy({name: 'miscord'}, proxyHandler)
+const form = new Proxy({ name: 'miscord' }, proxyHandler)
 
 // ELEMENTS
 const upload = getElement('#config-upload')
@@ -67,7 +69,7 @@ upload.addEventListener('change', e => {
 
 function handleUpload (config) {
   for (const key in config) {
-    if (key === 'messenger' || key === 'discord') for (const vkey in config[key]) form[key][vkey] = config[key][vkey]
+    if (categories.includes(key)) for (const vkey in config[key]) form[key][vkey] = config[key][vkey]
     else form[key] = config[key]
   }
 }
@@ -81,7 +83,7 @@ function generateConfig () {
 
   for (const key in defaultConfig) {
     console.log(key)
-    if (key === 'messenger' || key === 'discord') {
+    if (categories.includes(key)) {
       config[key] = {}
       for (const vkey in defaultConfig[key]) {
         if (vkey === 'whitelist' && !form[key][vkey].length) continue
