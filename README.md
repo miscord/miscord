@@ -2,11 +2,13 @@
 
 > Built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
 
-[![Standard.js](https://img.shields.io/badge/code%20style-standard.js-green.svg?style=flat-square)](https://standardjs.com/)
-[![Travis](https://img.shields.io/travis/miscord/miscord.svg?style=flat-square)](https://travis-ci.org/miscord/miscord/)
-[![NPM downloads](https://img.shields.io/npm/dt/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
-[![Version](https://img.shields.io/npm/v/miscord.svg?style=flat-square)](https://npmjs.org/package/miscord)
-[![Discord](https://discordapp.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
+<p align="center">
+  <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/dt/miscord.svg?style=for-the-badge" alt="NPM downloads"></a>
+  <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/v/miscord.svg?style=for-the-badge" alt="Version"></a>
+  <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/github/stars/miscord/miscord.svg?style=for-the-badge" alt="Stars"></a>
+  <br />
+  <a href="https://discord.gg/DkmTvVz"><img src="https://discordapp.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
+</p>
 
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](https://paypal.me/Bjornskjald)** &nbsp;
