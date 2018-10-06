@@ -10,7 +10,8 @@
       "discord": "(Discord)",
       "messenger": "(Messenger: {name})"
     },
-    "ignoreEmbeds": false
+    "ignoreEmbeds": false,
+    "attachmentTooLargeError": true
   },
   "discord": {
     "token": "",
