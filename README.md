@@ -1,7 +1,5 @@
 ![banner](../gh-pages/img/banner.png)
 
-> Built on [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) and [discord.js](https://discord.js.org)
-
 <p align="center">
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/dt/miscord.svg?style=for-the-badge" alt="NPM downloads"></a>
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/v/miscord.svg?style=for-the-badge" alt="Version"></a>
@@ -9,6 +7,8 @@
   <br />
   <a href="https://discord.gg/DkmTvVz"><img src="https://discordapp.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
 </p>
+
+> Built on [libfb](https://github.com/ChatPlug/libfb-js) and [discord.js](https://discord.js.org)
 
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](https://paypal.me/Bjornskjald)** &nbsp;
