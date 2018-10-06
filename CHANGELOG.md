@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.1] - 2018-10-06
+### Changed
+- Updated `libfb` to fix not sending messages
+- Cleaned up the config by moving timestamps and channels to separate categories
+- Fixed attachment size calculation
+
 ## [4.0.0] - 2018-10-04
 ### Added
 - Facebook message on attachments for Discord larger than 8MB
