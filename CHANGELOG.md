@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.0.2] - 2018-10-06
+### Changed
+- Fixed attachment size calculation (again)
+
 ## [4.0.1] - 2018-10-06
 ### Changed
 - Updated `libfb` to fix not sending messages
