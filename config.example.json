@@ -21,7 +21,8 @@
     "showEvents": false,
     "showFullNames": false,
     "createChannels": false,
-    "massMentions": true
+    "massMentions": true,
+    "userMentions": true
   },
   "channels": {
     "error": "",
