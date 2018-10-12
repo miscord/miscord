@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0] - 2018-10-12
+### Added
+- userMentions switch for Discord
+
+### Changed
+- Attachment parsing system
+- Fixed @everyone detection
+
 ## [4.0.2] - 2018-10-06
 ### Changed
 - Fixed attachment size calculation (again)
