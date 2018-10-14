@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2] - 2018-10-14
+### Changed
+- Fixed `undefined` message on plan creation
+- Fixed not waiting for attachments
+- Fixed missing username/avatar in Discord - Discord messages
+- Fixed empty logs
+
 ## [4.1.1] - 2018-10-12
 ### Added
 - More support for extensible attachments
