@@ -26,3 +26,8 @@ process.on('unhandledRejection', error => {
   if (!error) return
   sendError(error)
 })
+
+process.on('uncaughtException', error => {
+  if (!error) return
+  sendError(error)
+})
