@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.3] - 2018-10-16
+### Changed
+- Fixed error loop by adding a check if Discord channels are defined
+
 ## [4.1.2] - 2018-10-14
 ### Changed
 - Fixed `undefined` message on plan creation
