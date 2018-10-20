@@ -188,13 +188,6 @@
 							</div>
 			
 							<div class="field">
-								<label class="checkbox">
-									<input id="messenger-forceLogin" type="checkbox" checked="checked">
-									<span>Force login to Facebook (skip login reviews, etc.)</span>
-								</label>
-							</div>
-			
-							<div class="field">
 								<label class="label">Whitelist</label>
 								<textarea id="messenger-whitelist" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
 							</div>
@@ -210,7 +203,7 @@
 							<div class="field">
 								<input class="input" id="messenger-sourceFormat-messenger" type="text" placeholder="Messenger source format">
 								<p class="help">
-									Use this only when you used {source} in the message format<br />
+									Use source formats only when you used {source} in the message format<br />
 									More info about message format <a href="https://github.com/Bjornskjald/miscord/wiki/format">here</a>
 								</p>
 							</div>
@@ -219,6 +212,13 @@
 								<label class="checkbox">
 									<input id="messenger-ignoreEmbeds" type="checkbox">
 									<span>Ignore embeds from Discord</span>
+								</label>
+							</div>
+
+							<div class="field">
+								<label class="checkbox">
+									<input id="messenger-attachmentTooLargeError" type="checkbox">
+									<span>Show "attachments too large" error when sending to Discord</span>
 								</label>
 							</div>
 						</div>
@@ -269,6 +269,13 @@
 								<label class="checkbox">
 									<input id="discord-massMentions" type="checkbox" checked="checked">
 									<span>Allow for @everyone or @here from Messenger</span>
+								</label>
+							</div>
+			
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-userMentions" type="checkbox" checked="checked">
+									<span>Allow for user/role mentions from Messenger</span>
 								</label>
 							</div>
 						</div>

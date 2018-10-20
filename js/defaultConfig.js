@@ -2,14 +2,14 @@ const defaultConfig = {
   messenger: {
     username: '',
     password: '',
-    forceLogin: true,
     whitelist: [],
     format: '',
     sourceFormat: {
       discord: '',
       messenger: ''
     },
-    ignoreEmbeds: false
+    ignoreEmbeds: false,
+    attachmentTooLargeError: true
   },
   discord: {
     token: '',
@@ -17,7 +17,8 @@ const defaultConfig = {
     showEvents: false,
     showFullNames: false,
     createChannels: false,
-    massMentions: true
+    massMentions: true,
+    userMentions: true
   },
   timestamps: {
     console: false,
