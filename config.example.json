@@ -3,7 +3,6 @@
   "messenger": {
     "username": "",
     "password": "",
-    "forceLogin": true,
     "whitelist": [],
     "format": "*{username}*: {message}",
     "sourceFormat": {
