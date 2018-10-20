@@ -1,18 +1,19 @@
-/* global fetch */
-const getFullOSName = os => ({Win: 'Windows', Mac: 'macOS'}[os]) || 'Linux'
+/* global fetch, platform */
 const download = document.querySelector('#download')
-var osMatch = navigator.platform.match(/(Win|Mac|Linux)/)
-var os = (osMatch && osMatch[1]) || ''
-var arch = navigator.userAgent.match(/x86_64|Win64|WOW64/) || navigator.cpuClass === 'x64' ? 'x64' : 'x86'
+
+const { family } = platform.os
+const arch = family !== 'OS X' ? platform.os.architecture : 64
+const os = family.startsWith('Windows') ? (arch === 64 ? 'win' : 'win32') : family === 'OS X' ? 'macapp' : arch === 64 ? 'linux' : 'linux32'
+const longOS = family.startsWith('Windows') ? 'Windows' : family === 'OS X' ? 'macOS' : 'Linux'
 
 fetch('https://api.github.com/repos/Bjornskjald/miscord/releases/latest')
   .then(res => res.json())
-  .then(res => (os === 'Mac' || arch === 'x64') ? res : { assets: [] })
   .then(release => release.assets
-    .map(el => ({ url: el.browser_download_url, os: el.name.split('.')[0].replace('miscord-', ''), version: release.name }))
-    .find(el => (el.os === getFullOSName(os).toLowerCase() || el.os === os.toLowerCase()))
+    .map(el => ({ url: el.browser_download_url, os: el.name.split('-')[2].split('.')[0], version: release.name }))
+    .map(el => console.log(el) || el)
+    .find(el => el.os === os)
   )
   .then(asset => {
     download.href = asset.url
-    download.innerHTML = `Download Miscord ${asset.version} for ${getFullOSName(os)}`
+    download.innerHTML = `Download Miscord ${asset.version} for ${longOS}`
   })
