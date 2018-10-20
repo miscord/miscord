@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.4] - 2018-10-21
+### Added
+- Added building macOS GUI app
+- Added zipping every binary
+- Added checking `showEvents`
+
 ## [4.1.3] - 2018-10-16
 ### Changed
 - Fixed error loop by adding a check if Discord channels are defined
