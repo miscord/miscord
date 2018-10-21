@@ -14,6 +14,7 @@ fetch('https://api.github.com/repos/Bjornskjald/miscord/releases/latest')
     .find(el => el.os === os)
   )
   .then(asset => {
+    if (['Android', 'iOS', 'Windows Phone', 'Tizen', 'Symbian OS', 'FreeBSD'].includes(platform.os.family)) return
     download.href = asset.url
     download.innerHTML = `Download Miscord ${asset.version} for ${longOS}`
   })
