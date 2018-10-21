@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.5] - 2018-10-21
+### Changed
+- Updated `libfb` to support reconnecting
+
 ## [4.1.4] - 2018-10-21
 ### Added
 - Added building macOS GUI app
