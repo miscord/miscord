@@ -39,7 +39,7 @@
     "emoji-strip": "^1.0.1",
     "gh-release": "^3.4.0",
     "js-yaml": "^3.12.0",
-    "libfb": "^1.3.5",
+    "libfb": "1.3.4",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "remove-accents": "^0.4.2",
