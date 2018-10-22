@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.6] - 2018-10-22
+### Changed
+- Downgraded `libfb` back.
+
 ## [4.1.5] - 2018-10-21
 ### Changed
 - Updated `libfb` to support reconnecting
