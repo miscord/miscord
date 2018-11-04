@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.1.7] - 2018-11-04
+### Changed
+- Upgraded `consola` logger
+- Upgraded `libfb` (again)
+
 ## [4.1.6] - 2018-10-22
 ### Changed
 - Downgraded `libfb` back.
