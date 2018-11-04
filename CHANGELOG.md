@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.10] - 2018-11-04
+### Changed
+- Fixed crash on invalid Discord channel IDs
+
 ## [4.1.9] - 2018-11-04
 ### Changed
 - Fixed setting log level
