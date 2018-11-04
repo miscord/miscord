@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 require('colors')
-global.logger = require('consola')
+global.logger = require('consola').create({
+  level: ({ silly: 5, verbose: 4, info: 3, warn: 1, error: 0 }[process.env.MISCORD_LOG_LEVEL] || parseInt(process.env.MISCORD_LOG_LEVEL))
+})
 const { inspect } = require('util')
 global.toStr = (object, depth = 2) => inspect(object, { depth })
 const printAndExit = m => process.exit(console.log(m) || 0)
