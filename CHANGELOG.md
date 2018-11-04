@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.8] - 2018-11-04
+### Changed
+- Fixed object logging depth
+
 ## [4.1.7] - 2018-11-04
 ### Changed
 - Upgraded `consola` logger
