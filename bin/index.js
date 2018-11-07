@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 require('colors')
-global.logger = require('consola').create({
-  level: ({ silly: 5, verbose: 4, info: 3, warn: 1, error: 0 }[process.env.MISCORD_LOG_LEVEL] || parseInt(process.env.MISCORD_LOG_LEVEL))
-})
+const Logger = require('../lib/logger')
+global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 const { inspect } = require('util')
 global.toStr = (object, depth = 2) => inspect(object, { depth })
 const printAndExit = m => process.exit(console.log(m) || 0)
@@ -20,7 +19,7 @@ if (args.h || args.help) printAndExit(require('./help'))
 if (args.v || args.version) printAndExit(require('../package.json').version)
 if (args.getConfigPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
 
-require('../lib/logger.js')(args.c || args.config)
+require('../lib/logger.js').inject(args.c || args.config)
 
 getConfig(args.c || args.config).then(miscord).catch(err => sendError(err))
 
