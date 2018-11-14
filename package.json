@@ -61,8 +61,7 @@
       "messenger",
       "discord",
       "connections",
-      "logger",
-      "toStr"
+      "logger"
     ]
   }
 }
