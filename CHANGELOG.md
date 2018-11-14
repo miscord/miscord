@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.11] - 2018-11-14
+### Changed
+- Fixed bug with not receiving messages from Messenger (I mean, upgraded `libfb`)
+- Stole @alufers's logger from ChatPlug
+- Fixed timezone issues
+
 ## [4.1.10] - 2018-11-04
 ### Changed
 - Fixed crash on invalid Discord channel IDs

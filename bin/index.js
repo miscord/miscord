@@ -1,10 +1,7 @@
 #!/usr/bin/env node
 require('colors')
-global.logger = require('consola').create({
-  level: ({ silly: 5, verbose: 4, info: 3, warn: 1, error: 0 }[process.env.MISCORD_LOG_LEVEL] || parseInt(process.env.MISCORD_LOG_LEVEL))
-})
-const { inspect } = require('util')
-global.toStr = (object, depth = 2) => inspect(object, { depth })
+const Logger = require('../lib/logger')
+global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 const printAndExit = m => process.exit(console.log(m) || 0)
 
 const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
@@ -15,12 +12,12 @@ const sendError = require('../lib/error')
 const { getConfig, getConfigDir } = require('../lib/config')
 // const { checkToken } = require('../lib/discord')
 
-var args = require('minimist')(process.argv.slice(2))
+const args = require('minimist')(process.argv.slice(2))
 if (args.h || args.help) printAndExit(require('./help'))
 if (args.v || args.version) printAndExit(require('../package.json').version)
 if (args.getConfigPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
 
-require('../lib/logger.js')(args.c || args.config)
+require('../lib/logger.js').inject(args.c || args.config)
 
 getConfig(args.c || args.config).then(miscord).catch(err => sendError(err))
 
