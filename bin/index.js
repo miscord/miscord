@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-require('colors')
+const chalk = require('chalk')
 const Logger = require('../lib/logger')
 global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 const printAndExit = m => process.exit(console.log(m) || 0)
 
 const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
-if (!require('semver').gte(process.version, '8.5.0')) printAndExit(outdated.yellow)
+if (!require('semver').gte(process.version, '8.5.0')) printAndExit(chalk.yellow(outdated))
 
 const miscord = require('../')
 const sendError = require('../lib/error')
