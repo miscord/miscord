@@ -7,7 +7,9 @@ const miscord = require('../')
 const sendError = require('../lib/error')
 const { getConfig, getConfigDir } = require('../lib/config')
 
-const fork = c => cluster.fork({ CONFIG: c })
+const fork = c => cluster.fork({ CONFIG: c }).on('online', () => { lastRunTime = new Date() })
+
+let lastRunTime
 
 if (cluster.isMaster) {
   const printAndExit = m => process.exit(console.log(m) || 0)
@@ -24,6 +26,10 @@ if (cluster.isMaster) {
 
   cluster.on('exit', (worker, code, signal) => {
     logger.error(`Worker process ${worker.process.pid} died.`)
+    if ((new Date().getMilliseconds() - lastRunTime.getMilliseconds()) < (2 * 1000)) {
+      logger.fatal('Process crashed less than 2 seconds since the last launch, exiting.')
+      process.exit(1)
+    }
     fork(args.c || args.config)
   })
 } else {
