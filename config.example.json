@@ -24,7 +24,9 @@
     "createChannels": false,
 
     "massMentions": true,
-    "userMentions": true
+    "userMentions": true,
+
+    "ignoreBots": false
   },
   "channels": {
     "error": "",
