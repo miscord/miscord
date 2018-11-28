@@ -26,7 +26,8 @@
     "massMentions": true,
     "userMentions": true,
 
-    "ignoreBots": false
+    "ignoreBots": false,
+    "ignoredUsers": []
   },
   "channels": {
     "error": "",
