@@ -39,5 +39,6 @@
   },
   "checkUpdates": false,
   "logLevel": "info",
-  "timezone": ""
+  "timezone": "",
+  "ignoredSequences": []
 }
