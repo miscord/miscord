@@ -15,8 +15,6 @@ if (cluster.isMaster) {
   const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
   if (!require('semver').gte(process.version, '8.5.0')) printAndExit(chalk.yellow(outdated))
 
-  // const { checkToken } = require('../lib/discord')
-
   const args = require('minimist')(process.argv.slice(2))
   if (args.h || args.help) printAndExit(require('./help'))
   if (args.v || args.version) printAndExit(require('../package.json').version)
@@ -33,13 +31,11 @@ if (cluster.isMaster) {
   require('../lib/logger.js').inject(process.env.CONFIG)
   getConfig(process.env.CONFIG).then(miscord).catch(err => sendError(err))
 
-  process.on('unhandledRejection', error => {
+  const catchError = error => {
     if (!error) return
     sendError(error)
-  })
+  }
 
-  process.on('uncaughtException', error => {
-    if (!error) return
-    sendError(error)
-  })
+  process.on('unhandledRejection', catchError)
+  process.on('uncaughtException', catchError)
 }
