@@ -1,55 +1,71 @@
 /* global alert, FileReader, self, btoa */
 import defaultConfig from './defaultConfig.js'
-const categories = ['messenger', 'discord', 'timestamps', 'channels']
-const getElement = e => document.querySelector(e)
-const v = (value, defaultValue) => value === defaultValue ? undefined : value
+const $ = e => document.querySelector(e)
+const isEmpty = val => ['{}', '[]'].includes(JSON.stringify(val))
+const isObject = val => typeof val === 'object' && !Array.isArray(val)
+const setNestedProp = (target, ...a) => {
+  let source = form
+  if (Array.isArray(a)) {
+    while (a.length > 1) {
+      let key = a.shift()
+      target = target[key]
+      source = source[key]
+    }
+    a = a[0]
+  }
+  target[a] = source[a]
+}
 const style = {
   setDanger: el => { el.classList.remove('is-info'); el.classList.add('is-danger') },
   setInfo: el => { el.classList.remove('is-danger'); el.classList.add('is-info') }
 }
 const proxyHandler = {
-  get: (target, name) => {
-    console.log({ target, name })
-    if (categories.includes(name)) return new Proxy({ name }, proxyHandler)
+  get: (parent, name) => {
+    console.log(`${parent.name}-${name}`)
+    if (isObject(parent.default[name])) {
+      return new Proxy({
+        name: parent.name === 'miscord' ? name : parent.name + '-' + name,
+        default: parent.default[name]
+      }, proxyHandler)
+    }
 
-    console.log(`Querying #${target.name}-${name}`)
-    const element = document.querySelector(`#${target.name}-${name}`)
+    const element = $(`#${parent.name}-${name}`)
+    if (!element) return null
 
-    if (element && element.type === 'checkbox') return element.checked
-    else if (name === 'whitelist') return element.value.split('\n').map(el => el.trim()).filter(e => e)
-    else if (name === 'sourceFormat') {
-      return (format => (format.discord || format.messenger) ? { discord: v(format.discord, ''), messenger: v(format.messenger, '') } : undefined)({
-        discord: getElement('#messenger-sourceFormat-discord').value,
-        messenger: getElement('#messenger-sourceFormat-messenger').value
-      })
-    } else return element.value
+    let value
+
+    if (element.type === 'checkbox') value = element.checked
+    else if (element.type === 'textarea') value = element.value.split('\n').map(el => el.trim()).filter(e => e)
+    else value = element.value
+
+    if (typeof value === 'boolean') return value !== parent.default[name] ? value : undefined
+    return (value !== '' && value !== parent.default[name]) ? value : undefined
   },
-  set: (target, name, input) => {
-    console.log({ target, name, input })
-    if (categories.includes(name)) return new Proxy({ name }, proxyHandler)
+  set: (parent, name, input) => {
+    console.log(`${parent.name}-${name}`, input)
+    console.log('isObject:', parent.default[name], isObject(parent.default[name]))
+    if (isObject(parent.default[name])) return new Proxy({ name }, proxyHandler)
 
-    const element = document.querySelector(`#${target.name}-${name}`)
-
-    if (!element) return
+    const element = $(`#${parent.name}-${name}`)
+    if (!element) return true
+    if (input === parent.default[name]) return true
 
     if (element.type === 'checkbox') element.checked = input
-    else if (name === 'whitelist') return input.join('\n')
-    else if (name === 'sourceFormat') {
-      getElement('#messenger-sourceFormat-discord').value = input.discord
-      getElement('#messenger-sourceFormat-messenger').value = input.messenger
-    } else element.value = input
+    else if (element.type === 'textarea') element.value = input.join('\n')
+    else element.value = input
+    return true
   }
 }
 
-const form = new Proxy({ name: 'miscord' }, proxyHandler)
+const form = new Proxy({ name: 'miscord', default: defaultConfig }, proxyHandler)
 
 // ELEMENTS
-const upload = getElement('#config-upload')
-const uploadWrapper = getElement('#upload-wrapper')
+const upload = $('#config-upload')
+const uploadWrapper = $('#upload-wrapper')
 
 // BUTTONS
-getElement('#generate-config').addEventListener('click', e => { getElement('#output').innerHTML = generateConfig() })
-getElement('#download-config').addEventListener('click', e => downloadData(generateConfig(), 'config.json'))
+$('#generate-config').addEventListener('click', e => { $('#output').innerHTML = generateConfig() })
+$('#download-config').addEventListener('click', e => downloadData(generateConfig(), 'config.json'))
 
 upload.addEventListener('change', e => {
   if (upload.files.length === 0) return
@@ -58,7 +74,7 @@ upload.addEventListener('change', e => {
   style.setInfo(uploadWrapper)
   uploadWrapper.classList.add('has-name')
 
-  const filename = getElement('#filename')
+  const filename = $('#filename')
   filename.style.visibility = 'visible'
   filename.innerHTML = file.name
 
@@ -69,8 +85,12 @@ upload.addEventListener('change', e => {
 
 function handleUpload (config) {
   for (const key in config) {
-    if (categories.includes(key)) for (const vkey in config[key]) form[key][vkey] = config[key][vkey]
-    else form[key] = config[key]
+    if (isObject(config[key])) {
+      for (const vkey in config[key]) {
+        if (isObject(config[key][vkey])) for (const vvkey in config[key][vkey]) form[key][vkey][vvkey] = config[key][vkey][vvkey]
+        else form[key][vkey] = config[key][vkey]
+      }
+    } else form[key] = config[key]
   }
 }
 
@@ -82,14 +102,18 @@ function generateConfig () {
   const config = {}
 
   for (const key in defaultConfig) {
-    console.log(key)
-    if (categories.includes(key)) {
+    if (isObject(defaultConfig[key])) {
       config[key] = {}
       for (const vkey in defaultConfig[key]) {
-        if (vkey === 'whitelist' && !form[key][vkey].length) continue
-        if (defaultConfig[key][vkey] !== form[key][vkey]) config[key][vkey] = form[key][vkey]
+        if (isObject(defaultConfig[key][vkey])) {
+          config[key][vkey] = {}
+          for (const vvkey in defaultConfig[key][vkey]) setNestedProp(config, key, vkey, vvkey)
+          // i have no idea where did vkey come from but vvkey looks cool
+        } else setNestedProp(config, key, vkey)
+        if (isEmpty(config[key][vkey])) delete config[key][vkey]
       }
-    } else if (defaultConfig[key] !== form[key]) config[key] = form[key]
+    } else setNestedProp(config, key)
+    if (isEmpty(config[key])) delete config[key]
   }
 
   return JSON.stringify(config, null, 2)

@@ -3,10 +3,10 @@ const defaultConfig = {
     username: '',
     password: '',
     whitelist: [],
-    format: '',
+    format: '*{username}*: {message}',
     sourceFormat: {
-      discord: '',
-      messenger: ''
+      discord: '(Discord)',
+      messenger: '(Messenger: {name})'
     },
     ignoreEmbeds: false,
     attachmentTooLargeError: true
@@ -18,7 +18,9 @@ const defaultConfig = {
     showFullNames: false,
     createChannels: false,
     massMentions: true,
-    userMentions: true
+    userMentions: true,
+    ignoreBots: false,
+    ignoredUsers: []
   },
   timestamps: {
     console: false,
@@ -30,7 +32,8 @@ const defaultConfig = {
   },
   checkUpdates: false,
   logLevel: 'info',
-  timezone: ''
+  timezone: '',
+  ignoredSequences: []
 }
 
 export default defaultConfig

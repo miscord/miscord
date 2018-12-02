@@ -140,7 +140,7 @@
 									</select>
 								</div>
 							</div>
-				
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="miscord-checkUpdates" type="checkbox">
@@ -152,7 +152,6 @@
 								<input class="input" id="channels-error" type="text" placeholder="Channel (or your user ID) for error reports">
 							</div>
 
-              
 							<div class="field">
 								<input class="input" id="channels-command" type="text" placeholder="Channel (or your user ID) for commands">
 							</div>
@@ -163,7 +162,7 @@
 									<span>Show timestamps in the console</span>
 								</label>
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="timestamps-logs" type="checkbox" checked="checked">
@@ -171,6 +170,10 @@
 								</label>
 							</div>
 
+							<div class="field">
+								<label class="label">Ignored sequences</label>
+								<textarea id="miscord-ignoredSequences" class="textarea" placeholder="Ignored sequences (regexes without /, one in a line)"></textarea>
+							</div>
 
 							<div class="field">
 								<input class="input" id="miscord-timezone" type="text" placeholder="Timezone (tz database format)">
@@ -182,7 +185,7 @@
 							<div class="field">
 								<input class="input" id="messenger-username" type="text" placeholder="Facebook mail/username">
 							</div>
-			
+
 							<div class="field">
 								<input class="input" id="messenger-password" type="text" placeholder="Facebook password">
 							</div>
@@ -207,7 +210,7 @@
 									More info about message format <a href="https://github.com/Bjornskjald/miscord/wiki/format">here</a>
 								</p>
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="messenger-ignoreEmbeds" type="checkbox">
@@ -228,36 +231,36 @@
 							<div class="field">
 								<input class="input" id="discord-token" type="text" placeholder="Discord token">
 							</div>
-			
+
 							<div class="field">
 								<input class="input" id="discord-guild" type="text" placeholder="Discord guild (optional)">
 							</div>
-							
+
 							<div class="field">
 								<input class="input" id="discord-category" type="text" placeholder="Discord category name (optional)">
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="discord-renameChannels" type="checkbox" checked="checked">
 									<span>Rename Discord channels according to Messenger chat renames</span>
 								</label>
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="discord-showEvents" type="checkbox">
 									<span>Show Messenger chat events (kick/leave/chat rename, etc.) on Discord</span>
 								</label>
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="discord-showFullNames" type="checkbox">
 									<span>Show Messenger users' full names alongside their nicknames on Discord</span>
 								</label>
 							</div>
-			
+
 							<div class="field">
 								<label class="checkbox">
 									<input id="discord-createChannels" type="checkbox">
@@ -277,6 +280,18 @@
 									<input id="discord-userMentions" type="checkbox" checked="checked">
 									<span>Allow for user/role mentions from Messenger</span>
 								</label>
+							</div>
+
+							<div class="field">
+								<label class="checkbox">
+									<input id="discord-ignoreBots" type="checkbox">
+									<span>Ignore all messages from bots (or webhooks)</span>
+								</label>
+							</div>
+
+							<div class="field">
+								<label class="label">Ignored users</label>
+								<textarea id="discord-ignoredUsers" class="textarea" placeholder="Ignored users (IDs, one in a line)"></textarea>
 							</div>
 						</div>
 					</div>
