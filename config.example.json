@@ -3,6 +3,7 @@
   "messenger": {
     "username": "",
     "password": "",
+
     "whitelist": [],
     "format": "*{username}*: {message}",
     "sourceFormat": {
@@ -14,14 +15,19 @@
   },
   "discord": {
     "token": "",
+
     "guild": "",
     "category": "",
     "renameChannels": true,
     "showEvents": false,
     "showFullNames": false,
     "createChannels": false,
+
     "massMentions": true,
-    "userMentions": true
+    "userMentions": true,
+
+    "ignoreBots": false,
+    "ignoredUsers": []
   },
   "channels": {
     "error": "",
@@ -33,5 +39,6 @@
   },
   "checkUpdates": false,
   "logLevel": "info",
-  "timezone": ""
+  "timezone": "",
+  "ignoredSequences": []
 }

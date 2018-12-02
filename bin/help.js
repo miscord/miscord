@@ -1,12 +1,12 @@
-require('colors')
+const chalk = require('chalk')
 
 module.exports = `Miscord v${require('../package.json').version}
 
 Usage: miscord
-  --help    [-h]              ${'shows this message'.cyan}
-  --version [-v]              ${'shows version'.cyan}
-  --config  [-c] configPath   ${'reads config from custom path'.cyan}
-  --getConfigPath             ${'shows config path'.cyan}
+  --help    [-h]              ${chalk.cyan('shows this message')}
+  --version [-v]              ${chalk.cyan('shows version')}
+  --config  [-c] configPath   ${chalk.cyan('reads config from custom path')}
+  --getConfigPath             ${chalk.cyan('shows config path')}
 
 Example:
   miscord -c /path/to/config.json
