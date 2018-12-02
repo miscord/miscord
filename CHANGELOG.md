@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.2.0] - 2018-12-02
+### Added
+- Auto-restart
+- Not closing Windows .exe when no config
+- Logging on m!keep
+- config.ignoredSequences
+- config.discord.ignoreBots
+- config.discord.ignoredUsers
+
+### Fixed
+- Timezone issues
+- Null attachment URL
+- Sending embed images when embeds are disabled
+
 ## [4.1.11] - 2018-11-14
 ### Changed
 - Fixed bug with not receiving messages from Messenger (I mean, upgraded `libfb`)
