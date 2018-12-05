@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.1] - 2018-12-05
+### Fixed
+- Config path being "undefined" on Node 9 and lower
+
+### Removed
+- config.messenger.whitelist
+
 ## [4.2.0] - 2018-12-02
 ### Added
 - Auto-restart
