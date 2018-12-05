@@ -34,8 +34,9 @@ if (cluster.isMaster) {
   })
 } else {
   logger.success(`Worker process ${process.pid} started.`)
-  require('../lib/logger.js').inject(process.env.CONFIG)
-  getConfig(process.env.CONFIG).then(miscord).catch(err => sendError(err))
+  const configPath = process.env.CONFIG !== 'undefined' ? process.env.CONFIG : undefined
+  require('../lib/logger.js').inject(configPath)
+  getConfig(configPath).then(miscord).catch(err => sendError(err))
 
   const catchError = error => {
     if (!error) return
