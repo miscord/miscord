@@ -20,9 +20,14 @@ if (cluster.isMaster) {
   const args = require('minimist')(process.argv.slice(2))
   if (args.h || args.help) printAndExit(require('./help'))
   if (args.v || args.version) printAndExit(require('../package.json').version)
-  if (args.getConfigPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
+  if (args.g || args.getPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
 
-  fork(args.c || args.config)
+  const configUnsupported = c => `The -c option is now deprecated.
+Use --dataPath [-d] with your base folder (where your config is),
+probably ${require('path').parse(c).dir}.`
+  if (args.c || args.config) printAndExit(chalk.yellow(configUnsupported(args.c || args.config)))
+
+  fork(args.d || args.dataPath)
 
   cluster.on('exit', (worker, code, signal) => {
     logger.error(`Worker process ${worker.process.pid} died.`)
@@ -30,13 +35,13 @@ if (cluster.isMaster) {
       logger.fatal('Process crashed less than 2 seconds since the last launch, exiting.')
       process.exit(1)
     }
-    fork(args.c || args.config)
+    fork(args.d || args.dataPath)
   })
 } else {
   logger.success(`Worker process ${process.pid} started.`)
-  const configPath = process.env.CONFIG !== 'undefined' ? process.env.CONFIG : undefined
-  require('../lib/logger.js').inject(configPath)
-  getConfig(configPath).then(miscord).catch(err => sendError(err))
+  const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
+  require('../lib/logger.js').inject(dataPath)
+  getConfig(dataPath).then(miscord).catch(err => sendError(err))
 
   const catchError = error => {
     if (!error) return
