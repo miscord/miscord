@@ -36,6 +36,7 @@
     "discord.js": "^11.4.2",
     "dot-prop": "^4.2.0",
     "emoji-strip": "^1.0.1",
+    "is-docker": "^1.1.0",
     "js-yaml": "^3.12.0",
     "libfb": "^1.4.0",
     "minimist": "^1.2.0",
