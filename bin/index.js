@@ -17,17 +17,16 @@ if (cluster.isMaster) {
   const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
   if (!require('semver').gte(process.version, '8.5.0')) printAndExit(chalk.yellow(outdated))
 
-  const args = require('minimist')(process.argv.slice(2))
-  if (args.h || args.help) printAndExit(require('./help'))
-  if (args.v || args.version) printAndExit(require('../package.json').version)
-  if (args.g || args.getPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
+  const args = require('../lib/arguments').getArgs()
+  if (args.help) printAndExit(require('./help'))
+  if (args.version) printAndExit(require('../package.json').version)
+  if (args.getPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
 
   const configUnsupported = c => `The -c option is now deprecated.
-Use --dataPath [-d] with your base folder (where your config is),
-probably ${require('path').parse(c).dir}.`
-  if (args.c || args.config) printAndExit(chalk.yellow(configUnsupported(args.c || args.config)))
+Use --dataPath [-d] with your base folder (where your config is), probably ${require('path').parse(c).dir}.`
+  if (args.config) printAndExit(chalk.yellow(configUnsupported(args.config)))
 
-  fork(args.d || args.dataPath)
+  fork(args.dataPath)
 
   cluster.on('exit', (worker, code, signal) => {
     logger.error(`Worker process ${worker.process.pid} died.`)
@@ -35,7 +34,7 @@ probably ${require('path').parse(c).dir}.`
       logger.fatal('Process crashed less than 2 seconds since the last launch, exiting.')
       process.exit(1)
     }
-    fork(args.d || args.dataPath)
+    fork(args.dataPath)
   })
 } else {
   logger.success(`Worker process ${process.pid} started.`)
