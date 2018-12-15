@@ -23,7 +23,7 @@
 
 ## Installation
 - [NPM install (Linux)](../../wiki/install#npm)
-- [Cask install (macOS)](../../wiki/install#homebrew)
+- [Homebrew install (macOS)](../../wiki/install#homebrew)
 - [Binary packages (Windows)](../../releases/latest)
 - [Docker install (headless servers)](../../wiki/install#docker)
 
