@@ -22,7 +22,8 @@
 # :wrench: Setup
 
 ## Installation
-- [NPM install (Linux/macOS)](../../wiki/install#npm)
+- [NPM install (Linux)](../../wiki/install#npm)
+- [Homebrew install (macOS)](../../wiki/install#homebrew)
 - [Binary packages (Windows)](../../releases/latest)
 - [Docker install (headless servers)](../../wiki/install#docker)
 

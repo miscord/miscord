@@ -1,13 +1,12 @@
 const chalk = require('chalk')
+const args = require('../lib/arguments').getHelp()
+const miscord = chalk.green('miscord')
 
-module.exports = `Miscord v${require('../package.json').version}
+module.exports = `${chalk.green(`Miscord v${require('../package.json').version}`)}
 
-Usage: miscord
-  --help    [-h]              ${chalk.cyan('shows this message')}
-  --version [-v]              ${chalk.cyan('shows version')}
-  --config  [-c] configPath   ${chalk.cyan('reads config from custom path')}
-  --getConfigPath             ${chalk.cyan('shows config path')}
+Usage: ${miscord}
+  ${args}
 
 Example:
-  miscord -c /path/to/config.json
-  miscord -c D:\\Miscord\\config.json`
+  ${miscord} ${chalk.magenta('-d')} /path/to/miscord-data-folder
+  ${miscord} ${chalk.magenta('-d')} D:\\Miscord`

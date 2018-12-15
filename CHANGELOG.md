@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.3.0] - 2018-12-15
+### Added
+- Polls support
+- Homebrew install instructions
+
+### Changed
+- `config` CLI parameter is now `dataPath` (see #370)
+
+### Fixed
+- XMA attachment bugs
+- Getting sender object in the runtime
+- Some typos
+
 ## [4.2.1] - 2018-12-05
 ### Fixed
 - Config path being "undefined" on Node 9 and lower
