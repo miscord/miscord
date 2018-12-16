@@ -7,7 +7,7 @@ const miscord = require('../')
 const sendError = require('../lib/error')
 const { getConfig, getConfigDir } = require('../lib/config')
 
-const fork = c => cluster.fork({ CONFIG: c }).on('online', () => { lastRunTime = new Date() })
+const fork = d => cluster.fork({ DATA_PATH: d }).on('online', () => { lastRunTime = new Date() })
 
 let lastRunTime
 
