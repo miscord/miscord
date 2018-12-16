@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.3.1] - 2018-12-16
+### Fixed
+- Data path being ignored
+
 ## [4.3.0] - 2018-12-15
 ### Added
 - Polls support
