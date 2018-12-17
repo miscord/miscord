@@ -38,7 +38,7 @@
     "emoji-strip": "^1.0.1",
     "is-docker": "^1.1.0",
     "js-yaml": "^3.12.0",
-    "libfb": "^1.4.5",
+    "libfb": "^1.4.6",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "remove-accents": "^0.4.2",
