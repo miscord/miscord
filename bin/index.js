@@ -20,7 +20,7 @@ if (cluster.isMaster) {
   const args = require('../lib/arguments').getArgs()
   if (args.help) printAndExit(require('./help'))
   if (args.version) printAndExit(require('../package.json').version)
-  if (args.getPath) printAndExit(require('path').join(getConfigDir(), 'config.json'))
+  if (args.getPath) printAndExit(getConfigDir())
 
   const configUnsupported = c => `The -c option is now deprecated.
 Use --dataPath [-d] with your base folder (where your config is), probably ${require('path').parse(c).dir}.`
