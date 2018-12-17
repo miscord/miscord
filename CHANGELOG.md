@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.4.0] - 2018-12-17
+### Added
+- Location maps support
+- Thread customization event support (color/emoji changes)
+
+### Fixed
+- Undefined images
+- Polls support
+- `getPath` returning config path
+
 ## [4.3.1] - 2018-12-16
 ### Fixed
 - Data path being ignored
