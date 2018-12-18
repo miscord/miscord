@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const cluster = require('cluster')
 const chalk = require('chalk')
+const sudoBlock = require('sudo-block')
 const Logger = require('../lib/logger')
 global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 const miscord = require('../')
@@ -25,6 +26,15 @@ if (cluster.isMaster) {
   const configUnsupported = c => `The -c option is now deprecated.
 Use --dataPath [-d] with your base folder (where your config is), probably ${require('path').parse(c).dir}.`
   if (args.config) printAndExit(chalk.yellow(configUnsupported(args.config)))
+
+  const defaultMessage = chalk`
+{red.bold You are not allowed to run Miscord with root permissions.}
+If running without {bold sudo} doesn't work, you can either fix your permission problems or change where npm stores global packages by putting {bold ~/npm/bin} in your PATH and running:
+{blue npm config set prefix ~/npm}
+See: {underline https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md}
+If you {underline really} need to run Miscord with {bold sudo}, add parameter {bold --runningWithSudoIsDangerous}.
+`
+  if (!args.runningWithSudoIsDangerous) sudoBlock(defaultMessage)
 
   fork(args.dataPath)
 
