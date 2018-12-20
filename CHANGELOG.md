@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.4.1] - 2018-12-20
+### Added
+- Blocking running as root
+- Full config path resolving
+
 ## [4.4.0] - 2018-12-17
 ### Added
 - Location maps support
