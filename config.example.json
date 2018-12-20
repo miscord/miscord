@@ -32,10 +32,6 @@
     "error": "",
     "command": ""
   },
-  "timestamps": {
-    "console": false,
-    "logs": true
-  },
   "checkUpdates": false,
   "logLevel": "info",
   "timezone": "",
