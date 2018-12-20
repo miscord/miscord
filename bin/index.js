@@ -49,8 +49,11 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
 } else {
   logger.success(`Worker process ${process.pid} started.`)
   const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
-  require('../lib/logger.js').inject(dataPath)
-  getConfig(dataPath).then(miscord).catch(err => sendError(err))
+
+  Logger.gzipOldLogs().then(() => {
+    Logger.inject(dataPath)
+    getConfig(dataPath).then(miscord).catch(err => sendError(err))
+  })
 
   const catchError = error => {
     if (!error) return

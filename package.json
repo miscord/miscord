@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
@@ -36,11 +36,11 @@
     "discord.js": "^11.4.2",
     "dot-prop": "^4.2.0",
     "emoji-strip": "^1.0.1",
+    "fs-extra": "^7.0.1",
     "is-docker": "^1.1.0",
     "js-yaml": "^3.12.0",
-    "libfb": "^1.4.6",
+    "libfb": "^1.4.7",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
     "remove-accents": "^0.4.2",
     "request": "^2.88.0",
     "semver": "^5.6.0",
@@ -50,7 +50,6 @@
   "devDependencies": {
     "archiver": "^3.0.0",
     "extract-zip": "^1.6.7",
-    "fs-extra": "^7.0.1",
     "gh-release": "^3.4.0",
     "pkg": "^4.3.5",
     "standard": "^12.0.1",
