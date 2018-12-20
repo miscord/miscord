@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.4.2] - 2018-12-20
+### Added
+- Gzipping old logs
+
+### Fixed
+- Duplicate timestamping
+- Incrementing a number in temporary filenames
+
+### Removed
+- `timestamps` config section
+
 ## [4.4.1] - 2018-12-20
 ### Added
 - Blocking running as root
