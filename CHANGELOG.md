@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.4.4] - 2018-12-22
+### Fixed
+- Gzipping old logs
+
 ## [4.4.3] - 2018-12-21
 ### Fixed
 - Auto-restart "timeout"

@@ -39,7 +39,7 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
   fork(args.dataPath)
 
   cluster.on('exit', (worker, code, signal) => {
-    logger.error(`Worker process ${worker.process.pid} died.`)
+    logger.error(`Worker process ${worker.process.pid} died (${code}, ${signal}).`)
     if ((Date.now() - lastRunTime.getTime()) < (2 * 1000)) {
       logger.fatal('Process crashed less than 2 seconds since the last launch, exiting.')
       process.exit(1)
@@ -50,7 +50,9 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
   logger.success(`Worker process ${process.pid} started.`)
   const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
 
+  logger.start('Gzipping old logs...')
   Logger.gzipOldLogs().then(() => {
+    logger.success('All old logs gzipped, starting Miscord')
     Logger.inject(dataPath)
     getConfig(dataPath).then(miscord).catch(err => sendError(err))
   })
