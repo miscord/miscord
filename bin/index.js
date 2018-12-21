@@ -50,7 +50,9 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
   logger.success(`Worker process ${process.pid} started.`)
   const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
 
+  logger.start('Gzipping old logs...')
   Logger.gzipOldLogs().then(() => {
+    logger.success('All old logs gzipped, starting Miscord')
     Logger.inject(dataPath)
     getConfig(dataPath).then(miscord).catch(err => sendError(err))
   })
