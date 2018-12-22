@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.4.5] - 2018-12-22
+### Fixed
+- Custom emoji matching
+
 ## [4.4.4] - 2018-12-22
 ### Fixed
 - Gzipping old logs
