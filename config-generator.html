@@ -135,8 +135,8 @@
 										<option value="silent">silent</option>
 										<option value="warn">warn</option>
 										<option value="info" selected>info</option>
-										<option value="verbose">verbose</option>
-										<option value="silly">silly</option>
+										<option value="debug">debug</option>
+										<option value="trace">trace</option>
 									</select>
 								</div>
 							</div>
@@ -155,28 +155,16 @@
 							<div class="field">
 								<input class="input" id="channels-command" type="text" placeholder="Channel (or your user ID) for commands">
 							</div>
-			
-							<div class="field">
-								<label class="checkbox">
-									<input id="timestamps-console" type="checkbox">
-									<span>Show timestamps in the console</span>
-								</label>
-							</div>
-
-							<div class="field">
-								<label class="checkbox">
-									<input id="timestamps-logs" type="checkbox" checked="checked">
-									<span>Show timestamps in the logs</span>
-								</label>
-							</div>
-
-							<div class="field">
-								<label class="label">Ignored sequences</label>
-								<textarea id="miscord-ignoredSequences" class="textarea" placeholder="Ignored sequences (regexes without /, one in a line)"></textarea>
-							</div>
 
 							<div class="field">
 								<input class="input" id="miscord-timezone" type="text" placeholder="Timezone (tz database format)">
+							</div>
+
+							<div class="box">
+									<div class="field">
+										<label class="label">Ignored sequences</label>
+										<textarea id="miscord-ignoredSequences" class="textarea" placeholder="Ignored sequences (regexes without /, one in a line)"></textarea>
+									</div>
 							</div>
 						</div>
 					</div>
@@ -189,26 +177,24 @@
 							<div class="field">
 								<input class="input" id="messenger-password" type="text" placeholder="Facebook password">
 							</div>
-			
-							<div class="field">
-								<label class="label">Whitelist</label>
-								<textarea id="messenger-whitelist" class="textarea" placeholder="Facebook thread IDs (one in a line)"></textarea>
-							</div>
-			
+
 							<div class="field">
 								<input class="input" id="messenger-format" type="text" placeholder="Message format">
 							</div>
-			
-							<div class="field">
-								<input class="input" id="messenger-sourceFormat-discord" type="text" placeholder="Discord source format">
-							</div>
 
-							<div class="field">
-								<input class="input" id="messenger-sourceFormat-messenger" type="text" placeholder="Messenger source format">
-								<p class="help">
-									Use source formats only when you used {source} in the message format<br />
-									More info about message format <a href="https://github.com/Bjornskjald/miscord/wiki/format">here</a>
-								</p>
+							<div class="box">
+								<label class="label">Source format</label>
+								<div class="field">
+									<input class="input" id="messenger-sourceFormat-discord" type="text" placeholder="Discord source format">
+								</div>
+
+								<div class="field">
+									<input class="input" id="messenger-sourceFormat-messenger" type="text" placeholder="Messenger source format">
+									<p class="help">
+										Use source formats only when you used {source} in the message format<br />
+										More info about message format <a href="https://github.com/Bjornskjald/miscord/wiki/format">here</a>
+									</p>
+								</div>
 							</div>
 
 							<div class="field">
@@ -289,9 +275,11 @@
 								</label>
 							</div>
 
-							<div class="field">
-								<label class="label">Ignored users</label>
-								<textarea id="discord-ignoredUsers" class="textarea" placeholder="Ignored users (IDs, one in a line)"></textarea>
+							<div class="box">
+								<div class="field">
+									<label class="label">Ignored users</label>
+									<textarea id="discord-ignoredUsers" class="textarea" placeholder="Ignored users (IDs, one in a line)"></textarea>
+								</div>
 							</div>
 						</div>
 					</div>

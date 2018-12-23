@@ -2,7 +2,7 @@ const defaultConfig = {
   messenger: {
     username: '',
     password: '',
-    whitelist: [],
+
     format: '*{username}*: {message}',
     sourceFormat: {
       discord: '(Discord)',
@@ -13,18 +13,19 @@ const defaultConfig = {
   },
   discord: {
     token: '',
+
+    guild: '',
+    category: '',
     renameChannels: true,
     showEvents: false,
     showFullNames: false,
     createChannels: false,
+
     massMentions: true,
     userMentions: true,
+
     ignoreBots: false,
     ignoredUsers: []
-  },
-  timestamps: {
-    console: false,
-    logs: true
   },
   channels: {
     command: '',
