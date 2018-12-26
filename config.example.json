@@ -14,7 +14,10 @@
 
     "handleEvents": true,
     "handlePlans": true,
-    "handlePolls": true
+    "handlePolls": true,
+
+    "showPlanDetails": true,
+    "showPollDetails": true
   },
   "discord": {
     "token": "",
