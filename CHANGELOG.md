@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.5.0] - 2018-12-26
+### Added
+- config.messenger.handlePlans
+- config.messenger.handlePolls
+- config.messenger.showPlanDetails
+- config.messenger.showPollDetails
+
+### Fixed
+- Sending attachments to multiple Facebook chats
+- Thread names in polls/plans with multiple Facebook chats
+
+### Changed
+- Initial thread download count -> 200
+- config.discord.showEvents -> config.messenger.handleEvents
+
+### Removed
+- Accidental `FATAL` log
+
 ## [4.4.5] - 2018-12-22
 ### Fixed
 - Custom emoji matching
