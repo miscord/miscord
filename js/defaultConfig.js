@@ -9,7 +9,14 @@ const defaultConfig = {
       messenger: '(Messenger: {name})'
     },
     ignoreEmbeds: false,
-    attachmentTooLargeError: true
+    attachmentTooLargeError: true,
+
+    handleEvents: true,
+    handlePlans: true,
+    handlePolls: true,
+
+    showPlanDetails: true,
+    showPollDetails: true
   },
   discord: {
     token: '',
@@ -17,7 +24,6 @@ const defaultConfig = {
     guild: '',
     category: '',
     renameChannels: true,
-    showEvents: false,
     showFullNames: false,
     createChannels: false,
 
