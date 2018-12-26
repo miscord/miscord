@@ -10,7 +10,11 @@
       "messenger": "(Messenger: {name})"
     },
     "ignoreEmbeds": false,
-    "attachmentTooLargeError": true
+    "attachmentTooLargeError": true,
+
+    "handleEvents": true,
+    "handlePlans": true,
+    "handlePolls": true
   },
   "discord": {
     "token": "",
@@ -18,7 +22,6 @@
     "guild": "",
     "category": "",
     "renameChannels": true,
-    "showEvents": false,
     "showFullNames": false,
     "createChannels": false,
 
