@@ -25,7 +25,7 @@
     "showFullNames": false,
     "createChannels": false,
 
-    "massMentions": true,
+    "massMentions": false,
     "userMentions": true,
 
     "ignoreBots": false,
