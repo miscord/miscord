@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.5.1] - 2018-12-26
+### Fixed
+- Crash on `add` command
+
 ## [4.5.0] - 2018-12-26
 ### Added
 - config.messenger.handlePlans
