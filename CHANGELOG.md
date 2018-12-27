@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.5.2] - 2018-12-27
+### Fixed
+- Crash on creating a webhook
+- Sending message between FB chats without Discord
+
 ## [4.5.1] - 2018-12-26
 ### Fixed
 - Crash on `add` command
