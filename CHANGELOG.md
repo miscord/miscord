@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.4] - 2019-01-01
+### Changed
+- Added using node-fetch instead of request
+
+## [4.5.3] - 2019-01-01
+### Fixed
+- Crash on creating a connection
+
 ## [4.5.2] - 2018-12-27
 ### Fixed
 - Crash on creating a webhook
