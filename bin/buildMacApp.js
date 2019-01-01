@@ -1,7 +1,7 @@
 const tmp = require('tmp')
 const extractZip = require('extract-zip')
 const archiver = require('archiver')
-const request = require('request')
+const fetch = require('node-fetch')
 const path = require('path')
 const fs = require('fs-extra')
 
@@ -43,9 +43,10 @@ module.exports = async function buildMacApp (version) {
 
 const extract = (path, opts) => new Promise((resolve, reject) => extractZip(path, opts, err => { if (err) reject(err); else resolve() }))
 
-const download = (url, path) => new Promise((resolve, reject) => {
+const download = (url, path) => new Promise(async (resolve, reject) => {
   const stream = fs.createWriteStream(path)
-  request.get(url).pipe(stream)
+  const res = await fetch(url)
+  res.body.pipe(stream)
   stream.on('close', resolve)
 })
 
