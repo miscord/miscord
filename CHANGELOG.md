@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.0] - 2019-01-04
+### Added
+- `broadcast` command
+- Automatic error reporting (thanks to Sentry)
+
+### Fixed
+- Animated emoji recognition
+
 ## [4.5.4] - 2019-01-01
 ### Changed
 - Added using node-fetch instead of request
