@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.6.1] - 2019-01-04
+### Fixed
+- Crash on failed attachment URL request
+- A typo in help command
+
 ## [4.6.0] - 2019-01-04
 ### Added
 - `broadcast` command
