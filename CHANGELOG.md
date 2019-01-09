@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.6.2] - 2019-01-09
+### Fixed
+- Showing log folder path on error
+
+### Changed
+- Sentry endpoint
+
+### Added
+- Ignoring user-fault errors
+
 ## [4.6.1] - 2019-01-04
 ### Fixed
 - Crash on failed attachment URL request
