@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.6.3] - 2019-01-12
+### Added
+- Checking if name is not null when renaming
+- Not restarting when login failed
+
+### Fixed
+- Accessing command param without checking
+- Misleading missing thread error message
+
 ## [4.6.2] - 2019-01-09
 ### Fixed
 - Showing log folder path on error

@@ -38,10 +38,20 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
 
   fork(args.dataPath)
 
+  let loginFailed = true
+
+  cluster.on('message', (worker, message) => {
+    if (message === 'login successful') loginFailed = false
+  })
+
   cluster.on('exit', (worker, code, signal) => {
     logger.error(`Worker process ${worker.process.pid} died (${code}, ${signal}).`)
     if ((Date.now() - lastRunTime.getTime()) < (2 * 1000)) {
       logger.fatal('Process crashed less than 2 seconds since the last launch, exiting.')
+      process.exit(1)
+    }
+    if (loginFailed) {
+      logger.fatal('Logging in failed, exiting.')
       process.exit(1)
     }
     fork(args.dataPath)
