@@ -9,6 +9,8 @@ module.exports = config => {
   if (!global.config) global.config = config
   if (!global.logger) global.logger = new Logger(config.logLevel || 'info')
   return login().then(() => {
+    process.send('login successful')
+
     // when got a discord message
     discord.client.on('message', discordListener)
 
