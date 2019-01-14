@@ -5,4 +5,4 @@ RUN npm install --only=production -g miscord
 
 VOLUME ["/config"]
 
-CMD [ "miscord" ]
+ENTRYPOINT [ "npx", "miscord" ]

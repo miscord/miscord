@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.4] - 2019-01-14
+### Changed
+- Improved Dockerfiles
+
+### Fixed
+- Made channel renaming use thread clean name
+
 ## [4.6.3] - 2019-01-12
 ### Added
 - Checking if name is not null when renaming
