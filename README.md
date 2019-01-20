@@ -39,26 +39,20 @@
 **[All config properties (explained)](../../wiki/configuration)**  
 **Next step: [connections setup](../../wiki/Connections.yml)**
 
-# :warning: Disclaimer
-
-We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.  
-All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.  
-Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
-
-## Contributors
+# :heart: Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="https://github.com/miscord/miscord/graphs/contributors"><img src="https://opencollective.com/miscord/contributors.svg?width=890&button=false" /></a>
 
 
-## Backers
+# :dollar: Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/miscord#backer)]
 
 <a href="https://opencollective.com/miscord#backers" target="_blank"><img src="https://opencollective.com/miscord/backers.svg?width=890"></a>
 
 
-## Sponsors
+# :moneybag: Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/miscord#sponsor)]
 
@@ -73,7 +67,12 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/miscord/sponsor/8/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/miscord/sponsor/9/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/9/avatar.svg"></a>
 
-
-
 # :scroll: License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+
+
+# :warning: Disclaimer
+
+We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.  
+All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.  
+Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
