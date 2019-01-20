@@ -1,10 +1,11 @@
 ![banner](../gh-pages/img/banner.png)
 
 <p align="center">
-  <img src="https://img.shields.io/npm/dt/miscord.svg?style=for-the-badge" alt="NPM downloads"></a>
+  <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/dt/miscord.svg?style=for-the-badge" alt="NPM downloads"></a>
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/v/miscord.svg?style=for-the-badge" alt="Version"></a>
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/github/stars/miscord/miscord.svg?style=for-the-badge" alt="Stars"></a>
-  <a href="https://npmjs.org/package/miscord"><a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/miscord/backers/badge.svg?style=for-the-badge" /></a> 
+  <br />
+  <a href="#backers" alt="Backers on Open Collective"><img src="https://opencollective.com/miscord/backers/badge.svg?style=for-the-badge" /></a> 
   <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/miscord/sponsors/badge.svg?style=for-the-badge" /></a>
   <br />
   <a href="https://discord.gg/DkmTvVz"><img src="https://discordapp.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
