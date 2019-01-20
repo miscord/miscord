@@ -5,6 +5,9 @@
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/v/miscord.svg?style=for-the-badge" alt="Version"></a>
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/github/stars/miscord/miscord.svg?style=for-the-badge" alt="Stars"></a>
   <br />
+  <a href="#backers" alt="Backers on Open Collective"><img src="https://opencollective.com/miscord/backers/badge.svg?style=for-the-badge" /></a> 
+  <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/miscord/sponsors/badge.svg?style=for-the-badge" /></a>
+  <br />
   <a href="https://discord.gg/DkmTvVz"><img src="https://discordapp.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
 </p>
 
@@ -36,11 +39,40 @@
 **[All config properties (explained)](../../wiki/configuration)**  
 **Next step: [connections setup](../../wiki/Connections.yml)**
 
+# :heart: Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/miscord/miscord/graphs/contributors"><img src="https://opencollective.com/miscord/contributors.svg?width=890&button=false" /></a>
+
+
+# :dollar: Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/miscord#backer)]
+
+<a href="https://opencollective.com/miscord#backers" target="_blank"><img src="https://opencollective.com/miscord/backers.svg?width=890"></a>
+
+
+# :moneybag: Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/miscord#sponsor)]
+
+<a href="https://opencollective.com/miscord/sponsor/0/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/1/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/2/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/3/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/4/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/5/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/6/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/7/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/8/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/miscord/sponsor/9/website" target="_blank"><img src="https://opencollective.com/miscord/sponsor/9/avatar.svg"></a>
+
+# :scroll: License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+
+
 # :warning: Disclaimer
 
 We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.  
 All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.  
 Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
-
-# :scroll: License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
