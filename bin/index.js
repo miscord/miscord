@@ -42,6 +42,10 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
 
   cluster.on('message', (worker, message) => {
     if (message === 'login successful') loginFailed = false
+    if (message === 'quit') {
+      logger.success('Quit signal received, exiting...')
+      process.exit(0)
+    }
   })
 
   cluster.on('exit', (worker, code, signal) => {
