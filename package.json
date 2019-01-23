@@ -1,6 +1,6 @@
 {
   "name": "miscord",
-  "version": "4.6.4",
+  "version": "4.7.0",
   "description": "Facebook Messenger to Discord bridge",
   "main": "index.js",
   "scripts": {
