@@ -54,6 +54,7 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
       logger.fatal('Logging in failed, exiting.')
       process.exit(1)
     }
+    loginFailed = true
     fork(args.dataPath)
   })
 } else {
