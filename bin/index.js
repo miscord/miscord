@@ -42,6 +42,10 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
 
   cluster.on('message', (worker, message) => {
     if (message === 'login successful') loginFailed = false
+    if (message === 'quit') {
+      logger.success('Quit signal received, exiting...')
+      process.exit(0)
+    }
   })
 
   cluster.on('exit', (worker, code, signal) => {
@@ -54,6 +58,7 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
       logger.fatal('Logging in failed, exiting.')
       process.exit(1)
     }
+    loginFailed = true
     fork(args.dataPath)
   })
 } else {

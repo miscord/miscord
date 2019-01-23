@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.7.0] - 2019-01-24
+### Added
+- Support for multiple command channels
+- Sending custom emoji from Messenger to Discord
+- Restart command
+
+### Changed
+- Quit command actually quits
+
+### Fixed
+- Handling multiple role mentions when first one is not mentionable
+- Setting guilds when main guild is set
+- Resetting loginFailed variable before restart
+
 ## [4.6.4] - 2019-01-14
 ### Changed
 - Improved Dockerfiles
