@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.7.1] - 2019-01-29
+### Fixed
+- Crash loop on sending errors
+
 ## [4.7.0] - 2019-01-24
 ### Added
 - Support for multiple command channels
