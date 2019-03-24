@@ -28,6 +28,8 @@ We have an official Discord server where the community chimes in with helpful ad
 
 [![Discord](https://discordapp.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
 
+Also, take a look at our FAQ (`#faq` on Discord or [wiki/FAQ](https://wiki.miscord.net/FAQ))
+
 ## How Can I Contribute?
 
 ### Reporting Bugs
@@ -40,7 +42,7 @@ Before creating bug reports, please check [this list](#before-submitting-a-bug-r
 
 #### Before Submitting A Bug Report
 
-* **Check the [FAQ](https://flight-manual.atom.io/hacking-atom/sections/debugging/) and try changing log level.** You might be able to find the cause of the problem and fix things yourself. Most importantly, check if you can reproduce the problem [in the latest version of Miscord](https://github.com/miscord/miscord/wiki/Updating).
+* **Check the [FAQ](https://github.com/miscord/miscord/wiki/FAQ) and try changing log level.** You might be able to find the cause of the problem and fix things yourself. Most importantly, check if you can reproduce the problem [in the latest version of Miscord](https://github.com/miscord/miscord/wiki/Updating).
 * **Perform a [cursory search](https://github.com/miscord/miscord/issues)** to see if the problem has already been reported. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one.
 
 #### How Do I Submit A (Good) Bug Report?
@@ -50,7 +52,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started Miscord, e.g. which command exactly you used in the terminal, or how you started Miscord otherwise. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you moved the cursor to the end of a line, explain if you used the mouse, or a keyboard shortcut or an Miscord command, and if so which one?
+* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started Miscord, e.g. which command exactly you used in the terminal, or how you started Miscord otherwise.
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
@@ -78,9 +80,7 @@ Before creating enhancement suggestions, please check [this list](#before-submit
 #### Before Submitting An Enhancement Suggestion
 
 * **Check the [beta version](https://github.com/miscord/miscord/wiki/Beta-version)** — you might discover that the enhancement is already available. Most importantly, check if you're using [the latest version of Miscord](https://github.com/miscord/miscord/wiki/Updating).
-* **Check if there's already [a package](https://atom.io/packages) which provides that enhancement.**
-* **Determine [which repository the enhancement should be suggested in](#atom-and-packages).**
-* **Perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Aatom)** to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
+* **Perform a [search](https://github.com/miscord/miscord/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+sort%3Aupdated-desc)** to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 
 #### How Do I Submit A (Good) Enhancement Suggestion?
 
