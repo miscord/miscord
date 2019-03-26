@@ -39,7 +39,7 @@
     "fs-extra": "^7.0.1",
     "is-docker": "^1.1.0",
     "js-yaml": "^3.12.1",
-    "libfb": "^1.4.10",
+    "libfb": "^1.4.11",
     "minimist": "^1.2.0",
     "node-fetch": "^2.3.0",
     "remove-accents": "^0.4.2",
