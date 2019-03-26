@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node bin/index.js",
-    "postinstall": "node bin/postinstall.js",
     "test": "standard",
     "build": "node bin/build.js"
   },
