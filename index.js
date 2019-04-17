@@ -1,6 +1,7 @@
 const login = require('./lib/login')
 
 const Logger = require('./lib/logger')
+const api = require('./lib/api')
 const discordListener = require('./lib/discord/listener')
 const messengerListener = require('./lib/messenger/listener')
 const messengerEventListener = require('./lib/messenger/handleEvent')
@@ -10,6 +11,8 @@ module.exports = config => {
   if (!global.logger) global.logger = new Logger(config.logLevel || 'info')
   return login().then(() => {
     process.send('login successful')
+
+    if (global.config.api && global.config.api.username && global.config.api.password) api()
 
     // when got a discord message
     discord.client.on('message', discordListener)
