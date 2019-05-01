@@ -36,6 +36,7 @@
     "discord.js": "^11.4.2",
     "dot-prop": "^5.0.0",
     "emoji-strip": "^1.0.1",
+    "fastify": "^2.3.0",
     "fs-extra": "^7.0.1",
     "is-docker": "^1.1.0",
     "is-npm": "^3.0.0",
