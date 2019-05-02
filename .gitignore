@@ -3,3 +3,4 @@ appstate.json
 config.json
 .vs
 build/
+.idea
