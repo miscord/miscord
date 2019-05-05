@@ -1,5 +1,6 @@
 import { getThread } from './messenger'
 import { DMChannel, TextChannel } from 'discord.js'
+import { YAMLConnections } from './ConnectionsManager'
 
 export interface Endpoint {
   type: 'messenger' | 'discord'
@@ -136,6 +137,7 @@ export default class Connection {
 
   delete () {
     connections.list.delete(this.name)
+    return connections.save()
   }
 
   async save () {

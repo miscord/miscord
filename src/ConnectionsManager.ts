@@ -2,7 +2,7 @@ import { Collection, TextChannel } from 'discord.js'
 import Connection, { Endpoint } from './Connection'
 import { getThread } from './messenger'
 
-export type YAMLConnections = { [name: string]: Connection | string }
+export type YAMLConnections = { [name: string]: Endpoint[] | string }
 
 export class CMError extends Error {}
 
@@ -21,53 +21,63 @@ export default class ConnectionsManager {
 
       if (!parsed || typeof parsed !== 'object') return this.save()
 
-      // create Collection from these channels
-      await Promise.all(Object.entries(parsed).map(async ([name, endpoints]) => {
+      for (let [ name, endpoints ] of Object.entries(parsed)) {
         log.trace(name, endpoints)
 
-        if (name.startsWith('_')) return
+        if (name.startsWith('_')) continue
 
         if (
           !Array.isArray(endpoints) ||
           endpoints.some(el => typeof el !== 'object')
         ) throw new CMError(`Incorrect connection syntax: ${name}`)
 
-        const newEndpoints: Endpoint[] = []
-
-        for (let endpoint of (endpoints as Endpoint[])) {
-          if (!endpoint.type || !endpoint.id) throw new CMError('Type or ID missing on endpoint: ' + JSON.stringify(endpoint))
-
-          if (endpoint.type !== 'discord' && endpoint.type !== 'messenger') {
-            throw new CMError(`Endpoint type incorrect, should be 'messenger' or 'discord', actual: ${endpoint.type}`)
-          }
-
-          if (typeof endpoint.id !== 'string') throw new CMError(`Endpoint ID is not a string (wrap it in single quotes): ${endpoint.id}`)
-
-          if (endpoint.type === 'discord' && !discord.client.channels.get(endpoint.id)) throw new CMError(`Channel ${endpoint.id} not found!`)
-          if (endpoint.type === 'messenger') {
-            try {
-              await getThread(endpoint.id)
-            } catch (err) {
-              throw new CMError(`Thread ${endpoint.id} not found!`)
-            }
-          }
-
-          if (endpoint.name) return endpoint
-
-          endpoint.name = endpoint.type === 'discord'
-            ? (discord.client.channels.get(endpoint.id) as TextChannel).name
-            : (await getThread(endpoint.id)).name
-
-          newEndpoints.push(endpoint)
-        }
-
-        this.list.set(name, new Connection(name, newEndpoints))
-      }))
+        this.list.set(
+          name,
+          new Connection(
+            name,
+            await ConnectionsManager.validateEndpoints(endpoints)
+          )
+        )
+      }
       await this.save()
     } catch (err) {
       if (err.code !== 'ENOENT') throw err
       await this.save()
     }
+  }
+
+  static async validateEndpoints (endpoints: Endpoint[]): Promise<Endpoint[]> {
+    const newEndpoints: Endpoint[] = []
+    for (let endpoint of (endpoints as Endpoint[])) {
+      if (!endpoint.type || !endpoint.id) throw new CMError(`Type or ID missing on endpoint: ${JSON.stringify(endpoint)}`)
+
+      if (endpoint.type !== 'discord' && endpoint.type !== 'messenger') {
+        throw new CMError(`Endpoint type incorrect, should be 'messenger' or 'discord', actual: ${endpoint.type}`)
+      }
+
+      if (typeof endpoint.id !== 'string') throw new CMError(`Endpoint ID is not a string (wrap it in single quotes): ${endpoint.id}`)
+
+      if (endpoint.type === 'discord' && !discord.client.channels.get(endpoint.id)) throw new CMError(`Channel ${endpoint.id} not found!`)
+      if (endpoint.type === 'messenger') {
+        try {
+          await getThread(endpoint.id)
+        } catch (err) {
+          throw new CMError(`Thread ${endpoint.id} not found!`)
+        }
+      }
+
+      if (endpoint.name) {
+        newEndpoints.push(endpoint)
+        continue
+      }
+
+      endpoint.name = endpoint.type === 'discord'
+        ? (discord.client.channels.get(endpoint.id) as TextChannel).name
+        : (await getThread(endpoint.id)).name
+
+      newEndpoints.push(endpoint)
+    }
+    return newEndpoints
   }
 
   static async createAutomaticDiscordChannel (threadID: string, name: string) {
@@ -114,12 +124,13 @@ export default class ConnectionsManager {
   }
 
   save () {
-    let obj = {
-      __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'
-    }
-    if (this.list.size) {
-      obj = Object.assign(obj, ...this.list.map(connection => connection.toYAMLObject()))
-    }
-    return config.saveConnections(obj)
+    const yamlConnections: YAMLConnections = Object.assign(
+      {
+        __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'
+      },
+      ...this.list.map(connection => connection.toYAMLObject())
+    )
+    logger.info('conn save', yamlConnections)
+    return config.saveConnections(yamlConnections)
   }
 }
