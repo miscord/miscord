@@ -115,7 +115,7 @@ export default class Logger {
     } else if (obj) {
       prefix = chalk.reset(msg)
       msg = obj
-        ? (typeof obj === 'string' ? '' : '\n') + this.inspect(obj, depth, 20 + prefix.length)
+        ? this.inspect(obj, depth, 20 + prefix.length)
         : ''
     } else {
       msg = chalk.reset(msg)
