@@ -5,7 +5,7 @@ import { Session } from 'libfb'
 
 function getURL (filename: string) {
   let env = process.env.STORAGE_URL!!
-  return env + env.endsWith('/') ? filename : '/' + filename
+  return env + (env.endsWith('/') ? filename : '/' + filename)
 }
 
 async function getJSON (url: string) {

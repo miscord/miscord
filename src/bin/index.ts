@@ -11,7 +11,7 @@ import { getArgs } from '../arguments'
 import help from './help'
 const { version } = require('../../package.json')
 
-const fork = (d: string) => cluster.fork({ DATA_PATH: d }).on('online', () => { lastRunTime = new Date() })
+const fork = (d: string) => cluster.fork({ DATA_PATH: d, ...process.env }).on('online', () => { lastRunTime = new Date() })
 
 let lastRunTime: Date
 
