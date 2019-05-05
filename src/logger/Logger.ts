@@ -1,9 +1,10 @@
-const util = require('util')
-const chalk = require('chalk')
-const timezonedDate = require('./timezonedDate')
-const isDocker = require('is-docker')()
+import timezonedDate from './timezonedDate'
+import util from 'util'
+import chalk from 'chalk'
+import is_docker from 'is-docker'
+const isDocker = is_docker()
 
-type Level = 'fatal' | 'error' | 'warn' | 'info' | 'start' | 'success' | 'debug' | 'trace'
+export type Level = 'fatal' | 'error' | 'warn' | 'info' | 'start' | 'success' | 'debug' | 'trace'
 
 const levelBadges = {
   fatal: chalk.bgWhite.red('  FATAL  '),

@@ -1,9 +1,8 @@
 import login from './login'
-
 import api from './api'
-const discordListener = require('./discord/listener')
-const messengerListener = require('./messenger/listener')
-const messengerEventListener = require('./messenger/handleEvent')
+import discordListener from './discord/listener'
+import messengerListener from './messenger/listener'
+import messengerEventListener from './messenger/handleEvent'
 
 export default () => {
   return login().then(() => {

@@ -3,12 +3,12 @@ import chalk from 'chalk'
 import sudoBlock from 'sudo-block'
 import cluster from 'cluster'
 import Logger from '../logger/Logger'
+// @ts-ignore
+global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 import { getConfigDir } from '../config/FileConfig'
 import launch from './worker'
 import { getArgs } from '../arguments'
 import help from './help'
-// @ts-ignore
-global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 const { version } = require('../../package.json')
 
 const fork = (d: string) => cluster.fork({ DATA_PATH: d }).on('online', () => { lastRunTime = new Date() })

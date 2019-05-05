@@ -1,10 +1,10 @@
 const log = logger.withScope('login')
 
-const ConnectionsManager = require('./ConnectionsManager')
-const updateNotifier = require('./updateNotifier')
+import ConnectionsManager from './ConnectionsManager'
+import updateNotifier from './updateNotifier'
 
-const { login: messengerLogin } = require('./messenger')
-const { login: discordLogin, fetchWebhooks } = require('./discord')
+import { login as messengerLogin } from './messenger'
+import { fetchWebhooks, login as discordLogin } from './discord'
 
 export default async () => {
   logger.start('Launching Miscord v' + require('../package.json').version)

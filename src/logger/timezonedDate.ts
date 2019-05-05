@@ -1,8 +1,9 @@
-export default () => {
+export default function timezonedDate () {
   let date = new Date()
   date.setMinutes(date.getMinutes() + getOffset())
   return date.toJSON().split('.')[0]
 }
+
 // https://stackoverflow.com/a/44118363
 const isValidTimeZone = (tz: string) => {
   try {

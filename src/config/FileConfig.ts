@@ -22,7 +22,7 @@ export default class FileConfig extends Config {
   constructor (dataPath = getConfigDir()) {
     super()
     dataPath = path.resolve(dataPath)
-    this.path = path.join(dataPath, 'Config.ts.ts.json')
+    this.path = path.join(dataPath, 'config.json')
     this.connPath = path.join(dataPath, 'connections.yml')
     this.sessionPath = path.join(dataPath, 'session.json')
   }
@@ -84,7 +84,7 @@ export function getConfigDir () {
     case 'win32':
       return path.join(process.env.APPDATA!!, 'Miscord')
     case 'linux':
-      return path.join(os.homedir(), '.Config.ts.ts', 'Miscord')
+      return path.join(os.homedir(), '.config', 'Miscord')
     case 'darwin':
       return path.join(os.homedir(), 'Library', 'Application Support', 'Miscord')
     default:

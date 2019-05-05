@@ -1,6 +1,6 @@
 import { CMError } from './ConnectionsManager'
 import { isNpm } from 'is-npm'
-import Sentry from '@sentry/node'
+import * as Sentry from '@sentry/node'
 
 import { platform } from 'os'
 

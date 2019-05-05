@@ -1,5 +1,6 @@
-const chalk = require('chalk/types')
-const args = require('../arguments').getHelp()
+import chalk from 'chalk'
+import { getHelp } from '../arguments'
+const args = getHelp()
 const miscord = chalk.green('miscord')
 
 export default `${chalk.green(`Miscord v${require('../../package.json').version}`)}
