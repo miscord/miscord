@@ -7,7 +7,7 @@ import timezonedDate from './timezonedDate'
 
 type WriteFunction = (str: string, encoding?: string, cb?: (err?: Error | null) => void) => boolean
 
-class FakeWriteStream extends fs.WriteStream {
+class FakeWriteStream {
   end (cb?: () => void): void { if (cb) cb() }
   write (str: string, encoding?: any, cb?: (err?: Error | null) => void): boolean {
     return true
@@ -17,7 +17,7 @@ class FakeWriteStream extends fs.WriteStream {
 const getWritableDate = () => timezonedDate().replace('T', '_').replace(/:/g, '-')
 
 export default (configPath = getConfigDir()) => {
-  let logStream: fs.WriteStream
+  let logStream: fs.WriteStream | FakeWriteStream
   if (process.env.STORAGE_URL) {
     logStream = new FakeWriteStream()
   } else {
