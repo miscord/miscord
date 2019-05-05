@@ -28,7 +28,7 @@ export default async (thread: Thread, sender: User, message: Message, source: st
   for (let attach of files) {
     const url = attach.url ? attach.url : await getAttachmentURL(message, attach)
 
-    if (!url) break
+    if (!url) continue
 
     attachments.push(await downloadFile(url))
   }

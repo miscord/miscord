@@ -37,7 +37,7 @@ export default async (thread: Thread, sender: User, message: Message) => {
   for (let attach of files) {
     const url = attach.url || await getAttachmentURL(message, attach)
 
-    if (!url) break
+    if (!url) continue
     if (attach.size && attach.size > 8 * 1024 * 1024) {
       log.warn('Attachment was not sent due to Discord file size limit', attach)
     }
