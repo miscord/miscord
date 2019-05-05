@@ -3,6 +3,7 @@ import auth from 'basic-auth'
 
 import connectionsHandler from './connections'
 import configHandler from './config'
+import controlHandler from './control'
 
 const log = logger.withScope('api')
 
@@ -39,6 +40,7 @@ export default () => {
   })
   app.register(connectionsHandler, { prefix: '/connections' })
   app.register(configHandler, { prefix: '/config' })
+  app.register(controlHandler, { prefix: '/control' })
 
   app.listen(config.api.port || 8000, '0.0.0.0').then(() => log.success(`API is listening on port ${config.api.port || 8000}`))
 }
