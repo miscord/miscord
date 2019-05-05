@@ -46,9 +46,9 @@ export default async () => {
     })
 
   for (let thread of threads) {
+    thread.participants.forEach(user => messenger.senders.set(user.id, user))
     const miscordThread = await fillNames(thread)
     messenger.threads.set(thread.id, miscordThread)
-    thread.participants.forEach(user => messenger.senders.set(user.id, user))
   }
 
   log.trace('threads', Array.from(messenger.threads, ([ id, thread ]) => ({ id, name: thread.name })))
