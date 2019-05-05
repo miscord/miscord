@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0] - 2019-05-05
+### Added
+- REST API
+
+### Changed
+- Refactored the code to TypeScript
+
+### Removed
+- `channels.yml` support
+- `config.errorChannel` and `config.commandChannel` properties support
+
 ## [4.7.1] - 2019-01-29
 ### Fixed
 - Crash loop on sending errors
