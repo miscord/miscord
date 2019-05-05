@@ -2,11 +2,11 @@
   "name": "miscord",
   "version": "4.7.2",
   "description": "Facebook Messenger to Discord bridge",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node bin/index.js",
-    "test": "standard",
-    "build": "node bin/build.js"
+    "start": "node dist/bin/index.js",
+    "test": "tslint -c tslint.json 'src/**/*.ts'",
+    "build": "node dist/bin/build.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "bot"
   ],
   "bin": {
-    "miscord": "bin/index.js"
+    "miscord": "dist/bin/index.js"
   },
   "author": {
     "name": "Bjornskjald",
@@ -31,39 +31,43 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@sentry/node": "^5.0.8",
+    "@sentry/node": "^5.1.2",
+    "basic-auth": "^2.0.1",
     "chalk": "^2.4.2",
     "discord.js": "^11.4.2",
     "dot-prop": "^5.0.0",
     "emoji-strip": "^1.0.1",
     "fastify": "^2.3.0",
     "fs-extra": "^7.0.1",
-    "is-docker": "^1.1.0",
+    "is-docker": "^2.0.0",
     "is-npm": "^3.0.0",
     "js-yaml": "^3.13.1",
-    "libfb": "^1.4.11",
+    "libfb": "^2.0.2",
     "minimist": "^1.2.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.5.0",
     "remove-accents": "^0.4.2",
     "semver": "^6.0.0",
     "strip-ansi": "^5.2.0",
-    "sudo-block": "^2.0.0"
+    "sudo-block": "^3.0.0",
+    "tmp": "^0.1.0"
   },
   "devDependencies": {
+    "@types/archiver": "^2.1.3",
+    "@types/basic-auth": "^1.1.2",
+    "@types/extract-zip": "^1.6.2",
+    "@types/fs-extra": "^5.0.5",
+    "@types/js-yaml": "^3.12.1",
+    "@types/node": "^11.13.9",
+    "@types/node-fetch": "^2.3.3",
+    "@types/semver": "^6.0.0",
+    "@types/tmp": "^0.1.0",
     "archiver": "^3.0.0",
     "extract-zip": "^1.6.7",
     "gh-release": "^3.5.0",
-    "pkg": "^4.3.7",
-    "standard": "^12.0.1",
-    "tmp": "^0.1.0"
-  },
-  "standard": {
-    "globals": [
-      "config",
-      "messenger",
-      "discord",
-      "connections",
-      "logger"
-    ]
+    "pkg": "^4.3.8",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.4.5"
   }
 }
