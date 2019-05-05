@@ -1,11 +1,11 @@
+import Logger from '../logger/Logger'
+// @ts-ignore
+global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 import sendError, { initSentry } from '../error'
 import gzipOldLogs from '../logger/gzipOldLogs'
 import inject from '../logger/inject'
 import getConfig from '../config/getConfig'
 import miscord from '../index'
-import Logger from '../logger/Logger'
-// @ts-ignore
-global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
 
 export default function launch () {
   logger.success(`Worker process ${process.pid} started.`)

@@ -3,6 +3,7 @@ import { Session } from 'libfb'
 import { YAMLConnections } from '../ConnectionsManager'
 import defaultConfig from './defaultConfig'
 import mergeDeep from './mergeDeep'
+import { Level } from '../logger/Logger'
 
 export default abstract class Config {
   config: any = defaultConfig
@@ -15,6 +16,7 @@ export default abstract class Config {
 
   _load (config: any) {
     this.config = mergeDeep(this.config, config)
+    logger.setLevel(process.env.MISCORD_LOG_LEVEL as Level || this.config.logLevel as Level || 'info')
   }
 
   _set (key: string, value: any) {
