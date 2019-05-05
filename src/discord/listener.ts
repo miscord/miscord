@@ -12,7 +12,7 @@ export default async (message: Message) => {
   log.trace('message', message, 1)
 
   if (checkMKeep(message.cleanContent)) return log.debug('m!keep received, ignoring.')
-  if (config.discord.ignoreBots && message.author.bot) return log.debug('Config.ts.discord.ignoreBots enabled and author is a bot.')
+  if (config.discord.ignoreBots && message.author.bot) return log.debug('config.discord.ignoreBots enabled and author is a bot.')
   if (Array.isArray(config.discord.ignoredUsers) && config.discord.ignoredUsers.includes(message.author.id)) return log.debug('author is in config.discord.ignoredUsers.')
 
   // don't want to echo bot's messages

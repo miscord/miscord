@@ -9,7 +9,7 @@ import { fetchWebhooks, login as discordLogin } from './discord'
 export default async () => {
   logger.start('Launching Miscord v' + require('../package.json').version)
   log.start('Logging in...')
-  log.trace('Config.ts.ts', config)
+  log.trace('config', config)
   log.info('logLevel', config.logLevel)
 
   // check for updates if enabled in the config

@@ -24,7 +24,7 @@ function postJSON (url: string, body: any) {
 }
 
 export default class RemoteConfig extends Config {
-  url = getURL('Config.ts.ts.json')
+  url = getURL('config.json')
   connURL = getURL('connections.json')
   sessionURL = getURL('session.json')
 

@@ -9,7 +9,7 @@ export default abstract class Config {
 
   static proxify (config: any) {
     return new Proxy(config, {
-      get: (target, name, receiver) => Reflect.get(target, name, receiver) || Reflect.get(target.Config, name, receiver)
+      get: (target, name, receiver) => Reflect.get(target, name, receiver) || Reflect.get(target.config, name, receiver)
     })
   }
 
