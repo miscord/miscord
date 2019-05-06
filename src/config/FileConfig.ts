@@ -31,7 +31,7 @@ export default class FileConfig extends Config {
     if (!fs.existsSync(this.path)) {
       log.warn(`${this.path} not found, creating example config`)
       const example = path.join(__dirname, '../../config.example.json')
-      await fs.ensureDir(this.path)
+      await fs.ensureDir(path.parse(this.path).dir)
       // https://github.com/zeit/pkg/issues/342#issuecomment-368303496
       if (process.pkg) {
         fs.writeFileSync(this.path, fs.readFileSync(example))
