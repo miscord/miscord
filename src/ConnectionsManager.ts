@@ -130,7 +130,6 @@ export default class ConnectionsManager {
       },
       ...this.list.map(connection => connection.toYAMLObject())
     )
-    logger.info('conn save', yamlConnections)
     return config.saveConnections(yamlConnections)
   }
 }
