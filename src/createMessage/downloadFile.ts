@@ -39,7 +39,7 @@ async function download (dir: string, attachURL: string) {
   const fileStream = fs.createWriteStream(filePath)
   const stream = await new Promise((resolve, reject) => {
     const cb = (res: http.IncomingMessage) => resolve(res)
-    if (url.parse(attachURL).protocol === 'https') {
+    if (url.parse(attachURL).protocol === 'https:') {
       https.get(attachURL, cb)
     } else {
       http.get(attachURL, cb)
