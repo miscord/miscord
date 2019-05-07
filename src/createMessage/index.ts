@@ -1,2 +1,7 @@
-export { default as fromMessenger } from './fromMessenger'
-export { default as fromDiscord } from './fromDiscord'
+import * as fromMessenger from './fromMessenger'
+import * as fromDiscord from './fromDiscord'
+
+export {
+  fromMessenger,
+  fromDiscord
+}
