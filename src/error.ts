@@ -4,11 +4,6 @@ import * as Sentry from '@sentry/node'
 
 import { platform } from 'os'
 
-class APIError extends Error {
-  code?: number
-  requestArgs?: any
-}
-
 const log = logger.withScope('errorHandler')
 
 const bannedErrors = [
@@ -23,7 +18,7 @@ const bannedErrors = [
   'ECONNRESET', // connection reset
   'MQTT connection failed' // Facebook MQTT connection fail
 ]
-const isErrorBanned = (error: Error) => bannedErrors.some(banned => error.toString().includes(banned)) || error instanceof CMError
+const isErrorBanned = (error: Error) => bannedErrors.some(banned => error.toString().includes(banned) || error.message.includes(banned)) || error instanceof CMError
 const errorDescriptions = {
   'Invalid username or email address': `
 Couldn't login to Facebook.
@@ -51,7 +46,9 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
     else if (error.error && error.error instanceof Error) error = error.error
     else error = new Error(error.toString())
   }
-  const exitCode = ((error instanceof APIError && error.requestArgs) || error instanceof CMError) ? 'close 1' : 'close 2'
+
+  // @ts-ignore
+  const exitCode = (error.requestArgs || error instanceof CMError) ? 'close 1' : 'close 2'
   log.error('error', error)
   if (!isErrorBanned(error)) Sentry.captureException(error)
 
