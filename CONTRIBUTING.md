@@ -36,7 +36,7 @@ Also, take a look at our FAQ (`#faq` on Discord or [wiki/FAQ](https://wiki.misco
 
 This section guides you through submitting a bug report for Miscord. Following these guidelines helps maintainers and the community understand your report :pencil:, reproduce the behavior :computer: :computer:, and find related reports :mag_right:.
 
-Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](ISSUE_TEMPLATE.md), the information it asks for helps us resolve issues faster.
+Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](.github/ISSUE_TEMPLATE/Bug_report.md), the information it asks for helps us resolve issues faster.
 
 > **Note:** If you find a **Closed** issue that seems like it is the same thing that you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
 
@@ -47,7 +47,7 @@ Before creating bug reports, please check [this list](#before-submitting-a-bug-r
 
 #### How Do I Submit A (Good) Bug Report?
 
-Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). You can create an issue in the [miscord](https://github.com/miscord/miscord/issues) repository and provide the following information by filling in [the template](ISSUE_TEMPLATE.md).
+Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). You can create an issue in the [miscord](https://github.com/miscord/miscord/issues) repository and provide the following information by filling in [the template](.github/ISSUE_TEMPLATE/Bug_report.md).
 
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
@@ -75,7 +75,7 @@ Include details about your configuration and environment:
 
 This section guides you through submitting an enhancement suggestion for Miscord, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion :pencil: and find related suggestions :mag_right:.
 
-Before creating enhancement suggestions, please check [this list](#before-submitting-an-enhancement-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the feature you're requesting existed.
+Before creating enhancement suggestions, please check [this list](#before-submitting-an-enhancement-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](.github/ISSUE_TEMPLATE/Feature_request.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
 #### Before Submitting An Enhancement Suggestion
 
@@ -114,8 +114,8 @@ The process described here has several goals:
 
 Please follow these steps to have your contribution considered by the maintainers:
 
-1. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
-2. Follow the [styleguides](#styleguides)
+1. Follow the [styleguides](#styleguides)
+2. Make sure you're creating a PR to `dev` and not `master`
 3. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you. If we conclude that the failure was a false positive, then we will open an issue to track that problem with our status check suite.</details>
 
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
@@ -124,11 +124,11 @@ While the prerequisites above must be satisfied prior to having your pull reques
 
 ### Git Commit Messages
 
+* Start the commit message with [an applicable emoji](https://gitmoji.carloscuesta.me/)
 * Use the past tense ("added feature", not "add feature")
 * Don't capitalize ("added feature", not "Added feature")
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally after the first line
-* Consider starting the commit message with [an applicable emoji](https://gitmoji.carloscuesta.me/)
 
 ### JavaScript Styleguide
 
