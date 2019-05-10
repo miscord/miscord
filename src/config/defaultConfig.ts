@@ -23,5 +23,6 @@ export default {
   },
   checkUpdates: false,
   logLevel: process.env.MISCORD_LOG_LEVEL || 'info',
-  ignoredSequences: []
+  ignoredSequences: [],
+  channels: {}
 } as { [key: string]: any }
