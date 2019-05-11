@@ -1,5 +1,6 @@
 import util from 'util'
 import Command from './Command'
+import { splitString } from '../utils'
 
 export default new Command(async (argv, reply) => {
   try {
@@ -8,7 +9,7 @@ export default new Command(async (argv, reply) => {
     let evaled = eval(code)
 
     if (typeof evaled !== 'string') evaled = util.inspect(evaled)
-    evaled = evaled.length > 1000 ? evaled.match(/[\s\S]{1,1000}/g) : [evaled]
+    evaled = splitString(evaled, 1000)
     for (let part of evaled) await reply(part, { code: true })
   } catch (err) {
     reply(util.inspect(err), { code: true })
