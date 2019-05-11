@@ -1,6 +1,5 @@
 import { getThread } from './messenger'
-import { DMChannel, TextChannel } from 'discord.js'
-import { YAMLConnections } from './ConnectionsManager'
+import { TextChannel } from 'discord.js'
 
 export interface Endpoint {
   type: 'messenger' | 'discord'

@@ -1,6 +1,6 @@
 const log = logger.withScope('discord:login')
 
-import { Client, CategoryChannel, Channel, Collection, DMChannel, TextChannel } from 'discord.js'
+import { Client, CategoryChannel, Collection, DMChannel, TextChannel } from 'discord.js'
 import GuildArray from '../types/GuildArray'
 
 export default () => {
