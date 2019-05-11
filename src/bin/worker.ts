@@ -1,7 +1,8 @@
 import Logger from '../logger/Logger'
 // @ts-ignore
 global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
-import sendError, { initSentry } from '../error'
+import sendError from '../error'
+import { initSentry } from '../error/sentry'
 import gzipOldLogs from '../logger/gzipOldLogs'
 import inject from '../logger/inject'
 import getConfig from '../config/getConfig'
