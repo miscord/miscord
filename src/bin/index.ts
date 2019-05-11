@@ -44,7 +44,7 @@ If you {underline really} need to run Miscord with {bold sudo}, add parameter {b
   })
 
   cluster.on('exit', (worker, code, signal) => {
-    logger.error(`Worker process ${worker.process.pid} died (${code}, ${signal}).`)
+    logger.info(`Worker process ${worker.process.pid} died (${code}, ${signal}).`)
     // Code 0: exit
     // Code 1: error
     // Code 2: restart
