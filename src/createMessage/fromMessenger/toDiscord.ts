@@ -34,18 +34,28 @@ export default async (thread: Thread, sender: User, message: Message) => {
 
   log.trace('attachments to parse', message.attachments)
 
+  const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
+
+  let notSentAttachments = false
+
   for (let attach of files) {
     const url = attach.url || await getAttachmentURL(message, attach)
 
     if (!url) continue
     if (attach.size && attach.size > 8 * 1024 * 1024) {
       log.warn('Attachment was not sent due to Discord file size limit', attach)
+      notSentAttachments = true
     }
 
     opts.files!!.push({ attachment: url, name: attach.filename })
   }
 
-  const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
+  if (notSentAttachments) {
+    const message = 'Some attachments were not sent due to Discord file size limit'
+    appendToBody(message)
+    if (config.messenger.attachmentTooLargeError) await messenger.client.sendMessage(thread.id, message)
+  }
+
   for (let attach of xma) {
     if (attach.message) appendToBody(attach.message)
     if (attach.description) appendToBody(attach.description)

@@ -10,7 +10,8 @@ export default {
     handlePlans: true,
     handlePolls: true,
     showPlanDetails: true,
-    showPollDetails: true
+    showPollDetails: true,
+    attachmentTooLargeError: true
   },
   discord: {
     renameChannels: true,
