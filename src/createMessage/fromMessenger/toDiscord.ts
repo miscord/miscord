@@ -1,19 +1,17 @@
-import getAttachmentURL from '../getAttachmentURL'
-
 const log = logger.withScope('createMessage:fromMessenger:discord')
 
+import getAttachmentURL from '../getAttachmentURL'
 import { WebhookMessageOptions } from 'discord.js'
 import Thread from '../../types/Thread'
 import { User, Message, FileAttachment, XMAAttachment } from 'libfb'
 import handleEmojis from '../../discord/handleEmojis'
 import handleMentions from '../../discord/handleMentions'
 import emojiCount from '../emojiCount'
-import parseMessengerMessage from './parseMessengerMessage'
+import parseMessengerMessage, { thumbs } from './parseMessengerMessage'
 import url from 'url'
+import { DiscordMessageData } from '../MessageData'
 
-const thumbs = [ 369239263222822, 369239383222810, 369239343222814 ]
-
-export default async (thread: Thread, sender: User, message: Message) => {
+export default async (thread: Thread, sender: User, message: Message): Promise<DiscordMessageData> => {
   // set description to message body, set author to message sender
   let authorName
   ({ authorName, message } = parseMessengerMessage(thread, sender, message))

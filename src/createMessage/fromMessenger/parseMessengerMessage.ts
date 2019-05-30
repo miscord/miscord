@@ -2,7 +2,7 @@ import Thread from '../../types/Thread'
 import { User, Message } from 'libfb'
 
 const log = logger.withScope('createMessage:parseMessengerMessage')
-const thumbs = [ 369239263222822, 369239383222810, 369239343222814 ]
+export const thumbs = [ 369239263222822, 369239383222810, 369239343222814 ]
 
 export default (thread: Thread, sender: User, message: Message) => {
   const nickname = thread.nicknames ? thread.nicknames[message.authorId.toString()] : null

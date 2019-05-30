@@ -1,14 +1,13 @@
-import getAttachmentURL from '../getAttachmentURL'
-
 const log = logger.withScope('createMessage:fromMessenger:messenger')
 
+import getAttachmentURL from '../getAttachmentURL'
 import { User, Message, FileAttachment, XMAAttachment } from 'libfb'
 import Thread from '../../types/Thread'
 import downloadFile from '../downloadFile'
-import parseMessengerMessage from './parseMessengerMessage'
+import parseMessengerMessage, { thumbs } from './parseMessengerMessage'
+import { MessengerMessageData } from '../MessageData'
 
-const thumbs = [ 369239263222822, 369239383222810, 369239343222814 ]
-export default async (thread: Thread, sender: User, message: Message, source: string) => {
+export default async (thread: Thread, sender: User, message: Message): Promise<MessengerMessageData> => {
   // set description to message body, set author to message sender
   let authorName
   ({ authorName, message } = parseMessengerMessage(thread, sender, message))
@@ -17,10 +16,10 @@ export default async (thread: Thread, sender: User, message: Message, source: st
     .replace('{username}', authorName)
     .replace('{content}', message.message)
     .replace('{message}', message.message)
-    .replace('{source}', config.messenger.sourceFormat.messenger.replace('{name}', source))
+    .replace('{source}', config.messenger.sourceFormat.messenger.replace('{name}', thread.name))
     .replace('{newline}', '\n')
 
-  if ((!message.attachments || !message.attachments.length) && !message.stickerId) return { body }
+  if ((!message.attachments || !message.attachments.length) && !message.stickerId) return { body, attachments: [] }
   const files = message.attachments.filter(attach => attach.type.endsWith('Attachment')) as FileAttachment[]
   const xma = message.attachments.filter(attach => attach.type.endsWith('XMA')) as XMAAttachment[]
 

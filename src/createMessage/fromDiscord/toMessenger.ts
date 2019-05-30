@@ -1,10 +1,12 @@
+import { MessengerMessageData } from '../MessageData'
+
 const log = logger.withScope('createMessage:fromDiscord:messenger')
 
 import { Message } from 'discord.js'
 import downloadFile from '../downloadFile'
 import handleCustomEmoji from '../handleCustomEmoji'
 
-export default async (message: Message) => {
+export default async (message: Message): Promise<MessengerMessageData> => {
   let username = message.member ? (message.member.nickname || message.author.username) : message.author.username
   let content = message.cleanContent
   content = handleCustomEmoji(content)

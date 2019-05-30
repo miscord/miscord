@@ -1,10 +1,12 @@
+import cleanTemporaryFiles from '../messenger/cleanTemporaryFiles'
+
 const log = logger.withScope('discord:listener')
 
 import { Message } from 'discord.js'
 import { fromDiscord as createMessage } from '../createMessage'
-import fs from 'fs-extra'
 import handleCommand from '../handleCommand'
-import sendMessage from './sendMessage'
+import { sendMessage as sendDiscordMessage } from './'
+import { sendMessage as sendMessengerMessage } from '../messenger'
 import { checkIgnoredSequences, checkMKeep } from '../utils'
 
 export default async (message: Message) => {
@@ -37,31 +39,14 @@ export default async (message: Message) => {
   log.trace('threads', threads)
 
   // send message to threads specified in the connections
-  const { body, attachments } = await createMessage.toMessenger(message)
-  Promise.all(threads.map(async thread => {
-    if (body && body.trim()) {
-      log.debug('Sending Messenger message')
-      const info = await messenger.client.sendMessage(thread.id, body.toString())
-      log.trace('sent message info', info)
-      if (!info.succeeded) message.channel.send(info.errStr, { code: true })
-      log.debug('Sent message on Messenger')
-    }
-    if (attachments && attachments.length) {
-      log.debug('Sending Messenger attachments')
-      const info = await Promise.all(attachments.map(attachment => {
-        return messenger.client.sendAttachmentFile(thread.id, attachment.filePath, attachment.extension)
-      }))
-      log.trace('sent attachments info', info)
-      log.debug('Sent Messenger attachments')
-    }
-  })).then(async () => {
-    if (attachments && attachments.length) {
-      await Promise.all(attachments.map(attachment => fs.unlink(attachment.filePath)))
-      log.debug('Removed temporary attachment files')
-    }
-  })
-
-  const channels = connection.getOtherWritableChannels(message.channel.id)
-  const { body: dBody, opts } = createMessage.toDiscord(message)
-  channels.forEach(({ channel }) => sendMessage(channel!!, dBody, opts))
+  {
+    const data = await createMessage.toMessenger(message)
+    Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
+      .then(() => cleanTemporaryFiles(data))
+  }
+  {
+    const channels = connection.getOtherWritableChannels(message.channel.id)
+    const data = createMessage.toDiscord(message)
+    channels.forEach(({ channel }) => sendDiscordMessage(channel!!, data))
+  }
 }

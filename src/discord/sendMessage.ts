@@ -1,8 +1,12 @@
-import { TextChannel, WebhookMessageOptions } from 'discord.js'
-
 const log = logger.withScope('discord:sendMessage')
 
-export default async (channel: TextChannel, body: string, opts: WebhookMessageOptions, image?: string) => {
+import { TextChannel } from 'discord.js'
+import { DiscordMessageData } from '../createMessage/MessageData'
+
+export default async (channel: TextChannel, { body, opts }: DiscordMessageData, image?: string) => {
+  // check if body is empty and there are no files
+  if (!body && !(opts.files && opts.files.length)) return log.warn('Not sending message, empty.')
+
   // find / create a webhook
   let webhook = discord.webhooks.find(webhook => webhook.channelID === channel.id)
   if (!webhook) {
