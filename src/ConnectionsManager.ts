@@ -31,6 +31,7 @@ export default class ConnectionsManager {
           } else {
             this.disabled.set(name, new Connection(name, endpoints))
           }
+          continue
         }
 
         if (
