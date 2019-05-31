@@ -4,13 +4,13 @@ import { getThread } from './messenger'
 
 export type YAMLConnections = { [name: string]: Endpoint[] | string }
 
-export class CMError extends Error {}
-
 export default class ConnectionsManager {
   list: Collection<string, Connection>
+  disabled: Collection<string, Connection | string>
 
   constructor () {
     this.list = new Collection()
+    this.disabled = new Collection()
   }
 
   async load () {
@@ -24,20 +24,40 @@ export default class ConnectionsManager {
       for (let [ name, endpoints ] of Object.entries(parsed)) {
         log.trace(name, endpoints)
 
-        if (name.startsWith('_')) continue
+        if (name.startsWith('_')) {
+          if (name === '__comment') continue
+          if (typeof endpoints === 'string') {
+            this.disabled.set(name, endpoints)
+          } else {
+            this.disabled.set(name, new Connection(name, endpoints))
+          }
+        }
 
         if (
           !Array.isArray(endpoints) ||
           endpoints.some(el => typeof el !== 'object')
-        ) throw new CMError(`Incorrect connection syntax: ${name}`)
+        ) throw new Error(`Incorrect connection syntax: ${name}`)
 
-        this.list.set(
-          name,
-          new Connection(
+        try {
+          this.list.set(
             name,
-            await ConnectionsManager.validateEndpoints(endpoints)
+            new Connection(
+              name,
+              await ConnectionsManager.validateEndpoints(endpoints)
+            )
           )
-        )
+        } catch (err) {
+          log.warn(err.message)
+          log.warn(`Disabling temporarily connection ${name}, you can re-enable it once the error is fixed.`)
+          name = `_${name}`
+          this.disabled.set(
+            name,
+            new Connection(
+              name,
+              endpoints
+            )
+          )
+        }
       }
       await this.save()
     } catch (err) {
@@ -49,20 +69,27 @@ export default class ConnectionsManager {
   static async validateEndpoints (endpoints: Endpoint[]): Promise<Endpoint[]> {
     const newEndpoints: Endpoint[] = []
     for (let endpoint of (endpoints as Endpoint[])) {
-      if (!endpoint.type || !endpoint.id) throw new CMError(`Type or ID missing on endpoint: ${JSON.stringify(endpoint)}`)
-
-      if (endpoint.type !== 'discord' && endpoint.type !== 'messenger') {
-        throw new CMError(`Endpoint type incorrect, should be 'messenger' or 'discord', actual: ${endpoint.type}`)
+      if (!endpoint.type || !endpoint.id) {
+        throw new Error(`Type or ID missing on endpoint: ${JSON.stringify(endpoint)}`)
       }
 
-      if (typeof endpoint.id !== 'string') throw new CMError(`Endpoint ID is not a string (wrap it in single quotes): ${endpoint.id}`)
+      if (endpoint.type !== 'discord' && endpoint.type !== 'messenger') {
+        throw new Error(`Endpoint type incorrect, should be 'messenger' or 'discord', actual: ${endpoint.type}`)
+      }
 
-      if (endpoint.type === 'discord' && !discord.client.channels.get(endpoint.id)) throw new CMError(`Channel ${endpoint.id} not found!`)
+      if (typeof endpoint.id !== 'string') {
+        throw new Error(`Endpoint ID is not a string (wrap it in single quotes): ${endpoint.id}`)
+      }
+
+      if (endpoint.type === 'discord' && !discord.client.channels.get(endpoint.id)) {
+        throw new Error(`Channel ${endpoint.id} not found!`)
+      }
+
       if (endpoint.type === 'messenger') {
         try {
           await getThread(endpoint.id)
         } catch (err) {
-          throw new CMError(`Thread ${endpoint.id} not found!`)
+          throw new Error(`Thread ${endpoint.id} not found!`)
         }
       }
 
@@ -128,7 +155,8 @@ export default class ConnectionsManager {
       {
         __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'
       },
-      ...this.list.map(connection => connection.toYAMLObject())
+      ...this.list.map(connection => connection.toYAMLObject()),
+      ...this.disabled.map(connection => typeof connection === 'string' ? connection : connection.toYAMLObject())
     )
     return config.saveConnections(yamlConnections)
   }

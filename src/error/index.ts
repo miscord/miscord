@@ -1,6 +1,5 @@
 const log = logger.withScope('errorHandler')
 
-import { CMError } from '../ConnectionsManager'
 import { isNpm } from 'is-npm'
 import { closeSentry, sendToSentry } from './sentry'
 import { splitString } from '../utils'
@@ -24,8 +23,12 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
     else error = new Error(error.toString())
   }
 
-  // @ts-ignore
-  const exitCode = (error.requestArgs || error instanceof CMError || error.message.includes('Incorrect login details were provided')) ? 1 : 2
+  const exitCode = (
+    // @ts-ignore
+    error.requestArgs ||
+    error.message.includes('Incorrect login details were provided') ||
+    error.message.includes('EPIPE')
+  ) ? 1 : 2
   log.error('', error)
   sendToSentry(error)
 

@@ -1,4 +1,3 @@
-import { CMError } from '../ConnectionsManager'
 import * as Sentry from '@sentry/node'
 import { platform } from 'os'
 
@@ -17,7 +16,6 @@ const bannedErrors = [
 
 export function sendToSentry (error: Error) {
   if (bannedErrors.some(banned => error.toString().includes(banned) || error.message.includes(banned))) return
-  if (error instanceof CMError) return
   Sentry.captureException(error)
 }
 
