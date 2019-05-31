@@ -12,6 +12,7 @@ function tryToGetTheActualError (e: any): Error | void {
   if (e instanceof Error) return e
   if (e.error) return tryToGetTheActualError(e.error)
   if (e.err) return tryToGetTheActualError(e.err)
+  return e
 }
 
 export default async (error: Error | string | { error?: any, err?: any }) => {
