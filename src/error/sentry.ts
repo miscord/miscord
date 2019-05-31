@@ -11,7 +11,8 @@ const bannedErrors = [
   'User must verify their account', // Facebook login review
   'Service temporarily unavailable', // Facebook is down
   'ECONNRESET', // connection reset
-  'MQTT connection failed' // Facebook MQTT connection fail
+  'MQTT connection failed', // Facebook MQTT connection fail
+  'EPIPE' // Facebook session invalidated
 ]
 
 export function sendToSentry (error: Error) {

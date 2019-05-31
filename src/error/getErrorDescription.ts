@@ -12,6 +12,10 @@ http://facebook.com/settings?tab=security&section=per_app_passwords&view
 Couldn't login to Discord.
 Check your token.
 (it shouldn't be client ID nor anything else that doesn't have "token" in its name)
+`,
+  'EPIPE': `
+Current session was invalidated in Facebook settings.
+Remove file session.json and restart Miscord.  
 `
 }
 
