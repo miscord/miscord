@@ -15,7 +15,7 @@ Check your token.
 `,
   'EPIPE': `
 Current session was invalidated in Facebook settings.
-Remove file session.json and restart Miscord.  
+Remove file session.json and restart Miscord.
 `
 }
 
