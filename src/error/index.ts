@@ -45,6 +45,7 @@ ${dataPath || getConfigDir()}/logs`)
     try {
       let errorMessage = splitString(`${error.message}\n${error.stack}`, 1000)
       for (let part of errorMessage) await discord.channels.error.send(part, { code: true })
+      await discord.channels.error.send(desc)
     } catch (err) {
       log.fatal(err)
       sendToSentry(err)
