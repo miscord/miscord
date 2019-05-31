@@ -1,10 +1,11 @@
+const log = logger.withScope('errorHandler')
+
 import { CMError } from '../ConnectionsManager'
 import { isNpm } from 'is-npm'
 import { closeSentry, sendToSentry } from './sentry'
 import { splitString } from '../utils'
 import getErrorDescription from './getErrorDescription'
-
-const log = logger.withScope('errorHandler')
+import { getConfigDir } from '../config/FileConfig'
 
 const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
 
@@ -25,7 +26,7 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
 
   // @ts-ignore
   const exitCode = (error.requestArgs || error instanceof CMError || error.message.includes('Incorrect login details were provided')) ? 1 : 2
-  log.error('index.ts', error)
+  log.error('', error)
   sendToSentry(error)
 
   const desc = getErrorDescription(error)
@@ -34,7 +35,7 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
   if (isNpm) {
     log.warn(`Logs from NPM are unnecessary and don't give much information.
 Miscord logs folder:
-${dataPath || require('.//config/FileConfig').getConfigDir()}/logs`)
+${dataPath || getConfigDir()}/logs`)
   }
 
   if (global.discord && discord.channels && discord.channels.error) {
