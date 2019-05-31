@@ -42,8 +42,8 @@ Can't go (${declined.length}): ${truncatePeople(declined)}
 ` : plan.message
 
   const channels = await connection.getWritableChannels()
-  channels.forEach(async ({ channel }) => {
-    channel!!.send({ embed: { title: `Event: **${plan.title}**`, description } })
+  channels.forEach(endpoint => {
+    discord.getChannel(endpoint.id).send({ embed: { title: `Event: **${plan.title}**`, description } })
   })
 
   const threads = connection.getOtherWritableThreads(plan.threadId)

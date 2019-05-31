@@ -29,8 +29,8 @@ export default async function handleEvent (_event: { event: Event, type: EventTy
   if (type === 'threadNameEvent') await connection.checkChannelRenames(thread.name)
 
   const channels = connection.getWritableChannels()
-  channels.forEach(async ({ channel }) => {
-    channel!!.send(`*${(connection as Connection).getThreads().length > 1 ? thread.name + ': ' : ''}${messageEvent.message}*`)
+  channels.forEach(endpoint => {
+    discord.getChannel(endpoint.id).send(`*${(connection as Connection).getThreads().length > 1 ? thread.name + ': ' : ''}${messageEvent.message}*`)
   })
 
   const threads = connection.getOtherWritableThreads(event.threadId)

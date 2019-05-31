@@ -1,11 +1,18 @@
+import handleMentions from './handleMentions'
+
 const log = logger.withScope('discord:sendMessage')
 
-import { TextChannel } from 'discord.js'
 import { DiscordMessageData } from '../createMessage/MessageData'
 
-export default async (channel: TextChannel, { body, opts }: DiscordMessageData, image?: string) => {
+export default async (channelId: string, { body, opts }: DiscordMessageData, image?: string) => {
   // check if body is empty and there are no files
   if (!body && !(opts.files && opts.files.length)) return log.warn('Not sending message, empty.')
+
+  // get channel
+  const channel = discord.getChannel(channelId)
+
+  // handle mentions
+  body = handleMentions(body, channel)
 
   // find / create a webhook
   let webhook = discord.webhooks.find(webhook => webhook.channelID === channel.id)

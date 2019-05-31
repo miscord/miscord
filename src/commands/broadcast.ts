@@ -7,7 +7,7 @@ export default new Command(argv => {
     threads.forEach(thread => messenger.client.sendMessage(thread.id, message))
 
     const channels = connection.getWritableChannels()
-    channels.forEach(({ channel }) => channel!!.send(message))
+    channels.forEach(endpoint => discord.getChannel(endpoint.id).send(message))
   })
 }, {
   argc: 1,

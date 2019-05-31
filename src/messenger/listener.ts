@@ -36,7 +36,7 @@ export default async (message: Message) => {
   {
     const channels = await connection.getWritableChannels()
     const data = await createMessage.toDiscord(thread, sender, message)
-    channels.map(async ({ channel }) => sendDiscordMessage(channel, data, thread.image))
+    channels.forEach(endpoint => sendDiscordMessage(endpoint.id, data, thread.image))
   }
   {
     const threads = connection.getOtherWritableThreads(message.threadId)

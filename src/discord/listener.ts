@@ -47,6 +47,6 @@ export default async (message: Message) => {
   {
     const channels = connection.getOtherWritableChannels(message.channel.id)
     const data = createMessage.toDiscord(message)
-    channels.forEach(({ channel }) => sendDiscordMessage(channel!!, data))
+    channels.forEach(endpoint => sendDiscordMessage(endpoint.id, data))
   }
 }

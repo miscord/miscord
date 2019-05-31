@@ -5,11 +5,7 @@ export interface Endpoint {
   type: 'messenger' | 'discord'
   id: string
   name?: string
-  channel?: TextChannel
   readonly?: boolean
-}
-export interface ChannelEndpoint extends Endpoint {
-  channel: TextChannel
 }
 
 export default class Connection {
@@ -18,12 +14,7 @@ export default class Connection {
 
   constructor (name: string, endpoints: Endpoint[] = []) {
     this.name = name
-    this.endpoints = endpoints.map(endpoint => {
-      if (endpoint.type === 'discord' && !endpoint.channel) {
-        endpoint.channel = discord.client.channels.get(endpoint.id) as TextChannel
-      }
-      return endpoint
-    })
+    this.endpoints = endpoints
   }
 
   static isThread (endpoint: Endpoint) { return endpoint.type === 'messenger' }
@@ -42,8 +33,7 @@ export default class Connection {
     this.endpoints.push({
       type: 'discord',
       id,
-      name,
-      channel: discord.client.channels.get(id) as TextChannel
+      name
     })
     return this
   }
@@ -85,9 +75,9 @@ export default class Connection {
   getWritableThreads () { return this.getWritableEndpoints().filter(Connection.isThread) }
   getOtherWritableThreads (id: string) { return this.getWritableThreads().filter(thread => thread.id !== id.toString()) }
 
-  getChannels () { return this.endpoints.filter(Connection.isChannel).filter(channel => channel.channel) as ChannelEndpoint[] }
-  getWritableChannels () { return this.getWritableEndpoints().filter(Connection.isChannel).filter(channel => channel.channel) as ChannelEndpoint[] }
-  getOtherWritableChannels (id: string) { return this.getWritableChannels().filter(channel => channel.id !== id) as ChannelEndpoint[] }
+  getChannels () { return this.endpoints.filter(Connection.isChannel) }
+  getWritableChannels () { return this.getWritableEndpoints().filter(Connection.isChannel) }
+  getOtherWritableChannels (id: string) { return this.getWritableChannels().filter(channel => channel.id !== id) }
 
   async checkChannelRenames (name: string) {
     if (
@@ -98,8 +88,10 @@ export default class Connection {
       !this.getChannels()[0].readonly &&
       this.getChannels()[0].name !== name
     ) {
-      const channel = this.getChannels()[0]
-      await channel.channel.edit({ name })
+      const endpoint = this.getChannels()[0]
+      const channel = discord.getChannel(endpoint.id)
+      if (!channel) return this
+      await channel.edit({ name })
     }
     return this
   }
@@ -160,7 +152,6 @@ export default class Connection {
 
   get cleanEndpoints () {
     return this.endpoints
-      .map(({ type, id, name, readonly }) => ({ type, id, name, readonly }))
       .map(endpoint => {
         if (!endpoint.readonly) delete endpoint.readonly
         return endpoint

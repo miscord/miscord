@@ -5,7 +5,6 @@ import { WebhookMessageOptions } from 'discord.js'
 import Thread from '../../types/Thread'
 import { User, Message, FileAttachment, XMAAttachment } from 'libfb'
 import handleEmojis from '../../discord/handleEmojis'
-import handleMentions from '../../discord/handleMentions'
 import emojiCount from '../emojiCount'
 import parseMessengerMessage, { thumbs } from './parseMessengerMessage'
 import url from 'url'
@@ -16,7 +15,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
   let authorName
   ({ authorName, message } = parseMessengerMessage(thread, sender, message))
 
-  let body = handleEmojis(handleMentions(message.message))
+  let body = handleEmojis(message.message)
   if (body.length > 2000) body = body.slice(0, 1997) + '...'
 
   // if there are no attachments, send it already

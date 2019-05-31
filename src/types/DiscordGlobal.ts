@@ -10,4 +10,5 @@ export default interface DiscordGlobal {
     error?: (TextChannel | DMChannel)
   }
   webhooks: Collection<string, Webhook>
+  getChannel (channelId: string): TextChannel
 }

@@ -14,7 +14,10 @@ export default () => {
       client,
       guilds: new GuildArray(...client.guilds.array()),
       channels: {},
-      webhooks: new Collection()
+      webhooks: new Collection(),
+      getChannel (id: string) {
+        return client.channels.get(id) as TextChannel
+      }
     }
 
     // set activity

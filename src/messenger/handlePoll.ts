@@ -15,7 +15,7 @@ export default async (_poll: { type: string, event: PollEvent }) => {
   log.debug('Got Messenger thread')
   log.trace('thread', thread, 1)
 
-  let connection = await connections.getWithCreateFallback(poll.threadId.toString(), (thread as MiscordThread).cleanName!!)
+  let connection = await connections.getWithCreateFallback(poll.threadId.toString(), thread.cleanName)
   if (!connection) return
 
   const options = await Promise.all(poll.options.map(async option => {
@@ -31,8 +31,8 @@ ${options.map(option => `${option.title} (${option.voteCount}): ${truncatePeople
 ` : poll.message
 
   const channels = await connection.getWritableChannels()
-  channels.forEach(async ({ channel }) => {
-    channel!!.send({ embed: { title: `Poll: **${poll.title}**`, description } })
+  channels.forEach(endpoint => {
+    discord.getChannel(endpoint.id).send({ embed: { title: `Poll: **${poll.title}**`, description } })
   })
 
   const threads = connection.getOtherWritableThreads(poll.threadId.toString())
