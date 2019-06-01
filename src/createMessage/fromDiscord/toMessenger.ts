@@ -9,7 +9,6 @@ import handleCustomEmoji from '../handleCustomEmoji'
 export default async (message: Message): Promise<MessengerMessageData> => {
   let username = message.member ? (message.member.nickname || message.author.username) : message.author.username
   let content = message.cleanContent
-  content = handleCustomEmoji(content)
 
   // copy message content to a new variable, as the cleanContent property is read-only
   log.debug('clean content', content)
@@ -36,6 +35,9 @@ export default async (message: Message): Promise<MessengerMessageData> => {
       )
       : undefined
   }
+
+  // clean up custom emoji in the message
+  content = handleCustomEmoji(content)
 
   const body = config.messenger.format
     .replace('{username}', username)
