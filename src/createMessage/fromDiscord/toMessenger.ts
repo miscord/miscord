@@ -8,7 +8,7 @@ import handleCustomEmoji from '../handleCustomEmoji'
 
 export default async (message: Message): Promise<MessengerMessageData> => {
   let username = message.member ? (message.member.nickname || message.author.username) : message.author.username
-  let content = message.cleanContent
+  let content = message.type !== 'PINS_ADD' ? message.cleanContent : `${username} pinned a message to this channel.`
 
   // copy message content to a new variable, as the cleanContent property is read-only
   log.debug('clean content', content)
