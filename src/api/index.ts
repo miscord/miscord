@@ -4,11 +4,24 @@ import auth from 'basic-auth'
 import connectionsHandler from './connections'
 import configHandler from './config'
 import controlHandler from './control'
+import fastifyStatic from 'fastify-static'
+import path from 'path'
 
 const log = logger.withScope('api')
 
-export default () => {
+export default function runServer () {
   const app = fastify()
+
+  app.register(fastifyStatic, {
+    root: path.join(__dirname, '..', '..', 'node_modules'),
+    prefix: '/node_modules/',
+    decorateReply: false
+  })
+
+  app.register(fastifyStatic, {
+    root: path.join(__dirname, '..', '..', 'static', 'dashboard'),
+    prefix: '/static/'
+  })
 
   if (config.api.key) {
     app.addHook('preHandler', (request, reply, next) => {
