@@ -8,12 +8,12 @@ export default async (configPath: string = getConfigDir()) => {
   let files
   try {
     files = await fs.readdir(path.join(configPath, 'logs'))
+    await files
+      .filter(file => file.endsWith('.log'))
+      .map(file => path.join(configPath, 'logs', file))
+      .reduce((promise, item) => promise.then(() => { gzip(item) }), Promise.resolve())
+      .then(() => logger.success('All old logs compressed, starting Miscord'))
   } catch (err) {
-    return
+    logger.warn('Error occured during compressing logs, starting Miscord')
   }
-  await files
-    .filter(file => file.endsWith('.log'))
-    .map(file => path.join(configPath, 'logs', file))
-    .reduce((promise, item) => promise.then(() => { gzip(item) }), Promise.resolve())
-    .then(() => logger.success('All old logs compressed, starting Miscord'))
 }
