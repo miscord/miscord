@@ -23,7 +23,11 @@ export default async () => {
     client = new Client({ session })
     await client.login(config.messenger.username, config.messenger.password)
   } catch (err) {
-    client = new Client()
+    if (session && session.deviceId) {
+      client = new Client({ deviceId: session.deviceId })
+    } else {
+      client = new Client()
+    }
     await client.login(config.messenger.username, config.messenger.password)
   }
   global.messenger = {
