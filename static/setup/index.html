@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Setup</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord Setup
+      </h1>
+      <h2 class="subtitle">
+        Accounts
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="columns is-desktop">
+    <div class="column">
+      <div class="box" id="discord">
+        <p><b>Discord bot</b></p>
+        <br>
+        <div class="field">
+          <input class="input" type="text" placeholder="Discord token">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Log in</a>
+        </div>
+        <p class="status">Enter a valid token...</p>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box" id="messenger">
+        <p><b>Facebook account</b></p>
+        <br>
+        <div class="field">
+          <input class="input" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+          <input class="input" type="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Log in</a>
+        </div>
+        <p class="status">Enter valid Facebook credentials...</p>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box" id="api">
+        <p><b>Dashboard credentials</b></p>
+        <br>
+        <div class="field">
+          <input style="margin-right: 10px;" class="input" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+          <input style="margin-right: 10px;" class="input" type="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Save</a>
+        </div>
+        <p class="status">Choose username and password for the dashboard</p>
+      </div>
+    </div>
+  </div>
+  <a class="button is-info" id="next-button">Next</a>
+</section>
+<script src="/static/config.js"></script>
+<script src="/static/discord.js"></script>
+<script src="/static/messenger.js"></script>
+<script src="/static/api.js"></script>
+</body>
+</html>

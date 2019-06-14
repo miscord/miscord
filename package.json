@@ -36,11 +36,13 @@
   "dependencies": {
     "@sentry/node": "^5.1.2",
     "basic-auth": "^2.0.1",
+    "bulma": "^0.7.5",
     "chalk": "^2.4.2",
     "discord.js": "^11.4.2",
     "dot-prop": "^5.0.0",
     "emoji-strip": "^1.0.1",
     "fastify": "^2.3.0",
+    "fastify-static": "^2.4.0",
     "fs-extra": "^7.0.1",
     "is-docker": "^2.0.0",
     "is-npm": "^3.0.0",

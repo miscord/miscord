@@ -11,6 +11,7 @@ import { YAMLConnections } from '../ConnectionsManager'
 import diff from './diff'
 import defaultConfig from './defaultConfig'
 import { Session } from 'libfb'
+import SetupServer from '../api/setup'
 
 const log = logger.withScope('FileConfig')
 
@@ -29,18 +30,18 @@ export default class FileConfig extends Config {
 
   async load () {
     if (!fs.existsSync(this.path)) {
-      log.warn(`${this.path} not found, creating example config`)
-      const example = path.join(__dirname, '../../config.example.json')
-      await fs.ensureDir(path.parse(this.path).dir)
-      // https://github.com/zeit/pkg/issues/342#issuecomment-368303496
-      if (process.pkg) {
-        fs.writeFileSync(this.path, fs.readFileSync(example))
-      } else {
-        fs.copyFileSync(example, this.path)
-      }
-      log.fatal(`Default config copied to ${this.path}
-Fill it with data or use config generator here:
-https://miscord.net/config-generator.html`)
+      const server = new SetupServer()
+      server.run()
+      return new Promise(resolve => {
+        server.once('config', async config => {
+          await fs.ensureFile(this.path)
+          await fs.writeJSON(this.path, config, { spaces: 2 })
+          await fs.writeJSON(this.sessionPath, server.messengerSession, { spaces: 2 })
+          this._load(config)
+          await server.stop()
+          resolve()
+        })
+      })
     }
 
     log.info(`Loading config from ${this.path}`)
