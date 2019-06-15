@@ -4,6 +4,8 @@ import auth from 'basic-auth'
 import connectionsHandler from './connections'
 import configHandler from './config'
 import controlHandler from './control'
+import discordHandler from './discord'
+import messengerHandler from './messenger'
 import fastifyStatic from 'fastify-static'
 import path from 'path'
 
@@ -54,6 +56,8 @@ export default function runServer () {
   app.register(connectionsHandler, { prefix: '/connections' })
   app.register(configHandler, { prefix: '/config' })
   app.register(controlHandler, { prefix: '/control' })
+  app.register(discordHandler, { prefix: '/discord' })
+  app.register(messengerHandler, { prefix: '/messenger' })
 
   app.listen(config.api.port || 9448, '0.0.0.0').then(() => log.success(`API is listening on port ${config.api.port || 9448}`))
   return app
