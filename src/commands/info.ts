@@ -1,16 +1,15 @@
 import Command from './Command'
 
 export default new Command(async argv => {
-  let name = argv[0]
+  let [ name ] = argv
   let connection = connections.get(name)
   if (!connection) {
     connection = connections.getWith(name)
-    name = connection.name
   }
   if (!connection) return `Connection \`${name}\` not found!`
   return {
     embed: {
-      title: `Connection: ${name}`,
+      title: `Connection: ${connection.name}`,
       description: connection.getPrintable()
     }
   }
