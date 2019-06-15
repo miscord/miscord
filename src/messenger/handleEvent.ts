@@ -13,6 +13,7 @@ export default async function handleEvent (_event: { event: Event, type: EventTy
 
   const messageEvent = event as MessageEvent
 
+  if (type === 'messageRemoveEvent') return // TODO: implement removing messages
   if (type.startsWith('event')) return handlePlan({ type, event: event as PlanEvent })
   if (type.startsWith('poll')) return handlePoll({ type, event: event as PollEvent })
 
