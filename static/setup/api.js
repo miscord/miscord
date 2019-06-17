@@ -1,6 +1,6 @@
 (() => {
   const api = document.querySelector('#api')
-  const button = api.querySelector('a')
+  const button = api.querySelector('a.button')
   const username = api.querySelector('input[type=text]')
   const password = api.querySelector('input[type=password]')
   const status = api.querySelector('p.status')

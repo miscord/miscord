@@ -1,6 +1,6 @@
 (() => {
   const messenger = document.querySelector('#messenger')
-  const button = messenger.querySelector('a')
+  const button = messenger.querySelector('a.button')
   const username = messenger.querySelector('input[type=text]')
   const password = messenger.querySelector('input[type=password]')
   const status = messenger.querySelector('p.status')

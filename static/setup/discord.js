@@ -1,6 +1,6 @@
 (() => {
   const discord = document.querySelector('#discord')
-  const button = discord.querySelector('a')
+  const button = discord.querySelector('a.button')
   const input = discord.querySelector('input')
   const status = discord.querySelector('p.status')
 
