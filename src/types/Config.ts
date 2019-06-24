@@ -40,7 +40,7 @@ export default interface Config extends ConfigManager {
   }
   channels: {
     command?: string | string[]
-    error?: string
+    error?: string | string[]
   }
   timezone: string
   checkUpdates: boolean

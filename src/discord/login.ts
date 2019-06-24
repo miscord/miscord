@@ -64,23 +64,24 @@ It's not an error... unless you added the bot to your guild already.`)
     discord.channels = {}
 
     if (config.channels.error) {
-      discord.channels.error = await getChannel(client, config.channels.error)
+      if (!Array.isArray(config.channels.error)) config.channels.error = [ config.channels.error ]
+      discord.channels.error = await getChannels(client, config.channels.error)
     }
 
     if (config.channels.command) {
       if (!Array.isArray(config.channels.command)) config.channels.command = [ config.channels.command ]
-      discord.channels.command = (
-        await Promise.all(
-          config.channels.command.map(id => getChannel(client, id))
-            // .filter(channel => channel != null)
-        )
-      ).filter(Boolean) as (TextChannel | DMChannel)[]
+      discord.channels.command = await getChannels(client, config.channels.command)
     }
 
     client.on('error', (err: Error) => { throw err })
 
     return client
   })
+}
+async function getChannels (client: Client, channels: string[]): Promise<(TextChannel | DMChannel)[]> {
+  return (
+    await Promise.all(channels.map(id => getChannel(client, id)))
+  ).filter(Boolean) as (TextChannel | DMChannel)[]
 }
 async function getChannel (client: Client, channelID: string): Promise<TextChannel | DMChannel | undefined> {
   if (discord.client.users.has(channelID)) return client.users.get(channelID)!!.createDM()

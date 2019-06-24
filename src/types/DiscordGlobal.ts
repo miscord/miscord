@@ -7,7 +7,7 @@ export default interface DiscordGlobal {
   category?: CategoryChannel
   channels: {
     command?: (TextChannel | DMChannel)[]
-    error?: (TextChannel | DMChannel)
+    error?: (TextChannel | DMChannel)[]
   }
   webhooks: Collection<string, Webhook>
   getChannel (channelId: string): TextChannel
