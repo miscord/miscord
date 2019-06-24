@@ -43,7 +43,11 @@ export default function runServer () {
         reply.code(401).header('WWW-Authenticate', 'Basic realm="Miscord API"').send()
         return
       }
-      const { name, pass } = auth.parse(request.headers.authorization)!!
+      const creds = auth.parse(request.headers.authorization)
+      if (!creds) {
+        return reply.code(403).send(new Error('Username or password incorrect.'))
+      }
+      const { name, pass } = creds
       log.debug('login', { name, pass })
       if (name === config.api.username && pass === config.api.password) return next()
       reply.code(403).send(new Error('Username or password incorrect.'))
