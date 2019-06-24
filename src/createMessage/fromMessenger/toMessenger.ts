@@ -19,12 +19,14 @@ export default async (thread: Thread, sender: User, message: Message): Promise<M
     .replace('{source}', config.messenger.sourceFormat.messenger.replace('{name}', thread.name))
     .replace('{newline}', '\n')
 
-  if ((!message.attachments || !message.attachments.length) && !message.stickerId) return { body, attachments: [] }
-  const files = message.attachments.filter(attach => attach.type.endsWith('Attachment')) as FileAttachment[]
-  const xma = message.attachments.filter(attach => attach.type.endsWith('XMA')) as XMAAttachment[]
+  if (
+    (!message.fileAttachments || !message.fileAttachments.length) &&
+    (!message.mediaAttachments || !message.mediaAttachments.length) &&
+    !message.stickerId
+  ) return { body, attachments: [] }
 
   const attachments = []
-  for (let attach of files) {
+  for (let attach of message.fileAttachments) {
     const url = attach.url ? attach.url : await getAttachmentURL(message, attach)
 
     if (!url) continue
@@ -33,7 +35,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<M
   }
 
   const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
-  for (let attach of xma) {
+  for (let attach of message.mediaAttachments) {
     if (attach.message) appendToBody(attach.message)
     if (attach.description) appendToBody(attach.description)
     if (attach.url) appendToBody(attach.url)

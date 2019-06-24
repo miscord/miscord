@@ -24,18 +24,19 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
     avatarURL: sender.profilePicLarge,
     files: []
   }
-  if ((!message.attachments || !message.attachments.length) && !message.stickerId) return { body, opts }
+  if (
+    (!message.fileAttachments || !message.fileAttachments.length) &&
+    (!message.mediaAttachments || !message.mediaAttachments.length) &&
+    !message.stickerId
+  ) return { body, opts }
 
-  const files = message.attachments.filter(attach => attach.type.endsWith('Attachment')) as FileAttachment[]
-  const xma = message.attachments.filter(attach => attach.type.endsWith('XMA')) as XMAAttachment[]
-
-  log.trace('attachments to parse', message.attachments)
+  log.trace('attachments to parse', [ message.fileAttachments, message.mediaAttachments ], Infinity)
 
   const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
 
   let notSentAttachments = false
 
-  for (let attach of files) {
+  for (let attach of message.fileAttachments) {
     const url = attach.url || await getAttachmentURL(message, attach)
 
     if (!url) continue
@@ -53,7 +54,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
     if (config.messenger.attachmentTooLargeError) await messenger.client.sendMessage(thread.id, message)
   }
 
-  for (let attach of xma) {
+  for (let attach of message.mediaAttachments) {
     if (attach.message) appendToBody(attach.message)
     if (attach.description) appendToBody(attach.description)
     if (attach.url) appendToBody(attach.url)
@@ -62,6 +63,9 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
         attachment: attach.imageURL,
         name: url.parse(attach.imageURL).pathname!!.split('/').slice(-1)[0]
       })
+    }
+    if (attach.type === 'UnavailableXMA') {
+      log.trace('unavailableXMA', (attach as any).attach)
     }
   }
 
