@@ -94,10 +94,13 @@
 <script>
   const container = document.querySelector('#connections')
 
-  container.querySelector('#add-button').addEventListener('click', () => {
+  const button = document.querySelector('#add-button')
+  button.addEventListener('click', () => {
     const name = document.querySelector('#add-name').value.trim()
+    document.querySelector('#add-name').value = ''
     if (!name) return
 
+    button.classList.add('is-loading')
     fetch('/connections', {
       method: 'POST',
       headers: {
@@ -173,7 +176,7 @@
       `)
 
       if (!connections.length) {
-        container.innerHTML = `<h1 class="title">No connections!</h1>`
+        container.appendChild(parseHTML(`<h1 class="title">No connections!</h1>`))
       } else {
         for (let connection of connections) {
           container.appendChild(loadConnection(connection))
