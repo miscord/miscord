@@ -108,7 +108,7 @@ export default class Connection {
 
   removeEndpoint (id: string) {
     let index = this.endpoints.findIndex(endpoint => endpoint.id === id || endpoint.name === id)
-    if (index) this.endpoints.splice(index, 1)
+    if (index !== -1) this.endpoints.splice(index, 1)
     return this.save()
   }
 
