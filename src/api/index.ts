@@ -39,18 +39,22 @@ export default function runServer () {
     })
   } else {
     app.addHook('preHandler', (request, reply, next) => {
-      if (!request.headers.authorization) {
-        reply.code(401).header('WWW-Authenticate', 'Basic realm="Miscord API"').send()
-        return
-      }
+      const send401 = () => reply
+        .code(401)
+        .header('WWW-Authenticate', 'Basic realm="Miscord API"')
+        .header('Content-Type', 'text/html')
+        .send('<h1>Forbidden</h1>')
+
+      if (!request.headers.authorization) return send401()
+
       const creds = auth.parse(request.headers.authorization)
-      if (!creds) {
-        return reply.code(403).send(new Error('Username or password incorrect.'))
-      }
+      if (!creds) return send401()
+
       const { name, pass } = creds
       log.debug('login', { name, pass })
       if (name === config.api.username && pass === config.api.password) return next()
-      reply.code(403).send(new Error('Username or password incorrect.'))
+
+      send401()
     })
   }
 
