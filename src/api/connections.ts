@@ -62,6 +62,9 @@ export default async (app: Server) => {
     const connection = connections.get(name)
 
     if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
+    if (connection.hasEndpoint(request.body.id)) {
+      return reply.code(400).send(new Error(`Connection ${name} already has endpoint ${request.body.id}`))
+    }
 
     await connection.addEndpoint(request.body)
     reply.send(connection.toObject().endpoints)
