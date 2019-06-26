@@ -21,7 +21,7 @@ export default function runServer () {
   })
 
   app.register(fastifyStatic, {
-    root: path.join(__dirname, '..', '..', 'static', 'dashboard'),
+    root: path.join(__dirname, '..', '..', 'static'),
     prefix: '/static/'
   })
 
@@ -55,7 +55,10 @@ export default function runServer () {
   }
 
   app.get('/', (request, reply) => {
-    reply.send({ info: 'Miscord v' + require('../../package.json').version })
+    reply.sendFile('dashboard/index.html')
+  })
+  app.get('/connections/', (request, reply) => {
+    reply.sendFile('dashboard/connections.html')
   })
   app.register(connectionsHandler, { prefix: '/connections' })
   app.register(configHandler, { prefix: '/config' })

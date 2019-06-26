@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Miscord</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="/node_modules/select2/dist/css/select2.min.css">
+  <style>
+    select {
+      width: 100%;
+    }
+
+    .select2 {
+      margin: 1rem 0;
+    }
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 5px;
+    }
+
+    .endpoint {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .endpoint a {
+      text-decoration: none !important;
+    }
+
+    .endpoint a:hover {
+      text-decoration: underline !important;
+    }
+
+    .box.endpoint {
+      padding: 0.75em;
+    }
+  </style>
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord
+      </h1>
+      <h2 class="subtitle">
+        Connections
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a href="/">Dashboard</a></li>
+            <li><a class="is-active" href="/connections/">Connections</a></li>
+          </ul>
+          <p class="menu-label">
+            Configuration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/config-discord/">Discord</a></li>
+            <li><a href="/config-messenger/">Messenger</a></li>
+            <li><a href="/config-miscellaneous/">Miscellaneous</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-three-quarters" id="connections">
+        <div class="level">
+          <div class="level-left">
+            <input class="input" type="text" id="add-name" placeholder="New connection name">
+          </div>
+          <div class="level-right">
+            <a id="add-button" class="button">Add</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/node_modules/jquery/dist/jquery.slim.min.js"></script>
+<!-- unfortunately, it's needed for select2 :( -->
+<script src="/node_modules/select2/dist/js/select2.min.js"></script>
+<script src="/static/js/parseHTML.js"></script>
+<script>
+  const container = document.querySelector('#connections')
+
+  container.querySelector('#add-button').addEventListener('click', () => {
+    const name = document.querySelector('#add-name').value.trim()
+    if (!name) return
+
+    fetch('/connections', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        endpoints: []
+      })
+    })
+      .then(() => location.reload())
+      .catch(console.error)
+  })
+
+  const fetchJSON = url => fetch(url).then(res => res.json())
+
+  Promise.all([
+    fetchJSON('/connections'),
+    fetchJSON('/discord/guilds'),
+    fetchJSON('/messenger/threads')
+  ])
+    .then(([connections, guilds, threads]) => {
+      const categoryName = (guild, catID) => catID ? '[' + guild.channels.find(chan => chan.id === catID).name + ']' : ''
+
+      function endpointName (endpoint) {
+        if (endpoint.type === 'discord') {
+          const guild = guilds.find(guild => guild.channels.some(channel => channel.id === endpoint.id))
+          const channel = guild.channels.find(channel => channel.id === endpoint.id)
+          return [
+            `${guild.name}:`,
+            categoryName(guild, channel.category),
+            `#${endpoint.name}`
+          ].join(' ')
+        } else {
+          return endpoint.name
+        }
+      }
+
+      function endpointLink (endpoint) {
+        if (endpoint.type === 'discord') {
+          const guild = guilds.find(guild => guild.channels.some(channel => channel.id === endpoint.id))
+          return `https://discordapp.com/channels/${guild.id}/${endpoint.id}`
+        } else {
+          return `https://messenger.com/t/${endpoint.id}/`
+        }
+      }
+
+      const Endpoint = endpoint => `
+        <div class="box endpoint">
+          <img class="icon" src="/static/img/${endpoint.type}.png" alt="${endpoint.type} logo">
+          <a href="${endpointLink(endpoint)}">${endpointName(endpoint)}</a>
+          <button style="margin-left: auto;" class="delete" aria-label="delete" data-id="${endpoint.id}"></button>
+        </div>
+      `
+
+      const Connection = conn => parseHTML(`
+        <article class="message">
+          <header class="message-header">
+            <p>${conn.name}</p>
+            <button class="delete" aria-label="delete"></button>
+          </header>
+          <div class="message-body">
+            ${conn.endpoints.length ? conn.endpoints.map(Endpoint).join('\n') : '<b>No endpoints!</b>'}
+            <select name="discord-endpoints[]" class="discord-endpoints-select">
+              <option></option>
+            </select>
+            <br />
+            <select name="messenger-endpoints[]" class="messenger-endpoints-select">
+              <option></option>
+           </select>
+          </div>
+        </div>
+      `)
+
+      if (!connections.length) {
+        container.innerHTML = `<h1 class="title">No connections!</h1>`
+      } else {
+        for (let connection of connections) {
+          container.appendChild(loadConnection(connection))
+        }
+
+        function loadConnection (connection) {
+          const el = Connection(connection)
+
+          const refresh = () => {
+            fetch(`/connections/${connection.name}`)
+              .then(res => res.json())
+              .then(connection => {
+                const newEl = loadConnection(connection)
+                el.parentNode.replaceChild(newEl, el)
+                initSelects()
+              })
+          }
+
+          el.querySelector('.delete').addEventListener('click', () => {
+            if (confirm(`Do you want to delete connection ${connection.name}?`)) {
+              fetch(`/connections/${connection.name}`, { method: 'DELETE' })
+                .then(() => location.reload())
+            }
+          })
+
+          el.querySelectorAll('.endpoint > .delete').forEach(button => {
+            button.addEventListener('click', ev => {
+              fetch(`/connections/${connection.name}/endpoints/${ev.target.dataset.id}`, { method: 'DELETE' })
+                .then(() => refresh())
+            })
+          })
+
+          const discordEndpoints = $(el).find('.discord-endpoints-select')
+          const messengerEndpoints = $(el).find('.messenger-endpoints-select')
+
+          function addEndpoint (type, id) {
+            discordEndpoints.prop('disabled', true)
+            messengerEndpoints.prop('disabled', true)
+            fetch(`/connections/${connection.name}/endpoints`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ type, id })
+            }).then(() => refresh())
+          }
+
+          discordEndpoints.change(ev => addEndpoint('discord', ev.target.value))
+          messengerEndpoints.change(ev => addEndpoint('messenger', ev.target.value))
+
+          return el
+        }
+      }
+
+      function initSelects () {
+        $('.discord-endpoints-select').select2({
+          placeholder: 'Add Discord channel',
+          data: guilds.map(guild => ({
+            text: guild.name,
+            children: guild.channels.filter(channel => channel.type === 'text').map(channel => ({
+              id: channel.id,
+              text: channel.category
+                ? `[${guild.channels.find(c => c.id === channel.category).name}] #${channel.name}`
+                : `#${channel.name}`
+            }))
+          }))
+        })
+
+        $('.messenger-endpoints-select').select2({
+          placeholder: 'Add Messenger chat',
+          data: threads.map(thread => ({
+            id: thread.id,
+            text: thread.name
+          }))
+        })
+      }
+
+      initSelects()
+    })
+    .catch(console.error)
+</script>
+</body>
+</html>
