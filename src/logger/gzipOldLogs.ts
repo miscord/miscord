@@ -14,6 +14,7 @@ export default async (configPath: string = getConfigDir()) => {
       .reduce((promise, item) => promise.then(() => { gzip(item) }), Promise.resolve())
       .then(() => logger.success('All old logs compressed, starting Miscord'))
   } catch (err) {
-    logger.warn('Error occured during compressing logs, starting Miscord')
+    logger.debug(err)
+    logger.debug('Error occured during compressing logs, starting Miscord')
   }
 }
