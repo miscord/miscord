@@ -11,6 +11,11 @@ import { getSender, getThread, sendMessage as sendMessengerMessage } from './'
 export default async (message: Message) => {
   if (!message) throw new Error('Message missing!')
 
+  if (config.paused) {
+    log.info('Got a Messenger message (paused)')
+    return
+  }
+
   log.trace('message', message)
   log.info('Got a Messenger message')
 

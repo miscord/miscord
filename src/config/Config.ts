@@ -7,6 +7,7 @@ import { Level } from '../logger/Logger'
 
 export default abstract class Config {
   config: any = defaultConfig
+  paused: boolean = false
 
   static proxify (config: any) {
     return new Proxy(config, {

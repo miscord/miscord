@@ -10,6 +10,11 @@ import { sendMessage as sendMessengerMessage } from '../messenger'
 import { checkIgnoredSequences, checkMKeep } from '../utils'
 
 export default async (message: Message) => {
+  if (config.paused) {
+    log.info('Got a Discord messenger (paused)')
+    return
+  }
+
   log.info('Got a Discord message')
   log.trace('message', message, 1)
 

@@ -11,6 +11,13 @@ export default async function handleEvent (_event: { event: Event, type: EventTy
   const { event, type } = _event
   if (type === 'readReceiptEvent' || type === 'deliveryReceiptEvent') return
 
+  if (config.paused) {
+    log.info('Got a Messenger event (paused)', type)
+    return
+  }
+
+  log.info('Got a Messenger event', type)
+
   const messageEvent = event as MessageEvent
 
   if (type === 'messageRemoveEvent') return // TODO: implement removing messages
