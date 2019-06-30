@@ -41,10 +41,27 @@
         </aside>
       </div>
       <div class="column is-three-quarters">
-        <h1>ddd</h1>
+        <div class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <a id="pause-button" class="button is-warning">Pause</a>
+            </div>
+            <div class="level-item">
+              <a id="unpause-button" class="button is-success" disabled>Unpause</a>
+            </div>
+            <div class="level-item">
+              <a id="restart-button" class="button is-info">Restart</a>
+            </div>
+            <div class="level-item">
+              <a id="stop-button" class="button is-danger">Stop</a>
+            </div>
+          </div>
+        </div>
+        <p><b>Status: <span id="status">...</span></b></p>
       </div>
     </div>
   </div>
 </section>
+<script src="/static/dashboard/js/index/script.js"></script>
 </body>
 </html>
