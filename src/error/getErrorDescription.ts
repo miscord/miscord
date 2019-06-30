@@ -16,11 +16,20 @@ Check your token.
   'EPIPE': `
 Current session was invalidated in Facebook settings.
 Remove file session.json and restart Miscord.
-`
+`,
+  'User must verify their account': (err: any) => `
+Verify your account here: ${err.errorData.url}
+Account: ${err.requestArgs.email}
+  `
 }
 
-export default function getErrorDescription (err: Error) {
+export default function getErrorDescription (err: Error): string | null {
   const entry = Object.entries(errorDescriptions)
     .find(([ message ]) => err.toString().includes(message))
-  return entry ? entry[1] : null
+
+  if (!entry) return null
+  const desc = entry[1]
+
+  if (typeof desc === 'string') return desc
+  else return desc(err)
 }
