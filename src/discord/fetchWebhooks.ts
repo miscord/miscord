@@ -3,7 +3,11 @@ const log = logger.withScope('discord:login:fetchWebhooks')
 import { Collection } from 'discord.js'
 
 export default async () => {
-  const guilds = discord.guilds.filter(guild => guild.channels.some(channel => connections.has(channel.id)))
+  const guilds = discord.guilds.filter(
+    guild => guild.channels.some(
+      channel => connections.hasEndpoint(channel.id)
+    )
+  )
   log.trace('used guilds', guilds, 1)
 
   // get all webhooks

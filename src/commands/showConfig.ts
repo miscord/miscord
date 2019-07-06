@@ -1,6 +1,6 @@
 import Command from './Command'
 
-export default new Command((argv: string[], reply) => {
+export default new Command((_, reply) => {
   let cleanConfig = JSON.stringify(config.config, null, 2)
   cleanConfig
     .match(/"(token|username|password)": ".*"/g)!!

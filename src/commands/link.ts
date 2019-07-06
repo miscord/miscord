@@ -1,16 +1,17 @@
 import Command from './Command'
 
-export default new Command(async argv => {
-  let [ name, type, id ] = argv
+export default new Command(async ([ name, type, id ]) => {
+  if (!connections.has(name)) return `Connection \`${name}\` not found!`
+
   const connection = connections.get(name)
-  if (!connection) return `Connection \`${name}\` not found!`
   if (type !== 'discord' && type !== 'messenger') return `Wrong type: ${type}! Correct types: \`discord\`, \`messenger\``
-  const endpointType: 'discord' | 'messenger' = type
+
   try {
-    await connection.addEndpoint({ id, type: endpointType })
+    await connection.addEndpoint({ id, type })
   } catch (err) {
     return err.message
   }
+
   return `${type === 'discord' ? `Discord channel` : `Messenger thread`} \`${id}\` has been added successfully!`
 }, {
   argc: 3,

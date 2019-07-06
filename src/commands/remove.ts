@@ -1,10 +1,10 @@
 import Command from './Command'
 
-export default new Command(async argv => {
-  const [name] = argv
-  const connection = connections.get(name)
-  if (!connection) return `Connection \`${name}\` not found!`
-  await connection.delete()
+export default new Command(async ([ name ]) => {
+  if (!connections.has(name)) return `Connection \`${name}\` not found!`
+
+  await connections.get(name).delete()
+
   return `Connection \`${name}\` was removed successfully!`
 }, {
   argc: 1,

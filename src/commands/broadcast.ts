@@ -2,7 +2,7 @@ import Command from './Command'
 
 export default new Command(argv => {
   const message = argv.join(' ')
-  connections.list.map(connection => {
+  connections.map(connection => {
     const threads = connection.getWritableThreads()
     threads.forEach(thread => messenger.client.sendMessage(thread.id, message))
 

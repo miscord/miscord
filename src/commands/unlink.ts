@@ -1,10 +1,12 @@
 import Command from './Command'
 
-export default new Command(async argv => {
-  const [name, id] = argv
+export default new Command(async ([ name, id ]) => {
+  if (!connections.has(name)) return `Connection \`${name}\` not found!`
+
   const connection = connections.get(name)
-  if (!connection) return `Connection ${name} not found`
+  if (!connection.hasEndpoint(id)) return `Endpoint \`${id}\` not found in connection \`${name}\`!`
   await connection.removeEndpoint(id)
+
   return `Endpoint \`${id}\` was removed successfully from connection \`${name}\`!`
 }, {
   argc: 2,

@@ -1,10 +1,10 @@
 import Command from './Command'
 
-export default new Command(async argv => {
-  const [name, newName] = argv
-  const connection = connections.get(name)
-  if (!connection) return `Connection \`${name}\` not found!`
-  await connection.rename(newName)
+export default new Command(async ([ name, newName ]) => {
+  if (!connections.has(name)) return `Connection \`${name}\` not found!`
+
+  await connections.get(name).rename(newName).save()
+
   return `Connection \`${name}\` successfully renamed to \`${newName}\`!`
 }, {
   argc: 2,

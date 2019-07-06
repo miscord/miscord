@@ -4,15 +4,7 @@ import { getThread } from './messenger'
 
 export type YAMLConnections = { [name: string]: Endpoint[] | string }
 
-export default class ConnectionsManager {
-  list: Collection<string, Connection>
-  disabled: Collection<string, Connection | string>
-
-  constructor () {
-    this.list = new Collection()
-    this.disabled = new Collection()
-  }
-
+export default class ConnectionsManager extends Collection<string, Connection> {
   async load () {
     const log = logger.withScope('CM:init')
     try {
@@ -26,10 +18,9 @@ export default class ConnectionsManager {
 
         if (name.startsWith('_')) {
           if (name === '__comment') continue
-          if (typeof endpoints === 'string') {
-            this.disabled.set(name, endpoints)
-          } else {
-            this.disabled.set(name, new Connection(name, endpoints))
+          name = name.substr(1)
+          if (Array.isArray(endpoints)) {
+            await new Connection(name, endpoints).disable()
           }
           continue
         }
@@ -40,24 +31,14 @@ export default class ConnectionsManager {
         ) throw new Error(`Incorrect connection syntax: ${name}`)
 
         try {
-          this.list.set(
+          await new Connection(
             name,
-            new Connection(
-              name,
-              await ConnectionsManager.validateEndpoints(endpoints)
-            )
-          )
+            await ConnectionsManager.validateEndpoints(endpoints)
+          ).save()
         } catch (err) {
           log.warn(err.message)
           log.warn(`Disabling temporarily connection ${name}, you can re-enable it once the error is fixed.`)
-          name = `_${name}`
-          this.disabled.set(
-            name,
-            new Connection(
-              name,
-              endpoints
-            )
-          )
+          await new Connection(name, endpoints).disable().save()
         }
       }
       await this.save()
@@ -140,15 +121,21 @@ export default class ConnectionsManager {
   }
 
   getWith (id: string) {
-    return this.list.find(connection => connection.has(id))
+    return this.find(connection => connection.has(id))
   }
 
-  get (name: string) {
-    return this.list.get(name)
+  hasWith (id: string) {
+    return this.some(connection => connection.has(id))
   }
 
-  has (id: string) {
-    return this.list.some(connection => connection.has(id))
+  get (name: string): Connection {
+    // failsafe just for TypeScript to stop complaining
+    // in the code it should be checked with CM::has before
+    return super.get(name) || new Connection(name)
+  }
+
+  hasEndpoint (id: string) {
+    return this.some(connection => connection.has(id))
   }
 
   save () {
@@ -156,8 +143,7 @@ export default class ConnectionsManager {
       {
         __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'
       },
-      ...this.list.map(connection => connection.toYAMLObject()),
-      ...this.disabled.map(connection => typeof connection === 'string' ? connection : connection.toYAMLObject())
+      ...this.map(connection => connection.toYAMLObject())
     )
     return config.saveConnections(yamlConnections)
   }

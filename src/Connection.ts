@@ -121,18 +121,18 @@ export default class Connection {
   }
 
   rename (newName: string) {
-    connections.list.delete(this.name)
+    connections.delete(this.name)
     this.name = newName
     return this.save()
   }
 
   delete () {
-    connections.list.delete(this.name)
+    connections.delete(this.name)
     return connections.save()
   }
 
   async save () {
-    connections.list.set(this.name, this)
+    connections.set(this.name, this)
     await connections.save()
     return this
   }
