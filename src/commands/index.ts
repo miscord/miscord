@@ -1,52 +1,15 @@
-import add from './add'
-import broadcast from './broadcast'
-import config from './config'
-import eval from './eval'
-import help from './help'
-import info from './info'
-import link from './link'
-import list from './list'
-import quit from './quit'
-import readonly from './readonly'
-import remove from './remove'
-import rename from './rename'
-import restart from './restart'
-import showConfig from './showConfig'
-import unlink from './unlink'
-import Command from './Command'
-
-const commands: { [name in CommandName]: Command } = {
-  add,
-  broadcast,
-  config,
-  eval,
-  help,
-  info,
-  link,
-  list,
-  quit,
-  readonly,
-  remove,
-  rename,
-  restart,
-  showConfig,
-  unlink
-}
-export default commands
-export type CommandName = (
-  'add' |
-  'broadcast' |
-  'config' |
-  'eval' |
-  'help' |
-  'info' |
-  'link' |
-  'list' |
-  'quit' |
-  'readonly' |
-  'remove' |
-  'rename' |
-  'restart' |
-  'showConfig' |
-  'unlink'
-)
+export { default as add } from './add'
+export { default as broadcast } from './broadcast'
+export { default as config } from './config'
+export { default as eval } from './eval'
+export { default as help } from './help'
+export { default as info } from './info'
+export { default as link } from './link'
+export { default as list } from './list'
+export { default as quit } from './quit'
+export { default as readonly } from './readonly'
+export { default as remove } from './remove'
+export { default as rename } from './rename'
+export { default as restart } from './restart'
+export { default as showConfig } from './showConfig'
+export { default as unlink } from './unlink'

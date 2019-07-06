@@ -1,5 +1,6 @@
-import { MessageOptions, RichEmbed, TextChannel } from 'discord.js'
+import { DMChannel, MessageOptions, RichEmbed, TextChannel } from 'discord.js'
 import { splitString } from '../utils'
+import { TextBasedChannel } from '../types/TextBasedChannel'
 
 type ReplyFunction = (messsage: string, params: MessageOptions | RichEmbed) => Promise<void>
 
@@ -19,12 +20,12 @@ export default class Command {
     if (options) return new ExtendedCommand(handler, options)
   }
 
-  async run (argv: string[], channel: TextChannel) {
+  async run (argv: string[], channel: TextBasedChannel) {
     let reply = await this.handler(argv, (message, params) => this.send(channel, message, params))
     if (reply) return this.send(channel, reply)
   }
 
-  private async send (channel: TextChannel, message: string | MessageOptions, params?: MessageOptions | RichEmbed) {
+  private async send (channel: TextBasedChannel, message: string | MessageOptions, params?: MessageOptions | RichEmbed) {
     if (typeof message === 'string') {
       const messageArray = splitString(message, 1000)
       for (let part of messageArray) await channel.send(part, params)
