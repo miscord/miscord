@@ -110,7 +110,7 @@ export default class Connection {
   removeEndpoint (id: string) {
     let index = this.endpoints.findIndex(endpoint => endpoint.id === id || endpoint.name === id)
     if (index !== -1) this.endpoints.splice(index, 1)
-    return this.save()
+    return this
   }
 
   getPrintable () {
@@ -124,7 +124,7 @@ export default class Connection {
   rename (newName: string) {
     connections.delete(this.name)
     this.name = newName
-    return this.save()
+    return this
   }
 
   delete () {
