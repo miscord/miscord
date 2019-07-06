@@ -1,3 +1,5 @@
+import fetchJSON from '/static/js/fetchJSON.js'
+
 (() => {
   const messenger = document.querySelector('#messenger')
   const button = messenger.querySelector('a.button')
@@ -29,11 +31,10 @@
 
     status.textContent = 'Logging in...'
 
-    const res = await fetch('/validate/messenger', {
-      method: 'POST',
-      body: JSON.stringify({ username: user, password: pass }),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json())
+    const res = await fetchJSON('/validate/messenger', {
+      username: user,
+      password: pass
+    })
 
     if (!res.valid) return markInvalid(res.error)
     status.textContent = `Logged in, username: ${res.username}`

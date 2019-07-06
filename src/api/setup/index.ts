@@ -19,12 +19,12 @@ export default class SetupServer extends EventEmitter {
     })
 
     this.app.register(fastifyStatic, {
-      root: path.join(__dirname, '..', '..', '..', 'static', 'setup'),
+      root: path.join(__dirname, '..', '..', '..', 'static'),
       prefix: '/static/'
     })
 
     this.app.get('/', (request, reply) => {
-      reply.sendFile('index.html')
+      reply.sendFile('setup/index.html')
     })
 
     this.app.post('/validate/discord', async (request, reply) => {

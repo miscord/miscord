@@ -1,3 +1,5 @@
+import fetchJSON from '/static/js/fetchJSON.js'
+
 (() => {
   const discord = document.querySelector('#discord')
   const button = discord.querySelector('a.button')
@@ -28,11 +30,7 @@
 
     status.textContent = 'Logging in...'
 
-    const res = await fetch('/validate/discord', {
-      method: 'POST',
-      body: JSON.stringify({ token }),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json())
+    const res = await fetchJSON('/validate/discord',{ token })
 
     if (!res.valid) return markInvalid(res.error)
     status.textContent = `Logged in, username: ${res.username}`

@@ -1,3 +1,5 @@
+import fetchJSON from '/static/js/fetchJSON.js'
+
 const nextButton = document.querySelector('#next-button')
 class Config {
   constructor () {
@@ -34,11 +36,7 @@ class Config {
 }
 window.config = new Config()
 nextButton.addEventListener('click', async () => {
-  await fetch('/config', {
-    method: 'POST',
-    body: JSON.stringify(config.config),
-    headers: { 'Content-Type': 'application/json' }
-  })
+  await fetchJSON('/config', config.config)
   alert('Starting up the instance...\nYou might need to wait a few seconds before refreshing this page.')
   location.reload()
 })
