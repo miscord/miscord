@@ -14,8 +14,14 @@ export default ({ content, author, channel }: { content: string, author: User, c
   if (!command) command = 'help'
 
   if (!Object.keys(commands).includes(command)) return channel.send(`Command \`${command}\` not found!`)
-  if (command === 'eval' && (channel instanceof TextChannel) && !hasAdmin(author, channel.guild)) return channel.send(`You have no permission!`)
-  if (command === 'config' && argv[1] && argv[1].startsWith('`') && (channel instanceof TextChannel) && !hasAdmin(author, channel.guild)) return channel.send(`You have no permission!`)
+  if (command === 'eval') {
+    // can be unsafe?
+    argv.unshift(
+      channel instanceof TextChannel && !hasAdmin(author, channel.guild)
+        ? 'no'
+        : 'yes'
+    )
+  }
 
   // @ts-ignore Somehow TypeScript still doesn't allow me to get a command this way...
   commands[command].run(argv, channel)
