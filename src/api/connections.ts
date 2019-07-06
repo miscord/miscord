@@ -13,15 +13,15 @@ export default async (app: Server) => {
       body: schema.connection
     }
   }, async (request, reply) => {
-    if (connections.get(request.body.name)) {
-      return reply.code(409).send(new Error('Connection already exists'))
-    }
+    if (connections.has(request.body.name)) return reply.sendError(409, `Connection already exists!`)
+
     const connection = await new Connection(request.body.name).save()
     if (request.body.endpoints && request.body.endpoints.length) {
       for (let endpoint of request.body.endpoints) {
         await connection.addEndpoint(endpoint)
       }
     }
+
     reply.send(connection.toObject())
   })
 

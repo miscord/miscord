@@ -20,6 +20,7 @@ export default async (app: Server) => {
     return discord.client.guilds.array().map(guild)
   })
   app.get('/guilds/:guild/channels', async (request, reply) => {
+    if (!discord.client.guilds.has(request.params.guild)) return reply.sendError(404, 'Guild not found')
     return discord.client.guilds.get(request.params.guild)!!.channels.array().map(channel)
   })
 }

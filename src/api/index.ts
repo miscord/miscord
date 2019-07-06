@@ -1,13 +1,14 @@
 import fastify from 'fastify'
 import auth from 'basic-auth'
+import fastifyStatic from 'fastify-static'
+import path from 'path'
 
 import connectionsHandler from './connections'
 import configHandler from './config'
 import controlHandler from './control'
 import discordHandler from './discord'
 import messengerHandler from './messenger'
-import fastifyStatic from 'fastify-static'
-import path from 'path'
+import { Reply } from '../types/fastify'
 
 const log = logger.withScope('api')
 
@@ -25,15 +26,19 @@ export default function runServer () {
     prefix: '/static/'
   })
 
+  app.decorateReply('sendError', function (this: Reply, code: number, message: string) {
+    this.code(code).send(new Error(message))
+  })
+
   if (config.api.key) {
     app.addHook('preHandler', (request, reply, next) => {
       const { authorization } = request.headers
 
-      if (!authorization) return reply.code(403).send(new Error('API key missing'))
-      if (!authorization.startsWith('Bearer ')) return reply.code(403).send(new Error('API key incorrect'))
+      if (!authorization) return reply.sendError(403, 'API key missing')
+      if (!authorization.startsWith('Bearer ')) return reply.sendError(403, 'API key incorrect')
 
       const key = authorization.split(' ')[1]
-      if (key !== config.api.key) return reply.code(403).send(new Error('API key incorrect'))
+      if (key !== config.api.key) return reply.sendError(403, 'API key incorrect')
 
       next()
     })
@@ -60,6 +65,15 @@ export default function runServer () {
 
   app.get('/', (request, reply) => {
     reply.sendFile('dashboard/index.html')
+  })
+  app.get('/config-discord/', (request, reply) => {
+    reply.sendFile('dashboard/config-discord.html')
+  })
+  app.get('/config-messenger/', (request, reply) => {
+    reply.sendFile('dashboard/config-messenger.html')
+  })
+  app.get('/config-miscellaneous/', (request, reply) => {
+    reply.sendFile('dashboard/config-miscellaneous.html')
   })
   app.get('/connections/', (request, reply) => {
     reply.sendFile('dashboard/connections.html')

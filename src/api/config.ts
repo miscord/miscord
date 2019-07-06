@@ -8,7 +8,7 @@ export default async (app: Server) => {
 
   app.get('/:path', async (request, reply) => {
     const value = dotProp.get(config.config, request.params.path)
-    if (value == null) return reply.code(404).send(new Error(`Config property ${request.params.path} does not exist!`))
+    if (value == null) return reply.sendError(404, `Config property ${request.params.path} does not exist!`)
     reply.send(value)
   })
 
