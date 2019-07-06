@@ -1,10 +1,16 @@
 import { Server } from '../types/fastify'
-import { Guild, GuildChannel } from 'discord.js'
+import { Guild, GuildChannel, GuildMember } from 'discord.js'
 
 function channel ({ type, name, id, parent }: GuildChannel) {
   return {
     type, name, id,
     category: parent ? parent.id : null
+  }
+}
+
+function member ({ nickname, user: { discriminator, username } }: GuildMember) {
+  return {
+    nickname, username, discriminator
   }
 }
 
@@ -15,9 +21,20 @@ function guildWithChannels ({ name, id, channels }: Guild) {
   }
 }
 
+function guildWithUsers ({ name, id, members }: Guild) {
+  return {
+    name, id,
+    users: members.array().map(member)
+  }
+}
+
 export default async (app: Server) => {
   app.get('/channels', async (request, reply) => {
     return discord.client.guilds.array().map(guildWithChannels)
+  })
+
+  app.get('/users', async (request, reply) => {
+    return discord.client.guilds.array().map(guildWithUsers)
   })
 
   app.get('/guilds/:guild/channels', async (request, reply) => {
