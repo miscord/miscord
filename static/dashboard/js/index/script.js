@@ -1,3 +1,5 @@
+import fetchJSON from '/static/js/fetchJSON.js'
+
 const buttons = {
   pause: document.querySelector('#pause-button'),
   unpause: document.querySelector('#unpause-button'),
@@ -22,29 +24,27 @@ function setLoading (button, isLoading) {
 }
 
 buttons.pause.addEventListener('click', () => {
-  fetch('/control/pause', { method: 'POST' })
-    .then(res => res.json())
+  fetchJSON('/control/pause', {})
     .then(updateStatus)
     .catch(alert)
 })
 
 buttons.unpause.addEventListener('click', () => {
-  fetch('/control/unpause', { method: 'POST' })
-    .then(res => res.json())
+  fetchJSON('/control/unpause', {})
     .then(updateStatus)
     .catch(alert)
 })
 
 buttons.restart.addEventListener('click', () => {
   if (!confirm('Are you sure you want to restart Miscord?\nThe dashboard will become unavailable until it logs back in.')) return
-  fetch('/control/restart', { method: 'POST' })
+  fetchJSON('/control/restart', {})
     .then(() => alert('Restarting Miscord...'))
     .catch(alert)
 })
 
 buttons.stop.addEventListener('click', () => {
   if (!confirm('Are you sure you want to stop Miscord?\nThe dashboard will become unavailable until you run it again.')) return
-  fetch('/control/stop', { method: 'POST' })
+  fetchJSON('/control/stop', {})
     .then(() => alert('Stopped Miscord.'))
     .catch(alert)
 })
@@ -57,8 +57,7 @@ function updateStatus ({ status }) {
   disable(buttons.unpause, status !== 'paused')
   disable(buttons.pause, status === 'paused')
 }
-fetch('/control/status')
-  .then(res => res.json())
+fetchJSON('/control/status')
   .then(updateStatus)
   .then(() => {
     setLoading(buttons.pause, false)

@@ -1,4 +1,7 @@
-class AddConnectionLevel {
+import fetchJSON from '/static/js/fetchJSON.js'
+import parseHTML from '/static/js/parseHTML.js'
+
+export default class AddConnectionLevel {
   constructor () {
     const el = parseHTML(`
       <div class="level">
@@ -14,27 +17,18 @@ class AddConnectionLevel {
     const button = el.querySelector('#add-button')
     const field = el.querySelector('#add-name')
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       const name = field.value.trim()
       field.value = ''
       if (!name) return
 
       button.classList.add('is-loading')
-      fetch('/connections', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          endpoints: []
-        })
+      await fetchJSON('/connections', {
+        name,
+        endpoints: []
       })
-        .then(() => {
-          button.classList.remove('is-loading')
-          this.onadd(name)
-        })
-        .catch(alert)
+      button.classList.remove('is-loading')
+      this.onadd(name)
     })
 
     field.addEventListener('keydown', ev => {

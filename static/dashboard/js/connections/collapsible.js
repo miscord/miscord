@@ -1,9 +1,8 @@
-function collapsible (connection) {
+export default function collapsible (connection) {
   const header = connection.querySelector('header')
   const icons = header.querySelector('.icons')
   const deleteButton = header.querySelector('button.delete')
   const content = connection.querySelector('.message-body')
-  console.log(header)
   header.addEventListener('click', ev => {
     if (ev.target === deleteButton) return
     content.hidden = !content.hidden

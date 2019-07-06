@@ -1,13 +1,18 @@
-const container = document.querySelector('#connections')
+import fetchJSON from '/static/js/fetchJSON.js'
+import parseHTML from '/static/js/parseHTML.js'
+import handleError from '/static/js/handleError.js'
+import initSelects from '/static/js/initSelects.js'
+import collapsible from '/static/dashboard/js/connections/collapsible.js'
+import AddConnectionLevel from '/static/dashboard/js/connections/add.js'
 
-const fetchJSON = url => fetch(url).then(res => res.json())
+const container = document.querySelector('#connections')
 
 Promise.all([
   fetchJSON('/connections'),
-  fetchJSON('/discord/guilds'),
+  fetchJSON('/discord/channels'),
   fetchJSON('/messenger/threads')
 ])
-  .then(([connections, guilds, threads]) => {
+  .then(([ connections, guilds, threads ]) => {
     const categoryName = (guild, catID) => catID ? '[' + guild.channels.find(chan => chan.id === catID).name + ']' : ''
 
     function endpointName (endpoint) {
@@ -40,21 +45,23 @@ Promise.all([
         <button style="margin-left: auto;" class="delete" aria-label="delete" data-id="${endpoint.id}"></button>
       </div>
     `
+    const disabledStyle = ' style="color: #aaa; text-decoration: line-through; font-weight: lighter;"'
 
     const Connection = conn => parseHTML(`
       <article class="message connection">
         <header class="message-header">
-          <p>${conn.name}</p>
+          <p${conn.disabled ? disabledStyle : ''}>${conn.name}</p>
           <div class="icons" hidden>icons go here</div>
           <button class="delete" aria-label="delete"></button>
         </header>
         <div class="message-body">
+          <input type="checkbox" class="disable-checkbox" ${conn.disabled ? 'checked' : ''}> Disabled<br />
           ${conn.endpoints.length ? conn.endpoints.map(Endpoint).join('\n') : '<b>No endpoints!</b>'}
-          <select name="discord-endpoints[]" class="discord-endpoints-select">
+          <select name="discord-endpoints[]" class="discord-channels-select">
             <option></option>
           </select>
           <br />
-          <select name="messenger-endpoints[]" class="messenger-endpoints-select">
+          <select name="messenger-endpoints[]" class="messenger-threads-select">
             <option></option>
          </select>
         </div>
@@ -64,43 +71,41 @@ Promise.all([
     function loadConnection (connection) {
       const el = Connection(connection)
 
-      const refresh = () => {
-        fetch(`/connections/${connection.name}`)
-          .then(res => res.json())
-          .then(connection => {
-            const newEl = loadConnection(connection)
-            el.parentNode.replaceChild(newEl, el)
-            initSelects(guilds, threads)
-          })
+      const refresh = async conn => {
+        if (!conn) conn = await fetchJSON(`/connections/${connection.name}`)
+        const newEl = loadConnection(conn)
+        el.parentNode.replaceChild(newEl, el)
+        initSelects({ guilds, threads })
       }
 
-      el.querySelector('.delete').addEventListener('click', () => {
+      el.querySelector('.disable-checkbox').addEventListener('click', async () => {
+        const action = connection.disabled ? 'enable' : 'disable'
+        const conn = await fetchJSON(`/connections/${connection.name}/${action}`, 'POST')
+        await refresh(conn)
+      })
+
+      el.querySelector('.delete').addEventListener('click', async () => {
         if (confirm(`Do you want to delete connection ${connection.name}?`)) {
-          fetch(`/connections/${connection.name}`, { method: 'DELETE' })
-            .then(() => location.reload())
+          await fetchJSON(`/connections/${connection.name}`, 'DELETE')
+          location.reload()
         }
       })
 
       el.querySelectorAll('.endpoint > .delete').forEach(button => {
-        button.addEventListener('click', ev => {
-          fetch(`/connections/${connection.name}/endpoints/${ev.target.dataset.id}`, { method: 'DELETE' })
-            .then(() => refresh())
+        button.addEventListener('click', async ev => {
+          await fetchJSON(`/connections/${connection.name}/endpoints/${ev.target.dataset.id}`, 'DELETE')
+          await refresh()
         })
       })
 
-      const discordEndpoints = $(el).find('.discord-endpoints-select')
-      const messengerEndpoints = $(el).find('.messenger-endpoints-select')
+      const discordEndpoints = $(el).find('.discord-channelss-select')
+      const messengerEndpoints = $(el).find('.messenger-threads-select')
 
-      function addEndpoint (type, id) {
+      async function addEndpoint (type, id) {
         discordEndpoints.prop('disabled', true)
         messengerEndpoints.prop('disabled', true)
-        fetch(`/connections/${connection.name}/endpoints`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ type, id })
-        }).then(() => refresh())
+        await fetchJSON(`/connections/${connection.name}/endpoints`, { type, id })
+        await refresh()
       }
 
       discordEndpoints.change(ev => addEndpoint('discord', ev.target.value))
@@ -119,7 +124,7 @@ Promise.all([
       }
     }
 
-    initSelects(guilds, threads)
+    initSelects({ guilds, threads })
 
     const level = new AddConnectionLevel()
     level.onadd = name => {
@@ -127,8 +132,8 @@ Promise.all([
       if (noConn) container.removeChild(noConn)
 
       container.insertBefore(loadConnection({ name, endpoints: [] }), level.el)
-      initSelects(guilds, threads)
+      initSelects({ guilds, threads })
     }
     container.appendChild(level.el)
   })
-  .catch(alert)
+  .catch(handleError)
