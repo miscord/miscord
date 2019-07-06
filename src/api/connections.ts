@@ -1,11 +1,23 @@
-import { Server } from '../types/fastify'
+import { DoneFunction, Reply, Request, Server } from '../types/fastify'
 
 import Connection from '../Connection'
 import schema from './schema'
 
+const checkConnection = {
+  preHandler: function (request: Request, reply: Reply, done: DoneFunction) {
+    const { name } = request.params
+    if (!connections.has(name)) return reply.sendError(404, `Connection ${name} not found!`)
+    done()
+  }
+}
+
 export default async (app: Server) => {
+  app.decorateRequest('getConnection', function (this: Request) {
+    return connections.get(this.params.name)
+  })
+
   app.get('/', (request, reply) => {
-    reply.send(connections.list.map(connection => connection.toObject()))
+    reply.send(connections.map(connection => connection.toObject()))
   })
 
   app.post('/', {
@@ -25,30 +37,43 @@ export default async (app: Server) => {
     reply.send(connection.toObject())
   })
 
-  app.get('/:name', async (request, reply) => {
-    const { name } = request.params
-    const connection = connections.get(name)
-
-    if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
+  app.get('/:name', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
 
     reply.send(connection.toObject())
   })
 
-  app.delete('/:name', async (request, reply) => {
-    const { name } = request.params
-    const connection = connections.get(name)
+  app.post('/:name/disable', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
 
-    if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
+    if (connection.disabled) {
+      return reply.sendError(400, `Connection ${connection.name} is already disabled!`)
+    }
+    await connection.disable().save()
+
+    reply.send(connection.toObject())
+  })
+
+  app.post('/:name/enable', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
+
+    if (!connection.disabled) {
+      return reply.sendError(400, `Connection ${connection.name} is already enabled!`)
+    }
+    await connection.enable().save()
+
+    reply.send(connection.toObject())
+  })
+
+  app.delete('/:name', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
 
     await connection.delete()
     return reply.send(connection.toObject())
   })
 
-  app.get('/:name/endpoints', async (request, reply) => {
-    const { name } = request.params
-    const connection = connections.get(name)
-
-    if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
+  app.get('/:name/endpoints', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
 
     reply.send(connection.toObject().endpoints)
   })
@@ -56,29 +81,26 @@ export default async (app: Server) => {
   app.post('/:name/endpoints', {
     schema: {
       body: schema.endpoint
-    }
+    },
+    ...checkConnection
   }, async (request, reply) => {
-    const { name } = request.params
-    const connection = connections.get(name)
+    const connection = request.getConnection()
 
-    if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
     if (connection.hasEndpoint(request.body.id)) {
-      return reply.code(400).send(new Error(`Connection ${name} already has endpoint ${request.body.id}`))
+      return reply.sendError(400, `Connection ${connection.name} already has endpoint ${request.body.id}`)
     }
 
     await connection.addEndpoint(request.body)
     reply.send(connection.toObject().endpoints)
   })
 
-  app.delete('/:name/endpoints/:id', async (request, reply) => {
-    const { name, id } = request.params
-    const connection = connections.get(name)
+  app.delete('/:name/endpoints/:id', checkConnection, async (request, reply) => {
+    const connection = request.getConnection()
+    const { id, name } = request.params
 
-    if (!connection) return reply.code(404).send(new Error(`Connection ${name} not found!`))
+    if (!connection.has(id)) return reply.sendError(404, `Connection ${name} doesn't have an endpoint ${id}!`)
 
-    if (!connection.has(id)) return reply.code(404).send(new Error(`Connection ${name} doesn't have an endpoint ${id}!`))
-
-    await connection.removeEndpoint(id)
+    await connection.removeEndpoint(id).save()
 
     reply.send(connection.toObject().endpoints)
   })
