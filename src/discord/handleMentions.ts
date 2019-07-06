@@ -8,16 +8,18 @@ export default function handleMentions (message: string, channel: TextChannel) {
   if (massMentions.some(massMention => message.includes(massMention)) && !config.discord.massMentions) {
     massMentions.forEach(massMention => { message = message.replace(new RegExp(massMention, 'g'), `\`${massMention}\``) })
   }
-  // If no matches, or usermentions is disabled, return.
-  if (!config.discord.userMentions) return message
 
-  for (let role of channel.guild.roles.array()) {
-    message = replaceCaseInsensitive(message, `@${role.name}`, role.toString())
+  if (config.discord.roleMentions) {
+    for (let role of channel.guild.roles.array()) {
+      message = replaceCaseInsensitive(message, `@${role.name}`, role.toString())
+    }
   }
 
-  for (let member of channel.members.array()) {
-    message = replaceCaseInsensitive(message, `@${member.user.username}`, member.toString())
-    message = replaceCaseInsensitive(message, `@${member.nickname}`, member.toString())
+  if (config.discord.userMentions) {
+    for (let member of channel.members.array()) {
+      message = replaceCaseInsensitive(message, `@${member.user.username}`, member.toString())
+      message = replaceCaseInsensitive(message, `@${member.nickname}`, member.toString())
+    }
   }
 
   log.trace('message', message)

@@ -19,6 +19,7 @@ export default {
     createChannels: false,
     massMentions: false,
     userMentions: true,
+    roleMentions: true,
     ignoreBots: false,
     ignoredUsers: []
   },

@@ -29,6 +29,7 @@ export default interface Config extends ConfigManager {
     createChannels: boolean
     massMentions: boolean
     userMentions: boolean
+    roleMentions: boolean
     ignoreBots: boolean
     ignoredUsers: string[]
   }
