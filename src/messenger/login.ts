@@ -1,11 +1,13 @@
-import { Client, Thread } from 'libfb'
+import { Client, Thread, Session } from 'libfb'
 import { fillNames } from './getThread'
+import FakeClient from '../dummy/messenger'
+import { reportError } from '../error'
 
 const log = logger.withScope('messenger:login')
 
 export default async () => {
   log.start('Logging in to Facebook...')
-  let session
+  let session: Session | undefined
   try {
     session = await config.loadSession()
     if (session && session.tokens && session.tokens.identifier) {
@@ -18,17 +20,26 @@ export default async () => {
   } catch (err) {
     session = undefined
   }
-  let client
-  try {
-    client = new Client({ session })
-    await client.login(config.messenger.username, config.messenger.password)
-  } catch (err) {
-    if (session && session.deviceId) {
-      client = new Client({ deviceId: session.deviceId })
-    } else {
-      client = new Client()
-    }
-    await client.login(config.messenger.username, config.messenger.password)
+  let client: Client | FakeClient = new FakeClient()
+  if (config.messenger.username !== 'dummy') {
+    await Promise.resolve()
+      .then(() => {
+        client = new Client({ session })
+        return client.login(config.messenger.username, config.messenger.password)
+      })
+      .catch(() => {
+        if (session && session.deviceId) {
+          client = new Client({ deviceId: session.deviceId })
+        } else {
+          client = new Client()
+        }
+        return client.login(config.messenger.username, config.messenger.password)
+      })
+      .catch(err => {
+        client = new FakeClient()
+        log.warn('Could not log in to Facebook')
+        return reportError(err)
+      })
   }
   global.messenger = {
     client,
@@ -57,6 +68,9 @@ export default async () => {
 
   log.trace('threads', Array.from(messenger.threads, ([ id, thread ]) => ({ id, name: thread.name })))
   log.trace('senders', Array.from(messenger.senders, ([ id, sender ]) => ({ id, name: sender.name })))
-  await config.saveSession(client.getSession())
-  log.success('Logged in to Facebook')
+
+  if (client instanceof Client) {
+    await config.saveSession(client.getSession())
+    log.success('Logged in to Facebook')
+  }
 }

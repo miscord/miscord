@@ -15,6 +15,27 @@ function tryToGetTheActualError (e: any): Error | void {
   return e
 }
 
+export async function reportError (error: Error) {
+  log.error('', error)
+  sendToSentry(error)
+
+  const desc = getErrorDescription(error)
+  if (desc) log.error(desc)
+
+  if (global.discord && discord.channels && discord.channels.error) {
+    try {
+      let errorMessage = splitString(`${error.message}\n${error.stack}`, 1000)
+      for (let channel of discord.channels.error) {
+        for (let part of errorMessage) await channel.send(part, { code: true })
+        if (desc) await channel.send(desc)
+      }
+    } catch (err) {
+      log.fatal(err)
+      sendToSentry(err)
+    }
+  }
+}
+
 export default async (error: Error | string | { error?: any, err?: any }) => {
   if (!(error instanceof Error)) {
     const possibleError = tryToGetTheActualError(error)
@@ -30,29 +51,13 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
     error.message.includes('Incorrect login details were provided') ||
     error.message.includes('EPIPE')
   ) ? 1 : 2
-  log.error('', error)
-  sendToSentry(error)
 
-  const desc = getErrorDescription(error)
-  if (desc) log.error(desc)
+  await reportError(error)
 
   if (isNpm) {
     log.warn(`Logs from NPM are unnecessary and don't give much information.
 Miscord logs folder:
 ${dataPath || getConfigDir()}/logs`)
-  }
-
-  if (global.discord && discord.channels && discord.channels.error) {
-    try {
-      let errorMessage = splitString(`${error.message}\n${error.stack}`, 1000)
-      for (let channel of discord.channels.error) {
-        for (let part of errorMessage) await channel.send(part, { code: true })
-        if (desc) await channel.send(desc)
-      }
-    } catch (err) {
-      log.fatal(err)
-      sendToSentry(err)
-    }
   }
 
   await closeSentry()

@@ -1,10 +1,16 @@
 const log = logger.withScope('discord:login')
 
 import { Client, CategoryChannel, Collection, DMChannel, TextChannel } from 'discord.js'
+import FakeClient from '../dummy/discord'
 import GuildArray from '../types/GuildArray'
 
 export default () => {
-  const client = new Client()
+  let client: Client | FakeClient
+  if (config.discord.token === 'dummy') {
+    client = new FakeClient()
+  } else {
+    client = new Client()
+  }
 
   // log in to discord
   log.start('Logging in to Discord...')
@@ -78,12 +84,12 @@ It's not an error... unless you added the bot to your guild already.`)
     return client
   })
 }
-async function getChannels (client: Client, channels: string[]): Promise<(TextChannel | DMChannel)[]> {
+async function getChannels (client: Client | FakeClient, channels: string[]): Promise<(TextChannel | DMChannel)[]> {
   return (
     await Promise.all(channels.map(id => getChannel(client, id)))
   ).filter(Boolean) as (TextChannel | DMChannel)[]
 }
-async function getChannel (client: Client, channelID: string): Promise<TextChannel | DMChannel | undefined> {
+async function getChannel (client: Client | FakeClient, channelID: string): Promise<TextChannel | DMChannel | undefined> {
   if (discord.client.users.has(channelID)) return client.users.get(channelID)!!.createDM()
   if (discord.client.channels.has(channelID)) return client.channels.get(channelID) as TextChannel | DMChannel
   log.warn(`Channel/user ${channelID} not found.`)
