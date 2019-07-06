@@ -11,6 +11,7 @@ export interface Endpoint {
 export default class Connection {
   name: string
   endpoints: Endpoint[]
+  disabled: boolean = false
 
   constructor (name: string, endpoints: Endpoint[] = []) {
     this.name = name
@@ -131,6 +132,18 @@ export default class Connection {
     return connections.save()
   }
 
+  disable () {
+    if (this.disabled) return this
+    this.disabled = true
+    return this
+  }
+
+  enable () {
+    if (!this.disabled) return this
+    this.disabled = false
+    return this
+  }
+
   async save () {
     connections.set(this.name, this)
     await connections.save()
@@ -139,14 +152,15 @@ export default class Connection {
 
   toYAMLObject () {
     return {
-      [this.name]: this.cleanEndpoints
+      [(this.disabled ? '_' : '') + this.name]: this.cleanEndpoints
     }
   }
 
   toObject () {
     return {
       name: this.name,
-      endpoints: this.cleanEndpoints
+      endpoints: this.cleanEndpoints,
+      disabled: this.disabled
     }
   }
 
