@@ -6,25 +6,30 @@ export default {
       messenger: '(Messenger: {name})'
     },
     ignoreEmbeds: false,
+    attachmentTooLargeError: true,
+
     handleEvents: true,
     handlePlans: true,
     handlePolls: true,
+
     showPlanDetails: true,
-    showPollDetails: true,
-    attachmentTooLargeError: true
+    showPollDetails: true
   },
   discord: {
     renameChannels: true,
     showFullNames: false,
     createChannels: false,
+
     massMentions: false,
     userMentions: true,
     roleMentions: true,
+
     ignoreBots: false,
     ignoredUsers: []
   },
   checkUpdates: false,
   logLevel: process.env.MISCORD_LOG_LEVEL || 'info',
   ignoredSequences: [],
-  channels: {}
+  channels: {},
+  enableEval: false
 } as { [key: string]: any }

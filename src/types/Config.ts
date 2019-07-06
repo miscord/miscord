@@ -47,4 +47,5 @@ export default interface Config extends ConfigManager {
   checkUpdates: boolean
   logLevel: string
   ignoredSequences: any[]
+  enableEval: boolean
 }

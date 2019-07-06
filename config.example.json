@@ -42,5 +42,6 @@
   "checkUpdates": false,
   "logLevel": "info",
   "timezone": "",
-  "ignoredSequences": []
+  "ignoredSequences": [],
+  "enableEval": false
 }

@@ -14,4 +14,8 @@ export default new Command(() => `Commands available:
 - \`broadcast\` - broadcast a message to every registered connection
 - \`help\` - shows this message
 - \`restart\` - restarts Miscord
-- \`quit\` - exits Miscord`)
+- \`quit\` - exits Miscord
+- \`eval\` - ${config.enableEval
+  ? 'execute JavaScript code, only for admins'
+  : 'disabled, `config.enableEval = false`'
+}`)
