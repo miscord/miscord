@@ -14,7 +14,7 @@ export default async (app: Server) => {
 
   app.post('/:path', async (request, reply) => {
     await config.set(request.params.path, request.body)
-    reply.send(request.body)
+    reply.send(typeof request.body === 'string' ? JSON.stringify(request.body) : request.body)
   })
 
   app.delete('/:path', async (request, reply) => {
