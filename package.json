@@ -4,8 +4,8 @@
   "description": "Facebook Messenger to Discord bridge",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node dist/bin/index.js",
-    "dev": "npm run prepare && npm start",
+    "start": "npm run prepare && node dist/bin/index.js",
+    "dev": "ts-node src/bin/index.ts",
     "test": "tslint -c tslint.json 'src/**/*.ts'",
     "build": "node dist/bin/build.js",
     "clean": "shx rm -rf dist/",
