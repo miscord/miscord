@@ -4,7 +4,7 @@ export default function initSelects ({ guilds, threads }) {
 }
 
 export function initThreads (threads) {
-  $('.messenger-threads-select').select2({
+  $('.messenger-thread-select').select2({
     placeholder: 'Select a Messenger chat',
     data: threads.map(thread => ({
       id: thread.id,
@@ -14,7 +14,7 @@ export function initThreads (threads) {
 }
 
 export function initChannels (guilds) {
-  $('.discord-channels-select').select2({
+  $('.discord-channel-select').select2({
     placeholder: 'Select a Discord channel',
     data: guilds.map(guild => ({
       text: guild.name,

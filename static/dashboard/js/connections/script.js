@@ -57,11 +57,11 @@ Promise.all([
         <div class="message-body">
           <input type="checkbox" class="disable-checkbox" ${conn.disabled ? 'checked' : ''}> Disabled<br />
           ${conn.endpoints.length ? conn.endpoints.map(Endpoint).join('\n') : '<b>No endpoints!</b>'}
-          <select name="discord-endpoints[]" class="discord-channels-select">
+          <select name="discord-endpoints" class="discord-channel-select">
             <option></option>
           </select>
           <br />
-          <select name="messenger-endpoints[]" class="messenger-threads-select">
+          <select name="messenger-endpoints" class="messenger-thread-select">
             <option></option>
          </select>
         </div>
