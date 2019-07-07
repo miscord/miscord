@@ -2,7 +2,9 @@ import { Message } from 'discord.js'
 
 export default (message: Message) => {
   return {
-    body: message.type !== 'PINS_ADD' ? message.content : `<@${message.author.id}> pinned a message to this channel.`,
+    body: message.type !== 'PINS_ADD'
+      ? message.content
+      : `<@${message.author.id}> pinned a message to channel <#${message.channel.id}>.`,
     opts: {
       embeds: message.embeds,
       username: message.author.username,

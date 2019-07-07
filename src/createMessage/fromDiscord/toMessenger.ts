@@ -1,14 +1,18 @@
-import { MessengerMessageData } from '../MessageData'
-
 const log = logger.withScope('createMessage:fromDiscord:messenger')
 
-import { Message } from 'discord.js'
+import { MessengerMessageData } from '../MessageData'
+import { DMChannel, Message } from 'discord.js'
 import downloadFile from '../downloadFile'
 import handleCustomEmoji from '../handleCustomEmoji'
 
 export default async (message: Message): Promise<MessengerMessageData> => {
   let username = message.member ? (message.member.nickname || message.author.username) : message.author.username
-  let content = message.type !== 'PINS_ADD' ? message.cleanContent : `${username} pinned a message to this channel.`
+  const channelName = (message.channel instanceof DMChannel)
+    ? '@' + message.channel.recipient.username
+    : '#' + message.channel.name
+  let content = message.type !== 'PINS_ADD'
+    ? message.cleanContent
+    : `${username} pinned a message to channel ${channelName}.`
 
   // copy message content to a new variable, as the cleanContent property is read-only
   log.debug('clean content', content)
