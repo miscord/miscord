@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist/bin/index.js",
+    "dev": "npm run prepare && npm start",
     "test": "tslint -c tslint.json 'src/**/*.ts'",
     "build": "node dist/bin/build.js",
     "clean": "shx rm -rf dist/",
