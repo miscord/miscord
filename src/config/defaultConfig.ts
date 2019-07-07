@@ -7,6 +7,7 @@ export default {
     },
     ignoreEmbeds: false,
     attachmentTooLargeError: true,
+    sendPinned: false,
 
     handleEvents: true,
     handlePlans: true,

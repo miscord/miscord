@@ -39,15 +39,16 @@ export default async (message: Message) => {
   const connection = connections.getWith(message.channel.id)
   if (!connection) return log.debug('Channel not found in bot\'s connections')
 
-  // find threads by channel ID
-  const threads = connection.getWritableThreads()
-  log.trace('threads', threads)
-
   // send message to threads specified in the connections
   {
-    const data = await createMessage.toMessenger(message)
-    Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
-      .then(() => cleanTemporaryFiles(data))
+    if (message.type === 'PINS_ADD' && !config.messenger.sendPinned) {
+      log.debug(`"pinned" messages are disabled, ignoring`)
+    } else {
+      const threads = connection.getWritableThreads()
+      const data = await createMessage.toMessenger(message)
+      Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
+        .then(() => cleanTemporaryFiles(data))
+    }
   }
   {
     const channels = connection.getOtherWritableChannels(message.channel.id)

@@ -12,9 +12,12 @@ export default interface Config extends ConfigManager {
     }
     ignoreEmbeds: boolean
     attachmentTooLargeError: boolean
+    sendPinned: boolean
+
     handleEvents: boolean
     handlePlans: boolean
     handlePolls: boolean
+
     showPlanDetails: boolean
     showPollDetails: boolean
   }
@@ -27,9 +30,11 @@ export default interface Config extends ConfigManager {
     renameChannels: boolean
     showFullNames: boolean
     createChannels: boolean
+
     massMentions: boolean
     userMentions: boolean
     roleMentions: boolean
+
     ignoreBots: boolean
     ignoredUsers: string[]
   }
