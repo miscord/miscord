@@ -4,7 +4,6 @@ import { TextChannel } from 'discord.js'
 export interface Endpoint {
   type: 'messenger' | 'discord'
   id: string
-  name?: string
   readonly?: boolean
 }
 
@@ -21,46 +20,36 @@ export default class Connection {
   static isThread (endpoint: Endpoint) { return endpoint.type === 'messenger' }
   static isChannel (endpoint: Endpoint) { return endpoint.type === 'discord' }
 
-  addThread ({ id, name }: { id: string, name: string }) {
+  addThread (id: string) {
     this.endpoints.push({
       type: 'messenger',
-      id: id,
-      name
+      id
     })
     return this
   }
 
-  addChannel ({ id, name }: { id: string, name: string }) {
+  addChannel (id: string) {
     this.endpoints.push({
       type: 'discord',
-      id,
-      name
+      id
     })
     return this
   }
 
   async addEndpoint ({ id, type, readonly }: { id: string, type: 'discord' | 'messenger', readonly?: boolean }) {
     if (type === 'discord') {
-      const channel = discord.client.channels.find(channel => channel.id === id || (channel as TextChannel).name === id)
-      if (!channel) throw new Error(`Discord channel \`${id}\` not found!`)
+      if (!discord.client.channels.has(id)) throw new Error(`Discord channel \`${id}\` not found!`)
       await this
-        .addChannel({
-          id: channel.id,
-          name: (channel as TextChannel).name
-        })
+        .addChannel(id)
         .save()
     } else {
-      let thread
       try {
-        thread = await getThread(id)
+        await getThread(id)
       } catch (err) {
         throw new Error(`Messenger thread \`${id}\` not found!`)
       }
       await this
-        .addThread({
-          id,
-          name: thread!!.name
-        })
+        .addThread(id)
         .save()
     }
     if (readonly) this.markEndpointAsReadonly(id, true)
@@ -82,33 +71,36 @@ export default class Connection {
 
   async checkChannelRenames (name: string) {
     if (
-      name &&
-      config.discord.renameChannels &&
-      this.getThreads().length === 1 &&
-      this.getChannels().length === 1 &&
-      !this.getChannels()[0].readonly &&
-      this.getChannels()[0].name !== name
-    ) {
-      const endpoint = this.getChannels()[0]
-      const channel = discord.getChannel(endpoint.id)
-      if (!channel) return this
-      await channel.edit({ name })
-    }
+      !name ||
+      !config.discord.renameChannels ||
+      this.getThreads().length !== 1 ||
+      this.getChannels().length !== 1
+    ) return this
+
+    const channel = discord.client.channels.get(this.getChannels()[0].id)
+    if (
+      !channel ||
+      !(channel instanceof TextChannel) ||
+      name === channel.name
+    ) return this
+
+    await channel.edit({ name })
+
     return this
   }
 
   hasEndpoint (id: string) {
-    return this.endpoints.some(endpoint => endpoint.id === id || endpoint.name === id)
+    return this.endpoints.some(endpoint => endpoint.id === id)
   }
 
   markEndpointAsReadonly (id: string, readonly: boolean) {
-    let endpoint = this.endpoints.find(endpoint => endpoint.id === id || endpoint.name === id)
+    let endpoint = this.endpoints.find(endpoint => endpoint.id === id)
     endpoint!!.readonly = readonly
     return this
   }
 
   removeEndpoint (id: string) {
-    let index = this.endpoints.findIndex(endpoint => endpoint.id === id || endpoint.name === id)
+    let index = this.endpoints.findIndex(endpoint => endpoint.id === id)
     if (index !== -1) this.endpoints.splice(index, 1)
     return this
   }

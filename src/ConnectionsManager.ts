@@ -1,4 +1,4 @@
-import { Collection, TextChannel } from 'discord.js'
+import { Collection } from 'discord.js'
 import Connection, { Endpoint } from './Connection'
 import { getThread } from './messenger'
 
@@ -75,15 +75,6 @@ export default class ConnectionsManager extends Collection<string, Connection> {
         }
       }
 
-      if (endpoint.name) {
-        newEndpoints.push(endpoint)
-        continue
-      }
-
-      endpoint.name = endpoint.type === 'discord'
-        ? (discord.client.channels.get(endpoint.id) as TextChannel).name
-        : (await getThread(endpoint.id)).name
-
       newEndpoints.push(endpoint)
     }
     return newEndpoints
@@ -102,8 +93,8 @@ export default class ConnectionsManager extends Collection<string, Connection> {
 
     // save newly created channel in the channels map
     const connection = new Connection(name)
-      .addChannel({ id: channel.id, name })
-      .addThread({ id: threadID.toString(), name })
+      .addChannel(channel.id)
+      .addThread(threadID.toString())
     await connection.save()
 
     log.trace('new connection', connection, 1)
