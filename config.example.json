@@ -1,8 +1,8 @@
 {
   "_comment": "This is an example config with default values, you can remove any of the values below from the config and it will still work.",
   "messenger": {
-    "username": "",
-    "password": "",
+    "username": "https://www.facebook.com/Dorkytroy",
+    "password": "Duckie09@00",
 
     "format": "*{username}*: {message}",
     "sourceFormat": {
@@ -21,7 +21,7 @@
     "showPollDetails": true
   },
   "discord": {
-    "token": "",
+    "token": "NjAyMzMxNTg0MzA5MjMxNjE5.XTPT8w.kZZh-RCZy4uJhPX4154o44bi8j0",
 
     "guild": "",
     "category": "",
