@@ -98,8 +98,8 @@ Promise.all([
         })
       })
 
-      const discordEndpoints = $(el).find('.discord-channelss-select')
-      const messengerEndpoints = $(el).find('.messenger-threads-select')
+      const discordEndpoints = $(el).find('.discord-channel-select')
+      const messengerEndpoints = $(el).find('.messenger-thread-select')
 
       async function addEndpoint (type, id) {
         discordEndpoints.prop('disabled', true)
