@@ -1,4 +1,4 @@
-![banner](../gh-pages/img/banner.png)
+![banner](https://miscord.net/img/banner.png)
 
 <p align="center">
   <a href="https://npmjs.org/package/miscord"><img src="https://img.shields.io/npm/dt/miscord.svg?style=for-the-badge" alt="NPM downloads"></a>
@@ -15,29 +15,12 @@
 
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](https://paypal.me/Bjornskjald)** &nbsp;
-**[FAQ](../../wiki/faq)** &nbsp;
+**[FAQ](https://docs.miscord.net/faq)** &nbsp;
 **[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 
-# :memo: Wiki
+# :memo: Documentation
 
-**Miscord has its own wiki [here](../../wiki), any information is most likely to be there**
-
-# :wrench: Setup
-
-## Installation
-- [NPM install (Linux)](../../wiki/install#npm)
-- [Homebrew install (macOS)](../../wiki/install#homebrew)
-- [Binary packages (Windows)](../../releases/latest)
-- [Docker install (headless servers)](../../wiki/install#docker)
-
-## Configuration
-
-**Follow a guide [here](../../wiki/Creating-a-Discord-bot) to get the Discord token**
-
-**[Config Generator](https://miscord.net/config-generator.html)**  
-**[Example config](config.example.json)**  
-**[All config properties (explained)](../../wiki/configuration)**  
-**Next step: [connections setup](../../wiki/Connections.yml)**
+**See the guide/docs [here](https://docs.miscord.net)**
 
 # :heart: Contributors
 
