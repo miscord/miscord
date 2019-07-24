@@ -1,3 +1,5 @@
+import parseHTML from '/static/js/parseHTML.js'
+
 export default function collapsible (connection) {
   const header = connection.querySelector('header')
   const icons = header.querySelector('.icons')

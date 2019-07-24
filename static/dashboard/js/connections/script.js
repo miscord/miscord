@@ -1,4 +1,5 @@
 import fetchJSON from '/static/js/fetchJSON.js'
+import api from '/static/js/api.js'
 import parseHTML from '/static/js/parseHTML.js'
 import handleError from '/static/js/handleError.js'
 import initSelects from '/static/js/initSelects.js'
@@ -9,32 +10,29 @@ const container = document.querySelector('#connections')
 
 Promise.all([
   fetchJSON('/connections'),
-  fetchJSON('/discord/channels'),
-  fetchJSON('/messenger/threads')
+  api.getGuilds(),
+  api.getThreads()
 ])
   .then(([ connections, guilds, threads ]) => {
-    const categoryName = (guild, catID) => catID ? '[' + guild.channels.find(chan => chan.id === catID).name + ']' : ''
-
     function endpointName (endpoint) {
       if (endpoint.type === 'discord') {
-        const guild = guilds.find(guild => guild.channels.some(channel => channel.id === endpoint.id))
-        const channel = guild.channels.find(channel => channel.id === endpoint.id)
+        const channel = guilds.getChannel(endpoint.id)
         return [
-          `${guild.name}:`,
-          categoryName(guild, channel.category),
-          `#${endpoint.name}`
+          `${channel.guild.name}:`,
+          channel.category ? `[${guilds.getChannel(channel.category).name}]` : '',
+          `#${channel.name}`
         ].join(' ')
       } else {
-        return endpoint.name
+        const thread = threads.get(endpoint.id)
+        return thread.name
       }
     }
 
     function endpointLink (endpoint) {
       if (endpoint.type === 'discord') {
-        const guild = guilds.find(guild => guild.channels.some(channel => channel.id === endpoint.id))
-        return `https://discordapp.com/channels/${guild.id}/${endpoint.id}`
+        return guilds.getChannel(endpoint.id).link
       } else {
-        return `https://messenger.com/t/${endpoint.id}/`
+        return threads.get(endpoint.id).link
       }
     }
 
@@ -55,7 +53,9 @@ Promise.all([
           <button class="delete" aria-label="delete"></button>
         </header>
         <div class="message-body">
-          <input type="checkbox" class="disable-checkbox" ${conn.disabled ? 'checked' : ''}> Disabled<br />
+          <input type="checkbox" class="disable-checkbox" id="${conn.name}-disabled" ${conn.disabled ? 'checked' : ''}>
+          <label for="${conn.name}-disabled">Disabled</label>
+          <br /><br />
           ${conn.endpoints.length ? conn.endpoints.map(Endpoint).join('\n') : '<b>No endpoints!</b>'}
           <select name="discord-endpoints" class="discord-channel-select">
             <option></option>
