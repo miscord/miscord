@@ -1,13 +1,15 @@
 const log = logger.withScope('discord:handleMentions')
 
-import { TextChannel } from 'discord.js'
+import { DMChannel, TextChannel } from 'discord.js'
 
-export default function handleMentions (message: string, channel: TextChannel) {
+export default function handleMentions (message: string, channel: (TextChannel | DMChannel)) {
   // Goes through the message replacing mentions with escaped mentions if massMentions is disabled.
   const massMentions = ['@everyone', '@here']
   if (massMentions.some(massMention => message.includes(massMention)) && !config.discord.massMentions) {
     massMentions.forEach(massMention => { message = message.replace(new RegExp(massMention, 'g'), `\`${massMention}\``) })
   }
+
+  if (channel instanceof DMChannel) return message
 
   if (config.discord.roleMentions) {
     for (let role of channel.guild.roles.array()) {
