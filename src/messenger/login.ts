@@ -37,10 +37,18 @@ export default async () => {
       })
       .catch(err => {
         client = new FakeClient()
-        log.warn('Could not log in to Facebook')
+        log.warn('Could not log into Facebook')
         return reportError(err)
       })
   }
+
+  if (client instanceof FakeClient && discord.channels.error && discord.channels.error.length) {
+    for (let channel of discord.channels.error) {
+      channel.send(`Hey! It looks like your instance could not log into Facebook.
+      You can now change the account credentials through a command channel or dashboard, if you have them enabled`)
+    }
+  }
+
   global.messenger = {
     client,
     threads: new Map(),
