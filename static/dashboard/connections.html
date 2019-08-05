@@ -42,7 +42,13 @@
           </ul>
         </aside>
       </div>
-      <div class="column is-three-quarters" id="connections"></div>
+      <div class="column is-three-quarters" id="connections">
+        <div class="field">
+          <a onclick="
+            document.querySelectorAll('.connection').forEach(conn => conn.querySelector('header').click())
+          " class="button">Toggle all</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
