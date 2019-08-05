@@ -19,4 +19,6 @@ export default function collapsible (connection) {
 
     icons.hidden = !icons.hidden
   })
+
+  header.click()
 }
