@@ -47,6 +47,7 @@ export default async () => {
       channel.send(`Hey! It looks like your instance could not log into Facebook.
 You can now change the account credentials through a command channel or dashboard, if you have them enabled`)
     }
+    await discord.client.user.setStatus('dnd')
   }
 
   global.messenger = {
