@@ -7,6 +7,8 @@ const log = logger.withScope('messenger:login')
 
 export default async () => {
   log.start('Logging in to Facebook...')
+  await discord.client.user.setActivity('Logging in to Facebook...')
+  await discord.client.user.setStatus('idle')
   let session: Session | undefined
   try {
     session = await config.loadSession()
@@ -48,6 +50,8 @@ export default async () => {
 You can now change the account credentials through a command channel or dashboard, if you have them enabled`)
     }
     await discord.client.user.setStatus('dnd')
+  } else {
+    await discord.client.user.setStatus('online')
   }
 
   global.messenger = {
