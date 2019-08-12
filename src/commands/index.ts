@@ -1,6 +1,8 @@
 export { default as add } from './add'
 export { default as broadcast } from './broadcast'
 export { default as config } from './config'
+export { default as disable } from './disable'
+export { default as enable } from './enable'
 export { default as eval } from './eval'
 export { default as help } from './help'
 export { default as info } from './info'
