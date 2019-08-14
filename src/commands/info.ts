@@ -12,7 +12,7 @@ export default new Command(async ([ name ]) => {
   if (!connection) return `Connection \`${name}\` not found!`
   return {
     embed: {
-      title: `Connection: ${connection.name}` + connection.disabled ? ' (disabled)' : '',
+      title: `Connection: ${connection.name}` + (connection.disabled ? ' (disabled)' : ''),
       description: connection.getPrintable()
     }
   }
