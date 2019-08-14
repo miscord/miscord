@@ -5,7 +5,8 @@ import messengerListener from './messenger/listener'
 import messengerEventListener from './messenger/handleEvent'
 
 export default () => {
-  return login().then(() => {
+  return login().then(async () => {
+
     process.send!!('login successful')
 
     if (config.api && (
@@ -21,5 +22,7 @@ export default () => {
 
     // when got a messenger event
     messenger.client.on('event', messengerEventListener)
+
+    await discord.client.user.setActivity('Miscord v' + require('../package.json').version)
   })
 }

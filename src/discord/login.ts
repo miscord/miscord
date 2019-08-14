@@ -26,9 +26,6 @@ export default () => {
       }
     }
 
-    // set activity
-    await client.user.setActivity('Miscord v' + require('../../package.json').version)
-
     // if bot isn't added to any guilds, send error
     if (client.guilds.size === 0 && client instanceof Client) {
       throw new Error(`No guilds added!
