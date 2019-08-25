@@ -5,7 +5,7 @@ const log = logger.withScope('createMessage:parseMessengerMessage')
 export const thumbs = [ 369239263222822, 369239383222810, 369239343222814 ]
 
 export default (thread: Thread, sender: User, message: Message) => {
-  const nickname = thread.nicknames ? thread.nicknames[message.authorId.toString()] : null
+  const nickname = thread.nicknames ? thread.nicknames.get(message.authorId) : null
   const authorName = nickname ? (config.discord.showFullNames ? `${nickname} (${sender.name})` : nickname) : sender.name
 
   log.debug(`Nickname: ${nickname}, author name: ${authorName}`)

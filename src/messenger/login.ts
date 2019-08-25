@@ -59,16 +59,19 @@ You can now change the account credentials through a command channel or dashboar
     threads: new Map(),
     senders: new Map()
   }
-  let threads = await client.getThreadList(200) // because why not? shouldn't cause lags even on Raspberry Pi
+  let threads = await client.getThreadList(50) // because why not? shouldn't cause lags even on Raspberry Pi
   /*
   2018/12/25 update: Facebook API can be a bit slow when requesting a lot of threads;
                      processing speeds peak at 10ms
+  2019/08/24 update: Downloading a lot of stuff and keeping it in memory isn't the best strategy.
   */
   threads = threads
     .map((thread: Thread) => {
       if (!thread.nicknames) return thread
-      const nicknames: { [userID: number]: string } = {}
-      thread.nicknames.forEach((el: { participant_id: string, nickname: string }) => { nicknames[Number(el.participant_id)] = el.nickname })
+      const nicknames: Map<number, string> = new Map()
+      thread.nicknames.forEach((el: { participant_id: string, nickname: string }) => {
+        nicknames.set(Number(el.participant_id), el.nickname)
+      })
       thread.nicknames = nicknames
       return thread
     })

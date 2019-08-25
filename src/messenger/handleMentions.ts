@@ -10,9 +10,10 @@ export default function handleMentions (message: string, thread: Thread): Mentio
     find(`@${user.name}`, user.id)
     find(`@${user.name}#0000`, user.id)
     find(`@${user.name.split(' ')[0]}`, user.id)
-    if (thread.nicknames && thread.nicknames[user.id]) {
-      find(`@${thread.nicknames[user.id]}`, user.id)
-      find(`@${thread.nicknames[user.id]}#0000`, user.id)
+
+    if (thread.nicknames && thread.nicknames.has(user.id)) {
+      find(`@${thread.nicknames.get(user.id)}`, user.id)
+      find(`@${thread.nicknames.get(user.id)}#0000`, user.id)
     }
   }
   log.trace('mentions', mentions)

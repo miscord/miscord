@@ -1,15 +1,16 @@
 import removeAccents from 'remove-accents'
 import getSender from './getSender'
+import { Thread } from 'libfb'
 
 const log = logger.withScope('messenger:getThreadName')
-export default async (thread: any, clean = true) => {
+export default async function getThreadName (thread: Thread, clean = true) {
   // get thread name / user
   let name
   try {
     name = thread.isGroup
       ? (thread.name || thread.id)
       : (
-        (thread.nicknames ? thread.nicknames[thread.id] : null) || (await getSender(thread.id))!!.name
+        (thread.nicknames ? thread.nicknames.get(thread.id) : null) || (await getSender(thread.id))!!.name
       )
   } catch (err) {
     name = thread.name || thread.id
