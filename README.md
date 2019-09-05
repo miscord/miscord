@@ -56,6 +56,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 # :warning: Disclaimer
 
-We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any serivices integrated with Miscord. Use at your own discretion.  
+We do not guarantee that this bridge will work correctly. We are not responsible for getting banned on any services integrated with Miscord. Use at your own discretion.  
 All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.  
 Facebook and the Facebook logo are trademarks or registered trademarks of Facebook, Inc., used under license agreement.
