@@ -4,7 +4,7 @@ import fetchJSON from '../../../js/fetchJSON.js'
 
 export default function load (data, prefix) {
   const column = document.querySelector('.column.is-three-quarters')
-  const fields = column.querySelectorAll('input,textarea,checkbox')
+  const fields = column.querySelectorAll('input,select,textarea,checkbox')
   fields.forEach(field => {
     const val = dotProp.get(data, field.id)
     deserialize(field, val)
