@@ -55,5 +55,8 @@ export default {
   async getThreads () {
     const threads = await fetchJSON('/messenger/threads')
     return new MapWithFilter(threads.map(thread => [ thread.id, new Thread(thread) ]))
+  },
+  getConfig (prefix) {
+    return fetchJSON(`/config/${prefix || ''}`)
   }
 }
