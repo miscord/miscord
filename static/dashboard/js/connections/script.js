@@ -30,9 +30,9 @@ Promise.all([
 
     function endpointLink (endpoint) {
       if (endpoint.type === 'discord') {
-        return guilds.getChannel(endpoint.id).link
+        return (guilds.getChannel(endpoint.id) || { link: '#!' }).link
       } else {
-        return threads.get(endpoint.id).link
+        return (threads.get(endpoint.id) || { link: '#!' }).link
       }
     }
 
