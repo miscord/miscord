@@ -84,6 +84,17 @@ export default function runServer () {
   app.register(discordHandler, { prefix: '/discord' })
   app.register(messengerHandler, { prefix: '/messenger' })
 
-  app.listen(config.api.port || 9448, '0.0.0.0').then(() => log.success(`API is listening on port ${config.api.port || 9448}`))
+  const port = Number(config.api.port || 9448)
+
+  app.listen(port, '0.0.0.0')
+    .then(() => log.success(`API is listening on port ${port}`))
+    .catch(err => {
+      if (err.code === 'EADDRINUSE') {
+        app.listen(port + 1, '0.0.0.0')
+          .then(() => log.success(`API is listening on port ${port + 1}`))
+      } else {
+        throw err
+      }
+    })
   return app
 }
