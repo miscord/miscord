@@ -4,6 +4,17 @@
     "username": "",
     "password": "",
 
+    "accounts": [
+      {
+        "username": "test",
+        "password": "pass"
+      },
+      {
+        "username": "another_account@gmail.com",
+        "password": "p4ssw0rd"
+      }
+    ],
+
     "format": "*{username}*: {message}",
     "sourceFormat": {
       "discord": "(Discord)",

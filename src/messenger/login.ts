@@ -37,6 +37,19 @@ export default async () => {
         }
         return client.login(config.messenger.username, config.messenger.password)
       })
+      .catch(async err => {
+        if (!config.messenger.accounts) throw err
+        for (let account of config.messenger.accounts) {
+          try {
+            client = new Client()
+            await client.login(account.username, account.password)
+          } catch (err) {
+            log.warn('Could not log into Facebook')
+            reportError(err)
+            client = new FakeClient()
+          }
+        }
+      })
       .catch(err => {
         client = new FakeClient()
         log.warn('Could not log into Facebook')

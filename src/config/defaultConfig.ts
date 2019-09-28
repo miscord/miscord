@@ -1,5 +1,7 @@
 export default {
   messenger: {
+    accounts: [],
+
     format: '*{username}*: {message}',
     sourceFormat: {
       discord: '(Discord)',

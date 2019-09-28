@@ -5,6 +5,11 @@ export default interface Config extends ConfigManager {
     username: string
     password: string
 
+    accounts: {
+      username: string
+      password: string
+    }[]
+
     format: string
     sourceFormat: {
       discord: string
