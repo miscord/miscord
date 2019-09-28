@@ -12,7 +12,8 @@ const bannedErrors = [
   'Service temporarily unavailable', // Facebook is down
   'ECONNRESET', // connection reset
   'MQTT connection failed', // Facebook MQTT connection fail
-  'EPIPE' // Facebook session invalidated
+  'EPIPE', // Facebook session invalidated
+  'No guilds added!' // client.guilds is empty
 ]
 
 export function sendToSentry (error: Error) {

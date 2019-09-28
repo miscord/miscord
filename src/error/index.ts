@@ -49,7 +49,8 @@ export default async (error: Error | string | { error?: any, err?: any }) => {
     // @ts-ignore
     error.requestArgs ||
     error.message.includes('Incorrect login details were provided') ||
-    error.message.includes('EPIPE')
+    error.message.includes('EPIPE') ||
+    error.message.includes('No guilds added!')
   ) ? 1 : 2
 
   await reportError(error)
