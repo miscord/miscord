@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Miscord</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/dashboard/css/checkbox.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord
+      </h1>
+      <h2 class="subtitle">
+        Configuration: Discord
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/connections/">Connections</a></li>
+          </ul>
+          <p class="menu-label">
+            Configuration
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="/config-discord/">Discord</a></li>
+            <li><a href="/config-messenger/">Messenger</a></li>
+            <li><a href="/config-miscellaneous/">Miscellaneous</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-three-quarters">
+        <div class="field">
+          <label class="label" for="token">Discord token</label>
+          <input class="input" id="token" type="text">
+        </div>
+
+        <div class="field">
+          <label class="label" for="guild">Discord server ID for creating new channels</label>
+          <input class="input" id="guild" type="text">
+        </div>
+
+        <div class="field">
+          <label class="label" for="category">Discord category ID for creating new channels</label>
+          <input class="input" id="category" type="text">
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="renameChannels" type="checkbox" checked="checked">
+            <span>Rename Discord channels according to Messenger chat renames</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="showFullNames" type="checkbox">
+            <span>Show Messenger users' full names alongside their nicknames on Discord</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="createChannels" type="checkbox">
+            <span>Create new channels from Facebook threads if not found</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="massMentions" type="checkbox" checked="checked">
+            <span>Allow for @everyone or @here from Messenger</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="userMentions" type="checkbox" checked="checked">
+            <span>Allow for user/role mentions from Messenger</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="ignoreBots" type="checkbox">
+            <span>Ignore all messages from bots (or webhooks)</span>
+          </label>
+        </div>
+
+        <div class="box">
+          <div class="field">
+            <label class="label" for="ignoredUsers">Ignored users</label>
+            <textarea id="ignoredUsers" class="textarea" placeholder="Ignored users (IDs, one in a line)"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/static/js/dot-prop@5.1.0.js"></script>
+<script type="module" src="/static/dashboard/js/config/discord.js"></script>
+</body>
+</html>

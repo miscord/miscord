@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Miscord</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="/static/dashboard/css/checkbox.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord
+      </h1>
+      <h2 class="subtitle">
+        Configuration: Messenger
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/connections/">Connections</a></li>
+          </ul>
+          <p class="menu-label">
+            Configuration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/config-discord/">Discord</a></li>
+            <li><a class="is-active" href="/config-messenger/">Messenger</a></li>
+            <li><a href="/config-miscellaneous/">Miscellaneous</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-three-quarters">
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <input class="input" type="text" id="username">
+        </div>
+
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input class="input" type="text" id="password">
+        </div>
+
+        <div class="field">
+          <label class="label" for="format">Message format</label>
+          <input class="input" type="text" id="format">
+        </div>
+
+        <div class="box">
+          <div class="field">
+            <label class="label" for="sourceFormat.discord">Source format - Discord</label>
+            <input class="input" id="sourceFormat.discord" type="text">
+          </div>
+
+          <div class="field">
+            <label class="label" for="sourceFormat.messenger">Source format - Messenger</label>
+            <input class="input" id="sourceFormat.messenger" type="text">
+          </div>
+
+            <p class="help">
+              Use source formats only when you used {source} in the message format<br>
+              More info about message format <a href="https://github.com/Bjornskjald/miscord/wiki/format">here</a>
+            </p>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="ignoreEmbeds" type="checkbox">
+            <span>Ignore embeds from Discord</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="attachmentTooLargeError" type="checkbox" checked="checked">
+            <span>Show "attachments too large" error when sending to Discord</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="handleEvents" type="checkbox" checked="checked">
+            <span>Handle events (chat rename, nickname change, etc.)</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="handlePlans" type="checkbox" checked="checked">
+            <span>Handle plans</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="handlePolls" type="checkbox" checked="checked">
+            <span>Handle polls</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="showPlanDetails" type="checkbox" checked="checked">
+            <span>Show more details for plans</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="showPollDetails" type="checkbox" checked="checked">
+            <span>Show more details for polls</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="sendPinned" type="checkbox" checked="checked">
+            <span>Send info about a pinned message on Discord</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/static/js/dot-prop@5.1.0.js"></script>
+<script type="module" src="/static/dashboard/js/config/messenger.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+select {
+    width: 100%;
+}
+
+.select2 {
+    margin: 1rem 0;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+}
+
+.icons[hidden] {
+    display: none;
+}
+
+.icons {
+    position: absolute;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.endpoint {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.endpoint a {
+    text-decoration: none !important;
+}
+
+.endpoint a:hover {
+    text-decoration: underline !important;
+}
+
+.box.endpoint {
+    padding: 0.75em;
+}
+
+.connection > header {
+    cursor: pointer;
+}

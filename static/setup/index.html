@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Setup</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord Setup
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="columns is-desktop">
+    <div class="column">
+      <div class="box" id="discord">
+        <p>
+          <b>Discord bot</b>
+          <br>
+          If you need help with creating the bot,
+          check <a href="https://wiki.miscord.net/Creating-a-Discord-bot" target="_blank">here</a> for the tutorial.
+        </p>
+        <br>
+        <div class="field">
+          <input class="input" type="text" placeholder="Discord token">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Log in</a>
+        </div>
+        <p class="status">Enter a valid token...</p>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box" id="messenger">
+        <p>
+          <b>Facebook account</b>
+          <br>
+          It has to be a Facebook account, not Messenger (the one you create in the app)
+          <br>
+          Some guidelines for not getting banned:
+        </p>
+        <div class="content">
+          <ul>
+            <li>Make the account as real as you can</li>
+            <li>Don't use a name like "Discord Bot"</li>
+            <li>You can use a profile picture from <a href="https://thispersondoesnotexist.com/">This Person Does Not Exist</a></li>
+            <li>Add an unused phone number, if you have a spare one</li>
+            <li>Log into the Messenger app and open it once in a while</li>
+          </ul>
+        </div>
+        <div class="field">
+          <input class="input" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+          <input class="input" type="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Log in</a>
+        </div>
+        <p class="status">Enter valid Facebook credentials...</p>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box" id="api">
+        <p><b>Dashboard credentials</b></p>
+        <br>
+        <div class="field">
+          <input style="margin-right: 10px;" class="input" type="text" placeholder="Username">
+        </div>
+        <div class="field">
+          <input style="margin-right: 10px;" class="input" type="password" placeholder="Password">
+        </div>
+        <div class="field">
+          <a class="button is-primary">Save</a>
+        </div>
+        <p class="status">Choose username and password for the dashboard</p>
+      </div>
+    </div>
+  </div>
+  <a class="button is-info" id="next-button">Next</a>
+</section>
+<script src="https://browser.sentry-cdn.com/5.1.0/bundle.min.js" crossorigin="anonymous"></script>
+<script src="/static/js/initSentry.js"></script>
+<script src="/static/setup/config.js" type="module"></script>
+<script src="/static/setup/discord.js" type="module"></script>
+<script src="/static/setup/messenger.js" type="module"></script>
+<script src="/static/setup/api.js" type="module"></script>
+</body>
+</html>

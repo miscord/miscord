@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Miscord</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord
+      </h1>
+      <h2 class="subtitle">
+        Dashboard
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="/">Dashboard</a></li>
+            <li><a href="/connections/">Connections</a></li>
+          </ul>
+          <p class="menu-label">
+            Configuration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/config-discord/">Discord</a></li>
+            <li><a href="/config-messenger/">Messenger</a></li>
+            <li><a href="/config-miscellaneous/">Miscellaneous</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-three-quarters">
+        <div class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <a id="pause-button" class="button is-warning">Pause</a>
+            </div>
+            <div class="level-item">
+              <a id="unpause-button" class="button is-success" disabled>Unpause</a>
+            </div>
+            <div class="level-item">
+              <a id="restart-button" class="button is-info">Restart</a>
+            </div>
+            <div class="level-item">
+              <a id="stop-button" class="button is-danger">Stop</a>
+            </div>
+          </div>
+        </div>
+        <p><b>Status: <span id="status">...</span></b></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://browser.sentry-cdn.com/5.1.0/bundle.min.js" crossorigin="anonymous"></script>
+<script src="/static/js/initSentry.js"></script>
+<script src="/static/dashboard/js/index/script.js" type="module"></script>
+</body>
+</html>

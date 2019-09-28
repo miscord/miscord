@@ -4,6 +4,17 @@
     "username": "",
     "password": "",
 
+    "accounts": [
+      {
+        "username": "test",
+        "password": "pass"
+      },
+      {
+        "username": "another_account@gmail.com",
+        "password": "p4ssw0rd"
+      }
+    ],
+
     "format": "*{username}*: {message}",
     "sourceFormat": {
       "discord": "(Discord)",
@@ -11,6 +22,7 @@
     },
     "ignoreEmbeds": false,
     "attachmentTooLargeError": true,
+    "sendPinned": false,
 
     "handleEvents": true,
     "handlePlans": true,
@@ -30,6 +42,7 @@
 
     "massMentions": false,
     "userMentions": true,
+    "roleMentions": true,
 
     "ignoreBots": false,
     "ignoredUsers": []
@@ -41,5 +54,6 @@
   "checkUpdates": false,
   "logLevel": "info",
   "timezone": "",
-  "ignoredSequences": []
+  "ignoredSequences": [],
+  "enableEval": false
 }

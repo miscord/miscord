@@ -5,4 +5,4 @@ RUN npm install --only=production -g miscord-beta
 
 VOLUME ["/config"]
 
-ENTRYPOINT [ "npx", "miscord-beta" ]
+ENTRYPOINT [ "miscord-beta" ]

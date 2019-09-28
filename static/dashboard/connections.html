@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Miscord</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="/node_modules/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/static/dashboard/css/connections/style.css">
+</head>
+<body>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Miscord
+      </h1>
+      <h2 class="subtitle">
+        Connections
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a href="/">Dashboard</a></li>
+            <li><a class="is-active" href="/connections/">Connections</a></li>
+          </ul>
+          <p class="menu-label">
+            Configuration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/config-discord/">Discord</a></li>
+            <li><a href="/config-messenger/">Messenger</a></li>
+            <li><a href="/config-miscellaneous/">Miscellaneous</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-three-quarters" id="connections">
+        <div class="field">
+          <a onclick="
+            document.querySelectorAll('.connection').forEach(conn => conn.querySelector('header').click())
+          " class="button">Toggle all</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://browser.sentry-cdn.com/5.1.0/bundle.min.js" crossorigin="anonymous"></script>
+<script src="/static/js/initSentry.js"></script>
+<script src="/node_modules/jquery/dist/jquery.slim.min.js"></script>
+<!-- unfortunately, it's needed for select2 :( -->
+<script src="/node_modules/select2/dist/js/select2.min.js"></script>
+<script src="/static/dashboard/js/connections/script.js" type="module"></script>
+</body>
+</html>
