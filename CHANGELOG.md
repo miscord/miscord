@@ -3,9 +3,21 @@
 ## [5.0.0] - 2019-05-05
 ### Added
 - REST API
+- Web dashboard
+- Web setup
+- Auto-restarting
+- Support for Messenger mentions
+- Support for multiple Facebook accounts
+- Remote storage support
+- Pausing the whole instance
+- Better error descriptions
+- Support for disabling Messenger or Discord
+- Discord statuses when logging in (`idle`) or login failed (`dnd`)
+- Funding via Liberapay
 
 ### Changed
 - Refactored the code to TypeScript
+- Changed `set`/`get` commands to `config` command
 
 ### Removed
 - `channels.yml` support
