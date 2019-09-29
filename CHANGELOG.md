@@ -1,6 +1,10 @@
 # Changelog
 
-## [5.0.0] - 2019-05-05
+## [5.0.1] - 2019-09-29
+### Fixed
+- Fixed the build script crashing and not building
+
+## [5.0.0] - 2019-09-29
 ### Added
 - REST API
 - Web dashboard
