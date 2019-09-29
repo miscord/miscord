@@ -1,6 +1,10 @@
 # Changelog
 
-## [5.0.0] - 2019-05-05
+## [5.0.2] - 2019-09-29
+### Fixed
+- Fixed loop after Facebook failed login
+
+## [5.0.0] - 2019-09-29
 ### Added
 - REST API
 - Web dashboard
