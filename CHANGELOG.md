@@ -1,5 +1,9 @@
 # Changelog
 
+## [5.0.3] - 2019-09-29
+### Fixed
+- Fixed loop when checking updates is enabled
+
 ## [5.0.2] - 2019-09-29
 ### Fixed
 - Fixed loop after Facebook failed login
