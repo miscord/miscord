@@ -11,14 +11,14 @@ async function main () {
   console.log(`Building miscord-${version}-win.exe...`)
   await build('win-x64', 'win.exe')
 
-  console.log(`Building miscord-${version}-win32.exe...`)
-  await build('win-x86', 'win32.exe')
+  // console.log(`Building miscord-${version}-win32.exe...`)
+  // await build('win-x86', 'win32.exe')
 
   console.log(`Building miscord-${version}-linux.bin...`)
   await build('linux-x64', 'linux.bin')
 
-  console.log(`Building miscord-${version}-linux32.bin...`)
-  await build('linux-x86', 'linux32.bin')
+  // console.log(`Building miscord-${version}-linux32.bin...`)
+  // await build('linux-x86', 'linux32.bin')
 
   console.log(`Building miscord-${version}-mac.bin...`)
   await build('mac-x64', 'mac.bin')
@@ -37,9 +37,9 @@ async function main () {
     name: version,
     assets: [
       'win',
-      'win32',
+      // 'win32',
       'linux',
-      'linux32',
+      // 'linux32',
       'mac',
       'macapp'
     ].map(platform => `build/miscord-${version}-${platform}.zip`)
@@ -59,7 +59,7 @@ async function build (nodeVersion: string, name: string) {
 
 function exec (command: string) {
   return new Promise((resolve, reject) => {
-    const child = spawn('/bin/bash', ['-c', command], { cwd: require('path').join(__dirname, '..'), env: process.env })
+    const child = spawn('/bin/bash', ['-c', command], { cwd: require('path').join(__dirname, '..', '..'), env: process.env })
     child.stdout.on('data', data => process.stdout.write(data))
     child.stderr.on('data', data => process.stderr.write(data))
     child.on('error', err => {
