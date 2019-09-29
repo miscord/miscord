@@ -37,7 +37,6 @@
   "dependencies": {
     "@sentry/node": "^5.6.2",
     "basic-auth": "^2.0.1",
-    "bulma": "^0.7.5",
     "chalk": "^2.4.2",
     "discord.js": "^11.5.1",
     "dot-prop": "^5.1.0",
