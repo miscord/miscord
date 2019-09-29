@@ -1,12 +1,11 @@
 const log = logger.withScope('updateNotifier')
 
-import fs from 'fs-extra'
 import semver from 'semver'
 import chalk from 'chalk'
 import fetch from 'node-fetch'
 
 export default async () => {
-  const pkg = await fs.readJSON('../package.json')
+  const pkg = require('../package.json')
 
   log.info('Checking for updates...')
   let res
