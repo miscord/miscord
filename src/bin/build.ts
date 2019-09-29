@@ -59,7 +59,7 @@ async function build (nodeVersion: string, name: string) {
 
 function exec (command: string) {
   return new Promise((resolve, reject) => {
-    const child = spawn('/bin/bash', ['-c', command], { cwd: require('path').join(__dirname, '..'), env: process.env })
+    const child = spawn('/bin/bash', ['-c', command], { cwd: require('path').join(__dirname, '..', '..'), env: process.env })
     child.stdout.on('data', data => process.stdout.write(data))
     child.stderr.on('data', data => process.stderr.write(data))
     child.on('error', err => {
