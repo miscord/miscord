@@ -9,7 +9,7 @@ export default function handleMentions (message: string, channel: (TextChannel |
     massMentions.forEach(massMention => { message = message.replace(new RegExp(massMention, 'g'), `\`${massMention}\``) })
   }
 
-  if (channel instanceof DMChannel) return message
+  if (!channel || channel instanceof DMChannel) return message
 
   if (config.discord.roleMentions) {
     for (let role of channel.guild.roles.array()) {
