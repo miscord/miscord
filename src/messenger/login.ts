@@ -38,7 +38,7 @@ export default async () => {
         return client.login(config.messenger.username, config.messenger.password)
       })
       .catch(async err => {
-        if (!config.messenger.accounts) throw err
+        if (!config.messenger.accounts.length) throw err
         for (let account of config.messenger.accounts) {
           try {
             client = new Client()
