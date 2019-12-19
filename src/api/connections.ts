@@ -6,7 +6,10 @@ import schema from './schema'
 const checkConnection = {
   preHandler: function (request: Request, reply: Reply, done: DoneFunction) {
     const { name } = request.params
-    if (!connections.has(name)) return reply.sendError(404, `Connection ${name} not found!`)
+    if (!connections.has(name)) {
+      reply.sendError(404, `Connection ${name} not found!`)
+      return
+    }
     done()
   }
 }

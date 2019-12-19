@@ -34,11 +34,20 @@ export default function runServer () {
     app.addHook('preHandler', (request, reply, next) => {
       const { authorization } = request.headers
 
-      if (!authorization) return reply.sendError(403, 'API key missing')
-      if (!authorization.startsWith('Bearer ')) return reply.sendError(403, 'API key incorrect')
+      if (!authorization) {
+        reply.sendError(403, 'API key missing')
+        return
+      }
+      if (!authorization.startsWith('Bearer ')) {
+        reply.sendError(403, 'API key incorrect')
+        return
+      }
 
       const key = authorization.split(' ')[1]
-      if (key !== config.api.key) return reply.sendError(403, 'API key incorrect')
+      if (key !== config.api.key) {
+        reply.sendError(403, 'API key incorrect')
+        return
+      }
 
       next()
     })
@@ -50,10 +59,16 @@ export default function runServer () {
         .header('Content-Type', 'text/html')
         .send('<h1>Forbidden</h1>')
 
-      if (!request.headers.authorization) return send401()
+      if (!request.headers.authorization) {
+        send401()
+        return
+      }
 
       const creds = auth.parse(request.headers.authorization)
-      if (!creds) return send401()
+      if (!creds) {
+        send401()
+        return
+      }
 
       const { name, pass } = creds
       log.debug('login', { name, pass })
