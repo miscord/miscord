@@ -1,14 +1,14 @@
 import cleanTemporaryFiles from './cleanTemporaryFiles'
-
-const log = logger.withScope('messenger:listener')
-
 import { Message } from 'libfb'
 import { fromMessenger as createMessage } from '../createMessage'
 import { sendMessage as sendDiscordMessage } from '../discord'
 import { checkIgnoredSequences, checkMKeep } from '../utils'
 import { getSender, getThread, sendMessage as sendMessengerMessage } from './'
+import { reportError } from '../error'
 
-export default async (message: Message) => {
+const log = logger.withScope('messenger:listener')
+
+export default async function handleMessage (message: Message): Promise<void> {
   if (!message) throw new Error('Message missing!')
 
   if (config.paused) {
@@ -33,7 +33,7 @@ export default async (message: Message) => {
   log.debug('Got user info')
   log.trace('sender', sender)
 
-  let connection = await connections.getWithCreateFallback(message.threadId.toString(), thread.cleanName)
+  const connection = await connections.getWithCreateFallback(message.threadId.toString(), thread.cleanName)
   if (!connection) return
 
   await connection.checkChannelRenames(thread.cleanName)
@@ -41,12 +41,16 @@ export default async (message: Message) => {
   {
     const channels = await connection.getWritableChannels()
     const data = await createMessage.toDiscord(thread, sender, message)
-    channels.forEach(endpoint => sendDiscordMessage(endpoint.id, data, thread.image))
+    for (const channel of channels) {
+      sendDiscordMessage(channel.id, data, thread.image)
+        .catch(err => reportError(err))
+    }
   }
   {
     const threads = connection.getOtherWritableThreads(message.threadId)
     const data = await createMessage.toMessenger(thread, sender, message)
     Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
       .then(() => cleanTemporaryFiles(data))
+      .catch(err => reportError(err))
   }
 }

@@ -13,19 +13,19 @@ Couldn't log into Discord.
 Check your token.
 (it shouldn't be client ID nor anything else that doesn't have "token" in its name)
 `,
-  'EPIPE': `
+  EPIPE: `
 Current session was invalidated in Facebook settings.
 Remove file session.json and restart Miscord.
 `,
   'User must verify their account': (err: any) => `
-Verify your account here: ${err.errorData.url}
-Account: ${err.requestArgs.email}
+Verify your account here: ${err.errorData.url as string}
+Account: ${err.requestArgs.email as string}
   `
 }
 
 export default function getErrorDescription (err: Error): string | null {
   const entry = Object.entries(errorDescriptions)
-    .find(([ message ]) => err.toString().includes(message))
+    .find(([ message ]) => err.message.includes(message))
 
   if (!entry) return null
   const desc = entry[1]

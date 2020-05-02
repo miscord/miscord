@@ -1,6 +1,3 @@
-// @ts-ignore
-const fromEntries = (entries) => Object.assign(...entries.map(([ k, v ]) => ({ [k]: v })))
-
 import os from 'os'
 import path from 'path'
 import fs from 'fs-extra'
@@ -12,6 +9,7 @@ import diff from './diff'
 import defaultConfig from './defaultConfig'
 import { Session } from 'libfb'
 import SetupServer from '../api/setup'
+import { reportError } from '../error'
 
 const log = logger.withScope('FileConfig')
 
@@ -28,11 +26,12 @@ export default class FileConfig extends Config {
     this.sessionPath = path.join(dataPath, 'session.json')
   }
 
-  async load () {
+  async load (): Promise<void> {
     if (!fs.existsSync(this.path)) {
       const server = new SetupServer()
       server.run()
       return new Promise(resolve => {
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         server.once('config', async config => {
           await fs.ensureFile(this.path)
           await fs.writeJSON(this.path, config, { spaces: 2 })
@@ -49,14 +48,15 @@ export default class FileConfig extends Config {
     this._load(config)
   }
 
-  set (key: string, value: string) {
+  set (key: string, value: string): void {
     this._set(key, value)
-    return this.save()
+    this.save()
+      .catch(err => reportError(err))
   }
 
-  async save () {
+  async save (): Promise<void> {
     let config = JSON.parse(JSON.stringify(this.config))
-    config = fromEntries(
+    config = Object.fromEntries(
       Object.entries(config)
         .map(([ key, value ]) => {
           if (typeof value === 'object' && defaultConfig[key]) {
@@ -68,22 +68,28 @@ export default class FileConfig extends Config {
     await fs.writeJSON(this.path, config, { spaces: 2 })
   }
 
-  async loadConnections () {
+  async loadConnections (): Promise<YAMLConnections> {
     const file = await fs.readFile(this.connPath, 'utf8')
     return yaml.safeLoad(file) as YAMLConnections
   }
-  saveConnections (connections: YAMLConnections) {
+
+  async saveConnections (connections: YAMLConnections): Promise<void> {
     return fs.writeFile(this.connPath, yaml.safeDump(connections), 'utf8')
   }
 
-  loadSession () { return fs.readJSON(this.sessionPath) }
-  saveSession (session: Session) { return fs.writeJSON(this.sessionPath, session) }
+  async loadSession (): Promise<Session> {
+    return fs.readJSON(this.sessionPath)
+  }
+
+  async saveSession (session: Session): Promise<void> {
+    return fs.writeJSON(this.sessionPath, session)
+  }
 }
-export function getConfigDir () {
+export function getConfigDir (): string {
   if (isDocker()) return '/config'
   switch (process.platform) {
     case 'win32':
-      return path.join(process.env.APPDATA!!, 'Miscord')
+      return path.join(process.env.APPDATA ?? 'C:\\', 'Miscord')
     case 'linux':
       return path.join(os.homedir(), '.config', 'Miscord')
     case 'darwin':

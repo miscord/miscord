@@ -5,14 +5,14 @@ import { reportError } from '../error'
 
 const log = logger.withScope('messenger:login')
 
-export default async () => {
+export default async function login (): Promise<void> {
   log.start('Logging in to Facebook...')
   await discord.client.user.setActivity('Logging in to Facebook...')
   await discord.client.user.setStatus('idle')
   let session: Session | undefined
   try {
     session = await config.loadSession()
-    if (session && session.tokens && session.tokens.identifier) {
+    if (session?.tokens?.identifier) {
       if (session.tokens.identifier !== config.messenger.username) {
         // invalidate session if the username changed
         // currently no way to check if password changed other than keeping it in a file
@@ -25,12 +25,12 @@ export default async () => {
   let client: Client | FakeClient = new FakeClient()
   if (config.messenger.username !== 'dummy') {
     await Promise.resolve()
-      .then(() => {
+      .then(async () => {
         client = new Client({ session })
         return client.login(config.messenger.username, config.messenger.password)
       })
-      .catch(() => {
-        if (session && session.deviceId) {
+      .catch(async () => {
+        if (session?.deviceId) {
           client = new Client({ deviceId: session.deviceId })
         } else {
           client = new Client()
@@ -39,13 +39,13 @@ export default async () => {
       })
       .catch(async err => {
         if (!config.messenger.accounts.length) throw err
-        for (let account of config.messenger.accounts) {
+        for (const account of config.messenger.accounts) {
           try {
             client = new Client()
             await client.login(account.username, account.password)
           } catch (err) {
             log.warn('Could not log into Facebook')
-            reportError(err)
+            reportError(err).catch(err => reportError(err))
             client = new FakeClient()
           }
         }
@@ -53,14 +53,15 @@ export default async () => {
       .catch(err => {
         client = new FakeClient()
         log.warn('Could not log into Facebook')
-        return reportError(err)
+        reportError(err).catch(err => reportError(err))
       })
   }
 
   if (client instanceof FakeClient && discord.channels.error && discord.channels.error.length) {
-    for (let channel of discord.channels.error) {
+    for (const channel of discord.channels.error) {
       channel.send(`Hey! It looks like your instance could not log into Facebook.
 You can now change the account credentials through a command channel or dashboard, if you have them enabled`)
+        .catch(err => reportError(err))
     }
     await discord.client.user.setStatus('dnd')
   } else {
@@ -89,7 +90,7 @@ You can now change the account credentials through a command channel or dashboar
       return thread
     })
 
-  for (let thread of threads) {
+  for (const thread of threads) {
     thread.participants.forEach(user => messenger.senders.set(user.id, user))
     const miscordThread = await fillNames(thread)
     messenger.threads.set(thread.id, miscordThread)

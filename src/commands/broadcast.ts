@@ -1,17 +1,18 @@
 import Command from './Command'
+import { reportError } from '../error'
 
 export default new Command(argv => {
   const message = argv.join(' ')
-  connections.map(connection => {
+  connections.map(async connection => {
     const threads = connection.getWritableThreads()
-    threads.forEach(thread => messenger.client.sendMessage(thread.id, message))
+    await Promise.all(threads.map(thread => messenger.client.sendMessage(thread.id, message))).catch(err => reportError(err))
 
     const channels = connection.getWritableChannels()
-    channels.forEach(endpoint => discord.getChannel(endpoint.id).send(message))
+    await Promise.all(channels.map(endpoint => discord.getChannel(endpoint.id).send(message))).catch(err => reportError(err))
   })
 }, {
   argc: 1,
-  usage: `broadcast <message>`,
-  example: `broadcast hello everyone!`,
+  usage: 'broadcast <message>',
+  example: 'broadcast hello everyone!',
   allowMoreArguments: true
 })

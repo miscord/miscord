@@ -1,14 +1,15 @@
 import dotProp from 'dot-prop'
-import { Server } from '../types/fastify'
+import { FastifyInstance } from 'fastify'
 
-export default async (app: Server) => {
+export default function useConfig (app: FastifyInstance): void {
   app.get('/', (request, reply) => {
     reply.send(config.config)
   })
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   app.get('/:path', async (request, reply) => {
     const value = dotProp.get(config.config, request.params.path)
-    if (value == null) return reply.sendError(404, `Config property ${request.params.path} does not exist!`)
+    if (value == null) return reply.sendError(404, `Config property ${request.params.path as string} does not exist!`)
     reply.send(value)
   })
 

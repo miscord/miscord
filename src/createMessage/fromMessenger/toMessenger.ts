@@ -1,13 +1,13 @@
-const log = logger.withScope('createMessage:fromMessenger:messenger')
-
 import getAttachmentURL from '../getAttachmentURL'
-import { User, Message, FileAttachment, XMAAttachment } from 'libfb'
+import { Message, User } from 'libfb'
 import Thread from '../../types/Thread'
 import downloadFile from '../downloadFile'
 import parseMessengerMessage, { thumbs } from './parseMessengerMessage'
 import { MessengerMessageData } from '../MessageData'
 
-export default async (thread: Thread, sender: User, message: Message): Promise<MessengerMessageData> => {
+const log = logger.withScope('createMessage:fromMessenger:messenger')
+
+export default async function toMessenger (thread: Thread, sender: User, message: Message): Promise<MessengerMessageData> {
   // set description to message body, set author to message sender
   let authorName
   ({ authorName, message } = parseMessengerMessage(thread, sender, message))
@@ -26,7 +26,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<M
   ) return { body, attachments: [] }
 
   const attachments = []
-  for (let attach of message.fileAttachments) {
+  for (const attach of message.fileAttachments) {
     const url = attach.url ? attach.url : await getAttachmentURL(message, attach)
 
     if (!url) continue
@@ -34,8 +34,11 @@ export default async (thread: Thread, sender: User, message: Message): Promise<M
     attachments.push(await downloadFile(url))
   }
 
-  const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
-  for (let attach of message.mediaAttachments) {
+  const appendToBody = (str: string): void => {
+    if (!body.includes(str)) body += '\n' + str
+  }
+
+  for (const attach of message.mediaAttachments) {
     if (attach.message) appendToBody(attach.message)
     if (attach.description) appendToBody(attach.description)
     if (attach.url) appendToBody(attach.url)

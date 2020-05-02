@@ -14,9 +14,11 @@ class FakeWriteStream {
   }
 }
 
-const getWritableDate = () => timezonedDate().replace('T', '_').replace(/:/g, '-')
+function getWritableDate (): string {
+  return timezonedDate().replace('T', '_').replace(/:/g, '-')
+}
 
-export default (configPath = getConfigDir()) => {
+export default function inject (configPath = getConfigDir()): void {
   let logStream: fs.WriteStream | FakeWriteStream
   if (process.env.STORAGE_URL) {
     logStream = new FakeWriteStream()
@@ -47,6 +49,7 @@ export default (configPath = getConfigDir()) => {
       line = ''
     }
   }
+
   // @ts-ignore
   process.stdout.write = bindWrite(process.stdout.write, 'stdout')
   // @ts-ignore

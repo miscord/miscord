@@ -11,6 +11,6 @@ export default new Command(async ([ name, id, value ]) => {
   return `Endpoint ${id}@${name} is ${value === 'true' ? 'now' : 'no longer'} read only!`
 }, {
   argc: 3,
-  usage: `readonly <connection name> <endpoint ID> <true/false>`,
-  example: `readonly test-connection 1234 true`
+  usage: 'readonly <connection name> <endpoint ID> <true/false>',
+  example: 'readonly test-connection 1234 true'
 })

@@ -1,8 +1,8 @@
 import timezonedDate from './timezonedDate'
 import util from 'util'
 import chalk from 'chalk'
-import is_docker from 'is-docker'
-const isDocker = is_docker()
+import isDockerFn from 'is-docker'
+const isDocker = isDockerFn()
 
 export type Level = 'fatal' | 'error' | 'warn' | 'info' | 'start' | 'success' | 'debug' | 'trace'
 
@@ -61,35 +61,35 @@ export default class Logger {
     }
   }
 
-  withScope (scope: string) {
+  withScope (scope: string): Logger {
     const logger = new Logger(this.level, this.scope ? `${this.scope}:${scope}` : scope)
     this.scopedLoggers.push(logger)
     return logger
   }
 
-  setLevel (level: Level) {
+  setLevel (level: Level): void {
     this.level = levels[level]
     this.scopedLoggers.forEach(logger => logger.setLevel(level))
   }
 
-  private getScopeForLevel (level: Level) {
-    return (this.scope || '')
+  private getScopeForLevel (level: Level): string {
+    return (this.scope ?? '')
       .split(':')
       .map(frag => chalk.reset(frag))
       .join(` ${levelArrows[level]} `)
   }
 
-  private inspect (object: any, depth = 2, prefixLength = 20) {
+  private inspect (object: any, depth = 2, prefixLength = 20): string {
     const options = {
       depth,
       colors: true,
-      breakLength: (process.stdout.columns!! - (prefixLength + this.getScopeForLevel('info').length))
+      breakLength: ((process.stdout.columns ?? 100) - (prefixLength + this.getScopeForLevel('info').length))
     }
     if (isDocker) delete options.breakLength
     return util.inspect(object, options)
   }
 
-  log (logLevel: Level, msg: string, obj?: any, depth?: number) {
+  log (logLevel: Level, msg: string, obj?: any, depth?: number): void {
     if (this.level < levels[logLevel]) return
     if (process.env.JSON_LOGS) {
       console.log(JSON.stringify({
@@ -133,12 +133,12 @@ export default class Logger {
     console.log(msg)
   }
 
-  fatal (message: string, object?: any, depth?: number) { this.log('fatal', message, object, depth) }
-  error (message: string, object?: any, depth?: number) { this.log('error', message, object, depth) }
-  info (message: string, object?: any, depth?: number) { this.log('info', message, object, depth) }
-  start (message: string, object?: any, depth?: number) { this.log('start', message, object, depth) }
-  success (message: string, object?: any, depth?: number) { this.log('success', message, object, depth) }
-  warn (message: string, object?: any, depth?: number) { this.log('warn', message, object, depth) }
-  debug (message: string, object?: any, depth?: number) { this.log('debug', message, object, depth) }
-  trace (message: string, object?: any, depth?: number) { this.log('trace', message, object, depth) }
+  fatal (message: string, object?: any, depth?: number): void { this.log('fatal', message, object, depth) }
+  error (message: string, object?: any, depth?: number): void { this.log('error', message, object, depth) }
+  info (message: string, object?: any, depth?: number): void { this.log('info', message, object, depth) }
+  start (message: string, object?: any, depth?: number): void { this.log('start', message, object, depth) }
+  success (message: string, object?: any, depth?: number): void { this.log('success', message, object, depth) }
+  warn (message: string, object?: any, depth?: number): void { this.log('warn', message, object, depth) }
+  debug (message: string, object?: any, depth?: number): void { this.log('debug', message, object, depth) }
+  trace (message: string, object?: any, depth?: number): void { this.log('trace', message, object, depth) }
 }

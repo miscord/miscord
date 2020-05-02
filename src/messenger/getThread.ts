@@ -4,11 +4,11 @@ import { Thread } from 'libfb'
 
 const log = logger.withScope('messenger:getThread')
 
-export default async (threadID: string, useCache = true): Promise<MiscordThread> => {
+export default async function getThread (threadID: string, useCache = true): Promise<MiscordThread> {
   if (messenger.threads.has(threadID) && useCache) {
     log.debug('Messenger thread cached')
 
-    let thread = messenger.threads.get(threadID)
+    const thread = messenger.threads.get(threadID)
     if (!thread) throw new Error(`Could not find thread ${threadID}`)
 
     return thread

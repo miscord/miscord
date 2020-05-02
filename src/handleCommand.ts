@@ -1,12 +1,12 @@
-const log = logger.withScope('handleCommand')
-
-import { TextChannel, User } from 'discord.js'
+import { Message, TextChannel } from 'discord.js'
 import { hasAdmin } from './utils'
 import * as commands from './commands'
-import { TextBasedChannel } from './types/TextBasedChannel'
 
-export default ({ content, author, channel }: { content: string, author: User, channel: TextBasedChannel }) => {
+const log = logger.withScope('handleCommand')
+
+export default function handleCommand (message: Message): void {
   log.info('Command received!')
+  let { content, author, channel } = message
   content = content.trim()
 
   let command = content.split(' ')[0]
@@ -17,7 +17,11 @@ export default ({ content, author, channel }: { content: string, author: User, c
 
   if (!command) command = 'help'
 
-  if (!Object.keys(commands).includes(command)) return channel.send(`Command \`${command}\` not found!`)
+  if (!Object.keys(commands).includes(command)) {
+    channel.send(`Command \`${command}\` not found!`)
+      .catch(err => log.error(err))
+    return
+  }
   if (command === 'eval') {
     // can be unsafe?
     argv.unshift(

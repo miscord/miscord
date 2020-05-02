@@ -1,5 +1,5 @@
 // https://blog.jonnew.com/posts/poo-dot-length-equals-two
-export default (str: string) => {
+export default function emojiCount (str: string): number {
   const split = str.split('\u{200D}')
   let count = 0
 

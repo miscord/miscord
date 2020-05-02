@@ -1,6 +1,7 @@
 import { Message } from 'discord.js'
+import { DiscordMessageData } from '../MessageData'
 
-export default (message: Message) => {
+export default function toDiscord (message: Message): DiscordMessageData {
   return {
     body: message.type !== 'PINS_ADD'
       ? message.content

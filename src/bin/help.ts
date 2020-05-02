@@ -3,7 +3,9 @@ import { getHelp } from '../arguments'
 const args = getHelp()
 const miscord = chalk.green('miscord')
 
-export default `${chalk.green(`Miscord v${require('../../package.json').version}`)}
+const { version } = require('../../package.json') as { version: string }
+
+export default `${chalk.green(`Miscord v${version}`)}
 
 Usage: ${miscord}
   ${args}

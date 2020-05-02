@@ -12,7 +12,7 @@ export default function load (data, prefix) {
     field.addEventListener('change', async () => {
       field.disabled = true
       const value = serialize(field)
-      await fetchJSON(`/config/${prefix}${field.id}`, 'POST', value)
+      await fetchJSON(`/api/config/${prefix}${field.id}`, 'POST', value)
       field.disabled = false
     })
   })

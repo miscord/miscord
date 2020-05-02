@@ -49,14 +49,14 @@ class Thread {
 
 export default {
   async getGuilds () {
-    const guilds = await fetchJSON('/discord/channels')
+    const guilds = await fetchJSON('/api/discord/channels')
     return GuildArray.from(guilds)
   },
   async getThreads () {
-    const threads = await fetchJSON('/messenger/threads')
+    const threads = await fetchJSON('/api/messenger/threads')
     return new MapWithFilter(threads.map(thread => [ thread.id, new Thread(thread) ]))
   },
   getConfig (prefix) {
-    return fetchJSON(`/config/${prefix || ''}`)
+    return fetchJSON(`/api/config/${prefix || ''}`)
   }
 }

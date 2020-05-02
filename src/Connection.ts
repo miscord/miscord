@@ -17,10 +17,10 @@ export default class Connection {
     this.endpoints = endpoints
   }
 
-  static isThread (endpoint: Endpoint) { return endpoint.type === 'messenger' }
-  static isChannel (endpoint: Endpoint) { return endpoint.type === 'discord' }
+  static isThread (endpoint: Endpoint): boolean { return endpoint.type === 'messenger' }
+  static isChannel (endpoint: Endpoint): boolean { return endpoint.type === 'discord' }
 
-  addThread (id: string) {
+  addThread (id: string): Connection {
     this.endpoints.push({
       type: 'messenger',
       id
@@ -28,7 +28,7 @@ export default class Connection {
     return this
   }
 
-  addChannel (id: string) {
+  addChannel (id: string): Connection {
     this.endpoints.push({
       type: 'discord',
       id
@@ -36,7 +36,7 @@ export default class Connection {
     return this
   }
 
-  async addEndpoint ({ id, type, readonly }: { id: string, type: 'discord' | 'messenger', readonly?: boolean }) {
+  async addEndpoint ({ id, type, readonly }: { id: string, type: 'discord' | 'messenger', readonly?: boolean }): Promise<void> {
     if (type === 'discord') {
       if (!discord.client.channels.has(id)) throw new Error(`Discord channel \`${id}\` not found!`)
       await this
@@ -55,21 +55,23 @@ export default class Connection {
     if (readonly) this.markEndpointAsReadonly(id, true)
   }
 
-  has (id: string) {
+  has (id: string): boolean {
     return this.endpoints.some(endpoint => endpoint.id === id)
   }
 
-  getWritableEndpoints () { return this.endpoints.filter(endpoint => !endpoint.readonly) }
+  getWritableEndpoints (): Endpoint[] {
+    return this.endpoints.filter(endpoint => !endpoint.readonly)
+  }
 
-  getThreads () { return this.endpoints.filter(Connection.isThread) }
-  getWritableThreads () { return this.getWritableEndpoints().filter(Connection.isThread) }
-  getOtherWritableThreads (id: string) { return this.getWritableThreads().filter(thread => thread.id !== id.toString()) }
+  getThreads (): Endpoint[] { return this.endpoints.filter(Connection.isThread) }
+  getWritableThreads (): Endpoint[] { return this.getWritableEndpoints().filter(Connection.isThread) }
+  getOtherWritableThreads (id: string): Endpoint[] { return this.getWritableThreads().filter(thread => thread.id !== id.toString()) }
 
-  getChannels () { return this.endpoints.filter(Connection.isChannel) }
-  getWritableChannels () { return this.getWritableEndpoints().filter(Connection.isChannel) }
-  getOtherWritableChannels (id: string) { return this.getWritableChannels().filter(channel => channel.id !== id) }
+  getChannels (): Endpoint[] { return this.endpoints.filter(Connection.isChannel) }
+  getWritableChannels (): Endpoint[] { return this.getWritableEndpoints().filter(Connection.isChannel) }
+  getOtherWritableChannels (id: string): Endpoint[] { return this.getWritableChannels().filter(channel => channel.id !== id) }
 
-  async checkChannelRenames (name: string) {
+  async checkChannelRenames (name: string): Promise<Connection> {
     if (
       !name ||
       !config.discord.renameChannels ||
@@ -89,66 +91,68 @@ export default class Connection {
     return this
   }
 
-  hasEndpoint (id: string) {
+  hasEndpoint (id: string): boolean {
     return this.endpoints.some(endpoint => endpoint.id === id)
   }
 
-  markEndpointAsReadonly (id: string, readonly: boolean) {
-    let endpoint = this.endpoints.find(endpoint => endpoint.id === id)
-    endpoint!!.readonly = readonly
+  markEndpointAsReadonly (id: string, readonly: boolean): Connection {
+    const endpoint = this.endpoints.find(endpoint => endpoint.id === id)
+    if (endpoint != null) endpoint.readonly = readonly
     return this
   }
 
-  removeEndpoint (id: string) {
-    let index = this.endpoints.findIndex(endpoint => endpoint.id === id)
+  removeEndpoint (id: string): Connection {
+    const index = this.endpoints.findIndex(endpoint => endpoint.id === id)
     if (index !== -1) this.endpoints.splice(index, 1)
     return this
   }
 
-  getPrintable () {
-    const getLink = ({ type, id }: { type: 'discord' | 'messenger', id: string }) => type === 'messenger'
-      ? `[\`${id}\`](https://facebook.com/messages/t/${id})`
-      : `<#${id}>`
-    const e = (endpoint: Endpoint) => `\`${endpoint.type}\`: ${getLink(endpoint)}${endpoint.readonly ? ' (readonly)' : ''}`
-    return this.endpoints.map(e).join('\n')
+  getPrintable (): string {
+    return this.endpoints.map(endpoint => {
+      const link = endpoint.type === 'messenger'
+        ? `[\`${endpoint.id}\`](https://facebook.com/messages/t/${endpoint.id})`
+        : `<#${endpoint.id}>`
+
+      return `\`${endpoint.type}\`: ${link}${endpoint.readonly ? ' (readonly)' : ''}`
+    }).join('\n')
   }
 
-  rename (newName: string) {
+  rename (newName: string): Connection {
     connections.delete(this.name)
     this.name = newName
     return this
   }
 
-  delete () {
+  async delete (): Promise<void> {
     connections.delete(this.name)
     return connections.save()
   }
 
-  disable () {
+  disable (): Connection {
     if (this.disabled) return this
     this.disabled = true
     return this
   }
 
-  enable () {
+  enable (): Connection {
     if (!this.disabled) return this
     this.disabled = false
     return this
   }
 
-  async save () {
+  async save (): Promise<Connection> {
     connections.set(this.name, this)
     await connections.save()
     return this
   }
 
-  toYAMLObject () {
+  toYAMLObject (): any {
     return {
       [(this.disabled ? '_' : '') + this.name]: this.cleanEndpoints
     }
   }
 
-  toObject () {
+  toObject (): any {
     return {
       name: this.name,
       endpoints: this.cleanEndpoints,
@@ -156,7 +160,7 @@ export default class Connection {
     }
   }
 
-  get cleanEndpoints () {
+  get cleanEndpoints (): Endpoint[] {
     return this.endpoints
       .map(endpoint => {
         if (!endpoint.readonly) delete endpoint.readonly

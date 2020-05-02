@@ -1,6 +1,6 @@
-const log = logger.withScope('commands:restart')
-
 import Command from './Command'
+
+const log = logger.withScope('commands:restart')
 
 export default new Command(async () => {
   await discord.client.destroy()

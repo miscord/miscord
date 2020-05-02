@@ -1,19 +1,19 @@
 import Config from './Config'
-import fetch from 'node-fetch'
+import fetch, { Response } from 'node-fetch'
 import { YAMLConnections } from '../ConnectionsManager'
 import { Session } from 'libfb'
 
-function getURL (filename: string) {
-  let env = process.env.STORAGE_URL!!
+function getURL (filename: string): string {
+  const env = process.env.STORAGE_URL ?? ''
   return env + (env.endsWith('/') ? filename : '/' + filename)
 }
 
-async function getJSON (url: string) {
+async function getJSON (url: string): Promise<any> {
   const res = await fetch(url)
   return res.json()
 }
 
-function postJSON (url: string, body: any) {
+async function postJSON (url: string, body: any): Promise<Response> {
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -28,19 +28,29 @@ export default class RemoteConfig extends Config {
   connURL = getURL('connections.json')
   sessionURL = getURL('session.json')
 
-  async load () {
+  async load (): Promise<void> {
     const config = await getJSON(this.url)
     this._load(config)
   }
 
-  set (key: string, value: any) {
+  async set (key: string, value: any): Promise<Response> {
     this._set(key, value)
     return postJSON(this.url, { [key]: value })
   }
 
-  loadConnections () { return getJSON(this.connURL) }
-  async saveConnections (connections: YAMLConnections) { postJSON(this.connURL, connections) }
+  async loadConnections (): Promise<YAMLConnections> {
+    return getJSON(this.connURL)
+  }
 
-  loadSession () { return getJSON(this.sessionURL) }
-  async saveSession (session: Session) { postJSON(this.sessionURL, session) }
+  async saveConnections (connections: YAMLConnections): Promise<void> {
+    await postJSON(this.connURL, connections)
+  }
+
+  async loadSession (): Promise<Session> {
+    return getJSON(this.sessionURL)
+  }
+
+  async saveSession (session: Session): Promise<void> {
+    await postJSON(this.sessionURL, session)
+  }
 }

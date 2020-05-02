@@ -8,6 +8,6 @@ export default new Command(async ([ name ]) => {
   return `Connection \`${name}\` was removed successfully!`
 }, {
   argc: 1,
-  usage: `remove <connection name>`,
-  example: `remove test-connection`
+  usage: 'remove <connection name>',
+  example: 'remove test-connection'
 })

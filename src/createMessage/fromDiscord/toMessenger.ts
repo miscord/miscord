@@ -1,12 +1,12 @@
-const log = logger.withScope('createMessage:fromDiscord:messenger')
-
 import { MessengerMessageData } from '../MessageData'
 import { DMChannel, Message } from 'discord.js'
 import downloadFile from '../downloadFile'
 import handleCustomEmoji from '../handleCustomEmoji'
 
-export default async (message: Message): Promise<MessengerMessageData> => {
-  let username = message.member ? (message.member.nickname || message.author.username) : message.author.username
+const log = logger.withScope('createMessage:fromDiscord:messenger')
+
+export default async function toMessenger (message: Message): Promise<MessengerMessageData> {
+  const username = message.member ? (message.member.nickname ?? message.author.username) : message.author.username
   const channelName = (message.channel instanceof DMChannel)
     ? '@' + message.channel.recipient.username
     : '#' + message.channel.name
@@ -25,7 +25,9 @@ export default async (message: Message): Promise<MessengerMessageData> => {
       if (embed.title) content += '\n' + embed.title
       if (embed.url && !content.includes(embed.url)) content += '\n(' + embed.url + ')'
       if (embed.description) content += '\n' + embed.description
-      embed.fields.forEach(field => { content += '\n\n' + field.name + '\n' + field.value })
+      embed.fields.forEach(field => {
+        content += '\n\n' + field.name + '\n' + field.value
+      })
     })
     log.debug('content with embed', content)
     // get image url from discord embeds
@@ -50,7 +52,7 @@ export default async (message: Message): Promise<MessengerMessageData> => {
     .replace('{source}', config.messenger.sourceFormat.discord)
     .replace('{newline}', '\n')
 
-  const attachmentURLs = [config.messenger.ignoreEmbeds ? null : embedImageURL]
+  const attachmentURLs = [ config.messenger.ignoreEmbeds ? null : embedImageURL ]
     .concat(message.attachments.map(attach => attach.url))
     .filter(Boolean) as string[]
 

@@ -1,9 +1,9 @@
-import { Server } from '../types/fastify'
 import fs from 'fs-extra'
 import FileConfig from '../config/FileConfig'
 import path from 'path'
+import { FastifyInstance } from 'fastify'
 
-export default async (app: Server) => {
+export default function useControl (app: FastifyInstance): void {
   app.get('/logs', async (request, reply) => {
     if (!(config instanceof FileConfig)) return reply.send([])
     const count = request.query.count || 100
@@ -41,7 +41,7 @@ export default async (app: Server) => {
   })
 }
 
-async function close (code: number) {
+async function close (code: number): Promise<void> {
   await discord.client.destroy()
   logger.success('Logged out from Discord')
   console.error('close ' + code.toString())

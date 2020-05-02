@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run prepare && node dist/bin/index.js",
     "dev": "ts-node src/bin/index.ts",
-    "test": "tslint -c tslint.json 'src/**/*.ts'",
+    "test": "eslint --ext .js,.ts .",
     "build": "node dist/bin/build.js",
     "clean": "shx rm -rf dist/",
     "compile": "tsc",
@@ -55,7 +55,6 @@
     "select2": "^4.0.12",
     "semver": "^7.1.1",
     "strip-ansi": "^6.0.0",
-    "sudo-block": "^3.0.0",
     "tmp": "^0.1.0"
   },
   "devDependencies": {
@@ -68,14 +67,19 @@
     "@types/node-fetch": "^2.5.4",
     "@types/semver": "^6.2.0",
     "@types/tmp": "^0.1.0",
+    "@typescript-eslint/eslint-plugin": "2",
     "archiver": "^3.1.1",
+    "eslint": "6",
+    "eslint-config-standard-with-typescript": "^15.0.1",
+    "eslint-plugin-import": "2",
+    "eslint-plugin-node": "11",
+    "eslint-plugin-promise": "4",
+    "eslint-plugin-standard": "4",
     "extract-zip": "^1.6.7",
     "gh-release": "^3.5.0",
     "pkg": "^4.4.2",
     "shx": "^0.3.2",
     "ts-node": "^8.5.4",
-    "tslint": "^5.20.1",
-    "tslint-config-standard": "^9.0.0",
     "typescript": "^3.7.3"
   },
   "pkg": {

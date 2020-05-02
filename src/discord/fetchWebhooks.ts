@@ -1,8 +1,8 @@
-const log = logger.withScope('discord:login:fetchWebhooks')
-
 import { Collection } from 'discord.js'
 
-export default async () => {
+const log = logger.withScope('discord:login:fetchWebhooks')
+
+export default async function fetchWebhooks (): Promise<void> {
   const guilds = discord.guilds.filter(
     guild => guild.channels.some(
       channel => connections.hasEndpoint(channel.id)

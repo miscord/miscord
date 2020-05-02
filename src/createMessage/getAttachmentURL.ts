@@ -1,8 +1,8 @@
-const log = logger.withScope('createMessage:getAttachmentURL')
-
 import { Message, FileAttachment } from 'libfb'
 
-export default async (message: Message, attach: FileAttachment) => {
+const log = logger.withScope('createMessage:getAttachmentURL')
+
+export default async function (message: Message, attach: FileAttachment): Promise<string | void> {
   let url
   try {
     url = await messenger.client.getAttachmentURL(message.id, attach.id)

@@ -4,10 +4,12 @@ import path from 'path'
 import archiver from 'archiver'
 import fs from 'fs-extra'
 import buildMacApp from './buildMacApp'
+import Logger from '../logger/Logger'
+const log = new Logger('info')
 
-const { version } = require('../../package.json')
+const { version } = require('../../package.json') as { version: string }
 
-async function main () {
+async function main (): Promise<void> {
   console.log(`Building miscord-${version}-win.exe...`)
   await build('win-x64', 'win.exe')
 
@@ -28,7 +30,7 @@ async function main () {
 
   release({
     auth: {
-      token: process.env.GITHUB_TOKEN!!
+      token: process.env.GITHUB_TOKEN ?? ''
     },
     owner: 'miscord',
     repo: 'miscord',
@@ -50,16 +52,16 @@ async function main () {
   })
 }
 
-async function build (nodeVersion: string, name: string) {
+async function build (nodeVersion: string, name: string): Promise<void> {
   const filename = `miscord-${version}-${name}`
   await exec(`npx pkg -t latest-${nodeVersion} --public . -o ./build/${filename}`)
   await archivize(filename)
   await fs.remove(path.join('build', filename))
 }
 
-function exec (command: string) {
+async function exec (command: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const child = spawn('/bin/bash', ['-c', command], { cwd: require('path').join(__dirname, '..', '..'), env: process.env })
+    const child = spawn('/bin/bash', [ '-c', command ], { cwd: require('path').join(__dirname, '..', '..'), env: process.env })
     child.stdout.on('data', data => process.stdout.write(data))
     child.stderr.on('data', data => process.stderr.write(data))
     child.on('error', err => {
@@ -70,7 +72,7 @@ function exec (command: string) {
   })
 }
 
-const archivize = (file: string) => new Promise((resolve, reject) => {
+const archivize = (file: string): Promise<void> => new Promise((resolve, reject) => {
   const { name, base } = path.parse(file)
   const stream = fs.createWriteStream(path.join('build', name + '.zip'))
   stream.on('close', resolve)
@@ -80,6 +82,8 @@ const archivize = (file: string) => new Promise((resolve, reject) => {
   archive.pipe(stream)
   archive.append(fs.createReadStream(path.join('build', file)), { name: base, mode: 0o755 })
   archive.finalize()
+    .catch(reject)
 })
 
 main()
+  .catch(err => log.error(err))

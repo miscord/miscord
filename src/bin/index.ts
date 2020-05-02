@@ -1,22 +1,23 @@
 #!/usr/bin/env node
+/* eslint-disable import/first */
 import chalk from 'chalk'
-import sudoBlock from 'sudo-block'
 import cluster from 'cluster'
-import Logger from '../logger/Logger'
-// @ts-ignore
-global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
+import Logger, { Level } from '../logger/Logger'
+const logger = new Logger(process.env.MISCORD_LOG_LEVEL as Level ?? 'info')
+global.logger = logger
 import { getConfigDir } from '../config/FileConfig'
 import launch from './worker'
 import { getArgs } from '../arguments'
 import help from './help'
-const { version } = require('../../package.json')
 
-const fork = (d: string) => cluster.fork({ DATA_PATH: d, ...process.env }).on('online', () => { lastRunTime = new Date() })
+const { version } = require('../../package.json') as { version: string }
+
+const fork = (d: string): cluster.Worker => cluster.fork({ DATA_PATH: d, ...process.env }).on('online', () => { lastRunTime = new Date() })
 
 let lastRunTime: Date
 
 if (cluster.isMaster) {
-  const printAndExit = (m: string) => { console.log(m); process.exit(0) }
+  const printAndExit = (m: string): void => { console.log(m); process.exit(0) }
 
   const outdated = 'Hey! Your version of Node.JS seems outdated. Minimum version required: v8.5.0, your version: ' + process.version
   if (!require('semver').gte(process.version, '8.5.0')) printAndExit(chalk.yellow(outdated))
@@ -25,15 +26,6 @@ if (cluster.isMaster) {
   if (args.help) printAndExit(help)
   if (args.version) printAndExit(version)
   if (args.getPath) printAndExit(getConfigDir())
-
-  const defaultMessage = chalk`
-{red.bold Miscord should not be run with root permissions.}
-If running without {bold sudo} doesn't work, you can either fix your permission problems or change where npm stores global packages by putting {bold ~/npm/bin} in your PATH and running:
-{blue npm config set prefix ~/npm}
-See: {underline https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md}
-If you {underline really} need to run Miscord with {bold sudo}, add parameter {bold --runningWithSudoIsDangerous}.
-`
-  if (!args.runningWithSudoIsDangerous) sudoBlock(defaultMessage)
 
   fork(args.dataPath)
 

@@ -12,9 +12,9 @@ export default new Command(async ([ name, type, id ]) => {
     return err.message
   }
 
-  return `${type === 'discord' ? `Discord channel` : `Messenger thread`} \`${id}\` has been added successfully!`
+  return `${type === 'discord' ? 'Discord channel' : 'Messenger thread'} \`${id}\` has been added successfully!`
 }, {
   argc: 3,
-  usage: `link <connection name> <type (discord/messenger)> <ID>`,
-  example: `link test-connection messenger 1616656375118166`
+  usage: 'link <connection name> <type (discord/messenger)> <ID>',
+  example: 'link test-connection messenger 1616656375118166'
 })

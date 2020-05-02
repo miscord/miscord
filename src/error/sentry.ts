@@ -16,26 +16,27 @@ const bannedErrors = [
   'No guilds added!' // client.guilds is empty
 ]
 
-export function sendToSentry (error: Error) {
-  if (bannedErrors.some(banned => error.toString().includes(banned) || error.message.includes(banned))) return
+export function sendToSentry (error: Error): void {
+  if (bannedErrors.some(banned => error?.toString().includes(banned) || error.message.includes(banned))) return
   Sentry.captureException(error)
 }
 
-export function initSentry () {
-  const pkg = require('../../package.json')
+export function initSentry (): void {
+  const { version } = require('../../package.json') as { version: string }
   Sentry.init({
     dsn: 'https://a24e24e8c74f496db5fce2d611e085ee@sentry.miscord.net/2',
     maxBreadcrumbs: 0, // important, as it shows console messages
-    release: `miscord@${pkg.version}`
+    release: `miscord@${version}`
   })
   Sentry.configureScope(scope => {
-    scope.setTag('is_packaged', Boolean(process.pkg).toString().toLowerCase())
+    scope.setTag('is_packaged', process.pkg ? 'true' : 'false')
     scope.setTag('platform', platform())
-    scope.setTag('version', pkg.version)
+    scope.setTag('version', version)
     scope.setTag('node_version', process.version)
   })
 }
 
-export function closeSentry () {
-  return Sentry.getCurrentHub().getClient()!!.close(2000)
+export function closeSentry (): void {
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  Sentry?.getCurrentHub().getClient()?.close(2000)
 }

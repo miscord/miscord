@@ -5,10 +5,10 @@ import archiver from 'archiver'
 import extractZip from 'extract-zip'
 import tmp from 'tmp'
 
-export default async function buildMacApp (version: string) {
+export default async function buildMacApp (version: string): Promise<void> {
   // create a temporary directory
   const tmpdir = tmp.dirSync()
-  const tmppath = (p: string) => path.join(tmpdir.name, p)
+  const tmppath = (p: string): string => path.join(tmpdir.name, p)
 
   // get path to the zip file which will be downloaded
   const zipPath = tmppath('miscord.zip')
@@ -26,7 +26,7 @@ export default async function buildMacApp (version: string) {
   await fs.copyFile(`build/miscord-${version}-mac.zip`, tmppath('miscord-mac.zip'))
 
   // extract the binary
-  await extract(tmppath(`miscord-mac.zip`), { dir: tmpdir.name })
+  await extract(tmppath('miscord-mac.zip'), { dir: tmpdir.name })
 
   // fill the template with a binary
   await fs.copyFile(tmppath(`miscord-${version}-mac.bin`), tmppath('Miscord.app/Contents/Resources/miscord-mac.bin'))
@@ -41,16 +41,19 @@ export default async function buildMacApp (version: string) {
   await fs.remove(tmpdir.name)
 }
 
-const extract = (path: string, opts: extractZip.Options) => new Promise((resolve, reject) => extractZip(path, opts, err => { if (err) reject(err); else resolve() }))
+const extract = (path: string, opts: extractZip.Options): Promise<void> => new Promise(
+  (resolve, reject) => extractZip(path, opts, err => { if (err) reject(err); else resolve() })
+)
 
-const download = (url: string, path: string) => new Promise(async (resolve, reject) => {
+const download = (url: string, path: string): Promise<void> => new Promise((resolve, reject) => {
   const stream = fs.createWriteStream(path)
-  const res = await fetch(url)
-  res.body.pipe(stream)
+  fetch(url)
+    .then(res => res.body.pipe(stream))
+    .catch(reject)
   stream.on('close', resolve)
 })
 
-const archivize = (filePath: string, directory: string) => new Promise((resolve, reject) => {
+const archivize = (filePath: string, directory: string): Promise<void> => new Promise((resolve, reject) => {
   const stream = fs.createWriteStream(filePath)
   stream.on('close', resolve)
   const archive = archiver('zip', {
@@ -59,4 +62,5 @@ const archivize = (filePath: string, directory: string) => new Promise((resolve,
   archive.pipe(stream)
   archive.directory(directory, path.parse(directory).base)
   archive.finalize()
+    .catch(reject)
 })

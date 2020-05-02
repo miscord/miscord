@@ -9,7 +9,7 @@ import AddConnectionLevel from '/static/dashboard/js/connections/add.js'
 const container = document.querySelector('#connections')
 
 Promise.all([
-  fetchJSON('/connections'),
+  fetchJSON('/api/connections'),
   api.getGuilds(),
   api.getThreads()
 ])
@@ -72,7 +72,7 @@ Promise.all([
       const el = Connection(connection)
 
       const refresh = async conn => {
-        if (!conn) conn = await fetchJSON(`/connections/${connection.name}`)
+        if (!conn) conn = await fetchJSON(`/api/connections/${connection.name}`)
         const newEl = loadConnection(conn)
         el.parentNode.replaceChild(newEl, el)
         initSelects({ guilds, threads })
@@ -80,20 +80,20 @@ Promise.all([
 
       el.querySelector('.disable-checkbox').addEventListener('click', async () => {
         const action = connection.disabled ? 'enable' : 'disable'
-        const conn = await fetchJSON(`/connections/${connection.name}/${action}`, 'POST')
+        const conn = await fetchJSON(`/api/connections/${connection.name}/${action}`, 'POST')
         await refresh(conn)
       })
 
       el.querySelector('.delete').addEventListener('click', async () => {
         if (confirm(`Do you want to delete connection ${connection.name}?`)) {
-          await fetchJSON(`/connections/${connection.name}`, 'DELETE')
+          await fetchJSON(`/api/connections/${connection.name}`, 'DELETE')
           location.reload()
         }
       })
 
       el.querySelectorAll('.endpoint > .delete').forEach(button => {
         button.addEventListener('click', async ev => {
-          await fetchJSON(`/connections/${connection.name}/endpoints/${ev.target.dataset.id}`, 'DELETE')
+          await fetchJSON(`/api/connections/${connection.name}/endpoints/${ev.target.dataset.id}`, 'DELETE')
           await refresh()
         })
       })
@@ -104,7 +104,7 @@ Promise.all([
       async function addEndpoint (type, id) {
         discordEndpoints.prop('disabled', true)
         messengerEndpoints.prop('disabled', true)
-        await fetchJSON(`/connections/${connection.name}/endpoints`, { type, id })
+        await fetchJSON(`/api/connections/${connection.name}/endpoints`, { type, id })
         await refresh()
       }
 

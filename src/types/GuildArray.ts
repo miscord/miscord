@@ -1,7 +1,11 @@
-import { Guild } from 'discord.js'
+import { Guild, GuildMember, Role } from 'discord.js'
 
 export default class GuildArray extends Array<Guild> {
-  getAll (property: 'roles' | 'members') {
-    return this.map(guild => guild[property].array()).flat()
+  getAllRoles (): Role[] {
+    return this.map(guild => guild.roles.array()).flat()
+  }
+
+  getAllMembers (): GuildMember[] {
+    return this.map(guild => guild.members.array()).flat()
   }
 }

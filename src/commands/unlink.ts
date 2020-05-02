@@ -10,6 +10,6 @@ export default new Command(async ([ name, id ]) => {
   return `Endpoint \`${id}\` was removed successfully from connection \`${name}\`!`
 }, {
   argc: 2,
-  usage: `unlink <connection name> <ID>`,
-  example: `unlink test-connection 1616656375118166`
+  usage: 'unlink <connection name> <ID>',
+  example: 'unlink test-connection 1616656375118166'
 })

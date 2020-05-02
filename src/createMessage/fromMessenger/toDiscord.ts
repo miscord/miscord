@@ -1,16 +1,16 @@
-const log = logger.withScope('createMessage:fromMessenger:discord')
-
 import getAttachmentURL from '../getAttachmentURL'
 import { WebhookMessageOptions } from 'discord.js'
 import Thread from '../../types/Thread'
-import { User, Message, FileAttachment, XMAAttachment } from 'libfb'
+import { Message, User } from 'libfb'
 import handleEmojis from '../../discord/handleEmojis'
 import emojiCount from '../emojiCount'
 import parseMessengerMessage, { thumbs } from './parseMessengerMessage'
 import url from 'url'
 import { DiscordMessageData } from '../MessageData'
 
-export default async (thread: Thread, sender: User, message: Message): Promise<DiscordMessageData> => {
+const log = logger.withScope('createMessage:fromMessenger:discord')
+
+export default async function toDiscord (thread: Thread, sender: User, message: Message): Promise<DiscordMessageData> {
   // set description to message body, set author to message sender
   let authorName
   ({ authorName, message } = parseMessengerMessage(thread, sender, message))
@@ -32,12 +32,14 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
 
   log.trace('attachments to parse', [ message.fileAttachments, message.mediaAttachments ], Infinity)
 
-  const appendToBody = (str: string) => { if (!body.includes(str)) body += '\n' + str }
+  const appendToBody = (str: string): void => {
+    if (!body.includes(str)) body += '\n' + str
+  }
 
   let notSentAttachments = false
 
-  for (let attach of message.fileAttachments) {
-    const url = attach.url || await getAttachmentURL(message, attach)
+  for (const attach of message.fileAttachments) {
+    const url = attach.url ?? await getAttachmentURL(message, attach)
 
     if (!url) continue
     if (attach.size && attach.size > 8 * 1024 * 1024) {
@@ -45,7 +47,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
       notSentAttachments = true
     }
 
-    opts.files!!.push({ attachment: url, name: attach.filename })
+    opts.files?.push({ attachment: url, name: attach.filename })
   }
 
   if (notSentAttachments) {
@@ -54,14 +56,14 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
     if (config.messenger.attachmentTooLargeError) await messenger.client.sendMessage(thread.id, message)
   }
 
-  for (let attach of message.mediaAttachments) {
+  for (const attach of message.mediaAttachments) {
     if (attach.message) appendToBody(attach.message)
     if (attach.description) appendToBody(attach.description)
     if (attach.url) appendToBody(attach.url)
     if (attach.imageURL) {
-      opts.files!!.push({
+      opts.files?.push({
         attachment: attach.imageURL,
-        name: url.parse(attach.imageURL).pathname!!.split('/').slice(-1)[0]
+        name: new url.URL(attach.imageURL).pathname?.split('/').slice(-1)[0]
       })
     }
     if (attach.type === 'UnavailableXMA') {
@@ -71,7 +73,7 @@ export default async (thread: Thread, sender: User, message: Message): Promise<D
 
   if (message.stickerId && !thumbs.includes(message.stickerId)) {
     const stickerURL = await messenger.client.getStickerURL(message.stickerId)
-    opts.files!!.push({ attachment: stickerURL, name: message.stickerId + '.png' })
+    opts.files?.push({ attachment: stickerURL, name: message.stickerId.toString() + '.png' })
   }
 
   log.trace('files', opts.files)

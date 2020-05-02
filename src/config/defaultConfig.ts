@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 export default {
   messenger: {
     accounts: [],
@@ -31,7 +32,7 @@ export default {
     ignoredUsers: []
   },
   checkUpdates: false,
-  logLevel: process.env.MISCORD_LOG_LEVEL || 'info',
+  logLevel: process.env.MISCORD_LOG_LEVEL ?? 'info',
   ignoredSequences: [],
   channels: {},
   enableEval: false

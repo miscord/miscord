@@ -1,19 +1,20 @@
+/* eslint-disable import/first */
 import Logger from '../logger/Logger'
 // @ts-ignore
-global.logger = new Logger(process.env.MISCORD_LOG_LEVEL || 'info')
-import sendError from '../error'
+global.logger = new Logger(process.env.MISCORD_LOG_LEVEL ?? 'info')
+import sendError, { reportError } from '../error'
 import { initSentry } from '../error/sentry'
 import gzipOldLogs from '../logger/gzipOldLogs'
 import inject from '../logger/inject'
 import getConfig from '../config/getConfig'
 import miscord from '../index'
 
-export default function launch () {
+export default function launch (): void {
   logger.success(`Worker process ${process.pid} started.`)
   initSentry()
   const dataPath = process.env.DATA_PATH !== 'undefined' ? process.env.DATA_PATH : undefined
 
-  const launch = async () => {
+  async function launch (): Promise<void> {
     if (!process.env.STORAGE_URL) await gzipOldLogs(dataPath)
   }
 
@@ -23,9 +24,9 @@ export default function launch () {
     .then(miscord)
     .catch(err => sendError(err))
 
-  const catchError = (error: Error) => {
+  const catchError = (error: Error): void => {
     if (!error) return
-    sendError(error)
+    sendError(error).catch(err => reportError(err))
   }
 
   // @ts-ignore

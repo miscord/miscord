@@ -4,10 +4,10 @@ interface MessageData {
   body: string
 }
 export interface MessengerMessageData extends MessageData {
-  attachments: {
+  attachments: Array<{
     filePath: string
     extension: string
-  }[]
+  }>
 }
 export interface DiscordMessageData extends MessageData {
   opts: WebhookMessageOptions

@@ -6,7 +6,7 @@ export default new Command(async ([ name, ...endpoints ]) => {
 
   if (endpoints.length) {
     const connection = new Connection(name)
-    for (let endpoint of endpoints) {
+    for (const endpoint of endpoints) {
       if (discord.client.channels.has(endpoint)) {
         await connection.addEndpoint({
           id: endpoint,
@@ -31,6 +31,6 @@ If it's a Messenger chat and bot was added to it while running, try restarting.`
 }, {
   argc: 1,
   allowMoreArguments: true,
-  usage: `add <connection name> [...IDs of threads/channels]`,
-  example: `add test-connection 1234 5678`
+  usage: 'add <connection name> [...IDs of threads/channels]',
+  example: 'add test-connection 1234 5678'
 })

@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor,@typescript-eslint/require-await,@typescript-eslint/consistent-type-assertions */
 /* tslint:disable:no-empty */
 import { MessageOptions, Thread, Session, User } from 'libfb'
 
 export default class FakeClient {
-  async login (username: string, password: string) {}
+  async login (username: string, password: string): Promise<void> {}
 
-  getSession () { return { tokens: {}, deviceId: {} } as Session }
+  getSession (): Session { return { tokens: {}, deviceId: {} } as Session }
 
-  async sendAttachmentFile (threadId: string, attachmentPath: string, extension?: string) {}
+  async sendAttachmentFile (threadId: string, attachmentPath: string, extension?: string): Promise<void> {}
   async sendMessage (threadId: string, message: string, options?: MessageOptions): Promise<{
-    succeeded: boolean,
+    succeeded: boolean
     errStr?: string
   }> {
     return { succeeded: true }
   }
+
   async getAttachmentURL (mid: string, aid: string): Promise<string> { return '' }
   async getStickerURL (stickerID: number): Promise<string> { return '' }
   async getThreadList (count: number): Promise<Thread[]> { return [] }
@@ -32,6 +34,7 @@ export default class FakeClient {
       nicknames: null
     }
   }
+
   async getUserInfo (userID: string): Promise<User> {
     return {
       id: userID,
@@ -47,7 +50,8 @@ export default class FakeClient {
       profilePicSmall: ''
     }
   }
-  on (event: string, callback: any) {}
+
+  on (event: string, callback: any): void {}
 
   constructor (data?: any) {}
 }

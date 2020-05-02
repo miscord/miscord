@@ -1,65 +1,51 @@
 import chalk from 'chalk'
 
-const fillMissingArgs = (el: Argument) => ({ ...el, args: el.args || '' })
-const buildRow = ({ name, short, args, desc }: Argument) => `${chalk.yellow('--' + name)} [${chalk.magenta('-' + short)}] ${args}  ${desc}`
-const equalPad = (param: 'name' | 'args') => (line: Argument, index: number, arr: Argument[]) => ({
-  ...line,
-  [param]: line[param]!!.padEnd(Math.max.apply(null, arr.map(el => el[param]!!.length)))
-})
-
-interface Argument {
+class Argument {
   name: string
   short: string
-  args?: string
+  args: string
   desc: string
-  hidden?: boolean
+
+  constructor (name: string, short?: string, desc: string = '', args: string = '') {
+    this.name = name
+    this.short = short ?? name
+    this.args = args
+    this.desc = desc
+  }
+
+  buildRow (): string {
+    const name = this.name.padEnd(Math.max.apply(null, b.map(arg => arg.name.length ?? 0)))
+    const args = this.args.padEnd(Math.max.apply(null, b.map(arg => arg.args.length ?? 0)))
+
+    return `${chalk.yellow('--' + name)} [${chalk.magenta('-' + this.short)}] ${args}  ${this.desc}`
+  }
 }
 
-const a: Argument[] = [
-  {
-    name: 'help',
-    short: 'h',
-    desc: 'shows this message'
-  },
-  {
-    name: 'version',
-    short: 'v',
-    desc: 'shows version'
-  },
-  { name: 'dataPath',
-    short: 'd',
-    args: '<path>',
-    desc: 'reads data from another folder'
-  },
-  { name: 'getPath',
-    short: 'g',
-    desc: 'shows default data folder path'
-  },
-  {
-    name: 'runningWithSudoIsDangerous',
-    short: 'runningWithSudoIsDangerous',
-    desc: '',
-    hidden: true
-  }
+const b: Argument[] = [
+  new Argument('help', 'h', 'shows this message'),
+  new Argument('version', 'v', 'shows version'),
+  new Argument('dataPath', 'd', 'reads data from another folder', '<path>'),
+  new Argument('getPath', 'g', 'shows default data path')
 ]
 
-export function getArgs () {
+export function getArgs (): { [key: string]: string } {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const args = require('minimist')(process.argv.slice(2))
-  let newArgs: { [key: string]: string } = {}
-  a.forEach(arg => {
+  const newArgs: { [key: string]: string } = {}
+  b.forEach(arg => {
     if (args[arg.name] != null) newArgs[arg.name] = args[arg.name]
     if (args[arg.short] != null) newArgs[arg.name] = args[arg.short]
+
+    // if argument needs to have args but it doesn't, don't put boolean there
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     if (newArgs[arg.name] != null && arg.args && typeof newArgs[arg.name] !== 'string') delete newArgs[arg.name]
   })
   return newArgs
 }
 
-export function getHelp () {
-  return a
-    .filter(a => !a.hidden)
-    .map(equalPad('name'))
-    .map(fillMissingArgs)
-    .map(equalPad('args'))
-    .map(buildRow)
+export function getHelp (): string {
+  logger.info('test', getArgs())
+  return b
+    .map(arg => arg.buildRow())
     .join('\n  ')
 }

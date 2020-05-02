@@ -24,27 +24,27 @@ function setLoading (button, isLoading) {
 }
 
 buttons.pause.addEventListener('click', () => {
-  fetchJSON('/control/pause', {})
+  fetchJSON('/api/control/pause', {})
     .then(updateStatus)
     .catch(alert)
 })
 
 buttons.unpause.addEventListener('click', () => {
-  fetchJSON('/control/unpause', {})
+  fetchJSON('/api/control/unpause', {})
     .then(updateStatus)
     .catch(alert)
 })
 
 buttons.restart.addEventListener('click', () => {
   if (!confirm('Are you sure you want to restart Miscord?\nThe dashboard will become unavailable until it logs back in.')) return
-  fetchJSON('/control/restart', {})
+  fetchJSON('/api/control/restart', {})
     .then(() => alert('Restarting Miscord...'))
     .catch(alert)
 })
 
 buttons.stop.addEventListener('click', () => {
   if (!confirm('Are you sure you want to stop Miscord?\nThe dashboard will become unavailable until you run it again.')) return
-  fetchJSON('/control/stop', {})
+  fetchJSON('/api/control/stop', {})
     .then(() => alert('Stopped Miscord.'))
     .catch(alert)
 })

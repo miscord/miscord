@@ -1,13 +1,15 @@
-const log = logger.withScope('login')
-
 import ConnectionsManager from './ConnectionsManager'
 import updateNotifier from './updateNotifier'
 
 import { login as messengerLogin } from './messenger'
 import { fetchWebhooks, login as discordLogin } from './discord'
 
-export default async () => {
-  logger.start('Launching Miscord v' + require('../package.json').version)
+const log = logger.withScope('login')
+
+export default async function login (): Promise<void> {
+  const { version } = require('../package.json') as { version: string }
+
+  logger.start('Launching Miscord v' + version)
   log.start('Logging in...')
   log.trace('config', config)
   log.info('logLevel', config.logLevel)

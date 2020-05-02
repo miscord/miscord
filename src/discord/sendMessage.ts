@@ -1,10 +1,10 @@
 import handleMentions from './handleMentions'
+import { DiscordMessageData } from '../createMessage/MessageData'
+import { Message } from 'discord.js'
 
 const log = logger.withScope('discord:sendMessage')
 
-import { DiscordMessageData } from '../createMessage/MessageData'
-
-export default async (channelId: string, { body, opts }: DiscordMessageData, image?: string) => {
+export default async function sendMessage (channelId: string, { body, opts }: DiscordMessageData, image?: string): Promise<Message | Message[] | void> {
   // check if body is empty and there are no files
   if (!body && !(opts.files && opts.files.length)) return log.warn('Not sending message, empty.')
 
@@ -23,7 +23,7 @@ export default async (channelId: string, { body, opts }: DiscordMessageData, ima
       return
     }
 
-    webhook = await channel.createWebhook(`Miscord #${channel.name}`.substr(0, 32), image || 'https://miscord.net/img/icon.png')
+    webhook = await channel.createWebhook(`Miscord #${channel.name}`.substr(0, 32), image ?? 'https://miscord.net/img/icon.png')
     discord.webhooks.set(webhook.id, webhook)
   }
   log.trace('webhook', { webhook }, 1)

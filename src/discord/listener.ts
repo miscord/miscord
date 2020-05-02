@@ -1,7 +1,4 @@
 import cleanTemporaryFiles from '../messenger/cleanTemporaryFiles'
-
-const log = logger.withScope('discord:listener')
-
 import { Message } from 'discord.js'
 import { fromDiscord as createMessage } from '../createMessage'
 import handleCommand from '../handleCommand'
@@ -9,7 +6,9 @@ import { sendMessage as sendDiscordMessage } from './'
 import { sendMessage as sendMessengerMessage } from '../messenger'
 import { checkIgnoredSequences, checkMKeep } from '../utils'
 
-export default async (message: Message) => {
+const log = logger.withScope('discord:listener')
+
+export default async function handleMessage (message: Message): Promise<void> {
   if (config.paused) {
     log.info('Got a Discord messenger (paused)')
     return
@@ -40,19 +39,18 @@ export default async (message: Message) => {
   if (!connection) return log.debug('Channel not found in bot\'s connections')
 
   // send message to threads specified in the connections
-  {
-    if (message.type === 'PINS_ADD' && !config.messenger.sendPinned) {
-      log.debug(`"pinned" messages are disabled, ignoring`)
-    } else {
-      const threads = connection.getWritableThreads()
-      const data = await createMessage.toMessenger(message)
-      Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
-        .then(() => cleanTemporaryFiles(data))
-    }
+  if (message.type === 'PINS_ADD' && !config.messenger.sendPinned) {
+    log.debug('"pinned" messages are disabled, ignoring')
+  } else {
+    const threads = connection.getWritableThreads()
+    const data = await createMessage.toMessenger(message)
+    Promise.all(threads.map(thread => sendMessengerMessage(thread, data)))
+      .then(() => cleanTemporaryFiles(data))
+      .catch(err => log.error(err))
   }
   {
     const channels = connection.getOtherWritableChannels(message.channel.id)
     const data = createMessage.toDiscord(message)
-    channels.forEach(endpoint => sendDiscordMessage(endpoint.id, data))
+    channels.map(endpoint => sendDiscordMessage(endpoint.id, data))
   }
 }

@@ -1,4 +1,4 @@
-import fastify from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
 import auth from 'basic-auth'
 import fastifyStatic from 'fastify-static'
 import path from 'path'
@@ -12,7 +12,7 @@ import { Reply } from '../types/fastify'
 
 const log = logger.withScope('api')
 
-export default function runServer () {
+export default function runServer (): FastifyInstance {
   const app = fastify()
 
   app.register(fastifyStatic, {
@@ -53,7 +53,7 @@ export default function runServer () {
     })
   } else {
     app.addHook('preHandler', (request, reply, next) => {
-      const send401 = () => reply
+      const send401 = (): Reply => reply
         .code(401)
         .header('WWW-Authenticate', 'Basic realm="Miscord API"')
         .header('Content-Type', 'text/html')
@@ -81,25 +81,25 @@ export default function runServer () {
   app.get('/', (request, reply) => {
     reply.sendFile('dashboard/index.html')
   })
-  app.get('/config-discord/', (request, reply) => {
+  app.get('/config/discord/', (request, reply) => {
     reply.sendFile('dashboard/config-discord.html')
   })
-  app.get('/config-messenger/', (request, reply) => {
+  app.get('/config/messenger/', (request, reply) => {
     reply.sendFile('dashboard/config-messenger.html')
   })
-  app.get('/config-miscellaneous/', (request, reply) => {
+  app.get('/config/miscellaneous/', (request, reply) => {
     reply.sendFile('dashboard/config-miscellaneous.html')
   })
   app.get('/connections/', (request, reply) => {
     reply.sendFile('dashboard/connections.html')
   })
-  app.register(connectionsHandler, { prefix: '/connections' })
-  app.register(configHandler, { prefix: '/config' })
-  app.register(controlHandler, { prefix: '/control' })
-  app.register(discordHandler, { prefix: '/discord' })
-  app.register(messengerHandler, { prefix: '/messenger' })
+  app.register(connectionsHandler, { prefix: '/api/connections' })
+  app.register(configHandler, { prefix: '/api/config' })
+  app.register(controlHandler, { prefix: '/api/control' })
+  app.register(discordHandler, { prefix: '/api/discord' })
+  app.register(messengerHandler, { prefix: '/api/messenger' })
 
-  const port = Number(config.api.port || 9448)
+  const port = Number(config.api.port ?? 9448)
 
   app.listen(port, '0.0.0.0')
     .then(() => log.success(`API is listening on port ${port}`))
@@ -107,6 +107,7 @@ export default function runServer () {
       if (err.code === 'EADDRINUSE') {
         app.listen(port + 1, '0.0.0.0')
           .then(() => log.success(`API is listening on port ${port + 1}`))
+          .catch(err => log.error(err))
       } else {
         throw err
       }

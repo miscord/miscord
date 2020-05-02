@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http'
-import { DefaultHeaders, DefaultQuery, DefaultParams } from 'fastify'
+import { DefaultHeaders, DefaultQuery, DefaultParams, FastifyRequest } from 'fastify'
 import Connection from '../../Connection'
 
 declare module 'fastify' {
@@ -9,7 +9,7 @@ declare module 'fastify' {
     Params = DefaultParams,
     Headers = DefaultHeaders,
     Body = any
-    > {
+  > {
     getConnection: () => Connection
   }
 

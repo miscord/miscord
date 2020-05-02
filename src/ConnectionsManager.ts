@@ -2,16 +2,16 @@ import { Collection } from 'discord.js'
 import Connection, { Endpoint } from './Connection'
 import { getThread } from './messenger'
 
-export type YAMLConnections = { [name: string]: Endpoint[] | string }
+export interface YAMLConnections { [name: string]: Endpoint[] | string }
 
 export default class ConnectionsManager extends Collection<string, Connection> {
-  async load () {
+  async load (): Promise<void> {
     const log = logger.withScope('CM:init')
     try {
       // load file and parse YAML
-      let parsed = await config.loadConnections()
+      const parsed = await config.loadConnections()
 
-      if (!parsed || typeof parsed !== 'object') return this.save()
+      if (!parsed || typeof parsed !== 'object') return await this.save()
 
       for (let [ name, endpoints ] of Object.entries(parsed)) {
         log.trace(name, endpoints)
@@ -50,16 +50,18 @@ export default class ConnectionsManager extends Collection<string, Connection> {
 
   static async validateEndpoints (endpoints: Endpoint[]): Promise<Endpoint[]> {
     const newEndpoints: Endpoint[] = []
-    for (let endpoint of (endpoints as Endpoint[])) {
+    for (const endpoint of endpoints) {
       if (!endpoint.type || !endpoint.id) {
         throw new Error(`Type or ID missing on endpoint: ${JSON.stringify(endpoint)}`)
       }
 
       if (endpoint.type !== 'discord' && endpoint.type !== 'messenger') {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Endpoint type incorrect, should be 'messenger' or 'discord', actual: ${endpoint.type}`)
       }
 
       if (typeof endpoint.id !== 'string') {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Endpoint ID is not a string (wrap it in single quotes): ${endpoint.id}`)
       }
 
@@ -80,7 +82,7 @@ export default class ConnectionsManager extends Collection<string, Connection> {
     return newEndpoints
   }
 
-  static async createAutomaticDiscordChannel (threadID: string, name: string) {
+  static async createAutomaticDiscordChannel (threadID: string, name: string): Promise<Connection> {
     const log = logger.withScope('CM:createAutomaticDiscordChannel')
 
     // create new channel with specified name and set its parent
@@ -101,35 +103,38 @@ export default class ConnectionsManager extends Collection<string, Connection> {
     return connection
   }
 
-  async getWithCreateFallback (threadID: string, name: string) {
+  async getWithCreateFallback (threadID: string, name: string): Promise<Connection | void> {
     const log = logger.withScope('CM:getWithCreateFallback')
     let connection = this.getWith(threadID)
     if (!connection) {
-      if (!config.discord.createChannels) return log.debug(`Channel creation disabled, ignoring. Name: ${name}, id: ${threadID}`)
+      if (!config.discord.createChannels) {
+        log.debug(`Channel creation disabled, ignoring. Name: ${name}, id: ${threadID}`)
+        return
+      }
       connection = await ConnectionsManager.createAutomaticDiscordChannel(threadID, name)
     }
     return connection
   }
 
-  getWith (id: string) {
+  getWith (id: string): Connection {
     return this.find(connection => connection.has(id))
   }
 
-  hasWith (id: string) {
+  hasWith (id: string): boolean {
     return this.some(connection => connection.has(id))
   }
 
   get (name: string): Connection {
     // failsafe just for TypeScript to stop complaining
     // in the code it should be checked with CM::has before
-    return super.get(name) || new Connection(name)
+    return super.get(name) ?? new Connection(name)
   }
 
-  hasEndpoint (id: string) {
+  hasEndpoint (id: string): boolean {
     return this.some(connection => connection.has(id))
   }
 
-  save () {
+  async save (): Promise<void> {
     const yamlConnections: YAMLConnections = Object.assign(
       {
         __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'

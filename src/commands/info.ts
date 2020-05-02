@@ -1,6 +1,6 @@
 import Command from './Command'
 
-export default new Command(async ([ name ]) => {
+export default new Command(([ name ]) => {
   let connection
   if (connections.has(name)) {
     connection = connections.get(name)
@@ -18,6 +18,6 @@ export default new Command(async ([ name ]) => {
   }
 }, {
   argc: 1,
-  usage: `info <connection name/Discord channel ID/Messenger thread ID>`,
-  example: `info test-connection`
+  usage: 'info <connection name/Discord channel ID/Messenger thread ID>',
+  example: 'info test-connection'
 })

@@ -23,7 +23,7 @@ export default class AddConnectionLevel {
       if (!name) return
 
       button.classList.add('is-loading')
-      await fetchJSON('/connections', {
+      await fetchJSON('/api/connections', {
         name,
         endpoints: []
       })

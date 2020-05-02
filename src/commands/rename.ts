@@ -8,6 +8,6 @@ export default new Command(async ([ name, newName ]) => {
   return `Connection \`${name}\` successfully renamed to \`${newName}\`!`
 }, {
   argc: 2,
-  usage: `rename <connection name> <new name>`,
-  example: `rename test-connection testing`
+  usage: 'rename <connection name> <new name>',
+  example: 'rename test-connection testing'
 })

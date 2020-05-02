@@ -11,7 +11,7 @@ export default new Command(async ([ unsafe, ...argv ], reply) => {
       return '`eval` is disabled in the config, toggle `config.enableEval` to enable it'
     }
     if (unsafe === 'yes') {
-      // tslint:disable-next-line:no-eval
+      // eslint-disable-next-line no-eval
       evaled = eval(code)
     } else {
       evaled = runInNewContext(code, Object.create(null))
@@ -23,10 +23,10 @@ export default new Command(async ([ unsafe, ...argv ], reply) => {
   }
 
   evaled = splitString(evaled, 1000)
-  for (let part of evaled) await reply(part, { code: true })
+  for (const part of evaled) await reply(part, { code: true })
 }, {
   argc: 1,
-  usage: `eval <code>`,
-  example: `eval config.ignoredSequences = ['ddd']`,
+  usage: 'eval <code>',
+  example: 'eval config.ignoredSequences = [\'ddd\']',
   allowMoreArguments: true
 })

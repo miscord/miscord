@@ -1,14 +1,14 @@
-import { default as ConfigManager } from '../config/Config'
+import ConfigManager from '../config/Config'
 
 export default interface Config extends ConfigManager {
   messenger: {
     username: string
     password: string
 
-    accounts: {
+    accounts: Array<{
       username: string
       password: string
-    }[]
+    }>
 
     format: string
     sourceFormat: {

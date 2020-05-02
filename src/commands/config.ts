@@ -14,8 +14,8 @@ export default new Command(async ([ key, ...value ]) => {
   if (val === 'false') val = false
   if (/^`.+`$/.test(val)) {
     try {
-      val = runInNewContext(val.match(/^`(.+)`$/)!![1], Object.create(null))
-      if (!Array.isArray(val) && !['string', 'number', 'boolean'].includes(typeof val)) {
+      val = runInNewContext((val.match(/^`(.+)`$/) ?? [])[1], Object.create(null))
+      if (!Array.isArray(val) && ![ 'string', 'number', 'boolean' ].includes(typeof val)) {
         return 'Invalid type!'
       }
     } catch (err) {
@@ -27,7 +27,7 @@ export default new Command(async ([ key, ...value ]) => {
   return `\`config.${key}\` was set to \`${JSON.stringify(val)}\`.`
 }, {
   argc: 1,
-  usage: `config <key> [value]`,
-  example: `config discord.massMentions true`,
+  usage: 'config <key> [value]',
+  example: 'config discord.massMentions true',
   allowMoreArguments: true
 })
