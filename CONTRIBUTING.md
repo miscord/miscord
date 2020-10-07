@@ -26,7 +26,7 @@ The following is a set of guidelines for contributing to Miscord and its package
 
 We have an official Discord server where the community chimes in with helpful advice if you have questions.
 
-[![Discord](https://discordapp.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
+[![Discord](https://discord.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
 
 Also, take a look at our FAQ (`#faq` on Discord or [wiki/FAQ](https://wiki.miscord.net/FAQ))
 

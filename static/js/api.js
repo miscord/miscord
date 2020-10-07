@@ -31,7 +31,7 @@ class Channel {
   }
 
   get link () {
-    return `https://discordapp.com/channels/${this.guild.id}/${this.id}`
+    return `https://discord.com/channels/${this.guild.id}/${this.id}`
   }
 }
 

@@ -8,7 +8,7 @@
   <a href="https://liberapay.com/Miscord/donate"><img alt="Donate using Liberapay" src="https://img.shields.io/liberapay/receives/Miscord?logo=liberapay&style=for-the-badge"></a>
   <a href="https://www.bountysource.com/teams/miscord/issues"><img alt="Bountysource" src="https://img.shields.io/bountysource/team/miscord/activity?style=for-the-badge"></a>
   <br />
-  <a href="https://discord.gg/DkmTvVz"><img src="https://discordapp.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
+  <a href="https://discord.gg/DkmTvVz"><img src="https://discord.com/api/guilds/431471556540104724/embed.png" alt="Discord"></a>
 </p>
 
 > Built on [libfb](https://github.com/ChatPlug/libfb-js) and [discord.js](https://discord.js.org)

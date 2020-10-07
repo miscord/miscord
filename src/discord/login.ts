@@ -30,7 +30,7 @@ export default async function login (): Promise<Client | FakeClient> {
   if (client.guilds.size === 0 && client instanceof Client) {
     throw new Error(`No guilds added!
 You can add a bot to your guild here:
-https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=537390096&scope=bot
+https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=537390096&scope=bot
 It's not an error... unless you added the bot to your guild already.`)
   }
   // set guild as a global variable, if it's specified in arguments then get it by name, if not then get the first one
