@@ -28,7 +28,7 @@ We have an official Discord server where the community chimes in with helpful ad
 
 [![Discord](https://discord.com/api/guilds/431471556540104724/embed.png)](https://discord.gg/DkmTvVz)
 
-Also, take a look at our FAQ (`#faq` on Discord or [wiki/FAQ](https://wiki.miscord.net/FAQ))
+Also, take a look at our FAQ (`#faq` on Discord or [FAQ](https://docs.miscord.net/faq) in docs)
 
 ## How Can I Contribute?
 
@@ -42,7 +42,7 @@ Before creating bug reports, please check [this list](#before-submitting-a-bug-r
 
 #### Before Submitting A Bug Report
 
-* **Check the [FAQ](https://github.com/miscord/miscord/wiki/FAQ) and try changing log level.** You might be able to find the cause of the problem and fix things yourself. Most importantly, check if you can reproduce the problem [in the latest version of Miscord](https://github.com/miscord/miscord/wiki/Updating).
+* **Check the [FAQ](https://docs.miscord.net/faq) and try changing log level.** You might be able to find the cause of the problem and fix things yourself. Most importantly, check if you can reproduce the problem [in the latest version of Miscord](https://github.com/miscord/miscord/wiki/Updating).
 * **Perform a [cursory search](https://github.com/miscord/miscord/issues)** to see if the problem has already been reported. If it has **and the issue is still open**, add a comment to the existing issue instead of opening a new one.
 
 #### How Do I Submit A (Good) Bug Report?

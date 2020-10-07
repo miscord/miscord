@@ -137,7 +137,7 @@ export default class ConnectionsManager extends Collection<string, Connection> {
   async save (): Promise<void> {
     const yamlConnections: YAMLConnections = Object.assign(
       {
-        __comment: 'This is your connections.yml file. More info at https://github.com/miscord/miscord/wiki/Connections.yml'
+        __comment: 'This is your connections.yml file. More info at https://docs.miscord.net/configuration/connections.yml'
       },
       ...this.map(connection => connection.toYAMLObject())
     )
