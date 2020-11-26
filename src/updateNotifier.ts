@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 const log = logger.withScope('updateNotifier')
 
 export default async function (): Promise<void> {
-  const { version } = require('../../package.json') as { version: string }
+  const { version } = require('../package.json') as { version: string }
 
   log.info('Checking for updates...')
   let res
