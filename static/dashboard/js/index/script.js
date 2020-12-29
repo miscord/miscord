@@ -57,7 +57,7 @@ function updateStatus ({ status }) {
   disable(buttons.unpause, status !== 'paused')
   disable(buttons.pause, status === 'paused')
 }
-fetchJSON('/control/status')
+fetchJSON('/api/control/status')
   .then(updateStatus)
   .then(() => {
     setLoading(buttons.pause, false)

@@ -1,7 +1,7 @@
 import dotProp from 'dot-prop'
-import { FastifyInstance } from 'fastify'
+import { FastifyError, FastifyInstance } from 'fastify'
 
-export default function useConfig (app: FastifyInstance): void {
+export default function useConfig (app: FastifyInstance, options: any, next: (err?: FastifyError) => void): void {
   app.get('/', (request, reply) => {
     reply.send(config.config)
   })
@@ -22,4 +22,6 @@ export default function useConfig (app: FastifyInstance): void {
     await config.set(request.params.path, null)
     reply.code(200).send()
   })
+
+  next()
 }

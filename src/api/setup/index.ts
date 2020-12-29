@@ -14,12 +14,6 @@ export default class SetupServer extends EventEmitter {
 
   run (): void {
     this.app.register(fastifyStatic, {
-      root: path.join(__dirname, '..', '..', '..', 'node_modules'),
-      prefix: '/node_modules/',
-      decorateReply: false
-    })
-
-    this.app.register(fastifyStatic, {
       root: path.join(__dirname, '..', '..', '..', 'static'),
       prefix: '/static/'
     })

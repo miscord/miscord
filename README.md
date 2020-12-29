@@ -16,7 +16,6 @@
 **[Website](https://miscord.net/)** &nbsp;
 **[Donate](https://paypal.me/Bjornskjald)** &nbsp;
 **[FAQ](https://docs.miscord.net/faq)** &nbsp;
-**[Config Generator](https://miscord.net/config-generator.html)** &nbsp;
 
 # :memo: Documentation
 **See the guide/docs [here](https://docs.miscord.net)**

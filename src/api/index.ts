@@ -16,12 +16,6 @@ export default function runServer (): FastifyInstance {
   const app = fastify()
 
   app.register(fastifyStatic, {
-    root: path.join(__dirname, '..', '..', 'node_modules'),
-    prefix: '/node_modules/',
-    decorateReply: false
-  })
-
-  app.register(fastifyStatic, {
     root: path.join(__dirname, '..', '..', 'static'),
     prefix: '/static/'
   })

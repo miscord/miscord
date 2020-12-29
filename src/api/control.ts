@@ -1,9 +1,9 @@
 import fs from 'fs-extra'
 import FileConfig from '../config/FileConfig'
 import path from 'path'
-import { FastifyInstance } from 'fastify'
+import { FastifyError, FastifyInstance } from 'fastify'
 
-export default function useControl (app: FastifyInstance): void {
+export default function useControl (app: FastifyInstance, options: any, next: (err?: FastifyError) => void): void {
   app.get('/logs', async (request, reply) => {
     if (!(config instanceof FileConfig)) return reply.send([])
     const count = request.query.count || 100
@@ -39,6 +39,8 @@ export default function useControl (app: FastifyInstance): void {
     reply.send({})
     await close(0)
   })
+
+  next()
 }
 
 async function close (code: number): Promise<void> {

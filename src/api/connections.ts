@@ -1,7 +1,7 @@
 import { ConnectionRequest, DoneFunction, Reply, Request } from '../types/fastify'
 import Connection, { Endpoint } from '../Connection'
 import schema from './schema'
-import { FastifyInstance } from 'fastify'
+import fastify, { FastifyError, FastifyInstance, RegisterOptions } from 'fastify'
 
 const checkConnection = {
   preHandler: function (request: ConnectionRequest<any>, reply: Reply, done: DoneFunction) {
@@ -14,7 +14,7 @@ const checkConnection = {
   }
 }
 
-export default function useConnections (app: FastifyInstance): void {
+export default function useConnections (app: FastifyInstance, options: any, next: (err?: FastifyError) => void): void {
   app.decorateRequest('getConnection', function (this: ConnectionRequest) {
     return connections.get(this.params.name)
   })
@@ -110,4 +110,6 @@ export default function useConnections (app: FastifyInstance): void {
 
     reply.send(connection.toObject().endpoints)
   })
+
+  next()
 }

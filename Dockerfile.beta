@@ -1,5 +1,5 @@
 FROM node:alpine
-LABEL maintainer="Bjornskjald <github@bjorn.ml>"
+LABEL maintainer="ptrcnull <github@ptrcnull.me>"
 
 RUN npm install --only=production -g miscord-beta
 

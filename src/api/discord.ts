@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { Guild as DiscordGuild, GuildChannel, GuildMember } from 'discord.js'
-import { FastifyInstance } from 'fastify'
+import { FastifyError, FastifyInstance } from 'fastify'
 
 interface Channel {
   type: string
@@ -38,7 +38,7 @@ function guildWithUsers ({ name, id, members }: DiscordGuild): Guild {
   return { name, id, users: members.array().map(member) }
 }
 
-export default function useDiscord (app: FastifyInstance): void {
+export default function useDiscord (app: FastifyInstance, options: any, next: (err?: FastifyError) => void): void {
   app.get('/channels', async (request, reply) => {
     return discord.client.guilds.array().map(guildWithChannels)
   })
@@ -51,4 +51,6 @@ export default function useDiscord (app: FastifyInstance): void {
     if (!discord.client.guilds.has(request.params.guild)) return reply.sendError(404, 'Guild not found')
     return discord.client.guilds.get(request.params.guild)?.channels.array().map(channel) ?? []
   })
+
+  next()
 }
