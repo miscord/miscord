@@ -4,7 +4,7 @@
   "description": "Facebook Messenger to Discord bridge",
   "main": "src/index.ts",
   "scripts": {
-    "start": "npm run prepare && node dist/bin/index.js",
+    "start": "node dist/bin/index.js",
     "dev": "ts-node src/bin/index.ts",
     "test": "eslint --ext .js,.ts .",
     "build": "node dist/bin/build.js",
